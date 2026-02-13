@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  13 FEB 2026 12:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  13 FEB 2026 13:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -484,45 +484,21 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 5.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 5.
-
-<graphs/E4/Cubic.png, id=35, 295.85532pt x 322.95656pt>
+<graphs/E4/Cubic.png, id=43, 295.85532pt x 322.95656pt>
 File: graphs/E4/Cubic.png Graphic file (type png)
 <use graphs/E4/Cubic.png>
-Package pdftex.def Info: graphs/E4/Cubic.png  used on input line 13.
+Package pdftex.def Info: graphs/E4/Cubic.png  used on input line 16.
 (pdftex.def)             Requested size: 241.84842pt x 264.00806pt.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 20.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 20.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 25.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 25.
-
-<graphs/E4/FCC.png, id=39, 516.42938pt x 483.30562pt>
+<graphs/E4/FCC.png, id=47, 516.42938pt x 483.30562pt>
 File: graphs/E4/FCC.png Graphic file (type png)
 <use graphs/E4/FCC.png>
-Package pdftex.def Info: graphs/E4/FCC.png  used on input line 32.
+Package pdftex.def Info: graphs/E4/FCC.png  used on input line 52.
 (pdftex.def)             Requested size: 241.84842pt x 226.33508pt.
-)
+
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./graphs/E4/Cubic.png>]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./graphs/E4/Cubic.png>])
 
 [2 <./graphs/E4/FCC.png>] (./appendix/E4.tex
 
@@ -558,27 +534,43 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 4DFB8D8F89A867B792F9627BF419D284;679.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: 691BBFCFD861966514391BC61DCC710D;934
+(rerunfilecheck)             After:  CE766C6E67AE810164456BBA8683A16A;948.
  ) 
 Here is how much of TeX's memory you used:
- 13987 strings out of 473197
- 211901 string characters out of 5718606
- 1387668 words of memory out of 5000000
- 36887 multiletter control sequences out of 15000+600000
+ 14005 strings out of 473197
+ 212263 string characters out of 5718606
+ 1387727 words of memory out of 5000000
+ 36899 multiletter control sequences out of 15000+600000
  566429 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,6n,82p,277b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (5 pages, 432639 bytes).
+ 80i,11n,82p,399b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{section.5} has been referenced but does not exist, 
+replaced by a fixed one
+
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8
+.pfb>
+Output written on main.pdf (5 pages, 483725 bytes).
 PDF statistics:
- 309 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 185 named destinations out of 1000 (max. 500000)
- 67 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 349 PDF objects out of 1000 (max. 8388607)
+ 312 compressed objects within 4 object streams
+ 191 named destinations out of 1000 (max. 500000)
+ 83 words of extra memory for PDF output out of 10000 (max. 10000000)
 
