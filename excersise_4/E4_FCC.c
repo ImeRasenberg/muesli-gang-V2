@@ -11,7 +11,10 @@ int main(){
     float l = sqrt(2.0)*d;
 
     // defining the size of the box that will be spanned
-    float x_max = l*N;
+    float x_max = N*l;
+
+    // definging a variable such that the outline of the box aligns with the border of the particles
+    float s = 0.5*d;
 
     // Make a file where we can save the position data
     FILE *print_coords; // inititialises a file variable
@@ -19,9 +22,9 @@ int main(){
 
     // Let us print some initial coordinates
     fprintf(print_coords, "%i\n", 4*N*N*N); // the total number of particles
-    fprintf(print_coords, "%lf\t%lf\n", -0.0, x_max); // The ocupied space in the x direction
-    fprintf(print_coords, "%lf\t%lf\n", -0.0, x_max); // The ocupied space in the y direction
-    fprintf(print_coords, "%lf\t%lf\n", -0.0, x_max); // The ocupied space in the z direction
+    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the x direction
+    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the y direction
+    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the z direction
 
     // we first initialise the particle possision saving arrays
     float x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];
@@ -37,7 +40,6 @@ int main(){
     a_3 = a/2 (i + j)
     i, j, k are the unit vectors in x, y and z directions respectively (not the counts)
     */
-
 
 
 

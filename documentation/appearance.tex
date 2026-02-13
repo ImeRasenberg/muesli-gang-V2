@@ -1,5 +1,4 @@
-
-% setting the dimentions of where there can be writen
+% defining the boundaries of my pages
 \geometry{
 	a4paper,
 	total={170mm,257mm},
@@ -7,22 +6,11 @@
 	top=20mm,
 }
 
-%setting the astetics of the paragraphs
+%defining how i want my paragraphs to look
 \setlength{\parskip}{0.5mm} % Space between paragraphs
 \setlength{\parindent}{0em} % No paragraph indentation
 
-%how do the links look in the pfd
-\hypersetup{
-	colorlinks=true,
-	linkcolor=black,
-	filecolor=black,      
-	urlcolor=black,
-	citecolor=black,
-	pdftitle={Overleaf Example},
-	pdfpagemode=FullScreen,
-}
-
-%how the titles look in sections and subsections
+%defining how i want my sections to look
 \titlespacing*{\section}
 {0pt}   % left margin
 {1ex plus 0.5ex minus 0.5ex} % space *before* the section
@@ -31,3 +19,50 @@
 {0pt}   % left margin
 {1ex plus 0.5ex minus 0.5ex} % space *before* the section
 {0.5ex plus 0.2ex}           % space *after* the section title
+
+
+%---------------------------------------------------%
+%defining c couler coding scheme
+
+% Custom colors for syntax highlighting
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundVisual}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+	backgroundcolor=\color{backgroundVisual},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{mPurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2,
+	language=C
+}
+%---------------------------------------------------%
+
+
+%defining the python style
+\lstdefinestyle{PythonStyle}{
+	backgroundcolor=\color{backgroundVisual},   
+	commentstyle=\color{mGreen},
+	keywordstyle=\color{blue},       % Python keywords often look better in blue
+	numberstyle=\tiny\color{mGray},
+	stringstyle=\color{mPurple},
+	basicstyle=\footnotesize\ttfamily,
+	breaklines=true,                 
+	numbers=left,                    
+	tabsize=4,                       % Python standard is 4 spaces
+	language=Python,                 % Crucial change
+	otherkeywords={self},            % Add specific keywords if needed
+}
