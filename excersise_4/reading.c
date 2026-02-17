@@ -1,6 +1,12 @@
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
+#include <stdbool.h>
+
+ 
+#include <math.h>
+
+#include <time.h> // we use time as a random seed
+#include "../downloads/mt19937.h"
 
 /*
 // // //example found online
@@ -110,20 +116,43 @@ Loaded_Data load_data( char *init_filename){
 
 typedef struct
 {
-int Index;
-float displacement
+int index;
+float d_x;
+float d_y;
+float d_z;
+float l;
 } displacement;
 
-displacement move_particle(float Delta){
+
+displacement move_particle(float Delta,Loaded_Data Loaded_Data){
     displacement d;
 
+    d.index =floor(dsfmt_genrand()*Loaded_Data.N);
+    d.d_x = (dsfmt_genrand()-0.5);
+    d.d_y = (dsfmt_genrand()-0.5);
+    d.d_z = (dsfmt_genrand()-0.5);
+
+    d.l = (dsfmt_genrand()-0.5)*Delta+0.0001; //no devision by 0
+
+    float length = sqrt(d.d_x*d.d_x+d.d_y*d.d_y+d.d_z*d.d_z);
+
+    d.d_x = d.d_x/length*d.l;
+    d.d_y = d.d_y/length*d.l;
+    d.d_z = d.d_z/length*d.l;
+
+    return d;
+}
+
+bool check_particle_overlap(Loaded_Data l,displacement d){
+    float particle_;
 
     
-    return d;
-    
+    return true;
 }
 
 int main(){
+    dsfmt_seed(time(NULL)); //setting the seed for the random displacement
+
     int NDIM = 3; //the number of dimmentions reading for reading out the files (you cannot change this to switch to 2D because you particles will overlap????)
 
     // the file that will be considerd
@@ -131,8 +160,12 @@ int main(){
 
     Loaded_Data Loaded_Data = load_data(init_filename);
 
-
-
+    displacement displacement = move_particle(0.1, Loaded_Data);
+    printf("paricles number displaced: %i\n",displacement.index);
+    printf("moved by: %f\n",displacement.l);
+    printf("moved in x: %f\n",displacement.d_x);
+    printf("moved in y: %f\n",displacement.d_y);
+    printf("moved in z: %f\n",displacement.d_z);
     // monte carlo simmulation parameters
     int mc_steps = 3;
     
