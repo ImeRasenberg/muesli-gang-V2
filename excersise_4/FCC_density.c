@@ -7,6 +7,112 @@
 #include <time.h> // we use time as a random seed
 #include "../downloads/mt19937.h"
 
+
+void gennerate_FCC(float a){
+    int N = 4; // The number of particles in each dirrection
+    float d = 1.0; // the distance between two spheres
+    
+
+    // creating an distance variable that makes les typing
+    float l = sqrt(2.0)*d;
+
+    // defining the size of the box that will be spanned
+    float x_max = N*l;
+
+    // definging a variable such that the outline of the box aligns with the border of the particles
+    float s = 0.5*d;
+
+    // Make a file where we can save the position data
+    FILE *print_coords; // inititialises a file variable
+    print_coords = fopen("FCC_xyz.dat","w"); // defining the file variable to be the opening of some file cubic.xyz
+
+    // Let us print some initial coordinates
+    fprintf(print_coords, "%i\n", 4*N*N*N); // the total number of particles
+    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the x direction
+    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the y direction
+    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the z direction
+
+    // we first initialise the particle possision saving arrays
+    float x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];
+
+    // now we start generating particle possitions and radiuses
+    int n = 0; // this is our counting variable, it wil index which particle we will consider
+
+    /* 
+    The latice points are described by
+    R= a_1 n_x + a_2 n_x + a_3 n_z
+    a_1 = a/2 (j + k)
+    a_2 = a/2 (i + k)
+    a_3 = a/2 (i + j)
+    i, j, k are the unit vectors in x, y and z directions respectively (not the counts)
+    */
+
+
+
+    // sweeping over the N_x particles
+    for(int i=0; i<N; i++){
+        // sweeping over the N_y particles
+        for(int j=0; j<N; j++){
+            // sweeping over the N_z particles
+            for(int k=0; k<N; k++){
+                // generating the possition for i,j,k latice cite, also the radius of the particle
+
+                // first we start on the base vector because we know this patern reapeats every 2*unit vector in each direction
+                x[n]= (i)*l;
+                y[n]= (j)*l; 
+                z[n]= (k)*l;
+                r[n]= a;
+
+                // saving the x,y,z possition and radius of the particle
+                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
+
+                n++;
+
+                // here we will add the a_1 vector and make the same spacing
+                x[n]= (i)*l;
+                y[n]= (j+0.5)*l; 
+                z[n]= (k+0.5)*l;
+                r[n]= a;
+
+                // saving the x,y,z possition and radius of the particle
+                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
+
+                n++;
+
+                // here we will add the a_2 vector and make the same spacing
+                x[n]= (i+0.5)*l;
+                y[n]= (j)*l; 
+                z[n]= (k+0.5)*l;
+                r[n]= a;
+
+                // saving the x,y,z possition and radius of the particle
+                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
+
+                n++;
+
+                // here we will add the a3 vector and continue the same spacing
+                x[n]= (i+0.5)*l;
+                y[n]= (j+0.5)*l; 
+                z[n]= (k)*l;
+                r[n]= a;
+
+                // saving the x,y,z possition and radius of the particle
+                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
+
+                n++;
+
+
+
+
+
+            }
+        }
+    }
+
+
+    fclose(print_coords);
+}
+
 /*
 // // //example found online
 
@@ -244,12 +350,16 @@ void write_to_file(Loaded_Data l){
 }
 
 int main(){
+    float a = 0.59;
+
+    gennerate_FCC(a);
+
     dsfmt_seed(time(NULL)); //setting the seed for the random displacement
 
     int NDIM = 3; //the number of dimmentions reading for reading out the files (you cannot change this to switch to 2D because you particles will overlap????)
 
     int succes_count=0 ;
-    int mc_steps = 100000;
+    int mc_steps = 1E6;
     // the file that will be considerd
     char *init_filename= "FCC_xyz.dat";
 

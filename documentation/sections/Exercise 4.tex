@@ -78,8 +78,62 @@ From this we know that if we look at how much particles would be in a unit cell 
 
 
 \subsection{}
+The code for this \textbf{$read\_data()$} subroutine is found in Appendix~\ref{app:E4.c}.
+
+what we do in this part is, we first define a new data structure such that we can pass multiple things back from the reading. This structure is defined such that we can later define the number of points that the pointer should be able to count to with $N$ it is already defined with the number of dimensions (3D). We also want to pass back the box dimensions and the size of each particle.
+
+After this we load the file, it first reads the first line getting the number of particles. Now we can define the size of the position matrix and size vector. Then we read the dimensions of the box and place them in a matrix as well. Finally we read all the particle position left and close the file.
 
 
+\subsection{}
+The code for this \textbf{$move\_particle()$} subroutine is found in Appendix~\ref{app:E4.d}.
+
+Here we again define a new data structure where we can store the randomized x,y,z displacements, and the randomly selected particle.
+
+then we just generate a few random numbers and take the input delta and make sure that the total displacement is a random number between [-delta, delta].
+
+using the function explained in the next section the validity of this translation is check. If one is returned no overlap between particles is detected.
+
+If the translation is valid the translation is executed else it is skipped. The periodic boundary conditions are implemented here.
+
+Keep in min that if the packing is the most efficient it can be all the balls are touching each other and there can be no valid non overlapping translations, meaning that if we increase the spacing between the particles only then we can have valid translations.
+
+A good choice for delta is expected distance between particles over 2, then we know that the chance of a non overlapping translation will be decently sized.
+
+\subsection{}
+The code for this \textbf{$check\_particle\_overlap()$} subroutine is found in Appendix~\ref{app:E4.e}.
+
+this routine takes in the particle positions and also the translation of a single random particle. it translates this particle, then it checks wether this translation is valid or not by taking the distance from the particle to all the particles and seeing if the distance is at any point smaller then the radius's combined.
+
+This is done with periodic boundaries by checking if the distance greater then 1/2 the length of the box, if so then the distance is changed with the length of the box.
+
+\subsection{}
+a new function is made depicted in appendix \ref{app:E4.f} that saves the current location of each particle in a new file with the same structure as gotten from the saved file.
+
+The results of this NVT ensemble evolution are plotted in Figure~\ref{fig: cubic time evolved}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphs/E4/NTV procession.png}
+	\caption{Here the cubic lattice generated is perturbed 100000 times to give this configuration}
+	\label{fig: cubic time evolved}
+\end{figure}
+
+\subsection{}
+here we are asked to change the packing density, I will assume this is done by changing the particle size, perturbing and seeing if the structure is still fcc like.
+
+In figure~\ref{}, the figures of different particle sizes can be seen. To get to see the transition we know that if the particle size is 1 we will have no allowed translations thus no change. Now let us check a particle size of 0.5, we see that this one is chaotic, so somewhere in between there is order. Checking 0.75 gives perfect order again. Checking in between at 0.62, gives something disordered. 0.69 is still ordered while 0.65 gives a tiny bit of disorder. so the boundary between a melting FFC and an stable FFC lattice is somewhere between a packing density of $pi/(2\sqrt{2} 0.69)$ and $pi/(2\sqrt{2} 0.62)$
+
+\begin{figure}
+	\centering
+	\subfloat[particle size is 0.5]{\includegraphics[width=0.3\linewidth]{graphs/E4/50.png}}\ 
+	\subfloat[particle size is 0.59]{\includegraphics[width=0.3\linewidth]{graphs/E4/59.png}}\ 
+	\subfloat[particle size is 0.62]{\includegraphics[width=0.3\linewidth]{graphs/E4/62.png}}\newline
+	\subfloat[particle size is 0.65]{\includegraphics[width=0.3\linewidth]{graphs/E4/65.png}}\
+	\subfloat[particle size is 0.69]{\includegraphics[width=0.3\linewidth]{graphs/E4/69.png}}\
+	\subfloat[particle size is 0.75]{\includegraphics[width=0.3\linewidth]{graphs/E4/75.png}}\
+	
+\end{figure}
 
 
 

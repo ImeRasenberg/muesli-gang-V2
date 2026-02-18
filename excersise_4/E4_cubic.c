@@ -5,7 +5,7 @@
 int main(){
     int N = 4; // The number of particles in each dirrection
     float d = 1.0; // the distance between two spheres
-    float a = 1.0; // the radius of an sphere
+    float a = .95; // the radius of an sphere
 
     // Make a file where we can save the position data
     FILE *print_coords; // inititialises a file variable
