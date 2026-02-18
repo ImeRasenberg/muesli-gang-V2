@@ -377,9 +377,9 @@ int main(){
 	int NDIM = 3; //the number of dimmentions reading for reading out the files (you cannot change this to switch to 2D because you particles will overlap????)
 	
 	int succes_count=0 ;
-	int mc_steps = 1000000;
+	int mc_steps = 100000;
 	// the file that will be considerd
-	char *init_filename= "cubic_xyz.dat";
+	char *init_filename= "FCC_xyz.dat";
 	
 	Loaded_Data Loaded_Data = load_data(init_filename);
 	printf("starting displacement loop\n");
@@ -388,33 +388,7 @@ int main(){
 		// printf(" run %i\n",k);
 		displacement displacement = move_particle(0.1, Loaded_Data);
 		
-		// printf("%i\n",displacement.disp);
-		if(displacement.disp == 1){
-			// printf("overlap found no displacement\n");
-			continue; 
-		}
-		else if (displacement.disp == 0)
-		{
-			// printf("from: \t%f\t%f\t%f\n",Loaded_Data.r[displacement.index][0],
-			//     Loaded_Data.r[displacement.index][1],Loaded_Data.r[displacement.index][2]);
-			Loaded_Data.r[displacement.index][0] += displacement.d_r[0];
-			Loaded_Data.r[displacement.index][1] += displacement.d_r[1];
-			Loaded_Data.r[displacement.index][2] += displacement.d_r[2];
-			
-			for(int l=0; l<3;l++){
-				float box_len = abs(Loaded_Data.box[l][0]-Loaded_Data.box[l][1]) ;
-				
-				if(Loaded_Data.r[displacement.index][l]<Loaded_Data.box[l][0]){
-					Loaded_Data.r[displacement.index][l]+= box_len;
-				}
-				if(Loaded_Data.r[displacement.index][l]>Loaded_Data.box[l][1]){
-					Loaded_Data.r[displacement.index][l] -= box_len;
-				}
-			}
-			// printf("to: \t%f\t%f\t%f\n",Loaded_Data.r[displacement.index][0],
-			//     Loaded_Data.r[displacement.index][1],Loaded_Data.r[displacement.index][2]);
-			// printf("done a displacement\n");
-			
+		if (displacement.disp == 0){
 			succes_count+=1;
 		}
 		
