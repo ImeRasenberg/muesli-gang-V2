@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
  
 #include <math.h>
@@ -143,11 +142,81 @@ displacement move_particle(float Delta,Loaded_Data Loaded_Data){
     return d;
 }
 
-bool check_particle_overlap(Loaded_Data l,displacement d){
-    float particle_;
+// bool check_particle_overlap(Loaded_Data l,displacement d){
+//     float *p = l.r[d.index];
+//     p[0]+= d.d_x;
+//     p[1]+= d.d_y;
+//     p[2]+= d.d_z;
+
+//     float (*particles)[3] = l.r;
+    
+
+//     for(int i; i<l.N; i++){
+
+//         if (i == d.index) {
+//             continue;
+//         }
+
+//         float *p_c = l.r[i];
+
+//         float distance=0.0;
+//         for(int j; j>3; j++){
+//             distance += (p[j] - p_c[j])*(p[j] - p_c[j]);
+//         }
+
+//         if(distance < 0.5 * (l.size[i] + l.size[d.index])){
+//             return true;
+//         }
+//     }
 
     
-    return true;
+//     return false;
+// }
+
+
+int check_particle_overlap(Loaded_Data l, displacement d) {
+    // getting the selected particle and adding the gotten displacement to it
+    float *p = l.r[d.index];
+    p[0] += d.d_x;
+    p[1] += d.d_y;
+    p[2] += d.d_z;
+
+    // checking over all particles
+    for (int i = 0; i < l.N; i++) {
+        // if we consider the same particle the distance is always smaller then the combination of the two raduses
+        if (i == d.index) {
+            continue;
+        }
+        // getting the postion of the particle
+        float *p_c = l.r[i];
+
+        // setting the distance between this particle and the changed particle to 0
+        float dist_sq = 0.0;
+        // updating this dastance to be acurate
+        for (int j = 0; j < 3; j++) {
+            float diff = p[j] - p_c[j];
+            float length = abs(l.box[j][1] - l.box[j][0]);
+            if (diff>0.5*length){
+                diff -= length;
+                
+            }
+            else if (diff<-0.5*length){
+                diff += length;
+            }
+
+            dist_sq += diff * diff;
+        }
+
+        // making degining the minimum distance between two
+        float sum_raduses = 0.5 * (l.size[i] + l.size[d.index]);
+        
+
+        if (dist_sq < sum_raduses) {
+            return 1; // Overlap detected
+        }
+    }
+
+    return 0; // No overlaps found
 }
 
 int main(){
@@ -155,19 +224,22 @@ int main(){
 
     int NDIM = 3; //the number of dimmentions reading for reading out the files (you cannot change this to switch to 2D because you particles will overlap????)
 
+    int mc_steps = 3;
     // the file that will be considerd
     char *init_filename= "cubic_xyz.dat";
 
     Loaded_Data Loaded_Data = load_data(init_filename);
 
-    displacement displacement = move_particle(0.1, Loaded_Data);
+    displacement displacement = move_particle(0.01, Loaded_Data);
     printf("paricles number displaced: %i\n",displacement.index);
     printf("moved by: %f\n",displacement.l);
     printf("moved in x: %f\n",displacement.d_x);
     printf("moved in y: %f\n",displacement.d_y);
     printf("moved in z: %f\n",displacement.d_z);
     // monte carlo simmulation parameters
-    int mc_steps = 3;
-    
+
+    int can_move =  check_particle_overlap(Loaded_Data,displacement);
+    printf("%i\n",can_move);
+
     return 0;
 }
