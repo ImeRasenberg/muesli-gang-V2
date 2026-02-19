@@ -115,6 +115,7 @@ Loaded_Data load_data( char *init_filename){
 }
 
 
+
 typedef struct
 {
 int index;
@@ -160,7 +161,7 @@ int check_particle_overlap(Loaded_Data l, displacement d) {
         float sum_raduses = 0.5 * (l.size[i] + l.size[d.index]);
         
 
-        if (dist_sq < sum_raduses) {
+        if (dist_sq < sum_raduses*sum_raduses) {
             // printf("%f\t%f\t%f\nf",d.d_r[0],d.d_r[1],d.d_r[2]);
             return 1; // Overlap detected
         }
@@ -168,6 +169,7 @@ int check_particle_overlap(Loaded_Data l, displacement d) {
     // printf("there is no overlap\n");
     return 0; // No overlaps found
 }
+
 
 
 displacement move_particle(float Delta,Loaded_Data Loaded_Data){
@@ -224,6 +226,8 @@ displacement move_particle(float Delta,Loaded_Data Loaded_Data){
     return d;
 }
 
+
+
 void write_to_file(Loaded_Data l){
 
     FILE *print_coords; // inititialises a file variable
@@ -243,6 +247,9 @@ void write_to_file(Loaded_Data l){
     fclose(print_coords);
 }
 
+
+
+
 int main(){
     dsfmt_seed(time(NULL)); //setting the seed for the random displacement
 
@@ -250,6 +257,8 @@ int main(){
 
     int succes_count=0 ;
     int mc_steps = 100000;
+
+    int dV_m = 0.1;
     // the file that will be considerd
     char *init_filename= "FCC_xyz.dat";
 

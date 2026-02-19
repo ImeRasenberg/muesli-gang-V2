@@ -7,166 +7,6 @@
 #include <time.h> // we use time as a random seed
 #include "../downloads/mt19937.h"
 
-
-void gennerate_FCC(float a){
-    int N = 4; // The number of particles in each dirrection
-    float d = 1.0; // the distance between two spheres
-    
-
-    // creating an distance variable that makes les typing
-    float l = sqrt(2.0)*d;
-
-    // defining the size of the box that will be spanned
-    float x_max = N*l;
-
-    // definging a variable such that the outline of the box aligns with the border of the particles
-    float s = 0.5*d;
-
-    // Make a file where we can save the position data
-    FILE *print_coords; // inititialises a file variable
-    print_coords = fopen("FCC_xyz.dat","w"); // defining the file variable to be the opening of some file cubic.xyz
-
-    // Let us print some initial coordinates
-    fprintf(print_coords, "%i\n", 4*N*N*N); // the total number of particles
-    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the x direction
-    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the y direction
-    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the z direction
-
-    // we first initialise the particle possision saving arrays
-    float x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];
-
-    // now we start generating particle possitions and radiuses
-    int n = 0; // this is our counting variable, it wil index which particle we will consider
-
-    /* 
-    The latice points are described by
-    R= a_1 n_x + a_2 n_x + a_3 n_z
-    a_1 = a/2 (j + k)
-    a_2 = a/2 (i + k)
-    a_3 = a/2 (i + j)
-    i, j, k are the unit vectors in x, y and z directions respectively (not the counts)
-    */
-
-
-
-    // sweeping over the N_x particles
-    for(int i=0; i<N; i++){
-        // sweeping over the N_y particles
-        for(int j=0; j<N; j++){
-            // sweeping over the N_z particles
-            for(int k=0; k<N; k++){
-                // generating the possition for i,j,k latice cite, also the radius of the particle
-
-                // first we start on the base vector because we know this patern reapeats every 2*unit vector in each direction
-                x[n]= (i)*l;
-                y[n]= (j)*l; 
-                z[n]= (k)*l;
-                r[n]= a;
-
-                // saving the x,y,z possition and radius of the particle
-                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
-
-                n++;
-
-                // here we will add the a_1 vector and make the same spacing
-                x[n]= (i)*l;
-                y[n]= (j+0.5)*l; 
-                z[n]= (k+0.5)*l;
-                r[n]= a;
-
-                // saving the x,y,z possition and radius of the particle
-                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
-
-                n++;
-
-                // here we will add the a_2 vector and make the same spacing
-                x[n]= (i+0.5)*l;
-                y[n]= (j)*l; 
-                z[n]= (k+0.5)*l;
-                r[n]= a;
-
-                // saving the x,y,z possition and radius of the particle
-                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
-
-                n++;
-
-                // here we will add the a3 vector and continue the same spacing
-                x[n]= (i+0.5)*l;
-                y[n]= (j+0.5)*l; 
-                z[n]= (k)*l;
-                r[n]= a;
-
-                // saving the x,y,z possition and radius of the particle
-                fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\n", x[n], y[n],z[n],r[n]);
-
-                n++;
-
-
-
-
-
-            }
-        }
-    }
-
-
-    fclose(print_coords);
-}
-
-/*
-// // //example found online
-
-#include <stdio.h>
-
-typedef struct {
-    float **A; // makes matrix A_{i,j} each star gives an index
-    float b;
-} Result;
-
-Result create_data() {
-
-    Result r;
-
-    r.A[0][0] = 1.0;
-    r.A[0][1] = 2.0;
-    r.A[1][0] = 3.0;
-    r.A[1][1] = 4.0;
-
-    r.b = 5.0;
-
-    return r;
-}
-
-int main() {
-
-    Result data = create_data();
-
-    printf("Matrix:\n");
-    printf("%f %f\n", data.A[0][0], data.A[0][1]);
-    printf("%f %f\n", data.A[1][0], data.A[1][1]);
-
-    printf("scalar:\n")
-    printf("b = %f\n", data.b);
-
-    return 0;
-}
-
-*/
-
-/*
-here we see we can make a new file structure and define a function to output that structure
-
-apearently its better to define rows and colombs in one pointer....? why?
-
-then we define a function that puts data into the struture
-
-finally we run it in the main function
-
-this is what we will do for this code
-*/
-// #defining the datastructure of interest
-
-
 typedef struct
 {
 int N; // getting the number of particles from the file
@@ -219,6 +59,7 @@ Loaded_Data load_data( char *init_filename){
     fclose(read_cords);
     return Loaded_Data;
 }
+
 
 
 typedef struct
@@ -276,6 +117,7 @@ int check_particle_overlap(Loaded_Data l, displacement d) {
 }
 
 
+
 displacement move_particle(float Delta,Loaded_Data Loaded_Data){
     displacement d;
 
@@ -330,6 +172,8 @@ displacement move_particle(float Delta,Loaded_Data Loaded_Data){
     return d;
 }
 
+
+
 void write_to_file(Loaded_Data l){
 
     FILE *print_coords; // inititialises a file variable
@@ -349,17 +193,72 @@ void write_to_file(Loaded_Data l){
     fclose(print_coords);
 }
 
+
+
+
+void change_volume(Loaded_Data l,float dV_m){
+    /* given how we have defined the code before we should just be able to redefine the box sise, 
+    scale all the particle possitions with new box length, and check for overlap
+    
+    */
+    float dV = (dsfmt_genrand()-0.5)*2*dV_m;
+    float da = cbrt(dV);
+    float r_c[l.N][3];
+
+
+    for(int i=0; i<l.N; i++){
+
+        for(int j=0; j<3; j++){
+
+            float box_len = abs(l.box[j][0]-l.box[j][1]) ;
+            float mult_fac = (box_len + da)/box_len ;
+            r_c[i][j] = l.r[i][j] *mult_fac; 
+
+        }
+    }
+
+    for(int i; i<3;i++){
+        l.box[i][0]+= dV;
+        l.box[i][0]-= dV;
+    }
+
+}
+
+int check_overlap_volume(Loaded_Data l, float **r){
+    // we want to compare each particle to each other particle so 2 loops over particle index
+    for(int i=0; i<l.N; i++){
+        // chosing the particle
+        float *p = r[i];
+        for(int j=0; j<l.N; j++){
+            float *p_c = r[j];
+
+            float dist = 0;
+
+            for(int k=0;k<3;k++){
+                dist += (p[k] + p_c[k])*(p[k] + p_c[k]);
+
+            }
+            float sum_raduses = 0.5 * (l.size[i] + l.size[j]);
+        
+
+            if (dist < sum_raduses*sum_raduses) {
+                return 1; // Overlap detected
+            }
+        }
+    }
+    return 0;
+}
+
+
 int main(){
-    float a = 0.59;
-
-    gennerate_FCC(a);
-
     dsfmt_seed(time(NULL)); //setting the seed for the random displacement
 
     int NDIM = 3; //the number of dimmentions reading for reading out the files (you cannot change this to switch to 2D because you particles will overlap????)
 
     int succes_count=0 ;
-    int mc_steps = 1E6;
+    int mc_steps = 100000;
+
+    int dV_m = 0.1;
     // the file that will be considerd
     char *init_filename= "FCC_xyz.dat";
 

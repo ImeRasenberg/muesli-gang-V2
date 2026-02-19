@@ -333,7 +333,7 @@ int check_particle_overlap(Loaded_Data l, displacement d) {
 		float sum_raduses = 0.5 * (l.size[i] + l.size[d.index]);
 		
 		
-		if (dist_sq < sum_raduses) {
+		if (dist_sq < sum_raduses*sum_raduses) {
 			// printf("%f\t%f\t%f\nf",d.d_r[0],d.d_r[1],d.d_r[2]);
 			return 1; // Overlap detected
 		}
