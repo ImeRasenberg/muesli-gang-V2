@@ -350,7 +350,7 @@ void write_to_file(Loaded_Data l){
 }
 
 int main(){
-    float a = 0.59;
+    float a = 0.5;
 
     gennerate_FCC(a);
 
@@ -359,7 +359,7 @@ int main(){
     int NDIM = 3; //the number of dimmentions reading for reading out the files (you cannot change this to switch to 2D because you particles will overlap????)
 
     int succes_count=0 ;
-    int mc_steps = 1E6;
+    int mc_steps = 1E7;
     // the file that will be considerd
     char *init_filename= "FCC_xyz.dat";
 
@@ -368,7 +368,7 @@ int main(){
     for (int k=0; k< mc_steps; k++){
 
         // printf(" run %i\n",k);
-        displacement displacement = move_particle(0.1, Loaded_Data);
+        displacement displacement = move_particle((1-a), Loaded_Data);
         
         if (displacement.disp == 0){
             succes_count+=1;
