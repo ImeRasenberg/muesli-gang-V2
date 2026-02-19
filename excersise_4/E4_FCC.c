@@ -3,18 +3,18 @@
 // in this file we will make the cubic latice
 
 int main(){
-    int N = 4; // The number of particles in each dirrection
-    float d = 1.0; // the distance between two spheres
-    float a = 0.98; // the radius of an sphere
+    int N = 4; // The number of particles in each double
+    double d = 1.0; // the distance between two spheres
+    double a = 1.0; // the radius of an sphere
 
     // creating an distance variable that makes les typing
-    float l = sqrt(2.0)*d;
+    double l = sqrt(2.0)*d;
 
     // defining the size of the box that will be spanned
-    float x_max = N*l;
+    double x_max = N*l;
 
     // definging a variable such that the outline of the box aligns with the border of the particles
-    float s = 0.5*d;
+    double s = 0.5*d;
 
     // Make a file where we can save the position data
     FILE *print_coords; // inititialises a file variable
@@ -27,7 +27,7 @@ int main(){
     fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the z direction
 
     // we first initialise the particle possision saving arrays
-    float x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];
+    double x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];
 
     // now we start generating particle possitions and radiuses
     int n = 0; // this is our counting variable, it wil index which particle we will consider

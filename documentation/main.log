@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  19 FEB 2026 11:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  19 FEB 2026 14:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -494,13 +494,13 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(./sections/Exercise 4.tex
-<graphs/E4/Cubic.png, id=126, 295.85532pt x 322.95656pt>
+(./sections/Exercise 4_1.tex
+<graphs/E4/Cubic.png, id=156, 295.85532pt x 322.95656pt>
 File: graphs/E4/Cubic.png Graphic file (type png)
 <use graphs/E4/Cubic.png>
 Package pdftex.def Info: graphs/E4/Cubic.png  used on input line 17.
 (pdftex.def)             Requested size: 241.84842pt x 264.00806pt.
-<graphs/E4/FCC.png, id=130, 516.42938pt x 483.30562pt>
+<graphs/E4/FCC.png, id=160, 516.42938pt x 483.30562pt>
 File: graphs/E4/FCC.png Graphic file (type png)
 <use graphs/E4/FCC.png>
 Package pdftex.def Info: graphs/E4/FCC.png  used on input line 53.
@@ -510,7 +510,7 @@ Package pdftex.def Info: graphs/E4/FCC.png  used on input line 53.
 [2 <./graphs/E4/Cubic.png>]
 
 [3 <./graphs/E4/FCC.png>]
-<graphs/E4/NTV procession.png, id=158, 395.97937pt x 459.21562pt>
+<graphs/E4/NTV procession.png, id=189, 395.97937pt x 459.21562pt>
 File: graphs/E4/NTV procession.png Graphic file (type png)
 <use graphs/E4/NTV procession.png>
 Package pdftex.def Info: graphs/E4/NTV procession.png  used on input line 128.
@@ -518,22 +518,22 @@ Package pdftex.def Info: graphs/E4/NTV procession.png  used on input line 128.
 
 
 [4 <./graphs/E4/NTV procession.png>]
-<graphs/E4/50.png, id=168, 857.2025pt x 857.2025pt>
+<graphs/E4/50.png, id=198, 857.2025pt x 857.2025pt>
 File: graphs/E4/50.png Graphic file (type png)
 <use graphs/E4/50.png>
 Package pdftex.def Info: graphs/E4/50.png  used on input line 154.
 (pdftex.def)             Requested size: 169.29684pt x 169.29236pt.
-<graphs/E4/75.png, id=169, 857.2025pt x 857.2025pt>
+<graphs/E4/75.png, id=199, 857.2025pt x 857.2025pt>
 File: graphs/E4/75.png Graphic file (type png)
 <use graphs/E4/75.png>
 Package pdftex.def Info: graphs/E4/75.png  used on input line 155.
 (pdftex.def)             Requested size: 169.29684pt x 169.29236pt.
-<graphs/E4/81.png, id=170, 857.2025pt x 857.2025pt>
+<graphs/E4/81.png, id=200, 857.2025pt x 857.2025pt>
 File: graphs/E4/81.png Graphic file (type png)
 <use graphs/E4/81.png>
 Package pdftex.def Info: graphs/E4/81.png  used on input line 156.
 (pdftex.def)             Requested size: 169.29684pt x 169.29236pt.
-<graphs/E4/87.png, id=171, 857.2025pt x 857.2025pt>
+<graphs/E4/87.png, id=201, 857.2025pt x 857.2025pt>
 File: graphs/E4/87.png Graphic file (type png)
 <use graphs/E4/87.png>
 Package pdftex.def Info: graphs/E4/87.png  used on input line 157.
@@ -541,9 +541,11 @@ Package pdftex.def Info: graphs/E4/87.png  used on input line 157.
 )
 
 [5 <./graphs/E4/50.png> <./graphs/E4/75.png> <./graphs/E4/81.png> <./graphs/E4/
-87.png>] (./sections/Exercise 5.tex)
+87.png>] (./sections/Exercise 4.tex)
 
-[6] (./appendix/E4.tex
+[6] (./sections/Exercise 5.tex)
+
+[7] (./appendix/E4_1.tex
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
@@ -551,34 +553,49 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 )
 
-[7]
-
 [8]
 
 [9]
 
 [10]
 
-[11])
+[11]
 
-[12] (./appendix/E5.tex)
+[12])
 
-[13] (./main.aux)
+[13] (./appendix/E4.tex
+! Too many }'s.
+l.1 \section{Code Exercise 4 (filled in)}}
+                                          
+You've closed more groups than you opened.
+Such booboos are generally harmless, so keep going.
+
+
+
+[14])
+
+[15] (./appendix/E5.tex)
+
+[16] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B5FAE887CFAE2C8DAF3B501B9D5B5E29;1797.
+(rerunfilecheck)             Checksum: FEEBE3452525997023E786DD0D2D122D;3009.
  ) 
 Here is how much of TeX's memory you used:
- 14449 strings out of 473197
- 219066 string characters out of 5718606
- 1388287 words of memory out of 5000000
- 37055 multiletter control sequences out of 15000+600000
+ 14578 strings out of 473197
+ 221099 string characters out of 5718606
+ 1388609 words of memory out of 5000000
+ 37100 multiletter control sequences out of 15000+600000
  563308 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,11n,82p,462b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,11n,82p,542b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -591,10 +608,10 @@ sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt
 10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
 
-Output written on main.pdf (13 pages, 2176700 bytes).
+Output written on main.pdf (16 pages, 2187803 bytes).
 PDF statistics:
- 805 PDF objects out of 1000 (max. 8388607)
- 744 compressed objects within 8 object streams
- 474 named destinations out of 1000 (max. 500000)
- 212 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 932 PDF objects out of 1000 (max. 8388607)
+ 867 compressed objects within 9 object streams
+ 552 named destinations out of 1000 (max. 500000)
+ 260 words of extra memory for PDF output out of 10000 (max. 10000000)
 
