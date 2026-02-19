@@ -137,27 +137,24 @@ The results of this NVT ensemble evolution of a cubic lattice are plotted in Fig
 \subsection{}
 here we are asked to change the packing density, I will assume this is done by changing the particle size, perturbing and seeing if the structure is still fcc like.
 
-In Figure~\ref{fig:packing density sweep NVT}, configurations corresponding to different particle sizes are shown. For a particle size of 1, no translations are allowed due to the close packing, and the system therefore remains unchanged. Reducing the particle size to 0.5 leads to a clearly disordered configuration, meaning a melted phase. This means that the transition from an ordered to a disordered state occurs at an intermediate particle size.
+In Figure~\ref{fig:packing density sweep NVT}, configurations corresponding to different particle sizes are shown. For a particle size of 1, no translations are allowed due to the close packing. Reducing the particle size to 0.5 leads to a clearly disordered configuration. This means that the transition from an ordered to a disordered state occurs at an intermediate particle size.
 
-At a particle size of 0.75, the system exhibits a perfectly ordered FCC structure. However, at 0.62 the configuration is disordered. Further refinement shows that the system remains ordered at 0.69, while at 0.65 slight disorder begins to appear.
+At a particle size of 0.75, also gives a disordered system, however less so. With a particle size of 0.87 the structure is still a perfect FCC lattice. At a size of 0.81 the particles start to be disordered.
 
 
 So the lattice melts somewhere between
 \begin{equation*}
-\frac{\pi\cdot0.62^3}{2\sqrt{2}}\hspace*{1.5cm}\&\hspace*{1.5cm} \frac{\pi\cdot0.69^3}{2\sqrt{2}}
+\frac{\pi\cdot0.5^3}{2\sqrt{2}}\hspace*{1.5cm}\&\hspace*{1.5cm} \frac{\pi\cdot0.8^3}{2\sqrt{2}}
 \end{equation*}
 as a packing density.
 
 
-The simulation of the 0.59 was done because I wanted to plot an even number of graphs.
 \begin{figure}[H]
 	\centering
-	\subfloat[particle size is 0.5]{\includegraphics[width=0.3\linewidth]{graphs/E4/50.png}}\ 
-	\subfloat[particle size is 0.59]{\includegraphics[width=0.3\linewidth]{graphs/E4/59.png}}\ 
-	\subfloat[particle size is 0.62]{\includegraphics[width=0.3\linewidth]{graphs/E4/62.png}}\newline
-	\subfloat[particle size is 0.65]{\includegraphics[width=0.3\linewidth]{graphs/E4/65.png}}\
-	\subfloat[particle size is 0.69]{\includegraphics[width=0.3\linewidth]{graphs/E4/69.png}}\
-	\subfloat[particle size is 0.75]{\includegraphics[width=0.3\linewidth]{graphs/E4/75.png}}\
+	\subfloat[particle size is 0.5]{\includegraphics[width=0.45\linewidth]{graphs/E4/50.png}}
+	\subfloat[particle size is 0.75]{\includegraphics[width=0.45\linewidth]{graphs/E4/75.png}}\\
+	\subfloat[particle size is 0.81]{\includegraphics[width=0.45\linewidth]{graphs/E4/81.png}}
+	\subfloat[particle size is 0.87]{\includegraphics[width=0.45\linewidth]{graphs/E4/87.png}}
 	\caption{The packing density changed}
 	\label{fig:packing density sweep NVT}
 \end{figure}

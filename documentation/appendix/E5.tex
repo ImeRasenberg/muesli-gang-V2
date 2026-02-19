@@ -1,1 +1,60 @@
 \section{Exercise 5}
+
+\subsection{}\label{app:E5.a}
+
+\begin{lstlisting}[style=Cstyle]
+	
+	void change_volume(Loaded_Data l,float dV_m){
+		/* given how we have defined the code before we should just be able to redefine the box sise, 
+		scale all the particle possitions with new box length, and check for overlap
+		
+		*/
+		float dV = (dsfmt_genrand()-0.5)*2*dV_m;
+		float da = cbrt(dV);
+		float r_c[l.N][3];
+		
+		
+		for(int i=0; i<l.N; i++){
+			
+			for(int j=0; j<3; j++){
+				
+				float box_len = abs(l.box[j][0]-l.box[j][1]) ;
+				float mult_fac = (box_len + da)/box_len ;
+				r_c[i][j] = l.r[i][j] *mult_fac; 
+				
+			}
+		}
+		
+		for(int i; i<3;i++){
+			l.box[i][0]+= dV;
+			l.box[i][0]-= dV;
+		}
+		
+	}
+	
+	int check_overlap_volume(Loaded_Data l, float **r){
+		// we want to compare each particle to each other particle so 2 loops over particle index
+		for(int i=0; i<l.N; i++){
+			// chosing the particle
+			float *p = r[i];
+			for(int j=0; j<l.N; j++){
+				float *p_c = r[j];
+				
+				float dist = 0;
+				
+				for(int k=0;k<3;k++){
+					dist += (p[k] + p_c[k])*(p[k] + p_c[k]);
+					
+				}
+				float sum_raduses = 0.5 * (l.size[i] + l.size[j]);
+				
+				
+				if (dist < sum_raduses*sum_raduses) {
+					return 1; // Overlap detected
+				}
+			}
+		}
+		return 0;
+	}
+	
+\end{lstlisting}

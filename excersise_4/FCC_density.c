@@ -350,7 +350,7 @@ void write_to_file(Loaded_Data l){
 }
 
 int main(){
-    float a = 0.5;
+    float a = 0.81;
 
     gennerate_FCC(a);
 
@@ -359,7 +359,7 @@ int main(){
     int NDIM = 3; //the number of dimmentions reading for reading out the files (you cannot change this to switch to 2D because you particles will overlap????)
 
     int succes_count=0 ;
-    int mc_steps = 1E7;
+    int mc_steps = 1E6;
     // the file that will be considerd
     char *init_filename= "FCC_xyz.dat";
 
