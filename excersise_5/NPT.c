@@ -205,21 +205,32 @@ void change_volume(Loaded_Data l,float dV_m){
     float da = cbrt(dV);
     float r_c[l.N][3];
 
+    float box_len = abs(l.box[0][0]-l.box[0][1]) ;
+    float mult_fac = (box_len + da)/box_len ;
 
+    
     for(int i=0; i<l.N; i++){
 
         for(int j=0; j<3; j++){
 
-            float box_len = abs(l.box[j][0]-l.box[j][1]) ;
-            float mult_fac = (box_len + da)/box_len ;
             r_c[i][j] = l.r[i][j] *mult_fac; 
-
         }
     }
 
-    for(int i; i<3;i++){
-        l.box[i][0]+= dV;
-        l.box[i][0]-= dV;
+    int overlapping = check_overlap_volume(l, r_c);
+
+    if(overlapping==0){
+        for(int i=0; i<3;i++){
+            l.box[i][0]+= dV;
+            l.box[i][0]-= dV;
+        }
+        for(int i=0; i<l.N; i++){
+
+            for(int j=0; j<3; j++){
+                l.r[i][j] = l.r[i][j] *mult_fac;
+            }
+        }
+        
     }
 
 }
