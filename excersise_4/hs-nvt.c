@@ -11,9 +11,9 @@
 #define NDIM 3
 
 /* Initialization variables */
-const int mc_steps = 10000;
-const int output_steps = 500;
-const double packing_fraction = 0.1;
+const int mc_steps = 1000;
+const int output_steps = 100;
+const double packing_fraction = 0.4;
 const double diameter = 1.0;
 const double delta = 0.1;
 const char* init_filename = "fcc.xyz";
@@ -28,7 +28,7 @@ double box[NDIM];
 
 // randome movement
 double dr[3];
-double n;
+int n;
 
 void read_data(void){
 
@@ -108,7 +108,16 @@ int move_particle(void){
         return 0;
     }
     else if (disp==0){
+        for(int i=0;i<3;i++){
+            r[n][i] += dr[i];
 
+            if(r[n][i]<0){
+                r[n][i] +=box[i];
+            }
+            if(r[n][i]>box[i]){
+                r[n][i] -=box[i];
+            }
+        }
         return 1;
     }
 
