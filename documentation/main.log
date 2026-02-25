@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  19 FEB 2026 14:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  24 FEB 2026 12:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -494,58 +494,59 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(./sections/Exercise 4_1.tex
-<graphs/E4/Cubic.png, id=156, 295.85532pt x 322.95656pt>
+(./sections/Exercise 4.tex
+<graphs/E4/Cubic.png, id=119, 295.85532pt x 322.95656pt>
 File: graphs/E4/Cubic.png Graphic file (type png)
 <use graphs/E4/Cubic.png>
-Package pdftex.def Info: graphs/E4/Cubic.png  used on input line 17.
+Package pdftex.def Info: graphs/E4/Cubic.png  used on input line 13.
 (pdftex.def)             Requested size: 241.84842pt x 264.00806pt.
-<graphs/E4/FCC.png, id=160, 516.42938pt x 483.30562pt>
+<graphs/E4/FCC.png, id=123, 516.42938pt x 483.30562pt>
 File: graphs/E4/FCC.png Graphic file (type png)
 <use graphs/E4/FCC.png>
-Package pdftex.def Info: graphs/E4/FCC.png  used on input line 53.
+Package pdftex.def Info: graphs/E4/FCC.png  used on input line 49.
 (pdftex.def)             Requested size: 241.84842pt x 226.33508pt.
 
 
 [2 <./graphs/E4/Cubic.png>]
 
+LaTeX Warning: Reference `app:E4.e' on page 3 undefined on input line 97.
+
+
+
 [3 <./graphs/E4/FCC.png>]
-<graphs/E4/NTV procession.png, id=189, 395.97937pt x 459.21562pt>
+<graphs/E4/NTV procession.png, id=148, 395.97937pt x 459.21562pt>
 File: graphs/E4/NTV procession.png Graphic file (type png)
 <use graphs/E4/NTV procession.png>
-Package pdftex.def Info: graphs/E4/NTV procession.png  used on input line 128.
+Package pdftex.def Info: graphs/E4/NTV procession.png  used on input line 110.
 (pdftex.def)             Requested size: 241.84842pt x 280.47147pt.
-
-
-[4 <./graphs/E4/NTV procession.png>]
-<graphs/E4/50.png, id=198, 857.2025pt x 857.2025pt>
+<graphs/E4/40.png, id=150, 989.6975pt x 989.6975pt>
+File: graphs/E4/40.png Graphic file (type png)
+<use graphs/E4/40.png>
+Package pdftex.def Info: graphs/E4/40.png  used on input line 125.
+(pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
+<graphs/E4/45.png, id=151, 989.6975pt x 989.6975pt>
+File: graphs/E4/45.png Graphic file (type png)
+<use graphs/E4/45.png>
+Package pdftex.def Info: graphs/E4/45.png  used on input line 126.
+(pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
+<graphs/E4/50.png, id=152, 989.6975pt x 989.6975pt>
 File: graphs/E4/50.png Graphic file (type png)
 <use graphs/E4/50.png>
-Package pdftex.def Info: graphs/E4/50.png  used on input line 154.
-(pdftex.def)             Requested size: 169.29684pt x 169.29236pt.
-<graphs/E4/75.png, id=199, 857.2025pt x 857.2025pt>
-File: graphs/E4/75.png Graphic file (type png)
-<use graphs/E4/75.png>
-Package pdftex.def Info: graphs/E4/75.png  used on input line 155.
-(pdftex.def)             Requested size: 169.29684pt x 169.29236pt.
-<graphs/E4/81.png, id=200, 857.2025pt x 857.2025pt>
-File: graphs/E4/81.png Graphic file (type png)
-<use graphs/E4/81.png>
-Package pdftex.def Info: graphs/E4/81.png  used on input line 156.
-(pdftex.def)             Requested size: 169.29684pt x 169.29236pt.
-<graphs/E4/87.png, id=201, 857.2025pt x 857.2025pt>
-File: graphs/E4/87.png Graphic file (type png)
-<use graphs/E4/87.png>
-Package pdftex.def Info: graphs/E4/87.png  used on input line 157.
-(pdftex.def)             Requested size: 169.29684pt x 169.29236pt.
-)
+Package pdftex.def Info: graphs/E4/50.png  used on input line 127.
+(pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
+<graphs/E4/55.png, id=153, 989.6975pt x 989.6975pt>
+File: graphs/E4/55.png Graphic file (type png)
+<use graphs/E4/55.png>
+Package pdftex.def Info: graphs/E4/55.png  used on input line 128.
+(pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
 
-[5 <./graphs/E4/50.png> <./graphs/E4/75.png> <./graphs/E4/81.png> <./graphs/E4/
-87.png>] (./sections/Exercise 4.tex)
 
-[6] (./sections/Exercise 5.tex)
+[4 <./graphs/E4/NTV procession.png>])
 
-[7] (./appendix/E4_1.tex
+[5 <./graphs/E4/40.png> <./graphs/E4/45.png> <./graphs/E4/50.png> <./graphs/E4/
+55.png>] (./sections/Exercise 5.tex)
+
+[6] (./appendix/E4_1.tex
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2024/09/23 1.10c listings language file
 )
@@ -553,49 +554,36 @@ File: lstlang1.sty 2024/09/23 1.10c listings language file
 File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
 )
 
+[7]
+
 [8]
 
 [9]
 
-[10]
+[10])
 
-[11]
+[11] (./appendix/E4.tex) (./appendix/E5.tex)
 
-[12])
-
-[13] (./appendix/E4.tex
-! Too many }'s.
-l.1 \section{Code Exercise 4 (filled in)}}
-                                          
-You've closed more groups than you opened.
-Such booboos are generally harmless, so keep going.
-
-
-
-[14])
-
-[15] (./appendix/E5.tex)
-
-[16] (./main.aux)
+[12] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: FEEBE3452525997023E786DD0D2D122D;3009.
+(rerunfilecheck)             Checksum: F415F90ABB31E2C43E0B080B01C955F1;1813.
  ) 
 Here is how much of TeX's memory you used:
- 14578 strings out of 473197
- 221099 string characters out of 5718606
- 1388609 words of memory out of 5000000
- 37100 multiletter control sequences out of 15000+600000
- 563308 words of font info for 54 fonts, out of 8000000 for 9000
+ 14392 strings out of 473197
+ 218299 string characters out of 5718606
+ 1397322 words of memory out of 5000000
+ 37067 multiletter control sequences out of 15000+600000
+ 563140 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 80i,11n,82p,542b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,11n,82p,595b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -606,12 +594,11 @@ t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
 ublic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-
-Output written on main.pdf (16 pages, 2187803 bytes).
+8.pfb>
+Output written on main.pdf (12 pages, 2445569 bytes).
 PDF statistics:
- 932 PDF objects out of 1000 (max. 8388607)
- 867 compressed objects within 9 object streams
- 552 named destinations out of 1000 (max. 500000)
- 260 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 702 PDF objects out of 1000 (max. 8388607)
+ 645 compressed objects within 7 object streams
+ 403 named destinations out of 1000 (max. 500000)
+ 204 words of extra memory for PDF output out of 10000 (max. 10000000)
 

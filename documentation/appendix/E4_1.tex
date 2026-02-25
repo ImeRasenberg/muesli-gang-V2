@@ -1,4 +1,4 @@
-\section{Code Exercise 4 (completely my won)}
+\section{Code Exercise 4 }
 
 \subsection{} \label{app:E4.a}
 
@@ -72,31 +72,32 @@ int main(){
 // in this file we will make the cubic latice
 
 int main(){
-	int N = 4; // The number of particles in each dirrection
-	float d = 1.0; // the distance between two spheres
-	float a = 1.0; // the radius of an sphere
+	int N = 4; // The number of particles in each double
+	double d = 1.0; // the distance between two spheres
+	double a = 1.0; // the radius of an sphere
 	
 	// creating an distance variable that makes les typing
-	float l = sqrt(2.0)*d;
+	double l = sqrt(2.0)*d;
 	
-	// defining the size of the box that will be spanned
-	float x_max = N*l;
+	// defining the size of th  e box that will be spanned
+	double x_max = N*l;
 	
 	// definging a variable such that the outline of the box aligns with the border of the particles
-	float s = 0.5*d;
+	double s = 0.5*d;
 	
 	// Make a file where we can save the position data
 	FILE *print_coords; // inititialises a file variable
-	print_coords = fopen("FCC_xyz.dat","w"); // defining the file variable to be the opening of some file cubic.xyz
+	print_coords = fopen("fcc.xyz","w"); // defining the file variable to be the opening of some file cubic.xyz
 	
 	// Let us print some initial coordinates
+   // Let us print some initial coordinates
 	fprintf(print_coords, "%i\n", 4*N*N*N); // the total number of particles
-	fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the x direction
-	fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the y direction
-	fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the z direction
+	fprintf(print_coords, "%lf\t%lf\n", 0, x_max); // The ocupied space in the x direction
+	fprintf(print_coords, "%lf\t%lf\n", 0, x_max); // The ocupied space in the y direction
+	fprintf(print_coords, "%lf\t%lf\n", 0, x_max); // The ocupied space in the z direction
 	
 	// we first initialise the particle possision saving arrays
-	float x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];
+	double x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];
 	
 	// now we start generating particle possitions and radiuses
 	int n = 0; // this is our counting variable, it wil index which particle we will consider
@@ -177,7 +178,7 @@ int main(){
 	return 0;
 }
 \end{lstlisting}
-
+\iffalse
 \subsection{}\label{app:E4.c}
 \begin{lstlisting}[style=Cstyle]
 typedef struct
@@ -400,4 +401,161 @@ int main(){
 	write_to_file(Loaded_Data);
 	return 0;
 }
+\end{lstlisting}
+
+\fi
+
+
+
+\subsection{}\label{app:E4.1}
+
+
+\begin{lstlisting}[style=Cstyle]
+	#include <stdio.h>
+	#include <time.h>
+	#include <assert.h>
+	#include <math.h>
+	#include "../downloads/mt19937.h"
+	
+	#ifndef M_PI
+	#define M_PI 3.14159265358979323846
+	#endif
+	
+	#define NDIM 3
+	
+	/* Initialization variables */
+	const int mc_steps = 10000;
+	const int output_steps = 100;
+	const double packing_fraction = 0.6;
+	const double diameter = 1.0;
+	const double delta = 0.1;
+	const char* init_filename = "FCC_xyz.dat";
+	
+	/* Simulation variables */
+	int N;
+	int n_particles = 0;
+	double radius;
+	double particle_volume;
+	double (*r)[3];
+	double *size;
+	double box[NDIM];
+	
+	
+	double dummy;
+\end{lstlisting}
+
+\subsection{}\label{app:4.2}
+
+\begin{lstlisting}[style=Cstyle]
+	void read_data(void){
+		/*--------- Your code goes here -----------*/
+		// degining the file
+		FILE *read_cords;
+		read_cords = fopen(init_filename, "r");
+		
+		// reading the first line to get the number of of particles that exist in the file (why is the exersise so weird???)
+		fscanf(read_cords, "%i\n", &N); // the total number of particles
+		// printf("%i\n", Loaded_Data.N);
+		
+		// making sure that the size will be correctly degined instead of having to asign it before hand
+		// malloc is the memmory allocation commman which is wat we need to have exact size matrixes, only this satisfies me
+		r = malloc(N * sizeof * r); // all the position vectors of all the particles
+		size = malloc(N * sizeof * size); //The size of all particles
+		
+		// lets turn the above into a loop because i want to
+		for(int i = 0; i<3; i++){
+			fscanf(read_cords, "%f %f", &dummy, &box[i]);
+			
+		}
+		
+		// now that we have arived at the paricles lets be happy
+		for(int i = 0; i<N; i++){
+			fscanf(read_cords, "%f %f %f %f", &r[i][0], &r[i][1], &r[i][2], &size[i]);
+		}
+		
+		fclose(read_cords);
+	}
+\end{lstlisting}
+
+
+
+\subsection{}\label{app:E4.3}
+
+\begin{lstlisting}[style=Cstyle]
+	
+	int check_particle_overlap(int n){
+		double *p = r[n];
+		
+		for(int i=0;i<n_particles;i++){
+			if(i==n){
+				continue;
+			}
+			
+			double *p_c = r[i];
+			double distance_squared = 0;
+			
+			for(int j=0;j<3;j++){
+				double difference = p[j] + dr[j] - (p_c[j]);
+				if(difference>0.5*box[j]){
+					difference -= box[j];
+				}
+				else if(difference<-0.5*box[j]){
+					difference += box[j];
+				}
+				distance_squared += difference*difference;
+			}
+			
+			double sum_raduss = 0.5 * (size[i] + size[i]);
+			
+			
+			
+			if (distance_squared < sum_raduss*sum_raduss){
+				// printf("%lf\t < \t %lf\n",distance_squared,sum_raduss*sum_raduss);
+				return 1;
+			}
+		}
+		// printf("accept\n");
+		return 0;
+	}
+	
+\end{lstlisting}
+
+
+
+\subsection{}\label{app:E4.4}
+
+\begin{lstlisting}[style=Cstyle]
+int move_particle(void){
+	n = floor(dsfmt_genrand()*n_particles);
+	
+	for(int i=0;i<3;i++){
+		dr[i] = (dsfmt_genrand()-0.5) + 0.00001;
+	}
+	double delta_l=(dsfmt_genrand()-0.5)*2*delta + 0.00001;
+	
+	double length = sqrt(dr[0]*dr[0] + dr[1]*dr[1] + dr[2]*dr[2]);
+	for(int i=0;i<3;i++){
+		dr[i] *= delta_l/length;
+	}
+	
+	int disp = check_particle_overlap(n);
+	
+	if(disp ==1){
+		return 0;
+	}
+	else if (disp==0){
+		for(int i=0;i<3;i++){
+			r[n][i] += dr[i];
+			
+			if(r[n][i]<0){
+				r[n][i] +=box[i];
+			}
+			if(r[n][i]>box[i]){
+				r[n][i] -=box[i];
+			}
+		}
+		return 1;
+	}
+	
+	}
 \end{lstlisting}

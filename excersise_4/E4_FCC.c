@@ -10,7 +10,7 @@ int main(){
     // creating an distance variable that makes les typing
     double l = sqrt(2.0)*d;
 
-    // defining the size of the box that will be spanned
+    // defining the size of th  e box that will be spanned
     double x_max = N*l;
 
     // definging a variable such that the outline of the box aligns with the border of the particles
@@ -18,13 +18,13 @@ int main(){
 
     // Make a file where we can save the position data
     FILE *print_coords; // inititialises a file variable
-    print_coords = fopen("FCC_xyz.dat","w"); // defining the file variable to be the opening of some file cubic.xyz
+    print_coords = fopen("fcc.xyz","w"); // defining the file variable to be the opening of some file cubic.xyz
 
     // Let us print some initial coordinates
     fprintf(print_coords, "%i\n", 4*N*N*N); // the total number of particles
-    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the x direction
-    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the y direction
-    fprintf(print_coords, "%lf\t%lf\n", -s, x_max-sqrt(2)*s+0.5*d); // The ocupied space in the z direction
+    fprintf(print_coords, "%lf\t%lf\n", 0, x_max); // The ocupied space in the x direction
+    fprintf(print_coords, "%lf\t%lf\n", 0, x_max); // The ocupied space in the y direction
+    fprintf(print_coords, "%lf\t%lf\n", 0, x_max); // The ocupied space in the z direction
 
     // we first initialise the particle possision saving arrays
     double x[4*N*N*N], y[4*N*N*N], z[4*N*N*N], r[4*N*N*N];

@@ -13,7 +13,7 @@
 /* Initialization variables */
 const int mc_steps = 1000;
 const int output_steps = 100;
-const double packing_fraction = 0.4;
+const double packing_fraction = 0.55;
 const double diameter = 1.0;
 const double delta = 0.1;
 const char* init_filename = "fcc.xyz";
@@ -30,6 +30,9 @@ double box[NDIM];
 double dr[3];
 int n;
 
+double dummy;
+
+
 void read_data(void){
 
     FILE *read_cords;
@@ -41,7 +44,7 @@ void read_data(void){
     size = malloc(n_particles * sizeof * size); 
 
     for(int i = 0; i<NDIM; i++){
-        fscanf(read_cords, "%lf %lf", &box[i], &box[i]);
+        fscanf(read_cords, "%lf %lf", &dummy, &box[i]);
 
     }
 
@@ -91,7 +94,7 @@ int check_particle_overlap(int n){
 
 int move_particle(void){
     n = floor(dsfmt_genrand()*n_particles);
-
+double dummy;
     for(int i=0;i<3;i++){
         dr[i] = (dsfmt_genrand()-0.5) + 0.00001;
     }
@@ -99,7 +102,7 @@ int move_particle(void){
 
     double length = sqrt(dr[0]*dr[0] + dr[1]*dr[1] + dr[2]*dr[2]);
     for(int i=0;i<3;i++){
-        dr[i] = (dsfmt_genrand()-0.5);
+        dr[i] *= delta_l/length;
     }
 
     int disp = check_particle_overlap(n);
