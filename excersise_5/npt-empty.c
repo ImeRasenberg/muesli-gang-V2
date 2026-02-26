@@ -1,59 +1,234 @@
 #include <stdio.h>
 #include <time.h>
+#include <assert.h>
 #include <math.h>
-#include "mt19937.h"
+#include "../downloads/mt19937.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
 
 #define NDIM 3
-#define N 1000
 
 /* Initialization variables */
-const int mc_steps = 100000;
+const int mc_steps = 1000;
 const int output_steps = 100;
-const double packing_fraction = 0.6;
+const double packing_fraction = 0.55;
 const double diameter = 1.0;
-const double delta  = 0.1;
-/* Volume change -deltaV, delta V */
-const double deltaV = 2.0;
-/* Reduced pressure \beta P */
-const double betaP = 3.0;
-const char* init_filename = "fcc.dat";
+const double delta = 0.1;
+const char* init_filename = "fcc.xyz";
+
+// constants
+const double betaP = 3;
+
+
 
 /* Simulation variables */
 int n_particles = 0;
 double radius;
 double particle_volume;
-double r[N][NDIM];
+double (*r)[3];
+double *size;
 double box[NDIM];
 
+// randome movement
+double dr[3];
+int n;
 
-/* Functions */
-int change_volume(void){
-    /*--------- Your code goes here -----------*/
-}
+// randome volume change
+double dV;
+
+
+double dummy;
+
 
 void read_data(void){
-/*--------- Your code goes here -----------*/
+
+    FILE *read_cords;
+    read_cords = fopen(init_filename, "r");
+
+    fscanf(read_cords, "%d\n", &n_particles); 
+
+    r = malloc(n_particles * sizeof * r); 
+    size = malloc(n_particles * sizeof * size); 
+
+    for(int i = 0; i<NDIM; i++){
+        fscanf(read_cords, "%lf %lf", &dummy, &box[i]);
+
+    }
+
+    for(int i = 0; i<n_particles; i++){
+        fscanf(read_cords, "%lf %lf %lf %lf", &r[i][0], &r[i][1], &r[i][2], &size[i]);
+    }
+
+    fclose(read_cords);
 }
 
+
+double dV_m = 0.75;
+
+
+
+int change_volume(){
+
+    dV = (dsfmt_genrand()-0.5)*2*dV_m;
+
+    double V = box[0]*box[0]*box[0];
+    
+    double mult_fac = (box[0] + cbrt(dV))/box[0] ;
+
+    double V_new;
+
+    for(int i=0;i<3;i++){
+        V_new *=box[i]*mult_fac;
+    }
+    
+    double acc = fmin(1, exp(-betaP*dV + n_particles*log(V_new/V)));
+    if (dsfmt_genrand()<acc){
+        return 0;
+    }
+
+
+    double r_c[n_particles][3];
+
+    for(int i=0; i<n_particles; i++){
+
+        for(int j=0; j<3; j++){
+
+            r_c[i][j] = r[i][j] *mult_fac; 
+        }
+    }
+
+    for(int h=0; h<n_particles; h++){
+
+
+        for(int i=0; i < h; i++){
+
+            double distance = 0;
+
+            for(int j=0; j<3; j++){
+
+                double dist = (r_c[h][j] - r_c[i][j]);
+
+                if(dist>0.5*box[j]*mult_fac){
+                    dist -= box[j]*mult_fac;
+                }
+                else if(dist<-0.5*box[j]*mult_fac){
+                    dist += box[j]*mult_fac;
+                }
+                
+                distance += dist*dist;
+                    
+            }
+
+            
+            if (distance<(0.5*(size[h]+size[i]))*(0.5*(size[h]+size[i]))){
+                // printf("volume cannot change there is overlap\n");
+                return 0;
+            }
+        }
+
+    }
+
+
+
+
+    for(int i=0;i<3;i++){
+        box[i]*=mult_fac;
+    }
+    for(int i=0; i<n_particles; i++){
+        for(int j=0; j<3; j++){
+            r[i][j] = r_c[i][j];
+        }
+    }
+
+    // printf("volume changed\n");
+    return 1;
+
+}
+
+
+int check_particle_overlap(int n){
+    double *p = r[n];
+
+    for(int i=0;i<n_particles;i++){
+        if(i==n){
+            continue;
+        }
+
+        double *p_c = r[i];
+        double distance_squared = 0;
+
+        for(int j=0; j<3; j++){
+            double difference = p[j] + dr[j] - (p_c[j]);
+            if(difference>0.5*box[j]){
+                difference -= box[j];
+            }
+            else if(difference<-0.5*box[j]){
+                difference += box[j];
+            }
+            distance_squared += difference*difference;
+        }
+
+        double sum_raduss = 0.5 * (size[i] + size[i]);
+
+        
+
+        if (distance_squared < sum_raduss*sum_raduss){
+            // printf("%lf\t < \t %lf\n",distance_squared,sum_raduss*sum_raduss);
+            return 1;
+        }
+    }
+    // printf("accept\n");
+    return 0;
+}
+
+
 int move_particle(void){
-/*--------- Your code goes here -----------*/
+    n = floor(dsfmt_genrand()*n_particles);
+double dummy;
+    for(int i=0;i<3;i++){
+        dr[i] = (dsfmt_genrand()-0.5) + 0.00001;
+    }
+    double delta_l=(dsfmt_genrand()-0.5)*2*delta + 0.00001;
+
+    double length = sqrt(dr[0]*dr[0] + dr[1]*dr[1] + dr[2]*dr[2]);
+    for(int i=0;i<3;i++){
+        dr[i] *= delta_l/length;
+    }
+
+    int disp = check_particle_overlap(n);
+    
+    if(disp ==1){
+        return 0;
+    }
+    else if (disp==0){
+        for(int i=0;i<3;i++){
+            r[n][i] += dr[i];
+
+            if(r[n][i]<0){
+                r[n][i] +=box[i];
+            }
+            if(r[n][i]>box[i]){
+                r[n][i] -=box[i];
+            }
+        }
+        return 1;
+    }
+
 }
 
 void write_data(int step){
     char buffer[128];
-    sprintf(buffer, "coords_step%07d.dat", step);
+    sprintf(buffer, "./data/coords_step%07d.dat", step);
     FILE* fp = fopen(buffer, "w");
     int d, n;
     fprintf(fp, "%d\n", n_particles);
     for(d = 0; d < NDIM; ++d){
-        fprintf(fp, "%lf %lf\n",0.0,box[d]);
+        fprintf(fp, "%lf %lf\n",0.0, box[d]);
     }
     for(n = 0; n < n_particles; ++n){
-        for(d = 0; d < NDIM; ++d) fprintf(fp, "%lf\t", r[n][d]);
+        for(d = 0; d < NDIM; ++d) fprintf(fp, "%f\t", r[n][d]);
         fprintf(fp, "%lf\n", diameter);
     }
     fclose(fp);
@@ -69,11 +244,17 @@ void set_packing_fraction(void){
 
     for(n = 0; n < n_particles; ++n){
         for(d = 0; d < NDIM; ++d) r[n][d] *= scale_factor;
+        // printf("%lf\n",scale_factor);
     }
     for(d = 0; d < NDIM; ++d) box[d] *= scale_factor;
 }
 
 int main(int argc, char* argv[]){
+    read_data();
+    
+    assert(packing_fraction > 0.0 && packing_fraction < 1.0);
+    assert(diameter > 0.0);
+    assert(delta > 0.0);
 
     radius = 0.5 * diameter;
 
@@ -84,7 +265,8 @@ int main(int argc, char* argv[]){
         return 0;
     }
 
-    read_data();
+
+    
 
     if(n_particles == 0){
         printf("Error: Number of particles, n_particles = 0.\n");
@@ -94,28 +276,25 @@ int main(int argc, char* argv[]){
     set_packing_fraction();
 
     dsfmt_seed(time(NULL));
-            
-    printf("#Step \t Volume \t Move-acceptance\t Volume-acceptance \n");
 
-    int move_accepted = 0;
-    int vol_accepted = 0;
+    int accepted = 0;
     int step, n;
+    int accepted_dv = 0;
     for(step = 0; step < mc_steps; ++step){
         for(n = 0; n < n_particles; ++n){
-            move_accepted += move_particle();
+            accepted += move_particle();
+            accepted_dv += change_volume();
+
         }
-        vol_accepted += change_volume();
 
         if(step % output_steps == 0){
-            printf("%d \t %lf \t %lf \t %lf \n", 
-                    step, box[0] * box[1] * box[2], 
-                    (double)move_accepted / (n_particles * output_steps), 
-                    (double)vol_accepted /  output_steps);
-            move_accepted = 0;
-            vol_accepted = 0;
+            printf("Step %d. Move acceptance: %lf.\n", step, (double)accepted / (n_particles * output_steps));
+
+            printf("Step %d. Volume change acceptance: %lf.\n", step, (double)accepted_dv / (n_particles * output_steps));
+            accepted = 0;
             write_data(step);
         }
     }
-
+    printf("done");
     return 0;
 }

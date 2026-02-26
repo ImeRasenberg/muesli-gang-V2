@@ -67,7 +67,7 @@ int check_particle_overlap(int n){
         double *p_c = r[i];
         double distance_squared = 0;
 
-        for(int j=0;j<3;j++){
+        for(int j=0; j<3; j++){
             double difference = p[j] + dr[j] - (p_c[j]);
             if(difference>0.5*box[j]){
                 difference -= box[j];
