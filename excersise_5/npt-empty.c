@@ -11,15 +11,17 @@
 #define NDIM 3
 
 /* Initialization variables */
-const int mc_steps = 100000;
-const int output_steps = 100;
+const int mc_steps = 30000;
+const int output_steps = mc_steps/200;
 const double packing_fraction = 0.55;
 const double diameter = 1.0;
-const double delta = 0.1;
 const char* init_filename = "fcc.xyz";
 
 // constants
 const double betaP = 3;
+
+const double delta = 0.1;
+
 double dV_m = 0.7;
 
 
@@ -75,14 +77,14 @@ int change_volume(){
     
     double mult_fac = cbrt(V+dV)/box[0];
 
-    double V_new;
+    double V_new=1;
 
     for(int i=0;i<3;i++){
         V_new *=box[i]*mult_fac;
     }
     
     double acc = fmin(1, exp(-betaP*dV + n_particles*log(V_new/V)));
-    if (dsfmt_genrand()<acc){
+    if (dsfmt_genrand()>acc){
         return 0;
     }
 
@@ -225,7 +227,7 @@ void write_data(int step){
     for(d = 0; d < NDIM; ++d){
         fprintf(fp, "%lf %lf\n",0.0, box[d]);
     }
-    for(n = 0; n < n_particles; ++n){
+    for(n = 0; n < n_particles; ++n){  
         for(d = 0; d < NDIM; ++d) fprintf(fp, "%f\t", r[n][d]);
         fprintf(fp, "%lf\n", diameter);
     }
