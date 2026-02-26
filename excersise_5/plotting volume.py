@@ -107,7 +107,7 @@ for key, dataset in sorted(data_dict.items()):
     steps = dataset["step"]
     volumes = dataset["volume"]
     
-    Volume_particle = (sigma/2)**3 * 4/3* np.pi
+    Volume_particle = (sigma/2)**3 * 4/3* np.pi*dataset["n_particles"]
     
     mask = steps >= 15000
     avg_volume = np.mean(volumes[mask])
@@ -136,3 +136,34 @@ plt.show()
 
 # Return numerical values in case you want them
 list(zip(x_values, y_values))
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ... [Keep your existing data extraction code here] ...
+
+# 1. Generate the Carnahan-Starling Theoretical Curve
+eta_theory = np.linspace(0.1, 0.7, 100) # Theory is accurate up to ~0.5
+# CS Equation rearranged for x-axis (beta * P * sigma^3)
+# Note: rho*sigma^3 = 6*eta/pi
+x_theory = (6 * eta_theory / np.pi) * (1 + eta_theory + eta_theory**2 - eta_theory**3) / (1 - eta_theory)**3
+
+# 2. Plotting
+plt.figure(figsize=(8, 5))
+
+# Your Simulation Data
+plt.plot(x_values, y_values, 'bo-', label='MC Simulation')
+
+# Carnahan-Starling Theory
+plt.plot(x_theory, eta_theory, 'r--', label='Carnahan-Starling Theory')
+
+plt.xlabel(r'$\beta P \sigma^3$')
+plt.ylabel(r'Packing Fraction $\eta$')
+plt.title('Hard Sphere Equation of State')
+plt.legend()
+plt.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+

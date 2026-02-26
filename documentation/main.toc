@@ -19,3 +19,5 @@
 \contentsline {subsection}{\numberline {A.6}}{10}{subsection.A.6}%
 \contentsline {section}{\numberline {B}Exercise 5}{12}{appendix.B}%
 \contentsline {subsection}{\numberline {B.1}}{12}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}}{13}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}}{14}{subsection.B.3}%
