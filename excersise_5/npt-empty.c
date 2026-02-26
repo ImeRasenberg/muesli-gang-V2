@@ -11,7 +11,7 @@
 #define NDIM 3
 
 /* Initialization variables */
-const int mc_steps = 1000;
+const int mc_steps = 100000;
 const int output_steps = 100;
 const double packing_fraction = 0.55;
 const double diameter = 1.0;
@@ -20,7 +20,7 @@ const char* init_filename = "fcc.xyz";
 
 // constants
 const double betaP = 3;
-
+double dV_m = 0.7;
 
 
 /* Simulation variables */
@@ -65,8 +65,6 @@ void read_data(void){
 }
 
 
-double dV_m = 0.75;
-
 
 
 int change_volume(){
@@ -75,7 +73,7 @@ int change_volume(){
 
     double V = box[0]*box[0]*box[0];
     
-    double mult_fac = (box[0] + cbrt(dV))/box[0] ;
+    double mult_fac = cbrt(V+dV)/box[0];
 
     double V_new;
 
@@ -283,15 +281,15 @@ int main(int argc, char* argv[]){
     for(step = 0; step < mc_steps; ++step){
         for(n = 0; n < n_particles; ++n){
             accepted += move_particle();
-            accepted_dv += change_volume();
-
         }
+        accepted_dv += change_volume();
 
         if(step % output_steps == 0){
             printf("Step %d. Move acceptance: %lf.\n", step, (double)accepted / (n_particles * output_steps));
 
-            printf("Step %d. Volume change acceptance: %lf.\n", step, (double)accepted_dv / (n_particles * output_steps));
+            printf("Step %d. Volume change acceptance: %lf.\n", step, (double)accepted_dv / (output_steps));
             accepted = 0;
+            accepted_dv = 0;
             write_data(step);
         }
     }
