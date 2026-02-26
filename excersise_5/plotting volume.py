@@ -85,3 +85,54 @@ plt.ylabel(r'$V/\sigma^3$')
 plt.legend()
 plt.tight_layout()
 plt.show()
+
+# This code assumes `data_dict` is already defined in memory
+# with the structure previously constructed.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x_values = []
+y_values = []
+
+for key, dataset in sorted(data_dict.items()):
+    
+    betaP = dataset["betaP"]
+    sigma = dataset["size_average"]
+    
+    # Compute βP σ^3 (legend quantity)
+    x_val = betaP * sigma**3
+    
+    # Select steps >= 15000
+    steps = dataset["step"]
+    volumes = dataset["volume"]
+    
+    Volume_particle = (sigma/2)**3 * 4/3* np.pi
+    
+    mask = steps >= 15000
+    avg_volume = np.mean(volumes[mask])
+    
+    x_values.append(x_val)
+    y_values.append(Volume_particle / avg_volume)
+
+# Convert to arrays and sort by x
+x_values = np.array(x_values)
+y_values = np.array(y_values)
+
+order = np.argsort(x_values)
+x_values = x_values[order]
+y_values = y_values[order]
+
+# Single plot (no custom colors, no subplots)
+plt.figure()
+plt.plot(x_values, y_values)
+
+plt.xlabel(r'$\beta P \sigma^3$')
+plt.ylabel(r'$\langle \rho \rangle_{eq} $')
+# the average of the volume after 15000 steps as a fu
+
+plt.tight_layout()
+plt.show()
+
+# Return numerical values in case you want them
+list(zip(x_values, y_values))

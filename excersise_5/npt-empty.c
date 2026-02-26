@@ -25,7 +25,7 @@ const double diameter = 1.0;
 const char* init_filename = "fcc.xyz";
 
 // constants
-const double betaP = 10;
+const double betaP = 15;
 
 double delta = 0.2;
 
