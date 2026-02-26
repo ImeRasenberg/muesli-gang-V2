@@ -3,58 +3,81 @@
 \subsection{}\label{app:E5.a}
 
 \begin{lstlisting}[style=Cstyle]
+int change_volume(){
 	
-	void change_volume(Loaded_Data l,float dV_m){
-		/* given how we have defined the code before we should just be able to redefine the box sise, 
-		scale all the particle possitions with new box length, and check for overlap
-		
-		*/
-		float dV = (dsfmt_genrand()-0.5)*2*dV_m;
-		float da = cbrt(dV);
-		float r_c[l.N][3];
-		
-		
-		for(int i=0; i<l.N; i++){
-			
-			for(int j=0; j<3; j++){
-				
-				float box_len = abs(l.box[j][0]-l.box[j][1]) ;
-				float mult_fac = (box_len + da)/box_len ;
-				r_c[i][j] = l.r[i][j] *mult_fac; 
-				
-			}
-		}
-		
-		for(int i; i<3;i++){
-			l.box[i][0]+= dV;
-			l.box[i][0]-= dV;
-		}
-		
+	dV = (dsfmt_genrand()-0.5)*2*dV_m;
+	
+	double V = box[0]*box[0]*box[0];
+	
+	double mult_fac = cbrt(V+dV)/box[0];
+	
+	double V_new=1;
+	
+	for(int i=0;i<3;i++){
+		V_new *=box[i]*mult_fac;
 	}
 	
-	int check_overlap_volume(Loaded_Data l, float **r){
-		// we want to compare each particle to each other particle so 2 loops over particle index
-		for(int i=0; i<l.N; i++){
-			// chosing the particle
-			float *p = r[i];
-			for(int j=0; j<l.N; j++){
-				float *p_c = r[j];
-				
-				float dist = 0;
-				
-				for(int k=0;k<3;k++){
-					dist += (p[k] + p_c[k])*(p[k] + p_c[k]);
-					
-				}
-				float sum_raduses = 0.5 * (l.size[i] + l.size[j]);
-				
-				
-				if (dist < sum_raduses*sum_raduses) {
-					return 1; // Overlap detected
-				}
-			}
-		}
+	double acc = fmin(1, exp(-betaP*dV + n_particles*log(V_new/V)));
+	if (dsfmt_genrand()>acc){
 		return 0;
 	}
 	
+	
+	double r_c[n_particles][3];
+	
+	for(int i=0; i<n_particles; i++){
+		
+		for(int j=0; j<3; j++){
+			
+			r_c[i][j] = r[i][j] *mult_fac; 
+		}
+	}
+	
+	for(int h=0; h<n_particles; h++){
+		
+		
+		for(int i=0; i < h; i++){
+			
+			double distance = 0;
+			
+			for(int j=0; j<3; j++){
+				
+				double dist = (r_c[h][j] - r_c[i][j]);
+				
+				if(dist>0.5*box[j]*mult_fac){
+					dist -= box[j]*mult_fac;
+				}
+				else if(dist<-0.5*box[j]*mult_fac){
+					dist += box[j]*mult_fac;
+				}
+				
+				distance += dist*dist;
+				
+			}
+			
+			
+			if (distance<(0.5*(size[h]+size[i]))*(0.5*(size[h]+size[i]))){
+				// printf("volume cannot change there is overlap\n");
+				return 0;
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	for(int i=0;i<3;i++){
+		box[i]*=mult_fac;
+	}
+	for(int i=0; i<n_particles; i++){
+		for(int j=0; j<3; j++){
+			r[i][j] = r_c[i][j];
+		}
+	}
+	
+	// printf("volume changed\n");
+	return 1;
+	
+}	
 \end{lstlisting}

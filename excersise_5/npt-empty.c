@@ -4,6 +4,9 @@
 #include <math.h>
 #include "../downloads/mt19937.h"
 
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -11,16 +14,20 @@
 #define NDIM 3
 
 /* Initialization variables */
-const int mc_steps = 30000;
+const int mc_steps = 40000;
 const int output_steps = mc_steps/200;
+// wanting to save the converged state and the acceptance of both
+double inf[40000/200][6];
+
+
 const double packing_fraction = 0.55;
-const double diameter = 1.0;
+const double diameter = 1.0;    
 const char* init_filename = "fcc.xyz";
 
 // constants
-const double betaP = 3;
+const double betaP = 10;
 
-const double delta = 0.1;
+double delta = 0.2;
 
 double dV_m = 0.7;
 
@@ -42,6 +49,11 @@ double dV;
 
 
 double dummy;
+
+int converged_move = 0;
+int converged_vol = 0;
+
+
 
 
 void read_data(void){
@@ -220,7 +232,12 @@ double dummy;
 
 void write_data(int step){
     char buffer[128];
-    sprintf(buffer, "./data/coords_step%07d.dat", step);
+
+    char name[256];
+    sprintf(name, "./data/data %i", (int)floor(betaP));
+    int result = mkdir(name ,0755);
+
+    sprintf(buffer, "./data/data %i/coords_step%07d.dat",(int)floor(betaP), step);
     FILE* fp = fopen(buffer, "w");
     int d, n;
     fprintf(fp, "%d\n", n_particles);
@@ -247,6 +264,33 @@ void set_packing_fraction(void){
         // printf("%lf\n",scale_factor);
     }
     for(d = 0; d < NDIM; ++d) box[d] *= scale_factor;
+}
+
+
+void info_2_file(){
+    char new_name[128];
+    sprintf(new_name, "./data/data %i/info.dat",(int)floor(betaP));
+
+    FILE *print_coords; // inititialises a file variable
+// char *new_name = "info.dat";
+    print_coords = fopen(new_name,"w");
+
+    double size_average = 0;
+    for(int i = 0; i<n_particles;i++){
+        size_average += size[i];
+    }
+    size_average/=n_particles;
+
+    fprintf(print_coords, "%lf\t%lf\t%lf\t%i\t%lf\n", delta, dV_m, betaP, n_particles, size_average);
+
+    for(int i=0;i<output_steps;i++){
+
+        fprintf(print_coords, "%lf\t%lf\t%lf\t%lf\t%lf\t%lf\n", inf[i][0], inf[i][1],inf[i][2],inf[i][3],inf[i][4],inf[i][5]);
+    }
+
+    fclose(print_coords);
+
+
 }
 
 int main(int argc, char* argv[]){
@@ -279,22 +323,75 @@ int main(int argc, char* argv[]){
 
     int accepted = 0;
     int step, n;
+    int ind =0;
     int accepted_dv = 0;
-    for(step = 0; step < mc_steps; ++step){
+
+    for(step = 1; step < mc_steps; ++step){
         for(n = 0; n < n_particles; ++n){
             accepted += move_particle();
         }
         accepted_dv += change_volume();
 
         if(step % output_steps == 0){
-            printf("Step %d. Move acceptance: %lf.\n", step, (double)accepted / (n_particles * output_steps));
 
-            printf("Step %d. Volume change acceptance: %lf.\n", step, (double)accepted_dv / (output_steps));
+            double acceptance_move =  (double)accepted / (n_particles * output_steps);
+            double acceptance_vol = (double)accepted_dv / (output_steps);
+
+            printf("Step %d. Move acceptance: %lf.\n", step,  acceptance_move);
+ 
+            printf("Step %d. Volume change acceptance: %lf.\n", step, acceptance_vol);
+
+            write_data(step);
+
+            if(converged_vol<4){
+                if (acceptance_vol>0.55){
+                    dV_m *= 1.1;
+                }
+                else if (acceptance_vol<0.45){
+                    dV_m *= 0.9;
+                }
+                else{
+                    converged_move =0;
+                    converged_vol ++;
+                }
+            }
+
+            if(converged_move<4){
+                if (acceptance_move>0.55){
+                    delta *= 1.1;
+                }
+                else if (acceptance_move<0.45){
+                    delta *= 0.9;
+                }
+                else{
+                    converged_move ++;
+
+                }
+            }
+
+            inf[ind][2]=(double)acceptance_vol;
+            inf[ind][4]=(double)acceptance_move;
+            inf[ind][3]=(double)converged_vol;
+            inf[ind][5]=(double)converged_move;
+            inf[ind][0]=(double)step;
+            inf[ind][1]=(double)box[0]*box[0]*box[0];
+            ind++;
+
+
+            
+
             accepted = 0;
             accepted_dv = 0;
-            write_data(step);
         }
+
+        
+        
     }
+
+
+
+    info_2_file();
+
     printf("done");
     return 0;
 }
