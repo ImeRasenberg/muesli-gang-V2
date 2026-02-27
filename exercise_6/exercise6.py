@@ -16,7 +16,7 @@ plt.xlabel('Distance (r)')
 plt.ylabel('g(r)')
 plt.title('Radial Distribution Function g(r)')
 plt.ylim((0,np.max(gr)*1.05))
-plt.xlim((0,np.max(r)*1.05))
+plt.xlim((0,np.max(r)))
 plt.legend()
 plt.grid(True, linestyle=':', alpha=0.7)
 

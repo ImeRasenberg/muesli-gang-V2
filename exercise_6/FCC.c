@@ -3,7 +3,7 @@
 
 int main(){
     
-    int N=4;
+    int N=6;
     float d=1.0;
     float a=sqrt(2.0)*d;
 

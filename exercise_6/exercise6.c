@@ -15,7 +15,7 @@
 /* Initialization variables */
 const double diameter = 1.0;
 
-const char* init_filename = "final.dat";
+const char* init_filename = "coords_step0014000.dat";
 
 /* Simulation variables */
 int n_particles = 0;
@@ -25,7 +25,7 @@ double r[N][NDIM];
 double box[NDIM];
 
 /*variables for g(r)*/
-#define NBINS 300 // amount of bins
+#define NBINS 100 // amount of bins
 double dr_bin; // size of bins
 int nhis[NBINS]; 
 double g[NBINS];
@@ -54,6 +54,7 @@ void calcualte_gr(void){
 
         }
     }
+    
     double rho = n_particles/(box[0]*box[1]* box[2] );
     for(int d = 0; d<NBINS; d++){
        double dis = d*dr_bin; 
@@ -61,6 +62,7 @@ void calcualte_gr(void){
        g[d] =2* nhis[d]/((double)(n_particles)*nid);
 
     }
+    
 }
 
 
@@ -90,7 +92,7 @@ void read_data(void){
 }
 
 void write_gr(void){
-    FILE* fp = fopen("gr.dat", "w" );
+    FILE* fp = fopen("gr14000.dat", "w" );
     fprintf(fp, "r   g(r)\n");
     for (int b = 0; b<NBINS; b++){
         double r = (b+ 0.5) * dr_bin;
@@ -100,21 +102,7 @@ void write_gr(void){
     printf("g(r) written to gr.dat");
     
 }
-void write_data(){
-    char buffer[128];
-    sprintf(buffer, "final.dat");
-    FILE* fp = fopen(buffer, "w");
-    int d, n;
-    fprintf(fp, "%d\n", n_particles);
-    for(d = 0; d < NDIM; ++d){
-        fprintf(fp, "%lf %lf\n",0.0,box[d]);
-    }
-    for(n = 0; n < n_particles; ++n){
-        for(d = 0; d < NDIM; ++d) fprintf(fp, "%f\t", r[n][d]);
-        fprintf(fp, "%lf\n", diameter);
-    }
-    fclose(fp);
-}
+
 
 
 int main(int argc, char* argv[]){

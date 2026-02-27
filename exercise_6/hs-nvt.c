@@ -12,11 +12,12 @@
 #define N 1000
 
 /* Initialization variables */
-const int mc_steps = 10000;
+const int mc_steps = 15000;
+const int equilibrium = 10000;
 const int output_steps = 1000;
 const double packing_fraction = 0.35;
 const double diameter = 1.0;
-const double delta = 0.05;
+const double delta = 0.11;
 const char* init_filename = "fcc.xyz";
 
 /* Simulation variables */
@@ -86,9 +87,9 @@ int move_particle(void){
     return 1;
 }
 
-void write_data(void){
+void write_data(int step){
     char buffer[128];
-    sprintf(buffer, "final.dat");
+    sprintf(buffer, "coords_step%07d.dat", step);
     FILE* fp = fopen(buffer, "w");
     int d, n;
     fprintf(fp, "%d\n", n_particles);
@@ -155,9 +156,11 @@ int main(int argc, char* argv[]){
             accepted = 0;
             
         }
-
-        if ((step+1)% mc_steps== 0)write_data(); 
+        if (step >= equilibrium){
+            if (step% output_steps== 0)write_data(step); 
+        }
+        
     }
-
+    
     return 0;
 }
