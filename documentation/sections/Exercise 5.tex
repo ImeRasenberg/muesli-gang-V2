@@ -1,21 +1,75 @@
 \section{MC simulation of hard spheres in the NPT ensemble}
 
-
-\subsection{}
-here we are asked to make a change volume to see if we have some overlap. The code for this part is found in Appendix~\ref{app:E5.a}
-
-
-
-
-
 \subsection{}
 
+In this part a volume–change move is implemented in order to sample the NPT ensemble while ensuring that no particle overlaps occur. The code for this is given in Appendix~\ref{app:E5.a}.
 
+The function proposes a random change in volume and evaluates the acceptance probability. Since hard spheres do not contribute potential energy unless particles overlap, the acceptance probability depends only on the pressure work and the configurational entropy term,
+
+\begin{equation}
+	acc(o \rightarrow n) = \min\left( 1, 
+	\exp \left[  -\beta P \Delta V - N \ln \left( \frac{V'}{V} \right) \right] \right).
+\end{equation}
+This makes it so we can first check if the configuration would be accepted before checking if there is any overlap, saving on the computing time.
+
+After a volume change is temporarily accepted, all particle positions are rescaled according to the new volume and overlaps between all particle pairs are checked using periodic boundary conditions.
+
+
+\subsection{}
+
+First, $n$ (the number of particles) trial displacement moves are performed in the NVT ensemble. After these particle moves, a single volume move is attempted. Together these operations define one cycle. The implementation of this procedure is shown in Appendix~\ref{app:5.b}.
+
+Every 200 cycles the system state is written to file in order to monitor the evolution of the simulation and analyze convergence behavior.
+
+Figure~\ref{fig: E5 convergence} shows the evolution of the system volume as a function of the number of cycles. Adjusting the translation and volume step sizes improves convergence, as shown by comparing both panels. After about 15000 cycles the system seems equilibrated.
+illustrates the relaxation towards a steady-state volume. After approximately 15000 cycles the system appears equilibrated. From this point onward, the average volume is computed and used for further analysis.
+
+Figure~\ref{fig: E5 volume change} shows the equalization process for systems ate different pressures in the left hand panel. From the equilibrated state the average volume is gotten from the other cycles, this is then converted in the packing fraction by
+\begin{equation}
+	\eta = \frac{n \langle V_{p} \rangle}{\langle V_{sys,eq} \rangle }.
+\end{equation}
+Here $n$ is the number of particles, $\langle V_{p} \rangle$ is the average volume of these particles and $\langle V_{sys,eq} \rangle$ is the average volume of the system in equilibrium.
+
+It also shows how the packing fraction changes with volume. 
+
+
+
+\begin{figure}[H]
+	\centering
+	\subfloat[No changes to step sizes]{\includegraphics[width=0.48\linewidth]{graphs/E5/3.png}}
+	\subfloat[Adjusted step sizes to improve convergence]{\includegraphics[width=0.48\linewidth]{graphs/E5/3_with_delta.png}}\\
+	\caption{Evolution of the volume during equilibration.}
+	\label{fig: E5 convergence}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\subfloat[]{\includegraphics[width=0.48\linewidth]{graphs/E5/convergence.png}}
+	\subfloat[]{\includegraphics[width=0.48\linewidth]{graphs/E5/packing frac.png}}\\
+	\caption{(a) Convergence of the volume towards equilibrium. (b) Resulting packing fraction obtained from the equilibrated volume.}
+	\label{fig: E5 volume change}
+\end{figure}
 
 
 
 \subsection{}
 
+The simulation is repeated for several pressures in order to obtain the packing fraction over a wider range of pressure points. The resulting equation of state is shown in Figure~\ref{fig: E5 packing density}.
 
+For comparison, the Carnahan--Starling approximation for hard spheres is included,
 
+\begin{equation}
+	\frac{P}{k_B T} = \frac{1+\eta +\eta^2 -\eta^3}{(1-\eta)^3},
+\end{equation}
 
+where $\eta$ denotes the packing fraction.
+
+The numerical results show good agreement with the theoretical prediction over the investigated pressure range.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/E5/cornahan_theory.png}
+	\caption{Packing fraction as a function of pressure compared with the Carnahan--Starling equation of state.}
+	\label{fig: E5 packing density}
+\end{figure}
