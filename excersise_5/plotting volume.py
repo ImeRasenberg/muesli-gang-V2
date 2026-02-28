@@ -147,7 +147,7 @@ import matplotlib.pyplot as plt
 eta_theory = np.linspace(0.1, 0.7, 100) # Theory is accurate up to ~0.5
 # CS Equation rearranged for x-axis (beta * P * sigma^3)
 # Note: rho*sigma^3 = 6*eta/pi
-x_theory = (6 * eta_theory / np.pi) * (1 + eta_theory + eta_theory**2 - eta_theory**3) / (1 - eta_theory)**3
+x_theory = (1 + eta_theory + eta_theory**2 - eta_theory**3) / (1 - eta_theory)**3
 
 # 2. Plotting
 plt.figure(figsize=(8, 5))
