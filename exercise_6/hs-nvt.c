@@ -9,15 +9,15 @@
 #endif
 
 #define NDIM 3
-#define N 1000
+#define N 1500
 
 /* Initialization variables */
-const int mc_steps = 15000;
+const int mc_steps = 20000;
 const int equilibrium = 10000;
 const int output_steps = 1000;
-const double packing_fraction = 0.35;
+const double packing_fraction = 0.45;
 const double diameter = 1.0;
-const double delta = 0.11;
+const double delta = 0.07;
 const char* init_filename = "fcc.xyz";
 
 /* Simulation variables */
@@ -161,6 +161,9 @@ int main(int argc, char* argv[]){
         }
         
     }
+    if (mc_steps >= equilibrium && mc_steps % output_steps == 0) {
+    write_data(mc_steps);
+        }
     
     return 0;
 }

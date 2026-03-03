@@ -10,12 +10,12 @@
 #define M_PI 3.14159265358979323846
 #endif
 #define NDIM 3
-#define N 1000
+#define N 1500
 
 /* Initialization variables */
 const double diameter = 1.0;
 
-const char* init_filename = "coords_step0014000.dat";
+const char* init_filename = "fcc.xyz";
 
 /* Simulation variables */
 int n_particles = 0;
@@ -25,7 +25,7 @@ double r[N][NDIM];
 double box[NDIM];
 
 /*variables for g(r)*/
-#define NBINS 100 // amount of bins
+#define NBINS 1000 // amount of bins
 double dr_bin; // size of bins
 int nhis[NBINS]; 
 double g[NBINS];
@@ -91,8 +91,8 @@ void read_data(void){
 
 }
 
-void write_gr(void){
-    FILE* fp = fopen("gr14000.dat", "w" );
+void write_gr(){
+    FILE* fp = fopen("gr_fcc.dat", "w" );
     fprintf(fp, "r   g(r)\n");
     for (int b = 0; b<NBINS; b++){
         double r = (b+ 0.5) * dr_bin;
