@@ -158,8 +158,17 @@ OUTPUT main.pdf
 INPUT ./main.out
 INPUT ./main.out
 OUTPUT main.out
+INPUT ./sections/front page.tex
+INPUT ./sections/front page.tex
+INPUT ./sections/front page.tex
+INPUT ./sections/front page.tex
+INPUT sections/front page.tex
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./main.toc
 INPUT ./main.toc
@@ -180,13 +189,11 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm1
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
 OUTPUT main.toc
-INPUT /usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./sections/Exercise 4.tex
 INPUT ./sections/Exercise 4.tex
 INPUT ./sections/Exercise 4.tex
 INPUT ./sections/Exercise 4.tex
 INPUT sections/Exercise 4.tex
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./graphs/E4/Cubic.png
 INPUT ./graphs/E4/Cubic.png
@@ -251,16 +258,16 @@ INPUT ./graphs/E5/packing frac.png
 INPUT ./graphs/E5/packing frac.png
 INPUT ./graphs/E5/packing frac.png
 INPUT ./graphs/E5/packing frac.png
-INPUT ./graphs/E5/cornahan_theory.png
-INPUT ./graphs/E5/cornahan_theory.png
-INPUT ./graphs/E5/cornahan_theory.png
-INPUT ./graphs/E5/cornahan_theory.png
-INPUT ./graphs/E5/cornahan_theory.png
-INPUT ./sections/Exercise6.tex
-INPUT ./sections/Exercise6.tex
-INPUT ./sections/Exercise6.tex
-INPUT ./sections/Exercise6.tex
-INPUT sections/Exercise6.tex
+INPUT ./graphs/E5/cornahan_theory_2.png
+INPUT ./graphs/E5/cornahan_theory_2.png
+INPUT ./graphs/E5/cornahan_theory_2.png
+INPUT ./graphs/E5/cornahan_theory_2.png
+INPUT ./graphs/E5/cornahan_theory_2.png
+INPUT ./sections/Exercise 6.tex
+INPUT ./sections/Exercise 6.tex
+INPUT ./sections/Exercise 6.tex
+INPUT ./sections/Exercise 6.tex
+INPUT sections/Exercise 6.tex
 INPUT ./graphs/E6/gr_45.png
 INPUT ./graphs/E6/gr_45.png
 INPUT ./graphs/E6/gr_45.png
@@ -313,6 +320,11 @@ INPUT ./appendix/E5.tex
 INPUT ./appendix/E5.tex
 INPUT ./appendix/E5.tex
 INPUT appendix/E5.tex
+INPUT ./appendix/E6.tex
+INPUT ./appendix/E6.tex
+INPUT ./appendix/E6.tex
+INPUT ./appendix/E6.tex
+INPUT appendix/E6.tex
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
@@ -323,6 +335,7 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.p
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb

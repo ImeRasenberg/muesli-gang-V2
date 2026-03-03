@@ -1,8 +1,69 @@
-\section{Pair correlation function using MC simulations in the NVT ensemble}
+\section{Piar correlation function using MC simulations in the NVT ensemble}
+\subsection{}
+The pair corellation function is given by:
+\begin{align*}
+    g(r)= \frac{1}{\rho^2} \left\langle \sum_{i =1}^{N} \sum_{j \neq i}^{N} \delta(\mathbf{r_i})\delta(\mathbf{r_j - r})\right\rangle = \frac{V}{N^2} \left\langle \sum_{i =1}^{N} \sum_{j \neq i}^{N} \delta(\mathbf{r - r_{ij}})\right\rangle
+\end{align*}
 
+For large distances the postions of particle i and j become uncorelated. This means that the pair distribution function can be written as an product of two one-particle distributions: $\rho^{(2)}(\mathbf{r,r^{'}}) = \rho^2 g(r) \rightarrow \rho^{(1)}(\mathbf{r})\rho^{(1)}(\mathbf{r^{'}})$ For our pair correlation function this means:
+\begin{align*}
+    g(r) \rightarrow \frac{1}{\rho^2} \left\langle \sum_{i =1}^{N}\delta(\mathbf{r-r_i})\right\rangle \left\langle \sum_{j =1}^{N}\delta(\mathbf{r-r_j})\right\rangle = \frac{1}{\rho^2} \rho \rho = 1
+\end{align*}
+\subsection{}
+We start of with a FCC latice from exercise 4. 
+We than use the Monte Carlo simulation of the NVT ensemble from exercise 4 again to equilibriate the system for 10.000 steps. 
+After the system is in equilibrium we run the simulation for another 10.000 steps where we take a snapshot of the coordinates every 1.000 steps. 
+For every snapshot of the coordinates we calcualte the pair correlation function according to formula 8.2 from the exercise:
+\begin{align*}
+    g(r + 0.5\delta r) = \frac{1}{N} \frac{n_{his}(b)}{n_{id}(b)}
+\end{align*}
+Here $n_{his}$ is the amount of pairs in the interval $r, r + \delta r$ and $n_{id}$ is the theoretical count for the ideal gass: $n_{id} = \left(\frac{4 \pi N}{V} \right)\left[\left(r + dr \right)^3 -r^3 \right]$.
 
 \subsection{}
+Here we have 6plots of the radial distribution function for different packing fractions ranging from 0.2 to 0.45.
+For a $ r/\sigma $ lower than 1 the radial distribution is zero across all packing fractions. This is exactly what we expect for our HS potenial where there are no other partickles within one diameter.
+ We see that when the packing fraction becomes lower and hte fluid thus becomes more diluted that the peaks get lower and there are less distinguible peaks.
+ For lower packing fraction the radial discribution funciton goes more towards the flat line of the ideal gass ass aspected.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graphs/E6/gr_45.png}
+    \caption{Radial distribution function for a HS potential in the NVT ensemble with a packing fraction of 0.45.}
+    \label{fig:gr_45}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graphs/E6/gr_40.png}
+    \caption{Radial distribution function for a HS potential in the NVT ensemble with a packing fraction of 0.40.}
+    \label{fig:gr_40}
+\end{figure}
 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graphs/E6/gr_35.png}
+    \caption{Radial distribution function for a HS potential in the NVT ensemble with a packing fraction of 0.35.}
+    \label{fig:gr_35}
+\end{figure}
 
-\subsection{}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graphs/E6/gr_30.png}
+    \caption{Radial distribution function for a HS potential in the NVT ensemble with a packing fraction of 0.30.}
+    \label{fig:gr_35}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graphs/E6/gr_25.png}
+    \caption{Radial distribution function for a HS potential in the NVT ensemble with a packing fraction of 0.25.}
+    \label{fig:gr_25}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{graphs/E6/gr_20.png}
+    \caption{Radial distribution function for a HS potential in the NVT ensemble with a packing fraction of 0.20.}
+    \label{fig:gr_20}
+\end{figure}

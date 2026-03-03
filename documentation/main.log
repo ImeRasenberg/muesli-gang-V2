@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  28 FEB 2026 15:17
-=======
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  28 FEB 2026 20:41
->>>>>>> Stashed changes
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.25)  3 MAR 2026 11:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -330,15 +326,6 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
 )) (./appearance.tex
 Package hyperref Info: Option `colorlinks' set `true' on input line 32.
-<<<<<<< Updated upstream
-)
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count313
-\l__pdf_internal_box=\box59
-)
-(./main.aux)
-=======
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count305
@@ -348,7 +335,6 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 LaTeX Warning: Label `fig:gr_35' multiply defined.
 
 )
->>>>>>> Stashed changes
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
@@ -431,17 +417,10 @@ Package hyperref Info: Link coloring ON on input line 9.
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-<<<<<<< Updated upstream
-\c@lstlisting=\count320
- (./sections/front page.tex
-
-[1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./main.toc
-=======
 \c@lstlisting=\count312
- (./main.toc
->>>>>>> Stashed changes
+ (./sections/front page.tex [1
+
+{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]) (./main.toc
 LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
  (/usr/local/texlive/2024/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -453,27 +432,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- [1
 
-<<<<<<< Updated upstream
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.13 \tableofcontents \newpage
                                [1] (./sections/Exercise 4.tex
-<graphs/E4/Cubic.png, id=163, 295.85532pt x 322.95656pt>
-=======
-{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./sections/Exercise 4.tex
-<graphs/E4/Cubic.png, id=159, 295.85532pt x 322.95656pt>
->>>>>>> Stashed changes
+<graphs/E4/Cubic.png, id=168, 295.85532pt x 322.95656pt>
 File: graphs/E4/Cubic.png Graphic file (type png)
 <use graphs/E4/Cubic.png>
 Package pdftex.def Info: graphs/E4/Cubic.png  used on input line 13.
 (pdftex.def)             Requested size: 241.84842pt x 264.00806pt.
-<graphs/E4/FCC.png, id=167, 516.42938pt x 483.30562pt>
+<graphs/E4/FCC.png, id=172, 516.42938pt x 483.30562pt>
 File: graphs/E4/FCC.png Graphic file (type png)
 <use graphs/E4/FCC.png>
 Package pdftex.def Info: graphs/E4/FCC.png  used on input line 49.
@@ -483,150 +453,87 @@ Package pdftex.def Info: graphs/E4/FCC.png  used on input line 49.
 LaTeX Warning: Reference `app:E4.e' on page 3 undefined on input line 97.
 
 [3 <./graphs/E4/FCC.png>]
-<graphs/E4/NTV procession.png, id=193, 395.97937pt x 459.21562pt>
+<graphs/E4/NTV procession.png, id=198, 395.97937pt x 459.21562pt>
 File: graphs/E4/NTV procession.png Graphic file (type png)
 <use graphs/E4/NTV procession.png>
 Package pdftex.def Info: graphs/E4/NTV procession.png  used on input line 110.
 (pdftex.def)             Requested size: 241.84842pt x 280.47147pt.
-<graphs/E4/40.png, id=195, 989.6975pt x 989.6975pt>
+<graphs/E4/40.png, id=200, 989.6975pt x 989.6975pt>
 File: graphs/E4/40.png Graphic file (type png)
 <use graphs/E4/40.png>
 Package pdftex.def Info: graphs/E4/40.png  used on input line 125.
 (pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
-<graphs/E4/45.png, id=196, 989.6975pt x 989.6975pt>
+<graphs/E4/45.png, id=201, 989.6975pt x 989.6975pt>
 File: graphs/E4/45.png Graphic file (type png)
 <use graphs/E4/45.png>
 Package pdftex.def Info: graphs/E4/45.png  used on input line 126.
 (pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
-<graphs/E4/50.png, id=197, 989.6975pt x 989.6975pt>
+<graphs/E4/50.png, id=202, 989.6975pt x 989.6975pt>
 File: graphs/E4/50.png Graphic file (type png)
 <use graphs/E4/50.png>
 Package pdftex.def Info: graphs/E4/50.png  used on input line 127.
 (pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
-<graphs/E4/55.png, id=198, 989.6975pt x 989.6975pt>
+<graphs/E4/55.png, id=203, 989.6975pt x 989.6975pt>
 File: graphs/E4/55.png Graphic file (type png)
 <use graphs/E4/55.png>
 Package pdftex.def Info: graphs/E4/55.png  used on input line 128.
 (pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
-<<<<<<< Updated upstream
-
-
-[4 <./graphs/E4/NTV procession.png>])
-
-[5 <./graphs/E4/40.png> <./graphs/E4/45.png> <./graphs/E4/50.png> <./graphs/E4/
-55.png>] (./sections/Exercise 5.tex
-<graphs/E5/3.png, id=223, 504.38437pt x 341.275pt>
-=======
  [4 <./graphs/E4/NTV procession.png>]) [5 <./graphs/E4/40.png> <./graphs/E4/45.png> <./graphs/E4/50.png> <./graphs/E4/55.png>] (./sections/Exercise 5.tex
-<graphs/E5/3.png, id=219, 504.38437pt x 341.275pt>
->>>>>>> Stashed changes
+<graphs/E5/3.png, id=228, 504.38437pt x 341.275pt>
 File: graphs/E5/3.png Graphic file (type png)
 <use graphs/E5/3.png>
 Package pdftex.def Info: graphs/E5/3.png  used on input line 39.
 (pdftex.def)             Requested size: 232.17241pt x 157.09254pt.
-<<<<<<< Updated upstream
-<graphs/E5/3_with_delta.png, id=224, 504.38437pt x 341.275pt>
-=======
-<graphs/E5/3_with_delta.png, id=220, 504.38437pt x 341.275pt>
->>>>>>> Stashed changes
+<graphs/E5/3_with_delta.png, id=229, 504.38437pt x 341.275pt>
 File: graphs/E5/3_with_delta.png Graphic file (type png)
 <use graphs/E5/3_with_delta.png>
 Package pdftex.def Info: graphs/E5/3_with_delta.png  used on input line 40.
 (pdftex.def)             Requested size: 232.17241pt x 157.09254pt.
-<<<<<<< Updated upstream
-<graphs/E5/convergence.png, id=225, 425.08812pt x 281.55188pt>
-=======
-<graphs/E5/convergence.png, id=221, 425.08812pt x 281.55188pt>
->>>>>>> Stashed changes
+<graphs/E5/convergence.png, id=230, 425.08812pt x 281.55188pt>
 File: graphs/E5/convergence.png Graphic file (type png)
 <use graphs/E5/convergence.png>
 Package pdftex.def Info: graphs/E5/convergence.png  used on input line 48.
 (pdftex.def)             Requested size: 232.17241pt x 153.77567pt.
-<<<<<<< Updated upstream
-<graphs/E5/packing frac.png, id=226, 426.09187pt x 281.55188pt>
-=======
-<graphs/E5/packing frac.png, id=222, 426.09187pt x 281.55188pt>
->>>>>>> Stashed changes
+<graphs/E5/packing frac.png, id=231, 426.09187pt x 281.55188pt>
 File: graphs/E5/packing frac.png Graphic file (type png)
 <use graphs/E5/packing frac.png>
 Package pdftex.def Info: graphs/E5/packing frac.png  used on input line 49.
 (pdftex.def)             Requested size: 232.17241pt x 153.4148pt.
-<<<<<<< Updated upstream
-
-
-[6 <./graphs/E5/3.png> <./graphs/E5/3_with_delta.png>]
-<graphs/E5/cornahan_theory_2.png, id=242, 570.63188pt x 353.82187pt>
+ [6 <./graphs/E5/3.png> <./graphs/E5/3_with_delta.png>]
+<graphs/E5/cornahan_theory_2.png, id=247, 570.63188pt x 353.82187pt>
 File: graphs/E5/cornahan_theory_2.png Graphic file (type png)
 <use graphs/E5/cornahan_theory_2.png>
-Package pdftex.def Info: graphs/E5/cornahan_theory_2.png  used on input line 72
-.
+Package pdftex.def Info: graphs/E5/cornahan_theory_2.png  used on input line 72.
 (pdftex.def)             Requested size: 338.5863pt x 209.94084pt.
-)
-
-[7 <./graphs/E5/convergence.png> <./graphs/E5/packing frac.png> <./graphs/E5/co
-rnahan_theory_2.png>] (./sections/Exercise 6.tex)
-
-[8] (./appendix/E4_1.tex
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/09/23 1.10c listings language file
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
-)
-
-[9]
-
-[10]
-
-[11]
-
-[12])
-
-[13] (./appendix/E4.tex) (./appendix/E5.tex
-
-[14]
-
-[15])
-
-[16] (./appendix/E6.tex)
-
-[17] (./main.aux)
-=======
- [6 <./graphs/E5/3.png> <./graphs/E5/3_with_delta.png>]
-<graphs/E5/cornahan_theory.png, id=237, 570.63188pt x 353.82187pt>
-File: graphs/E5/cornahan_theory.png Graphic file (type png)
-<use graphs/E5/cornahan_theory.png>
-Package pdftex.def Info: graphs/E5/cornahan_theory.png  used on input line 72.
-(pdftex.def)             Requested size: 338.5863pt x 209.94084pt.
-) [7 <./graphs/E5/convergence.png> <./graphs/E5/packing frac.png> <./graphs/E5/cornahan_theory.png>] (./sections/Exercise6.tex
-<graphs/E6/gr_45.png, id=250, 578.16pt x 361.35pt>
+) [7 <./graphs/E5/convergence.png> <./graphs/E5/packing frac.png> <./graphs/E5/cornahan_theory_2.png>] (./sections/Exercise 6.tex
+<graphs/E6/gr_45.png, id=259, 578.16pt x 361.35pt>
 File: graphs/E6/gr_45.png Graphic file (type png)
 <use graphs/E6/gr_45.png>
 Package pdftex.def Info: graphs/E6/gr_45.png  used on input line 30.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
-<graphs/E6/gr_40.png, id=251, 578.16pt x 361.35pt>
+<graphs/E6/gr_40.png, id=260, 578.16pt x 361.35pt>
 File: graphs/E6/gr_40.png Graphic file (type png)
 <use graphs/E6/gr_40.png>
 Package pdftex.def Info: graphs/E6/gr_40.png  used on input line 37.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
  [8 <./graphs/E6/gr_45.png>]
-<graphs/E6/gr_35.png, id=260, 578.16pt x 361.35pt>
+<graphs/E6/gr_35.png, id=269, 578.16pt x 361.35pt>
 File: graphs/E6/gr_35.png Graphic file (type png)
 <use graphs/E6/gr_35.png>
 Package pdftex.def Info: graphs/E6/gr_35.png  used on input line 45.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
-<graphs/E6/gr_30.png, id=261, 578.16pt x 361.35pt>
+<graphs/E6/gr_30.png, id=270, 578.16pt x 361.35pt>
 File: graphs/E6/gr_30.png Graphic file (type png)
 <use graphs/E6/gr_30.png>
 Package pdftex.def Info: graphs/E6/gr_30.png  used on input line 52.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
  [9 <./graphs/E6/gr_40.png> <./graphs/E6/gr_35.png>]
-<graphs/E6/gr_25.png, id=270, 578.16pt x 361.35pt>
+<graphs/E6/gr_25.png, id=279, 578.16pt x 361.35pt>
 File: graphs/E6/gr_25.png Graphic file (type png)
 <use graphs/E6/gr_25.png>
 Package pdftex.def Info: graphs/E6/gr_25.png  used on input line 59.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
-<graphs/E6/gr_20.png, id=271, 578.16pt x 361.35pt>
+<graphs/E6/gr_20.png, id=280, 578.16pt x 361.35pt>
 File: graphs/E6/gr_20.png Graphic file (type png)
 <use graphs/E6/gr_20.png>
 Package pdftex.def Info: graphs/E6/gr_20.png  used on input line 66.
@@ -635,8 +542,7 @@ Package pdftex.def Info: graphs/E6/gr_20.png  used on input line 66.
 File: lstlang1.sty 2024/02/21 1.10 listings language file
 ) (/usr/local/texlive/2024/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
-) [12] [13] [14] [15]) [16] (./appendix/E4.tex) (./appendix/E5.tex [17] [18]) [19] (./main.aux)
->>>>>>> Stashed changes
+) [12] [13] [14] [15]) [16] (./appendix/E4.tex) (./appendix/E5.tex [17] [18]) [19] (./appendix/E6.tex) [20] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -645,53 +551,25 @@ L3 programming layer <2024-02-20>
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `main.out' has not changed.
-<<<<<<< Updated upstream
-(rerunfilecheck)             Checksum: 533F90C937A5C70D119CAF5803939505;2647.
+(rerunfilecheck)             Checksum: 8A9E7FA10A75E487360C322ED58114CD;2697.
  ) 
 Here is how much of TeX's memory you used:
- 14692 strings out of 473197
- 223383 string characters out of 5718606
- 1398077 words of memory out of 5000000
- 37180 multiletter control sequences out of 15000+600000
- 563746 words of font info for 55 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 80i,11n,82p,595b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (18 pages, 2656826 bytes).
-PDF statistics:
- 992 PDF objects out of 1000 (max. 8388607)
- 912 compressed objects within 10 object streams
- 580 named destinations out of 1000 (max. 500000)
- 293 words of extra memory for PDF output out of 10000 (max. 10000000)
-=======
-(rerunfilecheck)             Checksum: DBA1114AE2360A80B277AB5AFA9DEDD9;2566.
- ) 
-Here is how much of TeX's memory you used:
- 14598 strings out of 474116
- 223018 string characters out of 5743682
+ 14622 strings out of 474116
+ 223541 string characters out of 5743682
  2534187 words of memory out of 5000000
- 36193 multiletter control sequences out of 15000+600000
- 562372 words of font info for 53 fonts, out of 8000000 for 9000
+ 36208 multiletter control sequences out of 15000+600000
+ 562978 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,11n,82p,659b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (19 pages, 3200431 bytes).
+</usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on main.pdf (21 pages, 3215126 bytes).
 PDF statistics:
- 1022 PDF objects out of 1200 (max. 8388607)
- 927 compressed objects within 10 object streams
- 588 named destinations out of 1000 (max. 500000)
- 323 words of extra memory for PDF output out of 10000 (max. 10000000)
->>>>>>> Stashed changes
+ 1040 PDF objects out of 1200 (max. 8388607)
+ 941 compressed objects within 10 object streams
+ 590 named destinations out of 1000 (max. 500000)
+ 331 words of extra memory for PDF output out of 10000 (max. 10000000)
 
