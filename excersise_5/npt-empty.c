@@ -111,6 +111,9 @@ int change_volume(){
         }
     }
 
+    // if dv>0 you acceot the move else you check!!!
+
+    
     for(int h=0; h<n_particles; h++){
 
 
