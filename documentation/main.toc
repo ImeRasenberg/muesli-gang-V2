@@ -16,16 +16,16 @@
 \contentsline {subsection}{\numberline {6.1}}{8}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}}{8}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}}{8}{subsection.6.3}%
-\contentsline {section}{\numberline {8} MC simulation of a Lennard-Jones fluid in the N V T ensemble}{12}{section.8}%
-\contentsline {section}{\numberline {A}Code Exercise 4 }{13}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}}{13}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}}{13}{subsection.A.2}%
-\contentsline {subsection}{\numberline {A.3}}{15}{subsection.A.3}%
-\contentsline {subsection}{\numberline {A.4}}{15}{subsection.A.4}%
-\contentsline {subsection}{\numberline {A.5}}{16}{subsection.A.5}%
-\contentsline {subsection}{\numberline {A.6}}{16}{subsection.A.6}%
-\contentsline {section}{\numberline {B}Exercise 5}{18}{appendix.B}%
-\contentsline {subsection}{\numberline {B.1}}{18}{subsection.B.1}%
-\contentsline {subsection}{\numberline {B.2}}{19}{subsection.B.2}%
-\contentsline {subsection}{\numberline {B.3}}{20}{subsection.B.3}%
-\contentsline {section}{\numberline {C}Code Exerciser 6}{21}{appendix.C}%
+\contentsline {section}{\numberline {8} MC simulation of a Lennard-Jones fluid in the NVT ensemble}{10}{section.8}%
+\contentsline {section}{\numberline {A}Code Exercise 4 }{11}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}}{11}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}}{11}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}}{13}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}}{13}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}}{14}{subsection.A.5}%
+\contentsline {subsection}{\numberline {A.6}}{14}{subsection.A.6}%
+\contentsline {section}{\numberline {B}Exercise 5}{16}{appendix.B}%
+\contentsline {subsection}{\numberline {B.1}}{16}{subsection.B.1}%
+\contentsline {subsection}{\numberline {B.2}}{17}{subsection.B.2}%
+\contentsline {subsection}{\numberline {B.3}}{18}{subsection.B.3}%
+\contentsline {section}{\numberline {C}Code Exerciser 6}{19}{appendix.C}%

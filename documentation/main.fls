@@ -298,6 +298,18 @@ INPUT ./graphs/E6/gr_20.png
 INPUT ./graphs/E6/gr_20.png
 INPUT ./graphs/E6/gr_20.png
 INPUT ./graphs/E6/gr_20.png
+INPUT ./graphs/E6/gr_fcc.png
+INPUT ./graphs/E6/gr_fcc.png
+INPUT ./graphs/E6/gr_fcc.png
+INPUT ./graphs/E6/gr_fcc.png
+INPUT ./graphs/E6/gr_fcc.png
+INPUT ./sections/Exercise 8.tex
+INPUT ./sections/Exercise 8.tex
+INPUT ./sections/Exercise 8.tex
+INPUT ./sections/Exercise 8.tex
+INPUT sections/Exercise 8.tex
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/tools/.tex
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/tools/.tex
 INPUT ./appendix/E4_1.tex
 INPUT ./appendix/E4_1.tex
 INPUT ./appendix/E4_1.tex
@@ -325,6 +337,11 @@ INPUT ./appendix/E6.tex
 INPUT ./appendix/E6.tex
 INPUT ./appendix/E6.tex
 INPUT appendix/E6.tex
+INPUT ./appendix/E8.tex
+INPUT ./appendix/E8.tex
+INPUT ./appendix/E8.tex
+INPUT ./appendix/E8.tex
+INPUT appendix/E8.tex
 INPUT main.aux
 INPUT ./main.out
 INPUT ./main.out
