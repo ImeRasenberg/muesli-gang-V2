@@ -142,7 +142,7 @@ int change_volume(){
                 return 0;
             }
         }
-
+        return 1;
     }
 
 

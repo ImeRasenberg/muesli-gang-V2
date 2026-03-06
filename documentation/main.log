@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  3 MAR 2026 11:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian) (preloaded format=pdflatex 2026.2.3)  3 MAR 2026 11:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -506,12 +506,12 @@ been already used, duplicate ignored
                    \relax 
 l.13 \tableofcontents \newpage
                                [1] (./sections/Exercise 4.tex
-<graphs/E4/Cubic.png, id=168, 295.85532pt x 322.95656pt>
+<graphs/E4/Cubic.png, id=173, 295.85532pt x 322.95656pt>
 File: graphs/E4/Cubic.png Graphic file (type png)
 <use graphs/E4/Cubic.png>
 Package pdftex.def Info: graphs/E4/Cubic.png  used on input line 13.
 (pdftex.def)             Requested size: 241.84842pt x 264.00806pt.
-<graphs/E4/FCC.png, id=172, 516.42938pt x 483.30562pt>
+<graphs/E4/FCC.png, id=177, 516.42938pt x 483.30562pt>
 File: graphs/E4/FCC.png Graphic file (type png)
 <use graphs/E4/FCC.png>
 Package pdftex.def Info: graphs/E4/FCC.png  used on input line 49.
@@ -525,27 +525,27 @@ LaTeX Warning: Reference `app:E4.e' on page 3 undefined on input line 97.
 
 
 [3 <./graphs/E4/FCC.png>]
-<graphs/E4/NTV procession.png, id=198, 395.97937pt x 459.21562pt>
+<graphs/E4/NTV procession.png, id=203, 395.97937pt x 459.21562pt>
 File: graphs/E4/NTV procession.png Graphic file (type png)
 <use graphs/E4/NTV procession.png>
 Package pdftex.def Info: graphs/E4/NTV procession.png  used on input line 110.
 (pdftex.def)             Requested size: 241.84842pt x 280.47147pt.
-<graphs/E4/40.png, id=200, 989.6975pt x 989.6975pt>
+<graphs/E4/40.png, id=205, 989.6975pt x 989.6975pt>
 File: graphs/E4/40.png Graphic file (type png)
 <use graphs/E4/40.png>
 Package pdftex.def Info: graphs/E4/40.png  used on input line 125.
 (pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
-<graphs/E4/45.png, id=201, 989.6975pt x 989.6975pt>
+<graphs/E4/45.png, id=206, 989.6975pt x 989.6975pt>
 File: graphs/E4/45.png Graphic file (type png)
 <use graphs/E4/45.png>
 Package pdftex.def Info: graphs/E4/45.png  used on input line 126.
 (pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
-<graphs/E4/50.png, id=202, 989.6975pt x 989.6975pt>
+<graphs/E4/50.png, id=207, 989.6975pt x 989.6975pt>
 File: graphs/E4/50.png Graphic file (type png)
 <use graphs/E4/50.png>
 Package pdftex.def Info: graphs/E4/50.png  used on input line 127.
 (pdftex.def)             Requested size: 169.29684pt x 169.28835pt.
-<graphs/E4/55.png, id=203, 989.6975pt x 989.6975pt>
+<graphs/E4/55.png, id=208, 989.6975pt x 989.6975pt>
 File: graphs/E4/55.png Graphic file (type png)
 <use graphs/E4/55.png>
 Package pdftex.def Info: graphs/E4/55.png  used on input line 128.
@@ -556,22 +556,22 @@ Package pdftex.def Info: graphs/E4/55.png  used on input line 128.
 
 [5 <./graphs/E4/40.png> <./graphs/E4/45.png> <./graphs/E4/50.png> <./graphs/E4/
 55.png>] (./sections/Exercise 5.tex
-<graphs/E5/3.png, id=228, 504.38437pt x 341.275pt>
+<graphs/E5/3.png, id=233, 504.38437pt x 341.275pt>
 File: graphs/E5/3.png Graphic file (type png)
 <use graphs/E5/3.png>
 Package pdftex.def Info: graphs/E5/3.png  used on input line 39.
 (pdftex.def)             Requested size: 232.17241pt x 157.09254pt.
-<graphs/E5/3_with_delta.png, id=229, 504.38437pt x 341.275pt>
+<graphs/E5/3_with_delta.png, id=234, 504.38437pt x 341.275pt>
 File: graphs/E5/3_with_delta.png Graphic file (type png)
 <use graphs/E5/3_with_delta.png>
 Package pdftex.def Info: graphs/E5/3_with_delta.png  used on input line 40.
 (pdftex.def)             Requested size: 232.17241pt x 157.09254pt.
-<graphs/E5/convergence.png, id=230, 425.08812pt x 281.55188pt>
+<graphs/E5/convergence.png, id=235, 425.08812pt x 281.55188pt>
 File: graphs/E5/convergence.png Graphic file (type png)
 <use graphs/E5/convergence.png>
 Package pdftex.def Info: graphs/E5/convergence.png  used on input line 48.
 (pdftex.def)             Requested size: 232.17241pt x 153.77567pt.
-<graphs/E5/packing frac.png, id=231, 426.09187pt x 281.55188pt>
+<graphs/E5/packing frac.png, id=236, 426.09187pt x 281.55188pt>
 File: graphs/E5/packing frac.png Graphic file (type png)
 <use graphs/E5/packing frac.png>
 Package pdftex.def Info: graphs/E5/packing frac.png  used on input line 49.
@@ -579,7 +579,7 @@ Package pdftex.def Info: graphs/E5/packing frac.png  used on input line 49.
 
 
 [6 <./graphs/E5/3.png> <./graphs/E5/3_with_delta.png>]
-<graphs/E5/cornahan_theory_2.png, id=247, 570.63188pt x 353.82187pt>
+<graphs/E5/cornahan_theory_2.png, id=252, 570.63188pt x 353.82187pt>
 File: graphs/E5/cornahan_theory_2.png Graphic file (type png)
 <use graphs/E5/cornahan_theory_2.png>
 Package pdftex.def Info: graphs/E5/cornahan_theory_2.png  used on input line 72
@@ -589,12 +589,12 @@ Package pdftex.def Info: graphs/E5/cornahan_theory_2.png  used on input line 72
 
 [7 <./graphs/E5/convergence.png> <./graphs/E5/packing frac.png> <./graphs/E5/co
 rnahan_theory_2.png>] (./sections/Exercise 6.tex
-<graphs/E6/gr_45.png, id=259, 578.16pt x 361.35pt>
+<graphs/E6/gr_45.png, id=264, 578.16pt x 361.35pt>
 File: graphs/E6/gr_45.png Graphic file (type png)
 <use graphs/E6/gr_45.png>
 Package pdftex.def Info: graphs/E6/gr_45.png  used on input line 30.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
-<graphs/E6/gr_40.png, id=260, 578.16pt x 361.35pt>
+<graphs/E6/gr_40.png, id=265, 578.16pt x 361.35pt>
 File: graphs/E6/gr_40.png Graphic file (type png)
 <use graphs/E6/gr_40.png>
 Package pdftex.def Info: graphs/E6/gr_40.png  used on input line 37.
@@ -602,12 +602,12 @@ Package pdftex.def Info: graphs/E6/gr_40.png  used on input line 37.
 
 
 [8 <./graphs/E6/gr_45.png>]
-<graphs/E6/gr_35.png, id=269, 578.16pt x 361.35pt>
+<graphs/E6/gr_35.png, id=274, 578.16pt x 361.35pt>
 File: graphs/E6/gr_35.png Graphic file (type png)
 <use graphs/E6/gr_35.png>
 Package pdftex.def Info: graphs/E6/gr_35.png  used on input line 45.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
-<graphs/E6/gr_30.png, id=270, 578.16pt x 361.35pt>
+<graphs/E6/gr_30.png, id=275, 578.16pt x 361.35pt>
 File: graphs/E6/gr_30.png Graphic file (type png)
 <use graphs/E6/gr_30.png>
 Package pdftex.def Info: graphs/E6/gr_30.png  used on input line 52.
@@ -615,12 +615,12 @@ Package pdftex.def Info: graphs/E6/gr_30.png  used on input line 52.
 
 
 [9 <./graphs/E6/gr_40.png> <./graphs/E6/gr_35.png>]
-<graphs/E6/gr_25.png, id=279, 578.16pt x 361.35pt>
+<graphs/E6/gr_25.png, id=284, 578.16pt x 361.35pt>
 File: graphs/E6/gr_25.png Graphic file (type png)
 <use graphs/E6/gr_25.png>
 Package pdftex.def Info: graphs/E6/gr_25.png  used on input line 59.
 (pdftex.def)             Requested size: 362.77263pt x 226.73091pt.
-<graphs/E6/gr_20.png, id=280, 578.16pt x 361.35pt>
+<graphs/E6/gr_20.png, id=285, 578.16pt x 361.35pt>
 File: graphs/E6/gr_20.png Graphic file (type png)
 <use graphs/E6/gr_20.png>
 Package pdftex.def Info: graphs/E6/gr_20.png  used on input line 66.
@@ -674,14 +674,14 @@ Package rerunfilecheck Warning: File `main.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 8A9E7FA10A75E487360C322ED58114CD;2697
-(rerunfilecheck)             After:  CBD3A1C93E96C702D7A5781622B4B4F5;3082.
+(rerunfilecheck)             Before: CBD3A1C93E96C702D7A5781622B4B4F5;3082
+(rerunfilecheck)             After:  D55D92003DF821D01E6A3C11795D91AF;3066.
  ) 
 Here is how much of TeX's memory you used:
- 14776 strings out of 473197
- 225258 string characters out of 5718606
+ 14777 strings out of 473197
+ 225269 string characters out of 5718606
  1399170 words of memory out of 5000000
- 37243 multiletter control sequences out of 15000+600000
+ 37244 multiletter control sequences out of 15000+600000
  563746 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  80i,11n,82p,595b,2027s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -699,10 +699,10 @@ amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on main.pdf (22 pages, 3216035 bytes).
+Output written on main.pdf (22 pages, 3216763 bytes).
 PDF statistics:
- 1045 PDF objects out of 1200 (max. 8388607)
- 945 compressed objects within 10 object streams
+ 1049 PDF objects out of 1200 (max. 8388607)
+ 949 compressed objects within 10 object streams
  592 named destinations out of 1000 (max. 500000)
- 331 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 339 words of extra memory for PDF output out of 10000 (max. 10000000)
 
