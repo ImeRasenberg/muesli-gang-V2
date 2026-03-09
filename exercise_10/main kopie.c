@@ -11,16 +11,13 @@ We calcualte the amount of conflicts and use that to calcualte the 'energy' and 
 
 
 #define N 9  // size of the grid
-int M_steps = 2000000; // amount of simulation steps
-int M_check =  10000; // check interval
+int M_steps = 4000000; // amount of simulation steps
+int M_check = 10000; // check interval
 int grid[N][N]; //the grid that is going to be changed
 bool fixed[N][N]; // the positions of where the fixed  
-double beta = 0.4; //starting temp
-double beta_change = 1.02; // increase 5 procent
-int energy = 0; // the energy (conflicts of the sysem )
+double beta = 0.5; //starting temp
+double beta_change = 1.01; // increase 5 procent
 
-
-/*
 int puzzle[N][N] = { // puzzle form wikipedia: https://en.wikipedia.org/wiki/Sudoku
     {5,3,0,0,7,0,0,0,0},
     {6,0,0,1,9,5,0,0,0},
@@ -28,26 +25,10 @@ int puzzle[N][N] = { // puzzle form wikipedia: https://en.wikipedia.org/wiki/Sud
     {8,0,0,0,6,0,0,0,3},
     {4,0,0,8,0,3,0,0,1},
     {7,0,0,0,2,0,0,0,6},
-    {0,6,0,0,0,0,2,8,0},
+    {0,6,0,0,7,0,2,8,0},
     {0,0,0,4,1,9,0,0,5},
     {0,0,0,0,8,0,0,7,9},
 };
-*/
-
-int puzzle[N][N] = { // puzzle form new york times hard : https://www.nytimes.com/puzzles/sudoku/easy
-    {9,7,0,0,0,8,0,0,0},
-    {0,0,0,0,0,0,0,0,6},
-    {0,0,0,6,0,7,2,0,0},
-    {0,0,8,0,0,4,9,0,1},
-    {0,0,0,0,8,0,0,4,0},
-    {4,0,5,0,1,0,0,0,8},
-    {2,0,1,0,0,0,3,0,9},
-    {0,8,0,3,0,0,5,0,0},
-    {0,0,0,0,0,0,0,0,4},
-};
-
-
-
 
 void fill_grid(void){
    
@@ -147,6 +128,8 @@ int change_value (){
 
     if (fixed[trail_r][trail_c]) return 0; // reject the change if it is a fixed value of the puzzle
 
+    int old_energy = compute_energy(grid);
+
     int trail_grid[N][N]; // make a trail grid
     for(int r = 0; r< N; r++){
         for (int c = 0; c< N; c++){
@@ -158,17 +141,22 @@ int change_value (){
     trail_grid[trail_r][trail_c] = trail_number; // randomly change the one particle
 
     int new_energy = compute_energy(trail_grid);
-    double acc = exp(- beta * (new_energy- energy)); // acceptence rule 
+    double acc = exp(- beta * (new_energy- old_energy)); // acceptence rule 
    
-    
-    if (dsfmt_genrand()< acc){ // accept trail move
+    if (compute_energy(trail_grid) == 0){ // always accept the right solution
         grid[trail_r][trail_c]= trail_number;
-        energy = new_energy;
+        return 1; 
+    }
+    else if (dsfmt_genrand()< acc){ // accept trail move
+        grid[trail_r][trail_c]= trail_number;
         return 1; 
     }
 
     return 0; 
 }
+
+
+
 
 
 int main(){
@@ -177,11 +165,8 @@ int main(){
     fill_grid();
     print_grid();
     print_fixed();
-    
-    energy = compute_energy(grid);
-
     printf("amount of conficlts:\n");
-    printf("%d \n", energy );
+    printf("%d \n", compute_energy(grid) );
 
     float accepted = 0;
     int solved = 0;
@@ -191,7 +176,7 @@ int main(){
         for(int i = 0; i<N*N; i++){
            accepted += change_value();
 
-           if (energy == 0){ // check if it is solved
+           if (compute_energy(grid) == 0){ // check if it is solved
             printf("Solved at step %d\n", step);
             solved = 1;
             break;
@@ -203,13 +188,13 @@ int main(){
 
 
         if (step % M_check == 0){
-            printf("step %d amount of conficlts: %d, beta %.3f acceptence rate: %.3f \n", step, energy , beta, accepted/(M_check* N * N) );
+            printf("step %d amount of conficlts: %d, beta %.3f acceptence rate: %.3f \n", step, compute_energy(grid), beta, accepted/(M_check* N * N) );
             beta *= beta_change;
             accepted = 0;
         }
     }
     print_grid();
     printf("amount of conficlts:\n");
-    printf("%d \n", energy );
+    printf("%d \n", compute_energy(grid) );
     return 1;
 }
