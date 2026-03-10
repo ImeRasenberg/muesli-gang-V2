@@ -35,16 +35,24 @@ Meaning that the force function used for simulating can be described by
 	\end{cases}
 \end{equation}
 
+
+
 We know that the equation for the pressure is
 \begin{equation}
-	P = \rho k_B T + \frac{1}{3V} \left\langle \sum_{i<j} \vec{f(r_{ij})} \cdot \vec{r_{ij}} \right\rangle
+	\left\langle P \right\rangle= \rho k_B T + \frac{1}{3V} \left\langle \sum_{i<j} \vec{f(r_{ij})} \cdot \vec{r_{ij}} \right\rangle
 \end{equation}
+
+
+Using all these equations we can get the pressure
+
 
 
 \subsection{}
 
+We also want to see what the chemical potential is, I.E. how much energy does it cost to add one particle into the system. 
 
 \begin{equation}
-	\mu_{ex} = -k_B T \ln \left[ \sum_{i=1}^{N_{test}} \frac{-\beta \Delta U_i^+}{den}\right]
+	\mu_{ex} = -k_B T \ln \left[ \sum_{i=1}^{N_\text{test}} \frac{\exp \left\{-\beta \Delta U_i^+\right\}}{N_\text{test}}\right]
 \end{equation}
+
 

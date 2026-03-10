@@ -13,7 +13,7 @@
 
 
 /* Initialization variables */
-const int    mc_steps      = 10000;
+const int    mc_steps      = 5000;
 const int    output_steps  = 100; 
 const double density       = 0.8; 
 const double delta         = 0.1; 
@@ -21,6 +21,7 @@ const double r_cut         = 2.5;
 const double beta          = 0.5; // 1/k_b T??? that is an insanely high temperaturek
 const double T             = 270;
 const char*  init_filename = "fcc.xyz";
+const int N_test = 100 ;
 
 /* Simulation variables */
 int n_particles = 0;
@@ -73,17 +74,27 @@ void lenard_jones() {
 
 double epsilon = 1.0; 
 
-double calculate_force(double r, int n) {
-    if (r >= r_cut) return 0.0; // Force is zero beyond cutoff
+double calculate_force_times_dist(double r, int n) {
+    if (r >= r_cut*r_cut) return 0.0; 
 
-    double s_over_r = size[n] / r;
-    double sr6 = pow(s_over_r, 6);
+    double s_over_r = size[n]*size[n] / r;
+    double sr6 = pow(s_over_r, 3);
     double sr12 = sr6 * sr6;
-
-
-    return (48.0* epsilon / r) * ( sr12 - 0.5*sr6);
+    
+    return (48.0* epsilon) * ( sr12 - 0.5*sr6);
 }
 
+double calculate_potential(double r, int n) {
+    double base_c = size[n]*size[n] / r_cut;
+    double e_cut = 4 * epsilon * (pow(base_c, 6) - pow(base_c, 3));
+    if (r >= r_cut*r_cut) return 0.0; 
+
+    double s_over_r = size[n]*size[n] / r;
+    double sr6 = pow(s_over_r, 3);
+    double sr12 = sr6 * sr6;
+    
+    return (4*epsilon) * ( sr12 - sr6) - e_cut;
+}
 
 typedef struct{
     double average_pressure;
@@ -117,19 +128,65 @@ measurement_t measure(void){
                 distance2 += dist*dist;
                     
             }
-            double distance = sqrt(distance2);
             
-            force += calculate_force(distance, i)*distance;
+            force += calculate_force_times_dist(distance2, i); // THIS CAN BE MORE EFFICIENT DONT SQRT
 
+            // double s_over_r = size[i] / distance;
+            // double sr6 = pow(s_over_r, 6);
+            // double sr12 = sr6 * sr6;
+            
+
+            // if (distance2 >= r_cut) force +=0;
+            // else force +=(48.0* epsilon / distance2) * ( sr12 - 0.5*sr6);
         }
     }
+    
+    
+    // dsfmt_genrand()
+
+    double tot=0;
+
+    for(int i=0; i < N_test;i++){
+        double energys=0;
+        
+        double p[3];
+        for(int k=0; k<3; k++){
+            p[k] = dsfmt_genrand()*box[k];
+        }
+
+        for(int j=0;j<n_particles;j++){
+
+            double distance2 = 0;
+
+            for(int k=0; k<3; k++){
+
+                double dist = (p[k] - r[j][k]);
+
+                if(dist>0.5*box[k]){
+                    dist -= box[k];
+                }
+
+                else if(dist<-0.5*box[k]){
+                    dist += box[k];
+                }
+                
+                distance2 += dist*dist;
+                    
+            }
+        energys+= calculate_potential(distance2, j);
+        }
+        tot +=exp(-beta* energys);
+    }
+
+    tot/=N_test;
+
+  
+
     double volume_box = pow(box[0],NDIM);
 
     result.average_pressure = (n_particles/volume_box)/ beta     + (force)/3/volume_box;
 
-
-
-
+    result.mu_excess = - 1/beta * log(tot); 
 
     return result;
 }
@@ -240,7 +297,7 @@ int move_particle(void){
 
 void write_data(int step){
     char buffer[128];
-    sprintf(buffer, "coords_step%07d.dat", step);
+    sprintf(buffer, "data/coords_step%07d.dat", step);
     FILE* fp = fopen(buffer, "w");
     int d, n;
     fprintf(fp, "%d\n", n_particles);
@@ -306,7 +363,7 @@ int main(int argc, char* argv[]){
     printf("Starting virial: %f\n", virial);
     printf("Starting seed: %lu\n", seed);
 
-    FILE* fp = fopen("measurements.dat", "w");
+    FILE* fp = fopen("data/measurements.dat", "w");
 
     int accepted = 0;
     for(step = 0; step < mc_steps; ++step){
