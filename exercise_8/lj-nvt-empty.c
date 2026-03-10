@@ -80,8 +80,8 @@ double calculate_force(double r, int n) {
     double sr6 = pow(s_over_r, 6);
     double sr12 = sr6 * sr6;
 
-    // F(r) = (24 * epsilon / r) * [2 * (sigma/r)^12 - (sigma/r)^6]
-    return (24.0 * epsilon / r) * (2.0 * sr12 - sr6);
+
+    return (48.0* epsilon / r) * ( sr12 - 0.5*sr6);
 }
 
 
