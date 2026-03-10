@@ -103,8 +103,6 @@ void write_gr(){
     
 }
 
-
-
 int main(int argc, char* argv[]){
     
     assert(diameter > 0.0);
