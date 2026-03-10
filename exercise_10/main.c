@@ -15,9 +15,13 @@ int M_steps = 2000000; // amount of simulation steps
 int M_check =  10000; // check interval
 int grid[N][N]; //the grid that is going to be changed
 bool fixed[N][N]; // the positions of where the fixed  
-double beta = 0.4; //starting temp
-double beta_change = 1.02; // increase 5 procent
+double beta = 1.0; //starting temp
+double beta_f = 20; // final temp
+double beta_change ; // increase 5 procent
 int energy = 0; // the energy (conflicts of the sysem )
+int open_count = 0;
+int open_rows[N*N];
+int open_cols[N*N];
 
 
 /*
@@ -34,7 +38,8 @@ int puzzle[N][N] = { // puzzle form wikipedia: https://en.wikipedia.org/wiki/Sud
 };
 */
 
-int puzzle[N][N] = { // puzzle form new york times hard : https://www.nytimes.com/puzzles/sudoku/easy
+/*
+int puzzle[N][N] = { // puzzle form new york times hard : https://www.nytimes.com/puzzles/sudoku/hard
     {9,7,0,0,0,8,0,0,0},
     {0,0,0,0,0,0,0,0,6},
     {0,0,0,6,0,7,2,0,0},
@@ -46,6 +51,20 @@ int puzzle[N][N] = { // puzzle form new york times hard : https://www.nytimes.co
     {0,0,0,0,0,0,0,0,4},
 };
 
+*/
+
+
+int puzzle[N][N] = { // puzzle form new york times easy : https://www.nytimes.com/puzzles/sudoku/easy
+    {0,8,3,1,6,2,0,5,0},
+    {6,9,0,3,0,0,8,1,0},
+    {0,4,0,5,0,0,0,7,3},
+    {4,0,9,0,5,6,0,0,0},
+    {0,2,0,0,3,8,0,4,5},
+    {0,0,7,4,0,0,3,9,0},
+    {5,0,0,8,4,0,0,0,7},
+    {9,6,0,2,0,0,0,0,0},
+    {0,0,0,0,0,5,1,0,8},
+};
 
 
 
@@ -60,6 +79,9 @@ void fill_grid(void){
             else{
                 grid[r][c]= (int)(9 * dsfmt_genrand())+1; // randomly fill the open square
                 fixed[r][c]= false; // indicate the square is open
+                open_rows[open_count] = r;
+                open_cols[open_count] = c;
+                open_count++;
             }
         }
     }
@@ -142,8 +164,10 @@ int compute_energy(int grid[N][N]){
 
 int change_value (){
 
-    int trail_r = (int)(9 * dsfmt_genrand()); // pick a random square 
-    int trail_c = (int)(9 * dsfmt_genrand());
+    int idx = (int)(open_count * dsfmt_genrand());
+
+    int trail_r = open_rows[idx];
+    int trail_c = open_cols[idx];
 
     if (fixed[trail_r][trail_c]) return 0; // reject the change if it is a fixed value of the puzzle
 
@@ -172,6 +196,9 @@ int change_value (){
 
 
 int main(){
+    beta_change = pow(beta_f / beta, (double)M_check / M_steps);
+    printf(" beta_change %f \n", beta_change );
+ 
 
     dsfmt_seed(time(NULL));
     fill_grid();
@@ -180,34 +207,48 @@ int main(){
     
     energy = compute_energy(grid);
 
+    printf("open count %d\n",open_count);
     printf("amount of conficlts:\n");
     printf("%d \n", energy );
+
+    FILE *fp;
+    fp = fopen("sudoku.dat","w");
 
     float accepted = 0;
     int solved = 0;
 
     for (int step = 0; step< M_steps; step++){
        
-        for(int i = 0; i<N*N; i++){
+        for(int i = 0; i< open_count; i++){
            accepted += change_value();
 
            if (energy == 0){ // check if it is solved
-            printf("Solved at step %d\n", step);
+           
             solved = 1;
             break;
             }
         }
 
         /* terminate if solved */
-        if (solved == 1) break;
+        if (solved == 1) {
+            double T = 1/beta;
+            fprintf(fp,"%d %d %f\n", step, energy, T);
+            break;
+
+        }
+       
 
 
         if (step % M_check == 0){
-            printf("step %d amount of conficlts: %d, beta %.3f acceptence rate: %.3f \n", step, energy , beta, accepted/(M_check* N * N) );
+            double T = 1/beta; 
+            fprintf(fp,"%d %d %f\n", step, energy, T);
+            printf("step %d amount of conficlts: %d, beta %.3f acceptence rate: %.3f \n", step, energy , beta, accepted/(M_check* open_count) );
             beta *= beta_change;
             accepted = 0;
         }
     }
+    
+    fclose(fp);
     print_grid();
     printf("amount of conficlts:\n");
     printf("%d \n", energy );
