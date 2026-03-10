@@ -17,6 +17,7 @@
 \contentsline {subsection}{\numberline {6.2}}{8}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}}{8}{subsection.6.3}%
 \contentsline {section}{\numberline {8} MC simulation of a Lennard-Jones fluid in the NVT ensemble}{12}{section.8}%
+\contentsline {subsection}{\numberline {8.1}}{12}{subsection.8.1}%
 \contentsline {section}{\numberline {A}Code Exercise 4 }{13}{appendix.A}%
 \contentsline {subsection}{\numberline {A.1}}{13}{subsection.A.1}%
 \contentsline {subsection}{\numberline {A.2}}{13}{subsection.A.2}%

@@ -1,1 +1,18 @@
 \section{ MC simulation of a Lennard-Jones fluid in the NVT ensemble}
+
+\subsection{}
+we know that the inter molecular Lennard-Jonnes potential is described by
+
+\begin{equation}
+	u(r_{ij}) =4\epsilon\left[ \left(\frac{\sigma}{r_{ij}}\right)^{12}-\left(\frac{\sigma}{r_{ij}}\right)^6\right] 
+\end{equation}
+
+now for simulation purposes a cutoff point is defined, on this point the potential is almost 0
+
+\begin{equation}
+		u_c(r_{ij}) = 
+		\begin{cases}
+			u(r_{ij})-e_c\ & \text{if}\ r_{ij} \le r_c\\
+			0\ & \text{if}\  r_{ij} > r_c
+		\end{cases}
+\end{equation}

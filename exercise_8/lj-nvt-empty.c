@@ -2,7 +2,7 @@
 #include <time.h>
 #include <assert.h>
 #include <math.h>
-#include "mt19937.h"
+#include "../downloads/mt19937.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -11,43 +11,179 @@
 #define NDIM 3
 #define N 512
 
+
 /* Initialization variables */
 const int    mc_steps      = 10000;
-const int    output_steps  = 100;
-const double density       = 0.8;
-const double delta         = 0.1;
-const double r_cut         = 2.5;
-const double beta          = 0.5;
+const int    output_steps  = 100; 
+const double density       = 0.8; 
+const double delta         = 0.1; 
+const double r_cut         = 2.5; 
+const double beta          = 0.5; // 1/k_b T??? that is an insanely high temperaturek
+const double T             = 270;
 const char*  init_filename = "fcc.xyz";
 
 /* Simulation variables */
 int n_particles = 0;
 double e_cut;
-double r[N][NDIM];
+double (*r)[NDIM];
+double *size;
 double box[NDIM];
 
 double energy = 0.0;
 double virial = 0.0;
 
-typedef struct{
-    double energy;
-    double virial;
-}particle_info_t;
+double dummy;
+
+
+
+/*
+#define N_lj 100 
+
+double r_lj[N_lj];
+double U[N_lj];
+double F[N_lj];
+
+double sigma = 1.0;
+double epsilon = 1.0; 
+
+
+void lenard_jones() {
+    double base_c = sigma / r_cut;
+    double e_cut = 4 * epsilon * (pow(base_c, 12) - pow(base_c, 6));
+
+    for (int n = 0; n < N_lj; n++) {
+        // Linear spacing from a small epsilon (to avoid r=0) up to r_cut
+        // Starting at (n+1) prevents division by zero
+        r_lj[n] = ((double)(n + 1) / N_lj) * r_cut;
+
+        double r = r_lj[n];
+        double s_over_r = sigma / r;
+        double sr6 = pow(s_over_r, 6);
+        double sr12 = sr6 * sr6;
+
+        // Potential Energy (Shifted)
+        U[n] = 4 * epsilon * (sr12 - sr6) - e_cut;
+
+        // Force (Analytical Derivative)
+        // F = 24 * eps * [2*(sig/r)^12 - (sig/r)^6] / r
+        F[n] = (24.0 * epsilon / r) * (2.0 * sr12 - sr6);
+    }
+}
+*/
+
+double epsilon = 1.0; 
+
+double calculate_force(double r, int n) {
+    if (r >= r_cut) return 0.0; // Force is zero beyond cutoff
+
+    double s_over_r = size[n] / r;
+    double sr6 = pow(s_over_r, 6);
+    double sr12 = sr6 * sr6;
+
+    // F(r) = (24 * epsilon / r) * [2 * (sigma/r)^12 - (sigma/r)^6]
+    return (24.0 * epsilon / r) * (2.0 * sr12 - sr6);
+}
+
 
 typedef struct{
     double average_pressure;
     double mu_excess;
 }measurement_t;
 
-particle_info_t particle_energy_and_virial(int);
 
 /* Functions */
 measurement_t measure(void){
     measurement_t result;
-    
+
+    double force = 0;
+    for(int h=0; h<n_particles; h++){
+
+
+        for(int i=0; i < h; i++){
+
+            double distance2 = 0;
+
+            for(int j=0; j<3; j++){
+
+                double dist = (r[h][j] - r[i][j]);
+
+                if(dist>0.5*box[j]){
+                    dist -= box[j];
+                }
+                else if(dist<-0.5*box[j]){
+                    dist += box[j];
+                }
+                
+                distance2 += dist*dist;
+                    
+            }
+            double distance = sqrt(distance2);
+            
+            force += calculate_force(distance, i)*distance;
+
+        }
+    }
+    double volume_box = pow(box[0],NDIM);
+
+    result.average_pressure = (n_particles/volume_box)/ beta     + (force)/3/volume_box;
+
+
+
+
 
     return result;
 }
+
+
+/*
+void read_data(void){
+    FILE* fp = fopen(init_filename, "r");
+    int n, d;
+    double dmin,dmax;
+    fscanf(fp, "%d\n", &n_particles);
+    for(d = 0; d < NDIM; ++d){
+        fscanf(fp, "%lf %lf\n", &dmin, &dmax);
+        box[d] = fabs(dmax-dmin);
+    }
+    for(n = 0; n < n_particles; ++n){
+        for(d = 0; d < NDIM; ++d) fscanf(fp, "%lf\t", &r[n][d]);
+        double diameter;
+        fscanf(fp, "%lf\n", &diameter);
+    }
+    fclose(fp);
+}
+*/
+
+void read_data(void){
+
+    FILE *read_cords;
+    read_cords = fopen(init_filename, "r");
+
+    fscanf(read_cords, "%d\n", &n_particles); 
+
+    r = malloc(n_particles * sizeof * r); 
+    size = malloc(n_particles * sizeof * size); 
+
+    for(int i = 0; i<NDIM; i++){
+        fscanf(read_cords, "%lf %lf", &dummy, &box[i]);
+
+    }
+
+    for(int i = 0; i<n_particles; i++){
+        fscanf(read_cords, "%lf %lf %lf %lf", &r[i][0], &r[i][1], &r[i][2], &size[i]);
+    }
+
+    fclose(read_cords);
+}
+
+
+
+
+typedef struct{
+    double energy;
+    double virial;
+}particle_info_t;
+
 
 particle_info_t particle_energy_and_virial(int pid){
     particle_info_t info;
@@ -73,22 +209,6 @@ particle_info_t particle_energy_and_virial(int pid){
     return info;
 }
 
-void read_data(void){
-    FILE* fp = fopen(init_filename, "r");
-    int n, d;
-    double dmin,dmax;
-    fscanf(fp, "%d\n", &n_particles);
-    for(d = 0; d < NDIM; ++d){
-        fscanf(fp, "%lf %lf\n", &dmin, &dmax);
-        box[d] = fabs(dmax-dmin);
-    }
-    for(n = 0; n < n_particles; ++n){
-        for(d = 0; d < NDIM; ++d) fscanf(fp, "%lf\t", &r[n][d]);
-        double diameter;
-        fscanf(fp, "%lf\n", &diameter);
-    }
-    fclose(fp);
-}
 
 int move_particle(void){
     int rpid = n_particles * dsfmt_genrand();
