@@ -1,12 +1,13 @@
 /excersise_5/data
 
 # Ignore all LaTeX auxiliary files
-*.aux
-*.bbl
-*.blg
-*.log
-*.out
-*.toc
-*.synctex.gz
-*.fls
-*.fdb_latexmk
+/documentation/*.aux
+/documentation/*.bbl
+/documentation/*.blg
+/documentation/*.log
+/documentation/*.out
+/documentation/*.toc
+/documentation/*.synctex.gz
+/documentation/*.fls
+/documentation/*.fdb_latexmk
+/documentation/*.pdf
