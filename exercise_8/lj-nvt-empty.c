@@ -26,13 +26,16 @@ const double beta          = 0.5; // 1/k_b T??? that is an insanely high tempera
 const char*  init_filename = "fcc.xyz";
 const int N_test = 100 ;
 
-
-
+/* Simulation variables */
 int n_particles = 0;
 double e_cut;
 double (*r)[NDIM];
 double *size;
 double box[NDIM];
+
+double energy = 0.0;
+double virial = 0.0;
+
 double dummy;
 
 
