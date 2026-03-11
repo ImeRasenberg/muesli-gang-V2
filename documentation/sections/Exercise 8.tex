@@ -24,6 +24,7 @@ taking the derivative to get the force we get
 		f(r_{ij}) & = - \nabla u(r_{ij})\\
 		& =  \frac{48 \epsilon}{r_{ij}} \left[ \left(\ \frac{\sigma}{r_{ij}}\right)^{12}-\frac{1}{2}\left(\frac{\sigma}{r_{ij}}\right)^6\right] 
 	\end{split}
+	\label{eq: LJ force}
 \end{equation}
 
 Meaning that the force function used for simulating can be described by
@@ -40,10 +41,13 @@ Meaning that the force function used for simulating can be described by
 We know that the equation for the pressure is
 \begin{equation}
 	\left\langle P \right\rangle= \rho k_B T + \frac{1}{3V} \left\langle \sum_{i<j} \vec{f(r_{ij})} \cdot \vec{r_{ij}} \right\rangle
+	\label{eq: pressure}
 \end{equation}
 
 
-Using all these equations we can get the pressure
+Using all these equations we can get the pressure.
+
+The code for this part will be explained together with the next subsection.
 
 
 
@@ -54,5 +58,49 @@ We also want to see what the chemical potential is, I.E. how much energy does it
 \begin{equation}
 	\mu_{ex} = -k_B T \ln \left[ \sum_{i=1}^{N_\text{test}} \frac{\exp \left\{-\beta \Delta U_i^+\right\}}{N_\text{test}}\right]
 \end{equation}
+
+
+To get the chemical potential and the average pressure some code has been made that can be found in Appendix~\ref{app:E8}.
+
+ 
+To implement the physics described above, we developed a C-based Monte Carlo routine. The full source code for these measurements can be found in Appendix~\ref{app:E8}. 
+ 
+\subsubsection{Calculating the Pressure}
+ 
+In the code, we first determine the virial contribution needed for the pressure calculation. This is done by looping over all unique particle pairs $i$ and $j$. For each pair, we calculate the displacement vector while keeping in mind boundary conditions.
+ 
+We avoid using square roots in the inner loops. Since the Lennard-Jones force (Eq. \ref{eq: LJ force}) depends on even powers of the separation distance ($r^{-6}$ and $r^{-12}$), we can work directly with the squared distance $r_{ij}^2$. We sum up the internal virial $\sum \vec{f} \cdot \vec{r}$ for the whole configuration and then combine it with the ideal gas term, $\rho k_B T$, to get the total average pressure.
+ 
+ 
+ 
+\subsubsection{Measuring Chemical Potential}
+ 
+Next, we calculate the chemical potential.
+ 
+For each measurement, we perform $N_{\text{test}}$ trials. In each trial, we generate a random coordinate $(x, y, z)$ and sum up the interaction potential $\Delta U_i^+$ between this test particle and all $N$ existing particles in the box.
+
+
+\subsection{}
+
+Using the Widom test to calculate the chemical potential fro hard spheres is possible.
+\begin{equation}
+	\exp(-\beta\Delta U_i^+) = 
+	\begin{cases}
+		1\ \text{if}\ d>\frac{1}{2}(r_i-r_j)\\
+		0\ \text{if}\ d<\frac{1}{2}(r_i-r_j)
+	\end{cases}
+\end{equation}
+meaning that the average inside the $\ln$ converges to something between 0 and 1. Which gives a logical chemical potential
+
+The pressure calculation would give the ideal gas law back in the case of hard spheres. This is because no matter what there is no overlap between particles so particles don't experience forces.
+
+
+
+
+\subsection{}
+
+
+
+
 
 

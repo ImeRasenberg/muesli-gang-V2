@@ -4,6 +4,10 @@
 #include <math.h>
 #include "../downloads/mt19937.h"
 
+#include <sys/stat.h>
+#include <sys/types.h>
+
+
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
@@ -19,11 +23,22 @@ const double density       = 0.8;
 const double delta         = 0.1; 
 const double r_cut         = 2.5; 
 const double beta          = 0.5; // 1/k_b T??? that is an insanely high temperaturek
-const double T             = 270;
 const char*  init_filename = "fcc.xyz";
 const int N_test = 100 ;
 
-/* Simulation variables */
+
+
+int n_particles = 0;
+double e_cut;
+double (*r)[NDIM];
+double *size;
+double box[NDIM];
+double dummy;
+
+
+/* Simulation variables *#include <sys/stat.h>
+#include <sys/types.h>
+/
 int n_particles = 0;
 double e_cut;
 double (*r)[NDIM];
@@ -100,7 +115,6 @@ typedef struct{
     double average_pressure;
     double mu_excess;
 }measurement_t;
-
 
 /* Functions */
 measurement_t measure(void){
@@ -297,7 +311,12 @@ int move_particle(void){
 
 void write_data(int step){
     char buffer[128];
-    sprintf(buffer, "data/coords_step%07d.dat", step);
+
+    char name[256];
+    sprintf(name, "./data/beta_%lf___T_%lf", n_particles/ pow(box[0],3) , 1/(beta*epsilon));
+
+    int result = mkdir(name ,0755);
+    sprintf(buffer, "./data/beta_%lf___T_%lf/coords_step%07d.dat",  n_particles/ pow(box[0],3) , 1/(beta*epsilon), step);
     FILE* fp = fopen(buffer, "w");
     int d, n;
     fprintf(fp, "%d\n", n_particles);
