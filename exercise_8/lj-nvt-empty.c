@@ -19,12 +19,16 @@
 /* Initialization variables */
 const int    mc_steps      = 5000;
 const int    output_steps  = 100; 
-const double density       = 0.8; 
+// const double density       = 0.5; 
 const double delta         = 0.1; 
 const double r_cut         = 2.5; 
-const double beta          = 0.5; // 1/k_b T??? that is an insanely high temperaturek
+// const double beta          = 1;
 const char*  init_filename = "fcc.xyz";
-const int N_test = 100 ;
+const int N_test = 500 ;
+
+double density;
+double beta; 
+
 
 /* Simulation variables */
 int n_particles = 0;
@@ -95,19 +99,19 @@ double epsilon = 1.0;
 double calculate_force_times_dist(double r, int n) {
     if (r >= r_cut*r_cut) return 0.0; 
 
-    double s_over_r = size[n]*size[n] / r;
+    double s_over_r = 1 / r;
     double sr6 = pow(s_over_r, 3);
     double sr12 = sr6 * sr6;
     
     return (48.0* epsilon) * ( sr12 - 0.5*sr6);
 }
 
+
 double calculate_potential(double r, int n) {
-    double base_c = size[n]*size[n] / r_cut;
-    double e_cut = 4 * epsilon * (pow(base_c, 6) - pow(base_c, 3));
+
     if (r >= r_cut*r_cut) return 0.0; 
 
-    double s_over_r = size[n]*size[n] / r;
+    double s_over_r = 1 / r;
     double sr6 = pow(s_over_r, 3);
     double sr12 = sr6 * sr6;
     
@@ -229,7 +233,7 @@ void read_data(void){
 */
 
 void read_data(void){
-
+   
     FILE *read_cords;
     read_cords = fopen(init_filename, "r");
 
@@ -248,6 +252,7 @@ void read_data(void){
     }
 
     fclose(read_cords);
+
 }
 
 
@@ -269,7 +274,7 @@ particle_info_t particle_energy_and_virial(int pid){
         double dist2 = 0.0;
         for(d = 0; d < NDIM; ++d){
             double min_d = r[pid][d] - r[n][d];
-            min_d -= (int)(2.0 * min_d / box[d]) * box[d];
+            min_d -= (int)(2.0 * min_d / box[d]) * box[d];//?????
             dist2 += min_d * min_d;
         }
 
@@ -315,10 +320,6 @@ int move_particle(void){
 void write_data(int step){
     char buffer[128];
 
-    char name[256];
-    sprintf(name, "./data/beta_%lf___T_%lf", n_particles/ pow(box[0],3) , 1/(beta*epsilon));
-
-    int result = mkdir(name ,0755);
     sprintf(buffer, "./data/beta_%lf___T_%lf/coords_step%07d.dat",  n_particles/ pow(box[0],3) , 1/(beta*epsilon), step);
     FILE* fp = fopen(buffer, "w");
     int d, n;
@@ -348,65 +349,93 @@ void set_density(void){
 }
 
 int main(int argc, char* argv[]){
+    double base_c = 1*1 / r_cut*r_cut;
+    double e_cut = 4 * epsilon * (pow(base_c, 6) - pow(base_c, 3));
 
-    assert(delta > 0.0);
 
-    e_cut = 4.0 * (pow(1.0 / r_cut, 12.0) - pow(1.0 / r_cut, 6.0));
+    double betas[] = {0.5, 1.0, 2.0};
+    double densitys[] = {0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1};
 
-    read_data();
+    
+    // Calculate how many elements are in the array
+    int big = sizeof(betas) / sizeof(betas[0]);
+    int big2 = sizeof(densitys) / sizeof(densitys[0]);
 
-    if(n_particles == 0){
-        printf("Error: Number of particles, n_particles = 0.\n");
-        return 0;
-    }
+    for (int i = 0; i < big; i++) {
+        for(int j = 0; j < big2; j++){
+            density= densitys[j];
+            beta = betas[i];
+            printf("Current beta: %.1f\n", beta);
+            
 
-    set_density();
+            assert(delta > 0.0);
 
-    int d;
-    for(d = 0; d < NDIM; ++d) assert(r_cut <= 0.5 * box[d]);
+            e_cut = 4.0 * (pow(1.0 / r_cut, 12.0) - pow(1.0 / r_cut, 6.0));
 
-    int step, n;
-    for(n = 0; n < n_particles; ++n){
-        particle_info_t info = particle_energy_and_virial(n);
-        energy += info.energy;
-        virial += info.virial;
-    }
-    energy *= 0.5;
-    virial *= 0.5;
+            read_data();
 
-    size_t seed = time(NULL);
-    dsfmt_seed(seed);
+            if(n_particles == 0){
+                printf("Error: Number of particles, n_particles = 0.\n");
+                return 0;
+            }
 
-    double volume = 1.0;
-    for(d = 0; d < NDIM; ++d) volume *= box[d];
+            set_density();
 
-    printf("Starting volume: %f\n", volume);
-    printf("Starting energy: %f\n", energy);
-    printf("Starting virial: %f\n", virial);
-    printf("Starting seed: %lu\n", seed);
+            int d;
+            for(d = 0; d < NDIM; ++d) assert(r_cut <= 0.5 * box[d]);
 
-    FILE* fp = fopen("data/measurements.dat", "w");
+            int step, n;
+            for(n = 0; n < n_particles; ++n){
+                particle_info_t info = particle_energy_and_virial(n);
+                energy += info.energy;
+                virial += info.virial;
+            }
+            energy *= 0.5;
+            virial *= 0.5;
 
-    int accepted = 0;
-    for(step = 0; step < mc_steps; ++step){
-        for(n = 0; n < n_particles; ++n){
-            accepted += move_particle();
+            size_t seed = time(NULL);
+            dsfmt_seed(seed);
+
+            double volume = 1.0;
+            for(d = 0; d < NDIM; ++d) volume *= box[d];
+
+            printf("Starting volume: %f\n", volume);
+            printf("Starting energy: %f\n", energy);
+            printf("Starting virial: %f\n", virial);
+            printf("Starting seed: %lu\n", seed);
+
+            char name[256];
+            sprintf(name, "./data/beta_%lf___T_%lf", n_particles/ pow(box[0],3) , 1/(beta*epsilon));
+
+            int result = mkdir(name ,0755);
+            char save[128];
+
+            sprintf(save, "./data/beta_%lf___T_%lf/measurements.dat",  n_particles/ pow(box[0],3) , 1/(beta*epsilon));
+            FILE* fp = fopen(save, "w");
+
+
+            int accepted = 0;
+            for(step = 0; step < mc_steps; ++step){
+                for(n = 0; n < n_particles; ++n){
+                    accepted += move_particle();
+                }
+
+                measurement_t ms = measure();
+
+                fprintf(fp, "%d\t%f\t%f\n", step, ms.average_pressure, ms.mu_excess);
+
+                if(step % output_steps == 0){
+                    printf("Step %d. Move acceptance: %f.\n",
+                        step, (double)accepted / (n_particles * output_steps)
+                    );
+                    accepted = 0;
+                    write_data(step);
+                }
+            }
+
+            fclose(fp);
         }
-
-        measurement_t ms = measure();
-
-        fprintf(fp, "%d\t%f\t%f\n", step, ms.average_pressure, ms.mu_excess);
-
-        if(step % output_steps == 0){
-            printf("Step %d. Move acceptance: %f.\n",
-                step, (double)accepted / (n_particles * output_steps)
-            );
-            accepted = 0;
-            write_data(step);
-        }
     }
-
-    fclose(fp);
 
     return 0;
 }
