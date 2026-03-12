@@ -7,7 +7,7 @@ We know that the inter molecular Lennard-Jones potential is described by
 	u(r_{ij}) =4\epsilon\left[ \left(\frac{\sigma}{r_{ij}}\right)^{12}-\left(\frac{\sigma}{r_{ij}}\right)^6\right] 
 \end{equation}
 
-now for simulation purposes a cutoff point is defined, on this point the potential is almost 0
+now for simulation purposes a cutoff point is defined, on this point the potential is almost 0, this is done to save on compute time.
 
 \begin{equation}
 		u_c(r_{ij}) = 
@@ -17,7 +17,7 @@ now for simulation purposes a cutoff point is defined, on this point the potenti
 		\end{cases}
 \end{equation}
 
-taking the derivative to get the force we get
+Taking the derivative to get the force we get
 
 \begin{equation}
 	\begin{split}
@@ -28,6 +28,7 @@ taking the derivative to get the force we get
 \end{equation}
 
 Meaning that the force function used for simulating can be described by
+
 \begin{equation}
 	f_c(r_{ij}) = 
 	\begin{cases}
@@ -39,6 +40,7 @@ Meaning that the force function used for simulating can be described by
 
 
 We know that the equation for the pressure is
+
 \begin{equation}
 	\left\langle P \right\rangle= \rho k_B T + \frac{1}{3V} \left\langle \sum_{i<j} \vec{f(r_{ij})} \cdot \vec{r_{ij}} \right\rangle
 	\label{eq: pressure}
@@ -64,7 +66,7 @@ We also want to see what the chemical potential is, I.E. how much energy does it
 To get the chemical potential and the average pressure some code has been made that can be found in Appendix~\ref{app:E8}.
 
  
-To implement the physics described above, we developed a C-based Monte Carlo routine. The full source code for these measurements can be found in Appendix~\ref{app:E8}. 
+Appendix~\ref{app:E8} shows the code from the measurement function. 
  
 \subsubsection{Calculating the Pressure}
  
@@ -83,7 +85,7 @@ For each measurement, we perform $N_{\text{test}}$ trials. In each trial, we gen
 
 \subsection{}
 
-Using the Widom test to calculate the chemical potential fro hard spheres is possible.
+Using the Widom test to calculate the chemical potential for hard spheres is 
 \begin{equation}
 	\exp(-\beta\Delta U_i^+) = 
 	\begin{cases}
@@ -93,13 +95,13 @@ Using the Widom test to calculate the chemical potential fro hard spheres is pos
 \end{equation}
 meaning that the average inside the $\ln$ converges to something between 0 and 1. Which gives a logical chemical potential
 
-The pressure calculation would give the ideal gas law back in the case of hard spheres. This is because no matter what there is no overlap between particles so particles don't experience forces.
+The pressure calculation would give the ideal gas law back in the case of hard spheres. This is because no matter what there is no overlap between particles so particles don't experience forces from each other, only from the boundary.
 
 
 
 
 \subsection{}
-For one specific run at some temperature and some dimensionless density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not really have such a equilibrating process. From this point on the pressure is the average after 1000 MC simulation steps.
+For one specific run at some dimensionless temperature and dimensionless density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not have such an equilibrating process. From this point on the pressure is the average after 1000 MC simulation steps.
 
 
 \begin{figure}[H]
@@ -115,21 +117,29 @@ Calculating the dimensionless pressure this way for dimensionless densities $\{0
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{graphs/E8/pressure.png}
-	\caption{the dimension-less pressure as a function of the dimension-less density for different dimension-less temperatures}
+	\caption{the dimensionless pressure as a function of the dimensionless density for different dimensionless temperatures}
 	\label{fig: pressure density}
 \end{figure}
 
 
 \subsection{}
-We expect that because the Lennard-Jones potential is limited to range. If you are in this range it will act like an interacting system. however because it decays to 0 outside this range it will act like an ideal system. Meaning that if your average distance between particles is much larger than the interaction range,  you will be approximating an ideal gas quite well.
 
-This we don't see in the Figure~\ref{fig: pressure density}. 
+Because the Lennard-Jonnes potential is limited in range we get that we have two domains, one where there are forces due to the potential, here we will not see an ideal gass. And one where the particles do not exert forces on eachother because the potential is constant, here we expect that it will act like an ideal gas. 
+
+At some very low density we would expect the interactions to not matter. Also if the temperature is high then the particles cannot get stuck in each others potential meaning that you expect it to be close to an ideal gas.
+
+
+%We expect that because the Lennard-Jones potential is limited to range, if you are in this range it will act like an interacting system. however because it decays to 0 outside this range it will act like an ideal system. Meaning that if your average distance between particles is much larger than the interaction range,  you will be approximating an ideal gas quite well.
+
+Figure~\ref{fig: pressure density} shows the simulation results. 
 
 We see that at low temperature the attractive force is larger than the repulsive force op to a density of about $0.9$. This is because the Lennard-Jones potential makes the particles attract a bit at large distances, but there is no repulsive force to balance out.  After the particles are so closely pact that they start to repel.
 
-At a bit higher temperatures we see that the at low densities there is a balance between attractive force of the potential and the ideal gas law, up to a density of about $0.6$. After this density the pressure plateaus this is because there is because you are almost at the ideal distance on average and small deltas do not change much.
+At a bit higher temperatures we see that the at low densities there is a balance between attractive force of the potential and the ideal gas law, up to a density of about $0.6$. After this density the pressure plateaus, this is because there you are almost at the potentials minimum on average and small deltas do not change much.
 
-lastly for the highest temperature, you just skip the potential dip and just get the repulsive force.
+lastly for the highest temperature, you just skip the potential dip and just get the repulsive force this is because the temperature is to high for the particle to get sucked into the potential.
+
+So the ideal gas is a good approximation for low density and high temperatures.
 
 
 \subsection{}
@@ -156,12 +166,28 @@ Figure~\ref{fig: mu density zoom} shows the chemical potential range where it is
 	\label{fig: mu density zoom}
 \end{figure}
 
-Here we can see that the chemical potential is below one for all temperatures up to a dimensionless density of $0.5$ this is because there are a lot of empty wells in the potential meaning that adding a particle in that well will lower the total energy of the system.
+Here we can see that the chemical potential is below zero for all temperatures up to a dimensionless density of $0.5$ this is because there are a lot of empty wells in the potential meaning that adding a particle in that well will lower the total energy of the system.
 
-The higher the temperature the less pronounced this effect is, this is because, the exponential becomes more negative the higher the temperature for the same place in the potential meaning that you gain less energy for the same particle distribution.
+The higher the temperature the less energy is lost with this effect. This is because, the exponential from equation~\ref{eq: chem pot} deviates less from 1 (what is in the exponential will be larger than 1), meaning that the logarithm does not give as big of a positive number for the same energy. therefor the chemical potential is more negative the lower the temperature.
+
+The ideal gas chemical potential is defined by 
+\begin{equation}
+	\mu_{ig}(T,P) = k_B\ T \ln \left(\rho\right)
+\end{equation}
+which says that the chemical potential has some base level, it grows with logarithm over the particle density. Which is very unlike what we have found with the Lennard-Jones potential.
 
 
+Now we make the plots where also the ideal gas law is taken into account.
 
+\begin{figure}[H]
+	\centering
+	\subfloat[the dimension-less chemical potential as a function of the dimension-less density for different dimension-less temperatures]{\includegraphics[width=0.43\linewidth]{graphs/E8/Total_Chemical_Potential_Full.png}} \hspace{0.5cm}
+	\subfloat[the dimension-less chemical potential as a function of the dimension-less density for different dimension-less temperatures in a smaller range]{\includegraphics[width=0.43\linewidth]{graphs/E8/Total_Chemical_Potential_Zoom.png}}\\
+	\caption{the total chemical potential instead of just the chemical potential from the Lennard-Jones potential}
+	\label{fig: E8 chem pot}
+\end{figure}
+
+here we see that
 
 
 

@@ -301,12 +301,6 @@ for T in sorted_temps:
     # Sort by rho so lines connect properly
     data_list = sorted(results[T], key=lambda x: x["rho"])
     
-    rhos = [d["rho"] for d in data_list]
-    ps = [d["P"] for d in data_list]
-    p_errs = [d["P_err"] for d in data_list]
-    mus = [d["Mu"] for d in data_list]
-    mu_errs = [d["Mu_err"] for d in data_list]
-    
     # Plot Pressure
     # ax1.errorbar(rhos, ps, yerr=p_errs, fmt='-o', capsize=3, label=f"$T^* = {T}$")
     rhos = np.array([d["rho"] for d in data_list])
@@ -319,11 +313,7 @@ for T in sorted_temps:
     # Apply the mask to all arrays
     ax1.errorbar(rhos[mask], mus[mask], yerr=mu_errs[mask], 
                  fmt='-s', capsize=3, label=f"$T^* = {T}$")
-        # Plot Chemical Potential
-    # mask = rhos<0.85
-    # ax1.errorbar(rhos[mask], mus[mask], yerr=mu_errs[mask], fmt='-s', capsize=3, label=f"$T^* = {T}$")
 
-# Formatting Pressure Plot
 # Formatting Mu Plot
 ax1.set_xlabel(r"$\rho \sigma^3$")
 ax1.set_ylabel(r"${\mu_{ex}}/{ \epsilon} $")
@@ -337,4 +327,70 @@ plt.tight_layout()
 plt.savefig("Excess Chemical Potential.png", dpi=300)
 plt.show()
 
+#%%
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Plot 1: Full Range
+fig, ax1 = plt.subplots(1, 1, figsize=(7, 5))
+
+for T in sorted_temps:
+    data_list = sorted(results[T], key=lambda x: x["rho"])
+    
+    rhos = np.array([d["rho"] for d in data_list])
+    mu_ex = np.array([d["Mu"] for d in data_list]) # Assuming your 'Mu' key is mu_ex
+    mu_errs = np.array([d["Mu_err"] for d in data_list])
+    
+    # Calculate Ideal Gas part: mu_ig = T * ln(rho)
+    # Note: We skip rho=0 to avoid log(0) issues
+    mu_ig = T * np.log(rhos)
+    
+    # Total Chemical Potential
+    mu_tot = mu_ig + mu_ex
+    
+    # Plot Total Chemical Potential (Markers + Solid Line)
+    line = ax1.errorbar(rhos, mu_tot, yerr=mu_errs, fmt='-s', capsize=3, label=f"$T^* = {T}$ (Total)")
+    
+    # Plot Ideal Gas Reference (Dashed Line, same color as the total)
+    ax1.plot(rhos, mu_ig, '--', color=line[0].get_color(), alpha=0.6, label=f"$T^* = {T}$ (Ideal)")
+
+# Formatting
+ax1.set_xlabel(r"$\rho \sigma^3$")
+ax1.set_ylabel(r"$\mu / \epsilon$")
+ax1.grid(True, linestyle='--', alpha=0.7)
+# Placing legend outside or shrinking it might be needed if it gets too crowded
+ax1.legend(fontsize='small', ncol=2)
+
+plt.tight_layout()
+plt.savefig("Total_Chemical_Potential_Full.png", dpi=300)
+plt.show()
+
+# Plot 2: Zoomed Range (rho < 0.85)
+fig, ax1 = plt.subplots(1, 1, figsize=(7, 5))
+
+for T in sorted_temps:
+    data_list = sorted(results[T], key=lambda x: x["rho"])
+    
+    rhos = np.array([d["rho"] for d in data_list])
+    mu_ex = np.array([d["Mu"] for d in data_list])
+    mu_errs = np.array([d["Mu_err"] for d in data_list])
+    
+    # Masking
+    mask = rhos < 0.85
+    r_m = rhos[mask]
+    
+    mu_ig = T * np.log(r_m)
+    mu_tot = mu_ig + mu_ex[mask]
+    
+    # Plotting
+    line = ax1.errorbar(r_m, mu_tot+mu_ig, yerr=mu_errs[mask], fmt='-s', capsize=3, label=f"$T^* = {T}$")
+
+
+ax1.set_xlabel(r"$\rho \sigma^3$")
+ax1.set_ylabel(r"$\mu / \epsilon$")
+ax1.grid(True, linestyle='--', alpha=0.7)
+ax1.legend()
+
+plt.tight_layout()
+plt.savefig("Total_Chemical_Potential_Zoom.png", dpi=300)
+plt.show()
