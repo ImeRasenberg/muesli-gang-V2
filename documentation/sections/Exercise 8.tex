@@ -1,7 +1,7 @@
 \section{ MC simulation of a Lennard-Jones fluid in the NVT ensemble}
 
 \subsection{}
-we know that the inter molecular Lennard-Jonnes potential is described by
+We know that the inter molecular Lennard-Jones potential is described by
 
 \begin{equation}
 	u(r_{ij}) =4\epsilon\left[ \left(\frac{\sigma}{r_{ij}}\right)^{12}-\left(\frac{\sigma}{r_{ij}}\right)^6\right] 
@@ -57,6 +57,7 @@ We also want to see what the chemical potential is, I.E. how much energy does it
 
 \begin{equation}
 	\mu_{ex} = -k_B T \ln \left[ \sum_{i=1}^{N_\text{test}} \frac{\exp \left\{-\beta \Delta U_i^+\right\}}{N_\text{test}}\right]
+	\label{eq: chem pot}
 \end{equation}
 
 
@@ -98,23 +99,23 @@ The pressure calculation would give the ideal gas law back in the case of hard s
 
 
 \subsection{}
-For one specific run at some temperature and some unit-less density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not really have such a equilibrating process. From this point on the pressure is the average after 1000 MC simulation steps.
+For one specific run at some temperature and some dimensionless density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not really have such a equilibrating process. From this point on the pressure is the average after 1000 MC simulation steps.
 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{graphs/E8/simulation_results.png}
-	\caption{text}
+	\caption{The pressure (top graph) and the chemical potential (bottom graph) as a function of the number Monte Carlo simulations}
 	\label{fig: pressure steps}
 \end{figure}
 
-Calculating the unit-less pressure this way for unit-less densities $\{0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1 \}$ and unit-less temperatures $\{0.5, 1.0, 2.0\}$ gives Figure~\ref{fig: pressure density}. 
+Calculating the dimensionless pressure this way for dimensionless densities $\{0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1 \}$ and dimensionless temperatures $\{0.5, 1.0, 2.0\}$ gives Figure~\ref{fig: pressure density}. 
 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{graphs/E8/pressure.png}
-	\caption{text}
+	\caption{the dimension-less pressure as a function of the dimension-less density for different dimension-less temperatures}
 	\label{fig: pressure density}
 \end{figure}
 
@@ -132,35 +133,32 @@ lastly for the highest temperature, you just skip the potential dip and just get
 
 
 \subsection{}
-Figure~\ref{fig: mu density} shows the calculated chemical potential as a function of unit-less densities $\{0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1 \}$ and unit-less temperatures $\{0.5, 1.0, 2.0\}$.
+Figure~\ref{fig: mu density} shows the calculated chemical potential as a function of dimensionless densities $\{0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1 \}$ and dimensionless temperatures $\{0.5, 1.0, 2.0\}$.
 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{graphs/E8/Excess Chemical Potential.png}
-	\caption{text}
+	\caption{the dimension-less chemical potential as a function of the dimension-less density for different dimension-less temperatures}
 	\label{fig: mu density}
 \end{figure}
 
-From this we see that after a unit-less density of about $0.8$ it becomes very hard to add a particle no matter the temperature.
+From this we see that after a dimensionless density of about $0.8$ it becomes very hard to add a particle no matter the temperature.
 
 Because the uncertainties are so large after this density it is hard to see what the trends are.
 
+Figure~\ref{fig: mu density zoom} shows the chemical potential range where it is not diverging yet so we can better see its behavior.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{graphs/E8/Excess Chemical Potential zoom.png}
-	\caption{text}
+	\caption{the dimension-less chemical potential as a function of the dimension-less density for different dimension-less temperatures in a smaller range}
 	\label{fig: mu density zoom}
 \end{figure}
 
+Here we can see that the chemical potential is below one for all temperatures up to a dimensionless density of $0.5$ this is because there are a lot of empty wells in the potential meaning that adding a particle in that well will lower the total energy of the system.
 
-
-
-
-
-
-
+The higher the temperature the less pronounced this effect is, this is because, the exponential becomes more negative the higher the temperature for the same place in the potential meaning that you gain less energy for the same particle distribution.
 
 
 
