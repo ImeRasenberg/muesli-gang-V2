@@ -296,5 +296,45 @@ plt.tight_layout()
 plt.savefig("Excess Chemical Potential.png", dpi=300)
 plt.show()
 
+fig, (ax1) = plt.subplots(1,1, figsize=(7, 5))
+for T in sorted_temps:
+    # Sort by rho so lines connect properly
+    data_list = sorted(results[T], key=lambda x: x["rho"])
+    
+    rhos = [d["rho"] for d in data_list]
+    ps = [d["P"] for d in data_list]
+    p_errs = [d["P_err"] for d in data_list]
+    mus = [d["Mu"] for d in data_list]
+    mu_errs = [d["Mu_err"] for d in data_list]
+    
+    # Plot Pressure
+    # ax1.errorbar(rhos, ps, yerr=p_errs, fmt='-o', capsize=3, label=f"$T^* = {T}$")
+    rhos = np.array([d["rho"] for d in data_list])
+    mus = np.array([d["Mu"] for d in data_list])
+    mu_errs = np.array([d["Mu_err"] for d in data_list])
+    
+    # Now this comparison works!
+    mask = rhos < 0.85
+    
+    # Apply the mask to all arrays
+    ax1.errorbar(rhos[mask], mus[mask], yerr=mu_errs[mask], 
+                 fmt='-s', capsize=3, label=f"$T^* = {T}$")
+        # Plot Chemical Potential
+    # mask = rhos<0.85
+    # ax1.errorbar(rhos[mask], mus[mask], yerr=mu_errs[mask], fmt='-s', capsize=3, label=f"$T^* = {T}$")
+
+# Formatting Pressure Plot
+# Formatting Mu Plot
+ax1.set_xlabel(r"$\rho \sigma^3$")
+ax1.set_ylabel(r"${\mu_{ex}}/{ \epsilon} $")
+# ax1.set_title("Excess $\mu$ vs Density")
+ax1.grid(True, linestyle='--', alpha=0.7)
+ax1.legend()
+
+
+
+plt.tight_layout()
+plt.savefig("Excess Chemical Potential.png", dpi=300)
+plt.show()
 
 

@@ -42,58 +42,6 @@ double virial = 0.0;
 
 double dummy;
 
-
-/* Simulation variables *#include <sys/stat.h>
-#include <sys/types.h>
-/
-int n_particles = 0;
-double e_cut;
-double (*r)[NDIM];
-double *size;
-double box[NDIM];
-
-double energy = 0.0;
-double virial = 0.0;
-
-double dummy;
-
-
-
-/*
-#define N_lj 100 
-
-double r_lj[N_lj];
-double U[N_lj];
-double F[N_lj];
-
-double sigma = 1.0;
-double epsilon = 1.0; 
-
-
-void lenard_jones() {
-    double base_c = sigma / r_cut;
-    double e_cut = 4 * epsilon * (pow(base_c, 12) - pow(base_c, 6));
-
-    for (int n = 0; n < N_lj; n++) {
-        // Linear spacing from a small epsilon (to avoid r=0) up to r_cut
-        // Starting at (n+1) prevents division by zero
-        r_lj[n] = ((double)(n + 1) / N_lj) * r_cut;
-
-        double r = r_lj[n];
-        double s_over_r = sigma / r;
-        double sr6 = pow(s_over_r, 6);
-        double sr12 = sr6 * sr6;
-
-        // Potential Energy (Shifted)
-        U[n] = 4 * epsilon * (sr12 - sr6) - e_cut;
-
-        // Force (Analytical Derivative)
-        // F = 24 * eps * [2*(sig/r)^12 - (sig/r)^6] / r
-        F[n] = (24.0 * epsilon / r) * (2.0 * sr12 - sr6);
-    }
-}
-*/
-
 double epsilon = 1.0; 
 
 double calculate_force_times_dist(double r, int n) {
@@ -150,15 +98,7 @@ measurement_t measure(void){
                     
             }
             
-            force += calculate_force_times_dist(distance2, i); // THIS CAN BE MORE EFFICIENT DONT SQRT
-
-            // double s_over_r = size[i] / distance;
-            // double sr6 = pow(s_over_r, 6);
-            // double sr12 = sr6 * sr6;
-            
-
-            // if (distance2 >= r_cut) force +=0;
-            // else force +=(48.0* epsilon / distance2) * ( sr12 - 0.5*sr6);
+            force += calculate_force_times_dist(distance2, i); 
         }
     }
     
@@ -200,9 +140,7 @@ measurement_t measure(void){
     }
 
     tot/=N_test;
-
-  
-
+    
     double volume_box = pow(box[0],NDIM);
 
     result.average_pressure = (n_particles/volume_box)/ beta     + (force)/3/volume_box;
@@ -212,25 +150,6 @@ measurement_t measure(void){
     return result;
 }
 
-
-/*
-void read_data(void){
-    FILE* fp = fopen(init_filename, "r");
-    int n, d;
-    double dmin,dmax;
-    fscanf(fp, "%d\n", &n_particles);
-    for(d = 0; d < NDIM; ++d){
-        fscanf(fp, "%lf %lf\n", &dmin, &dmax);
-        box[d] = fabs(dmax-dmin);
-    }
-    for(n = 0; n < n_particles; ++n){
-        for(d = 0; d < NDIM; ++d) fscanf(fp, "%lf\t", &r[n][d]);
-        double diameter;
-        fscanf(fp, "%lf\n", &diameter);
-    }
-    fclose(fp);
-}
-*/
 
 void read_data(void){
    
@@ -435,19 +354,6 @@ int main(int argc, char* argv[]){
                     accepted = 0;
                     
                     write_data(step);
-
-                //     if(converged_move<4){
-                //         if ((double)accepted / (n_particles * output_steps)>0.55){
-                //             delta *= 1.1;
-                //         }
-                //         else if ((double)accepted / (n_particles * output_steps)<0.45){
-                //             delta *= 0.9;
-                //         }
-                //         else{
-                //             converged_move ++;
-
-                //         }
-                //     }
                 }
             }
 

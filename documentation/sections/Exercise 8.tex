@@ -98,7 +98,7 @@ The pressure calculation would give the ideal gas law back in the case of hard s
 
 
 \subsection{}
-For one specific run at some temperature and some density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not really have such a equilibrating process. From this point on the pressure is the average after 1000 MC simulation steps.
+For one specific run at some temperature and some unit-less density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not really have such a equilibrating process. From this point on the pressure is the average after 1000 MC simulation steps.
 
 
 \begin{figure}[H]
@@ -108,7 +108,7 @@ For one specific run at some temperature and some density the measured pressure 
 	\label{fig: pressure steps}
 \end{figure}
 
-Calculating the pressure this way for unit-less densities $\{0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1 \}$ and unit-less temperatures $\{0.5, 1.0, 2.0\}$ gives Figure~\ref{fig: pressure density}. 
+Calculating the unit-less pressure this way for unit-less densities $\{0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1 \}$ and unit-less temperatures $\{0.5, 1.0, 2.0\}$ gives Figure~\ref{fig: pressure density}. 
 
 
 \begin{figure}[H]
@@ -126,12 +126,13 @@ This we don't see in the Figure~\ref{fig: pressure density}.
 
 We see that at low temperature the attractive force is larger than the repulsive force op to a density of about $0.9$. This is because the Lennard-Jones potential makes the particles attract a bit at large distances, but there is no repulsive force to balance out.  After the particles are so closely pact that they start to repel.
 
-At a bit higher temperatures we see that the at low densities there is a balance between attractive force of the potential and the ideal gas law, up to a density of about $0.6$. After this density the pressure plateaus this is because there is because you are almost at the ideal distance on average and small deltas dont change much.
+At a bit higher temperatures we see that the at low densities there is a balance between attractive force of the potential and the ideal gas law, up to a density of about $0.6$. After this density the pressure plateaus this is because there is because you are almost at the ideal distance on average and small deltas do not change much.
 
 lastly for the highest temperature, you just skip the potential dip and just get the repulsive force.
 
 
 \subsection{}
+Figure~\ref{fig: mu density} shows the calculated chemical potential as a function of unit-less densities $\{0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1 \}$ and unit-less temperatures $\{0.5, 1.0, 2.0\}$.
 
 
 \begin{figure}[H]
@@ -140,5 +141,30 @@ lastly for the highest temperature, you just skip the potential dip and just get
 	\caption{text}
 	\label{fig: mu density}
 \end{figure}
+
+From this we see that after a unit-less density of about $0.8$ it becomes very hard to add a particle no matter the temperature.
+
+Because the uncertainties are so large after this density it is hard to see what the trends are.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphs/E8/Excess Chemical Potential zoom.png}
+	\caption{text}
+	\label{fig: mu density zoom}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
