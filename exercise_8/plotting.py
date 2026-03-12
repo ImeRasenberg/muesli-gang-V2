@@ -255,7 +255,7 @@ for T in sorted_temps:
 # Formatting Pressure Plot
 ax1.set_xlabel(r"$\rho \sigma^3$")
 ax1.set_ylabel(r"$\beta P \sigma^3$")
-ax1.set_title("Pressure vs Density")
+# ax1.set_title("Pressure vs Density")
 ax1.grid(True, linestyle='--', alpha=0.7)
 ax1.legend()
 
@@ -284,9 +284,9 @@ for T in sorted_temps:
 
 # Formatting Pressure Plot
 # Formatting Mu Plot
-ax1.set_xlabel(r"Density $\rho$")
-ax1.set_ylabel(r"$\mu_{ex}$")
-ax1.set_title("Excess $\mu$ vs Density")
+ax1.set_xlabel(r"$\rho \sigma^3$")
+ax1.set_ylabel(r"${\mu_{ex}}/{ \epsilon} $")
+# ax1.set_title("Excess $\mu$ vs Density")
 ax1.grid(True, linestyle='--', alpha=0.7)
 ax1.legend()
 

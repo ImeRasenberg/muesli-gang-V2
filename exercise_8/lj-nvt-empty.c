@@ -20,7 +20,7 @@
 const int    mc_steps      = 5000;
 const int    output_steps  = 100; 
 // const double density       = 0.5; 
-const double delta         = 0.1; 
+double delta         = 0.1; 
 const double r_cut         = 2.5; 
 // const double beta          = 1;
 const char*  init_filename = "fcc.xyz";
@@ -356,10 +356,12 @@ int main(int argc, char* argv[]){
     double betas[] = {0.5, 1.0, 2.0};
     double densitys[] = {0.1,0.3,0.5,0.6,0.7,0.8,0.9,1.0,1.1};
 
-    
+
     // Calculate how many elements are in the array
     int big = sizeof(betas) / sizeof(betas[0]);
     int big2 = sizeof(densitys) / sizeof(densitys[0]);
+
+    int converged_move = 0;
 
     for (int i = 0; i < big; i++) {
         for(int j = 0; j < big2; j++){
@@ -422,14 +424,30 @@ int main(int argc, char* argv[]){
 
                 measurement_t ms = measure();
 
-                fprintf(fp, "%d\t%f\t%f\n", step, ms.average_pressure, ms.mu_excess);
+                fprintf(fp, "%d\t%f\t%f\t%f\n", step, ms.average_pressure, ms.mu_excess, delta);
 
                 if(step % output_steps == 0){
                     printf("Step %d. Move acceptance: %f.\n",
                         step, (double)accepted / (n_particles * output_steps)
                     );
+                    printf("delta is %f \n", delta);
+
                     accepted = 0;
+                    
                     write_data(step);
+
+                //     if(converged_move<4){
+                //         if ((double)accepted / (n_particles * output_steps)>0.55){
+                //             delta *= 1.1;
+                //         }
+                //         else if ((double)accepted / (n_particles * output_steps)<0.45){
+                //             delta *= 0.9;
+                //         }
+                //         else{
+                //             converged_move ++;
+
+                //         }
+                //     }
                 }
             }
 
