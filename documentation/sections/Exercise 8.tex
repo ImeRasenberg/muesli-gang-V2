@@ -101,8 +101,7 @@ The pressure calculation would give the ideal gas law back in the case of hard s
 
 
 \subsection{}
-For one specific run at some dimensionless temperature and dimensionless density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not have such an equilibrating process. From this point on the pressure is the average after 1000 MC simulation steps.
-
+For one specific run at some dimensionless temperature and dimensionless density the measured pressure and chemical potential are shown in figure~\ref{fig: pressure steps}. Here we can see that after only a few hundred steps the pressure converges into some oscillation around an stable point while the chemical potential does not have such an equilibrating process. To get a value for the pressure and chemical potential in a certain configuration we average over the steps that are greater than 1000.
 
 \begin{figure}[H]
 	\centering
@@ -187,7 +186,7 @@ Now we make the plots where also the ideal gas law is taken into account.
 	\label{fig: E8 chem pot}
 \end{figure}
 
-here we see that
+Here we see that because we added the ideal gas law the total chemical potential is no longer lower than 0 at any point, however the conclusions about the shape remains the same.
 
 
 
