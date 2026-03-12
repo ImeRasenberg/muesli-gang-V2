@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 # 1. Load the data
 # Assuming your C code output: fprintf(fp, "%d\t%f\t%f\n", step, ms.average_pressure, ms.mu_excess);
 try:
-    data = pd.read_csv('data/beta_0.900000___T_0.500000/measurements.dat', sep='\t', names=['Step', 'Pressure', 'Mu_Excess'])
+    data = pd.read_csv('data/beta_0.900000___T_0.500000/measurements.dat', sep='\t', names=['Step', 'Pressure', 'Mu_Excess', "delta"])
 except FileNotFoundError:
     print("Error: measurements.dat not found. Run your C simulation first!")
     exit()
