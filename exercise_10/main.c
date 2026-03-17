@@ -12,7 +12,7 @@ We calcualte the amount of conflicts and use that to calcualte the 'energy' and 
 
 #define N 9  // size of the grid
 int M_steps = 2000000; // amount of simulation steps
-int M_check =  10000; // check interval
+int M_check =  1000; // check interval
 int grid[N][N]; //the grid that is going to be changed
 bool fixed[N][N]; // the positions of where the fixed  
 double beta = 1.0; //starting temp
@@ -36,7 +36,7 @@ int puzzle[N][N] = { // puzzle form wikipedia: https://en.wikipedia.org/wiki/Sud
     {0,0,0,4,1,9,0,0,5},
     {0,0,0,0,8,0,0,7,9},
 };
-*/
+
 
 /*
 int puzzle[N][N] = { // puzzle form new york times hard : https://www.nytimes.com/puzzles/sudoku/hard
@@ -50,10 +50,10 @@ int puzzle[N][N] = { // puzzle form new york times hard : https://www.nytimes.co
     {0,8,0,3,0,0,5,0,0},
     {0,0,0,0,0,0,0,0,4},
 };
-
 */
 
 
+/*
 int puzzle[N][N] = { // puzzle form new york times easy : https://www.nytimes.com/puzzles/sudoku/easy
     {0,8,3,1,6,2,0,5,0},
     {6,9,0,3,0,0,8,1,0},
@@ -65,6 +65,8 @@ int puzzle[N][N] = { // puzzle form new york times easy : https://www.nytimes.co
     {9,6,0,2,0,0,0,0,0},
     {0,0,0,0,0,5,1,0,8},
 };
+*/
+
 
 
 
@@ -233,11 +235,11 @@ int main(){
         if (solved == 1) {
             double T = 1/beta;
             fprintf(fp,"%d %d %f\n", step, energy, T);
+            printf("solved at step: %d\n", step);
             break;
 
         }
-       
-
+    
 
         if (step % M_check == 0){
             double T = 1/beta; 

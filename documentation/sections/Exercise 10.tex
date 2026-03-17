@@ -3,12 +3,22 @@
 \subsection{}
 Appendix \ref{app: E 10} shows the code that solves a sudoku with simulated annealing.
 \subsection{}
-The to main parameters that we can very is the starting $\beta: \beta_0$ and the rate of change for $\beta: \delta \beta$.
+The main parameters that we can very is the starting $\beta: \beta_0$, the final beta $\beta_f$and the rate of change for $\beta: \delta \beta$. Every update step we update the temprature:
+\begin{equation*}
+    \centering
+    \beta_{n +1} = \beta_n * \delta \beta
+\end{equation*}
+
+We choose our $\delta \beta$ such the in our $M_{steps}$we reach our $\beta_f$:
+\begin{align*}
+    \delta \beta = \left ( \frac{\beta_f}{\beta_0} \right )^{M_{check}/M_{steps}}.
+\end{align*}
+We update the $\beta$ every $M_{check}$ steps.\\
 If we start of with a lower $\beta_0$ the simulation takes longer to converge but has a higer change of finding the right solution.
-we choose $\beta_0$ such that we start of with an acceptence rate of aboutn 0.5 meaning that half of the trail moves are accepted and we dont waste to much time at the start but have a high change of finding the right solution.
-Four our sudoku this comes down to a beta of 0.4.
+we choose $\beta_0$ such that we start of with an acceptence rate of about 0.5 meaning that half of the trail moves are accepted and we dont waste to much time at the start but have a high change of finding the right solution.
+Four our sudoku's this comes down to a $\beta_0$ of 0.4 -1.0 depending on the sudoku puzzle.
 We want to choose our $\delta \beta$ such that we slowly reach freezing at the and of the simulation. 
-we choose a final $\beta_f$ of 20. We get a rate of change of aboutn 1.01 so about $1 \% $.
+We choose a final $\beta_f$ of 20 so we get a rate of change of aboutn 1.015 so about $1.5 \% $.
 
 We have tested it out for the easy and hard daily sudoku of the new york times. We see that the hard ones takes about twice as many steps.
 But becuase of the random nature of our algoritme this may vary.
@@ -21,7 +31,16 @@ But becuase of the random nature of our algoritme this may vary.
     \label{fig: sudoku}
 \end{figure}
 
-We see that the energy has a general linear downward trend with noice making the graph jagged.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{graphs/E10/sudoku_temp.png}
+    \caption{ The temprature against the steps.}
+    \label{fig: sudoku_temp}
+\end{figure}
+
+In figure \ref{fig: sudoku} we see the energy in black has a generaldownward trend with noice making the graph jagged. 
+We therfore used a salgov filter to smooth out the energy in red where we see the downward trend more clearly. 
+In figure \ref{fig: sudoku_temp} we see that the temprature decreases exponential as expected from the formula we used for beta.
 
 \subsection{}
 There need to be 17 fixed squares to garanty a unique solution. This means that for our origional aproch there are:
@@ -37,5 +56,5 @@ Instead of changing a random value we can then make random swaps within a block.
 
 For making swaps in a block with $k_b$ open squares there are $k_b !$ poabilites per block meaning there are a total of: $\prod_{b =1}^{9} k_b!$. 
 If we assume there are 8 block with 7 open sqares and 1 with 8 there are $(7!)^8 8! \approx 10^{35}$ possible grids. 
-This means we hve reduced our searche space by roughly a factor of $10^{27}$
+This means we hve reduced our searche space by roughly a factor of $10^{27}$.
 
