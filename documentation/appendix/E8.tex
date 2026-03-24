@@ -1,22 +1,37 @@
 \section{Code Exercise 8}\label{app:E8}
 
 \begin{lstlisting}[style=Cstyle]
+
+/* Simulation variables */
+int n_particles = 0;
+double e_cut;
+double (*r)[NDIM];
+double *size;
+double box[NDIM];
+
+double energy = 0.0;
+double virial = 0.0;
+
+double dummy;
+
+double epsilon = 1.0; 
+
 double calculate_force_times_dist(double r, int n) {
 	if (r >= r_cut*r_cut) return 0.0; 
 	
-	double s_over_r = size[n]*size[n] / r;
+	double s_over_r = 1 / r;
 	double sr6 = pow(s_over_r, 3);
 	double sr12 = sr6 * sr6;
 	
 	return (48.0* epsilon) * ( sr12 - 0.5*sr6);
 }
 
+
 double calculate_potential(double r, int n) {
-	double base_c = size[n]*size[n] / r_cut;
-	double e_cut = 4 * epsilon * (pow(base_c, 6) - pow(base_c, 3));
+	
 	if (r >= r_cut*r_cut) return 0.0; 
 	
-	double s_over_r = size[n]*size[n] / r;
+	double s_over_r = 1 / r;
 	double sr6 = pow(s_over_r, 3);
 	double sr12 = sr6 * sr6;
 	
@@ -27,7 +42,6 @@ typedef struct{
 	double average_pressure;
 	double mu_excess;
 }measurement_t;
-
 
 /* Functions */
 measurement_t measure(void){
@@ -56,15 +70,7 @@ measurement_t measure(void){
 				
 			}
 			
-			force += calculate_force_times_dist(distance2, i); // THIS CAN BE MORE EFFICIENT DONT SQRT
-			
-			// double s_over_r = size[i] / distance;
-			// double sr6 = pow(s_over_r, 6);
-			// double sr12 = sr6 * sr6;
-			
-			
-			// if (distance2 >= r_cut) force +=0;
-			// else force +=(48.0* epsilon / distance2) * ( sr12 - 0.5*sr6);
+			force += calculate_force_times_dist(distance2, i); 
 		}
 	}
 	
@@ -106,8 +112,6 @@ measurement_t measure(void){
 	}
 	
 	tot/=N_test;
-	
-	
 	
 	double volume_box = pow(box[0],NDIM);
 	

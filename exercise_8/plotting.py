@@ -351,8 +351,6 @@ for T in sorted_temps:
     # Plot Total Chemical Potential (Markers + Solid Line)
     line = ax1.errorbar(rhos, mu_tot, yerr=mu_errs, fmt='-s', capsize=3, label=f"$T^* = {T}$ (Total)")
     
-    # Plot Ideal Gas Reference (Dashed Line, same color as the total)
-    ax1.plot(rhos, mu_ig, '--', color=line[0].get_color(), alpha=0.6, label=f"$T^* = {T}$ (Ideal)")
 
 # Formatting
 ax1.set_xlabel(r"$\rho \sigma^3$")
@@ -383,7 +381,7 @@ for T in sorted_temps:
     mu_tot = mu_ig + mu_ex[mask]
     
     # Plotting
-    line = ax1.errorbar(r_m, mu_tot+mu_ig, yerr=mu_errs[mask], fmt='-s', capsize=3, label=f"$T^* = {T}$")
+    line = ax1.errorbar(r_m, mu_tot, yerr=mu_errs[mask], fmt='-s', capsize=3, label=f"$T^* = {T}$")
 
 
 ax1.set_xlabel(r"$\rho \sigma^3$")

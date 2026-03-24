@@ -24,7 +24,7 @@ double delta         = 0.1;
 const double r_cut         = 2.5; 
 // const double beta          = 1;
 const char*  init_filename = "fcc.xyz";
-const int N_test = 500 ;
+const int N_test = 500;
 
 double density;
 double beta; 
