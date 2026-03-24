@@ -1,14 +1,12 @@
 /* annealing algorimte to solve a sudoku. we start with a puzzle from wikipedia and fill the rest at random.
 We calcualte the amount of conflicts and use that to calcualte the 'energy' and perform a monte carlo algoritm*/
 
-
 #include <stdio.h>
 #include <time.h>
 #include <assert.h>
 #include <math.h>
 #include "mt19937.h"
 #include <stdbool.h>
-
 
 #define N 9  // size of the grid
 int M_steps = 2000000; // amount of simulation steps
@@ -24,7 +22,7 @@ int open_rows[N*N];
 int open_cols[N*N];
 
 
-/*
+
 int puzzle[N][N] = { // puzzle form wikipedia: https://en.wikipedia.org/wiki/Sudoku
     {5,3,0,0,7,0,0,0,0},
     {6,0,0,1,9,5,0,0,0},
@@ -76,8 +74,9 @@ void fill_grid(void){
         for(int c = 0; c<N; c++){
             if (puzzle[r][c] != 0){
                 grid[r][c]= puzzle[r][c];
-                fixed[r][c]= true; // indicat the sqare is fixed
+                fixed[r][c]= true; // indicate the square is fixed
             }
+
             else{
                 grid[r][c]= (int)(9 * dsfmt_genrand())+1; // randomly fill the open square
                 fixed[r][c]= false; // indicate the square is open
@@ -90,6 +89,7 @@ void fill_grid(void){
 }
 
 void print_grid(void) {
+    /*function that prints the grid */
     printf("Current Sudoku grid:\n");
     for (int r = 0; r < N; r++) {
         for (int c = 0; c < N; c++) {
@@ -100,6 +100,7 @@ void print_grid(void) {
 }
 
 void print_fixed(void) {
+    /* function that prints the grid with which squares are fixed */
     printf("fixed squares:\n");
     for (int r = 0; r < N; r++) {
         for (int c = 0; c < N; c++) {
@@ -166,12 +167,10 @@ int compute_energy(int grid[N][N]){
 
 int change_value (){
 
+    // pick a random square 
     int idx = (int)(open_count * dsfmt_genrand());
-
     int trail_r = open_rows[idx];
     int trail_c = open_cols[idx];
-
-    if (fixed[trail_r][trail_c]) return 0; // reject the change if it is a fixed value of the puzzle
 
     int trail_grid[N][N]; // make a trail grid
     for(int r = 0; r< N; r++){
@@ -179,10 +178,9 @@ int change_value (){
             trail_grid[r][c] = grid[r][c];
         }
     }
-    int trail_number= (int)(9 * dsfmt_genrand())+1;
+    int trail_number= (int)(9 * dsfmt_genrand())+1; // ranom new number
 
     trail_grid[trail_r][trail_c] = trail_number; // randomly change the one particle
-
     int new_energy = compute_energy(trail_grid);
     double acc = exp(- beta * (new_energy- energy)); // acceptence rule 
    
@@ -198,23 +196,20 @@ int change_value (){
 
 
 int main(){
+    /*set up the grid and energy*/
+    dsfmt_seed(time(NULL));
     beta_change = pow(beta_f / beta, (double)M_check / M_steps);
     printf(" beta_change %f \n", beta_change );
- 
-
-    dsfmt_seed(time(NULL));
     fill_grid();
     print_grid();
     print_fixed();
-    
     energy = compute_energy(grid);
-
     printf("open count %d\n",open_count);
     printf("amount of conficlts:\n");
     printf("%d \n", energy );
 
-    FILE *fp;
-    fp = fopen("sudoku.dat","w");
+    FILE *fp; 
+    fp = fopen("sudoku.dat","w"); // open the file
 
     float accepted = 0;
     int solved = 0;
@@ -225,7 +220,6 @@ int main(){
            accepted += change_value();
 
            if (energy == 0){ // check if it is solved
-           
             solved = 1;
             break;
             }
@@ -234,14 +228,14 @@ int main(){
         /* terminate if solved */
         if (solved == 1) {
             double T = 1/beta;
-            fprintf(fp,"%d %d %f\n", step, energy, T);
+            fprintf(fp,"%d %d %f\n", step, energy, T); // ad the final values when solved
             printf("solved at step: %d\n", step);
             break;
 
         }
     
-
-        if (step % M_check == 0){
+        if (step % M_check == 0){ 
+            /*write of values and update beta*/
             double T = 1/beta; 
             fprintf(fp,"%d %d %f\n", step, energy, T);
             printf("step %d amount of conficlts: %d, beta %.3f acceptence rate: %.3f \n", step, energy , beta, accepted/(M_check* open_count) );
@@ -249,10 +243,10 @@ int main(){
             accepted = 0;
         }
     }
-    
+    /*close file and print final grid and energy*/
     fclose(fp);
     print_grid();
     printf("amount of conficlts:\n");
     printf("%d \n", energy );
-    return 1;
+    return 0;
 }

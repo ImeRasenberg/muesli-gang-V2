@@ -5,11 +5,11 @@ from scipy.signal import savgol_filter
 # load data
 data = np.loadtxt("sudoku.dat")
 
-# columns
+# get columns
 step = data[:,0]
 energy = data[:,1]
 temperature = data[:,2]
-energy_smooth = savgol_filter(energy, window_length=150, polyorder=3)
+energy_smooth = savgol_filter(energy, window_length=150, polyorder=3) #local smoothing algoritm
 
 # plot energy vs step
 plt.figure()
@@ -24,6 +24,7 @@ plt.legend()
 plt.savefig("sudoku.png", dpi=500)
 plt.show()
 
+#plot the temprature 
 plt.figure()
 plt.plot(step, temperature, 'b-')
 plt.xlabel("Monte Carlo step")

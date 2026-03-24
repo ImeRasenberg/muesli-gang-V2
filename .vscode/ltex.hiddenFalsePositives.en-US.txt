@@ -1,0 +1,1 @@
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QWe choose \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q such that we start of with an acceptance rate of about 0.5 meaning that half of the trail moves are accepted and we do not waste too much time at the start but have a high change of finding the right solution.\\E$"}

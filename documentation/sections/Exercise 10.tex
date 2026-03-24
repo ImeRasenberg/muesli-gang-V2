@@ -1,9 +1,9 @@
 \stepcounter{section}
 \section{Sudoku solver with simulated annealing}
 \subsection{}
-Appendix \ref{app: E 10} shows the code that solves a sudoku with simulated annealing.
+Appendix \ref{app: E 10} shows the code that solves a Sudoku with simulated annealing.
 \subsection{}
-The main parameters that we can very is the starting $\beta: \beta_0$, the final beta $\beta_f$and the rate of change for $\beta: \delta \beta$. Every update step we update the temprature:
+The main parameters that we can very is the starting $\beta: \beta_0$, the final beta $\beta_f$and the rate of change for $\beta: \delta \beta$. Every update step we update the temperature:
 \begin{equation*}
     \centering
     \beta_{n +1} = \beta_n * \delta \beta
@@ -15,13 +15,13 @@ We choose our $\delta \beta$ such the in our $M_{steps}$we reach our $\beta_f$:
 \end{align*}
 We update the $\beta$ every $M_{check}$ steps.\\
 If we start of with a lower $\beta_0$ the simulation takes longer to converge but has a higer change of finding the right solution.
-we choose $\beta_0$ such that we start of with an acceptence rate of about 0.5 meaning that half of the trail moves are accepted and we dont waste to much time at the start but have a high change of finding the right solution.
-Four our sudoku's this comes down to a $\beta_0$ of 0.4 -1.0 depending on the sudoku puzzle.
-We want to choose our $\delta \beta$ such that we slowly reach freezing at the and of the simulation. 
-We choose a final $\beta_f$ of 20 so we get a rate of change of aboutn 1.015 so about $1.5 \% $.
-
-We have tested it out for the easy and hard daily sudoku of the new york times. We see that the hard ones takes about twice as many steps.
-But becuase of the random nature of our algorcitme this may vary.
+If we start of with a lower $\beta_0$ the simulation takes longer to converge but has a higher change of finding the right solution.
+We choose $\beta_0$ such that we start of with an acceptance rate of about 0.5 meaning that half of the trail moves are accepted and we do not waste too much time at the start but have a high change of finding the right solution.
+Four our Sudoku's this comes down to a $\beta_0$ of 0.4 -1.0 depending on the Sudoku puzzle.
+We want to choose our $\delta \beta$ such that we slowly reach freezing at the end of the simulation. 
+We choose a final $\beta_f$ of 20 so we get a rate of change of about 1.015 so about $1.5 \% $.
+We have tested it out for the easy and hard daily Sudoku of the New York Times. Furthermore, we see that the hard ones takes about twice as many steps.
+But because of the random nature of our algorithm this may vary.
 \subsection{}
 
 \begin{figure}[H]
@@ -38,23 +38,22 @@ But becuase of the random nature of our algorcitme this may vary.
     \label{fig: sudoku_temp}
 \end{figure}
 
-In figure \ref{fig: sudoku} we see the energy in black has a generaldownward trend with noice making the graph jagged. 
-We therfore used a salgov filter to smooth out the energy in red where we see the downward trend more clearly. 
-In figure \ref{fig: sudoku_temp} we see that the temprature decreases exponential as expected from the formula we used for beta.
+In figure \ref{fig: sudoku} we see the energy in black has a general downward trend with noise making the graph jagged. 
+We therefore used a Salgov filter to smooth out the energy in red where we see the downward trend more clearly. 
+In figure \ref{fig: sudoku_temp} we see that the temperature decreases exponential as expected from the formula we used for beta.
 
 \subsection{}
-There need to be 17 fixed squares to garanty a unique solution. This means that for our origional aproch there are:
-$9^{64} \approx  10^{61}$ posible grids.
+There need to be 17 fixed squares to guarantee a unique solution. This means that for our original approach there are:
+$9^{64} \approx  10^{61}$ possible grids.
 
 If we get an easier puzzle with more fixed squares the search space reduces.
-This means that we are likely to find the solution sooner but becasue of our Monte Carlo simulation we are not garantueed to find a solution sooner.
+This means that we are likely to find the solution sooner but because of our Monte Carlo simulation we are not guaranteed to find a solution sooner.
+The current approach of randomly filling the grid and changing a square to a random number is inefficient.
+We can make use of the fact that we know that the grid contains every number 9 times and that every 3x3 block contains every number. 
+Instead of filling the grid completely random we can fill every block with all numbers from 1 to 9 after finding which numbers are missing in the puzzle. 
+Instead of changing a random value we can then make random swaps within a block. This greatly reduces the search space. 
 
-The current aporoch of randomly filling the grid an changing a square to a random number is inefficient.
-We can make use of the fact that we know that the grid contains every number 9 times and that every block contains every number. 
-Instead of filling the grid completly random we can fill every block with all numbers from 1 to 9 after finding which numbers are missing in the puzzle. 
-Instead of changing a random value we can then make random swaps within a block. this greatly reduces the searche space. 
-
-For making swaps in a block with $k_b$ open squares there are $k_b !$ poabilites per block meaning there are a total of: $\prod_{b =1}^{9} k_b!$. 
-If we assume there are 8 block with 7 open sqares and 1 with 8 there are $(7!)^8 8! \approx 10^{35}$ possible grids. 
-This means we hve reduced our searche space by roughly a factor of $10^{27}$.
+For making swaps in a block with $k_b$ open squares there are $k_b !$ probabilities per block meaning there are a total of: $\prod_{b =1}^{9} k_b!$. 
+If we assume there are 8 blocks with 7 open squares and 1 with 8 there are $(7!)^8 8! \approx 10^{35}$ possible grids. 
+This means we have reduced our search space by roughly a factor of $10^{27}$. We also get an added benefit that we don't need to calculate the conflicts for the block.
 
