@@ -25,7 +25,7 @@ def plot_analysis():
                 parts = line.split()
                 # parts[0] is step, parts[1] is energy
                 steps.append(float(parts[0]))
-                energies.append(float(parts[1]))
+                energies.append(float(parts[2]))
         
         steps_arr = np.array(steps)
         energies_arr = np.array(energies)
@@ -54,9 +54,9 @@ def plot_analysis():
     for dt, x_vals, y_vals in plot1_data:
         plt.plot(x_vals, y_vals, label=f"dt = {dt:.1e}")
 
-    plt.xlabel('Unitles time $t/dt$')
-    plt.ylabel(r'$E_{tot}/\beta$')
-    plt.title('Energy Evolution per Iteration Step')
+    plt.xlabel(r'Unitles time $\tau$')
+    plt.ylabel(r'$E_{pot}/\beta$')
+    # plt.title('Energy Evolution per Iteration Step')
     plt.legend()
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
@@ -73,8 +73,8 @@ def plot_analysis():
     plt.loglog(dt_values[sort_idx], abs_sum_values[sort_idx], 'o-', color='tab:red', markersize=8)
     
     plt.xlabel('Time Step ($dt$)')
-    plt.ylabel(r'Sum of Absolute Derivatives $\sum |\frac{\Delta E}{\Delta t}|$')
-    plt.title('Total Absolute Variation vs. Time Step (Log-Log Scale)')
+    plt.ylabel(r'Sum of Absolute Derivatives potential energy $\sum |\frac{\Delta E}{\Delta t}|/\beta$')
+    # plt.title('Total Absolute Variation vs. Time Step (Log-Log Scale)')
     plt.grid(True, which="both", ls="-", alpha=0.2)
     plt.tight_layout()
 

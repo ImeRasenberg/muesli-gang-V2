@@ -20,18 +20,17 @@ const char*  init_filename = "fcc.xyz";
 int n_particles = 0;
 double (*r)[NDIM];
 double (*F)[NDIM];
-double (*Fn)[NDIM];
 double (*v)[NDIM];
 double *size;
 double box[NDIM];
 double dummy;
 
 double dt = 5E-4; // the size of the timesteps
-#define M 1000
+#define M 5000
 double time_array[M];
-double E[M];
+double E[M][2];
 
-double epsilon = 2/3;
+double epsilon = 2.0/3.0;
 double sigma = 1.0;
 double r_cut = 2.5;
 double e_cut = 0.0;
@@ -40,16 +39,19 @@ double beta = 1.0;
 double mass = 1.0;
 double std;
 
+double calculate_force_over_r(double r2) {
+    if (r2 >= r_cut * r_cut) return 0.0; 
 
-double calculate_force_times_dist(double r) {
-    if (r >= r_cut*r_cut) return 0.0; 
-
-    double s_over_r = sigma*sigma / r;
-    double sr6 = pow(s_over_r, 3);
-    double sr12 = sr6 * sr6;
+    double inv_r2 = 1.0 / r2;                 
+    double sr2 = (sigma * sigma) * inv_r2;    
+    double sr6 = sr2 * sr2 * sr2;             
+    double sr12 = sr6 * sr6;                  
     
-    return (48.0* epsilon) * ( sr12 - 0.5*sr6);
+    // This returns F(r)/r
+    return (48.0 * epsilon * inv_r2) * (sr12 - 0.5 * sr6);
 }
+
+
 double calculate_potential(double r) {
 
     if (r >= r_cut*r_cut) return 0.0; 
@@ -63,38 +65,40 @@ double calculate_potential(double r) {
 double energy;
 void calc_forces(){
     for(int i=0; i<n_particles; i++) 
-        for(int k=0; k<NDIM; k++) Fn[i][k] = 0.0;
+        for(int k=0; k<NDIM; k++) F[i][k] = 0.0;
 
-    energy=0;
+    energy = 0;
+    double r_cut2 = r_cut * r_cut;
 
-    double r_cut2 = r_cut*r_cut;
-    for(int i = 0; i<n_particles; i++){
-        for(int j = 0; j<i; j++){
+    for(int i = 0; i < n_particles; i++){
+        for(int j = 0; j < i; j++){
             double r_ij[NDIM];
             double r2 = 0;
             
+
             for(int k=0; k < NDIM; k++) {
                 r_ij[k] = r[i][k] - r[j][k];
-                // printf("distance is %lf\n",r[i][k]);
-                // Periodic Boundary Conditions
+  
                 if (r_ij[k] >  0.5 * box[k]) r_ij[k] -= box[k];
                 if (r_ij[k] < -0.5 * box[k]) r_ij[k] += box[k];
-                double len = r_ij[k] * r_ij[k];
-                r2 += len;
-
-                if(len < r_cut2){
-                    double force = calculate_force_times_dist(len);
-                    Fn[i][k] += force;
-                    Fn[j][k] -= force;
-                }
-                
+                r2 += r_ij[k] * r_ij[k];
             }
-            double energy_temp = calculate_potential(r2);
-            // printf("distance is %lf\n",r2);/
-            energy+= energy_temp; 
+
+
+            if(r2 < r_cut2){
+                double f_over_r = calculate_force_over_r(r2); 
+                
+                for(int k=0; k < NDIM; k++) {
+                    double force_k = f_over_r * r_ij[k];
+                    F[i][k] += force_k;
+                    F[j][k] -= force_k;
+                    // printf("force calculated i: %e\n",force_k);
+                }
+                energy += calculate_potential(r2);
+            }
+            
         }
     }
-
 }
 
 typedef struct{
@@ -138,12 +142,7 @@ void read_data(void){
 
     r = malloc(n_particles * sizeof * r); 
     v = malloc(n_particles * sizeof * v);
-    F = malloc(n_particles * sizeof * F);
-
-    for(int i=0; i<n_particles; i++) 
-        for(int k=0; k<NDIM; k++) F[i][k] = 0.0;
-
-    Fn = malloc(n_particles * sizeof * Fn); 
+    F = malloc(n_particles * sizeof * F); 
     size = malloc(n_particles * sizeof * size); 
 
     for(int i = 0; i<NDIM; i++){
@@ -159,10 +158,9 @@ void read_data(void){
 }
 
 int main(){
-    std = 1/beta/mass;
+    std = sqrt(1/beta/mass);
     // printf("sdt %lf/n",std);
     e_cut = 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
-    printf("sdt %lf/n",std);
     read_data();
 
     if(n_particles == 0){
@@ -176,11 +174,11 @@ int main(){
     double dts[] = {1E-2,5E-2,1E-3,5E-3,1E-4,1E-5,1E-6,1E-7,5E-5,5E-6,5E-7};
     int big = sizeof(dts) / sizeof(dts[0]);
 
+    size_t seed = time(NULL);
+    dsfmt_seed(seed);
+
     for(int j=0;j<big;j++){
         dt = dts[j];
-        size_t seed = time(NULL);
-        dsfmt_seed(seed);
-
 
         for(int i=0;i< (int)floor(n_particles/2);i++){
             ran rannums = get_gaussian_nums();
@@ -191,34 +189,42 @@ int main(){
                 // printf("speed is %lf\n ",v[(int)(2*i)+1][k]);
             }
         }
-        for(int i=0; i<n_particles; i++) 
-            for(int k=0; k<NDIM; k++) F[i][k] = 0.0;
 
-        for(int c =0; c<M; c++){
-            time_array[c] = (double)c*dt;
-            
-            for(int i=0;i<n_particles;i++){
-                for(int j=0;j<NDIM;j++){
-                    r[i][j] += v[i][j]*dt + Fn[i][j]/2/mass * dt*dt;
-                    v[i][j] += F[i][j]/2/mass *dt;
-                }
-            }
-            calc_forces();
-            double E_kin = 0;
+        calc_forces();
 
-            for(int i=0;i<n_particles;i++){
-                for(int j=0;j<NDIM;j++){
-                    v[i][j] += Fn[i][j]/2/mass *dt;
-                    F[i][j] = Fn[i][j];
+        for(int c = 0; c < M; c++) {
+            time_array[c] = (double)c * dt;
+
+
+            for(int i = 0; i < n_particles; i++) {
+                for(int j = 0; j < NDIM; j++) {
+
+                    v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
                     
-                    E_kin += 0.5*mass*v[i][j]*v[i][j];
-                    // printf("speed squared is %lf\n",v[i][j]*v[i][j]);
-                    // printf("mass is %lf\n",mass);
-                    // printf("energy is %lf\n",E_kin);
+                    
+                    r[i][j] += v[i][j] * dt;
+                    if (r[i][j] < 0) r[i][j] += box[j];
+                    if (r[i][j] >= box[j]) r[i][j] -= box[j];
                 }
             }
 
-            E[c] = energy+E_kin;
+
+            calc_forces(); 
+
+
+            double E_kin = 0;
+            for(int i = 0; i < n_particles; i++) {
+                double v2_sum = 0;
+                for(int j = 0; j < NDIM; j++) {
+
+                    v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
+                    v2_sum += v[i][j] * v[i][j];
+                }
+                E_kin += 0.5 * mass * v2_sum;
+            }
+
+            E[c][0] = energy; 
+            E[c][1] = E_kin;
         }
         char filename[100];
         sprintf(filename, "data/energy_vs_time_dt_%.8f.txt", dt);
@@ -226,7 +232,7 @@ int main(){
         FILE *fp = fopen(filename, "w");
         fprintf(fp, "# Time    Energy\n");
         for (int i = 0; i < M; i++) {
-            fprintf(fp, "%f    %f\n", time_array[i], E[i]);
+            fprintf(fp, "%lf\t%lf\t%lf\n", time_array[i], E[i][0],E[i][1]);
         }
         fclose(fp);
     }
