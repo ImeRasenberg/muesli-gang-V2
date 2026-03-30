@@ -171,7 +171,7 @@ int main(){
     set_density();
 
 
-    double dts[] = {1E-2,5E-2,1E-3,5E-3,1E-4,1E-5,1E-6,1E-7,5E-5,5E-6,5E-7};
+    double dts[] = {1E-1,5E-1,1E-2,5E-2,1E-3,5E-3,1E-4,1E-5,1E-6,1E-7,5E-5,5E-6,5E-7};
     int big = sizeof(dts) / sizeof(dts[0]);
 
     size_t seed = time(NULL);

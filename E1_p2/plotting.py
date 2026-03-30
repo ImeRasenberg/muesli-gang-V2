@@ -25,7 +25,7 @@ def plot_analysis():
                 parts = line.split()
                 # parts[0] is step, parts[1] is energy
                 steps.append(float(parts[0]))
-                energies.append(float(parts[2]))
+                energies.append(float(parts[2])+float(parts[1]))
         
         steps_arr = np.array(steps)
         energies_arr = np.array(energies)
@@ -36,14 +36,10 @@ def plot_analysis():
             normalized_steps = steps_arr / dt
             plot1_data.append((dt, normalized_steps, energies_arr))
             
-            # Calculate absolute sum of derivatives: sum| (E_n+1 - E_n) / dt |
-            delta_e = np.diff(energies_arr)
-            # Dividing by dt gives the derivative dE/dt
-            derivative = delta_e
-            total_variation = np.sum(np.abs(derivative))
+            max_var = abs(max(energies_arr)- min(energies_arr))
             
             dt_values.append(dt)
-            abs_sum_values.append(total_variation)
+            abs_sum_values.append(max_var)
 
     # --- FIGURE 1: Energy Evolution ---
     plt.figure(figsize=(10, 6))
@@ -52,7 +48,8 @@ def plot_analysis():
     plot1_data.sort(key=lambda x: x[0], reverse=True)
 
     for dt, x_vals, y_vals in plot1_data:
-        plt.plot(x_vals, y_vals, label=f"dt = {dt:.1e}")
+        if (dt>0.9e-4) and (dt<1.1e-4):
+            plt.plot(x_vals, y_vals, label=f"dt = {dt:.1e}")
 
     plt.xlabel(r'Unitles time $\tau$')
     plt.ylabel(r'$E_{pot}/\beta$')
@@ -73,7 +70,7 @@ def plot_analysis():
     plt.loglog(dt_values[sort_idx], abs_sum_values[sort_idx], 'o-', color='tab:red', markersize=8)
     
     plt.xlabel('Time Step ($dt$)')
-    plt.ylabel(r'Sum of Absolute Derivatives potential energy $\sum |\frac{\Delta E}{\Delta t}|/\beta$')
+    plt.ylabel(r'Maximum difference Energy')
     # plt.title('Total Absolute Variation vs. Time Step (Log-Log Scale)')
     plt.grid(True, which="both", ls="-", alpha=0.2)
     plt.tight_layout()
