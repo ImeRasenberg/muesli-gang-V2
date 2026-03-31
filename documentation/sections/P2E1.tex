@@ -1,19 +1,41 @@
 \section{Exercise 1}
 
-\subsection{NVE}
-
 Here we are asked to make a MD simulation of which the code will be found in appendix~\ref{app:MD 1}.
+\subsection{NVE}
+The code for the NVE molecular dynamics simulation can be found in appendix~\ref{app:MD 1 NVE}.
 
-\begin{figure}
+The energy as function of time can be found in Figure~\ref{fig: energy tau}. Here it can be seen that it has some equilibrating process taking place in the first $\approx 100$ time steps.
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{graphs/P2E1/Energy_tau.png}
 	\caption{The Total kinetic and potential energy}
 	\label{fig: energy tau}
 \end{figure}
 
-\begin{figure}
+We don't yet know what a good choice is for dt, so we run the simulation many times with different choices for dt. Then we take the standard deviation of the energy in time. This is plotted in figure~\ref{fig: energy dt} 
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\linewidth]{graphs/P2E1/Energy_dt.png}
 	\caption{The maximum change in energy as a function of step size}
 	\label{fig: energy dt}
 \end{figure}
+
+We can see that taking time steps larger than $10^{-2}$ the simulations become nonsensical.
+
+\subsection{NVT}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphs/P2E1/Eaverage_Temp.png}
+	\caption{The maximum change in energy as a function of step size}
+	\label{fig: E average beta}
+\end{figure}
+
+\subsection{Expectation}
+
+
+\subsection{Velocity-Velocity correlation function}
+
+
+\subsection{Diffusion Coefficient}

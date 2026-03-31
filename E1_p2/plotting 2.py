@@ -59,9 +59,9 @@ average = average[sort_idx]
 
 # Log-log plot
 plt.figure()
-plt.scatter(1/betas, average, marker='o', linestyle='-')
+plt.scatter(1/betas * 1.5, average, marker='o', linestyle='-')
 
-plt.xlabel('Temperature')
+plt.xlabel(r' $\epsilon\beta^{-1}$')
 plt.ylabel('Average Energy')
 plt.title('Log-Log Plot of Average Energy vs dt')
 plt.grid(True, which="both", ls="--")

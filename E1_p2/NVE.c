@@ -161,29 +161,26 @@ int main(){
 
     // printf("sdt %lf/n",std);
     e_cut = epsilon * 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
-    read_data();
-
-    if(n_particles == 0){
-        printf("Error: Number of particles, n_particles = 0.\n");
-        return 0;
-    }
-
-    set_density();
-
-
-
 
     size_t seed = time(NULL);
     dsfmt_seed(seed);
 
-
-    double betas[] = {1.0,5.0,10.0,50.0,100.0,200.0,500.0,700.0,1.0e3,1.0e3,2.0e3,2.5e3};
-    // double betas[] = {200.0,2000.0,3000.0,2500.0,3500.0};
+    // double betas[] = {0.1,0.5,1.0,5.0,10.0,15.0};
+    double betas[] = {2,4,6,8,10,12,14};
     int big = sizeof(betas) / sizeof(betas[0]);
 
     for(int o=0;o<big;o++){
-        beta = 1/betas[o];
+        beta = 1/(double)betas[o];
         std = sqrt(1/beta/mass);
+
+        read_data();
+
+        if(n_particles == 0){
+            printf("Error: Number of particles, n_particles = 0.\n");
+            return 0;
+        }
+
+        set_density();
 
         for(int i=0;i< (int)floor(n_particles/2);i++){
             ran rannums = get_gaussian_nums();
@@ -239,7 +236,7 @@ int main(){
         }
 
         char filename[100];
-        sprintf(filename, "data_2/energy_vs_time_dt_temp_%.8f.txt", 1.0/beta);
+        sprintf(filename, "data_2/energy_vs_time_dt_temp_%.1f.txt", 1.0/beta);
 
         FILE *fp = fopen(filename, "w");
         fprintf(fp, "# Time    Energy\n");

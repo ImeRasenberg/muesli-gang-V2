@@ -52,16 +52,18 @@ double calculate_force_over_r(double r2) {
 }
 
 
-double calculate_potential(double r) {
+double calculate_potential(double r2) {
+    if (r2 >= r_cut*r_cut) return 0.0;
 
-    if (r >= r_cut*r_cut) return 0.0; 
+    double inv_r2 = 1.0 / r2;
+    double sr2 = sigma*sigma * inv_r2;
+    double sr6 = sr2*sr2*sr2;
+    double sr12 = sr6*sr6;
 
-    double s_over_r = sigma*sigma / r;
-    double sr6 = s_over_r*s_over_r*s_over_r;
-    double sr12 = sr6 * sr6;
-    
-    return (4*epsilon) * ( sr12 - sr6) - e_cut;
+    return 4*epsilon*(sr12 - sr6) - e_cut;
 }
+
+
 double energy;
 void calc_forces(){
     for(int i=0; i<n_particles; i++) 
@@ -161,17 +163,10 @@ int main(){
     std = sqrt(1/beta/mass);
     // printf("sdt %lf/n",std);
     e_cut = 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
-    read_data();
-
-    if(n_particles == 0){
-        printf("Error: Number of particles, n_particles = 0.\n");
-        return 0;
-    }
-
-    set_density();
 
 
-    double dts[] = {1E-1,5E-1,1E-2,5E-2,1E-3,5E-3,1E-4,1E-5,1E-6,1E-7,5E-5,5E-6,5E-7};
+
+    double dts[] = {0.5,1E-1,5E-2,1E-2,5E-3,1E-3,1E-4,1E-5,1E-6,1E-7,5E-5,5E-6,5E-7};
     int big = sizeof(dts) / sizeof(dts[0]);
 
     size_t seed = time(NULL);
@@ -179,6 +174,15 @@ int main(){
 
     for(int o=0;o<big;o++){
         dt = dts[o];
+
+        read_data();
+
+        if(n_particles == 0){
+            printf("Error: Number of particles, n_particles = 0.\n");
+            return 0;
+        }
+
+        set_density();
 
         for(int i=0;i< (int)floor(n_particles/2);i++){
             ran rannums = get_gaussian_nums();
@@ -189,6 +193,14 @@ int main(){
                 // printf("speed is %lf\n ",v[(int)(2*i)+1][k]);
             }
         }
+
+        for(int k=0;k<NDIM;k++){
+        double v_cm = 0;
+        for(int i=0;i<n_particles;i++) v_cm += v[i][k];
+        v_cm /= n_particles;
+
+        for(int i=0;i<n_particles;i++) v[i][k] -= v_cm;
+}
 
         calc_forces();
 
