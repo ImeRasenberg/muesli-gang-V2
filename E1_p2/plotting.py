@@ -36,7 +36,8 @@ def plot_analysis():
             normalized_steps = steps_arr / dt
             plot1_data.append((dt, normalized_steps, energies_arr))
             
-            max_var = abs(max(energies_arr)- min(energies_arr))
+            # max_var = abs(max(energies_arr)- min(energies_arr))
+            max_var = np.std(energies_arr)
             
             dt_values.append(dt)
             abs_sum_values.append(max_var)

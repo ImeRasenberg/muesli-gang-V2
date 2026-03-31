@@ -39,7 +39,7 @@ double beta = 1.0;
 double mass = 1.0;
 double std;
 
-double nu = 100;
+double nu = 1;
 
 double calculate_force_over_r(double r2) {
     if (r2 >= r_cut * r_cut) return 0.0; 
@@ -49,17 +49,15 @@ double calculate_force_over_r(double r2) {
     double sr6 = sr2 * sr2 * sr2;             
     double sr12 = sr6 * sr6;                  
     
-    // This returns F(r)/r
     return (48.0 * epsilon * inv_r2) * (sr12 - 0.5 * sr6);
 }
+double calculate_potential(double r2) {
 
+    if (r2 >= r_cut*r_cut) return 0.0; 
 
-double calculate_potential(double r) {
-
-    if (r >= r_cut*r_cut) return 0.0; 
-
-    double s_over_r = sigma*sigma / r;
-    double sr6 = pow(s_over_r, 3);
+    double inv_r2 = 1.0 / r2;
+    double sr2 = sigma*sigma * inv_r2;
+    double sr6 = sr2*sr2*sr2;
     double sr12 = sr6 * sr6;
     
     return (4*epsilon) * ( sr12 - sr6) - e_cut;
@@ -160,7 +158,7 @@ void read_data(void){
 }
 
 int main(){
-    std = sqrt(1/beta/mass);
+
     // printf("sdt %lf/n",std);
     e_cut = epsilon * 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
     read_data();
@@ -179,11 +177,13 @@ int main(){
     dsfmt_seed(seed);
 
 
-    double betas[] = {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0};
+    double betas[] = {1.0,5.0,10.0,50.0,100.0,200.0,500.0,700.0,1.0e3,1.0e3,2.0e3,2.5e3};
+    // double betas[] = {200.0,2000.0,3000.0,2500.0,3500.0};
     int big = sizeof(betas) / sizeof(betas[0]);
 
     for(int o=0;o<big;o++){
         beta = 1/betas[o];
+        std = sqrt(1/beta/mass);
 
         for(int i=0;i< (int)floor(n_particles/2);i++){
             ran rannums = get_gaussian_nums();
@@ -220,7 +220,6 @@ int main(){
                 double v2_sum = 0;
                 if(dsfmt_genrand()>=nu*dt){
                     for(int j = 0; j < NDIM; j++) {
-
                     v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
                     v2_sum += v[i][j] * v[i][j];
                     }
@@ -240,7 +239,7 @@ int main(){
         }
 
         char filename[100];
-        sprintf(filename, "data/energy_vs_time_dt_temp_%.8f.txt", 1.0/beta);
+        sprintf(filename, "data_2/energy_vs_time_dt_temp_%.8f.txt", 1.0/beta);
 
         FILE *fp = fopen(filename, "w");
         fprintf(fp, "# Time    Energy\n");

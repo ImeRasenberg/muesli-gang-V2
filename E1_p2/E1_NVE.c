@@ -29,7 +29,7 @@ double dt = 5E-4; // the size of the timesteps
 #define M 5000
 double time_array[M];
 double E[M][2];
-    
+
 double epsilon = 2.0/3.0;
 double sigma = 1.0;
 double r_cut = 2.5;
@@ -57,7 +57,7 @@ double calculate_potential(double r) {
     if (r >= r_cut*r_cut) return 0.0; 
 
     double s_over_r = sigma*sigma / r;
-    double sr6 = pow(s_over_r, 3);
+    double sr6 = s_over_r*s_over_r*s_over_r;
     double sr12 = sr6 * sr6;
     
     return (4*epsilon) * ( sr12 - sr6) - e_cut;

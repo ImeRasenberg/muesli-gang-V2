@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import glob
 import numpy as np
 
-files = glob.glob("data/energy_vs_time_dt_temp_*.txt")
+files = glob.glob("data_2/energy_vs_time_dt_temp_*.txt")
 
 if not files:
     print("No energy files found! Run your C program first.")
