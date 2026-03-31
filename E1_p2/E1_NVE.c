@@ -29,7 +29,7 @@ double dt = 5E-4; // the size of the timesteps
 #define M 5000
 double time_array[M];
 double E[M][2];
-
+    
 double epsilon = 2.0/3.0;
 double sigma = 1.0;
 double r_cut = 2.5;

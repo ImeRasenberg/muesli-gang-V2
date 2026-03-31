@@ -25,7 +25,7 @@ double *size;
 double box[NDIM];
 double dummy;
 
-double dt = 5E-4; // the size of the timesteps
+double dt = 1E-3; // the size of the timesteps
 #define M 5000
 double time_array[M];
 double E[M][2];
@@ -39,7 +39,7 @@ double beta = 1.0;
 double mass = 1.0;
 double std;
 
-double nu = 10;
+double nu = 100;
 
 double calculate_force_over_r(double r2) {
     if (r2 >= r_cut * r_cut) return 0.0; 
@@ -162,7 +162,7 @@ void read_data(void){
 int main(){
     std = sqrt(1/beta/mass);
     // printf("sdt %lf/n",std);
-    e_cut = 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
+    e_cut = epsilon * 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
     read_data();
 
     if(n_particles == 0){

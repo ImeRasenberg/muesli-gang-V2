@@ -32,7 +32,7 @@ for file in files:
             parts = line.split()
             # parts[0] is step, parts[1] is energy
             steps.append(float(parts[3]))
-            energies.append(float(parts[2])+float(parts[1]))
+            energies.append(float(parts[1])+float(parts[2]))
     
     steps_arr = np.array(steps)
     energies_arr = np.array(energies)
