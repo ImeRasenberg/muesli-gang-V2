@@ -48,7 +48,7 @@ def plot_analysis():
     plot1_data.sort(key=lambda x: x[0], reverse=True)
 
     for dt, x_vals, y_vals in plot1_data:
-        if (dt>0.9e-4) and (dt<1.1e-4):
+        if (dt>0.9e-3) and (dt<1.1e-3):
             plt.plot(x_vals, y_vals, label=f"dt = {dt:.1e}")
 
     plt.xlabel(r'Unitles time $\tau$')

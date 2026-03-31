@@ -39,6 +39,8 @@ double beta = 1.0;
 double mass = 1.0;
 double std;
 
+double nu = 10;
+
 double calculate_force_over_r(double r2) {
     if (r2 >= r_cut * r_cut) return 0.0; 
 
@@ -177,61 +179,74 @@ int main(){
     dsfmt_seed(seed);
 
 
+    double betas[] = {1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0};
+    int big = sizeof(betas) / sizeof(betas[0]);
 
+    for(int o=0;o<big;o++){
+        beta = 1/betas[o];
 
-    for(int i=0;i< (int)floor(n_particles/2);i++){
-        ran rannums = get_gaussian_nums();
-        for(int k=0;k<NDIM;k++){
-            v[(int)(2*i)][k] = rannums.N1[k];
-            v[(int)(2*i)+1][k] = rannums.N2[k];
-            // printf("speed is %lf\n ",v[(int)(2*i)][k]);
-            // printf("speed is %lf\n ",v[(int)(2*i)+1][k]);
-        }
-    }
-
-    calc_forces();
-
-    for(int c = 0; c < M; c++) {
-        time_array[c] = (double)c * dt;
-
-
-        for(int i = 0; i < n_particles; i++) {
-            for(int j = 0; j < NDIM; j++) {
-
-                v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
-                
-                
-                r[i][j] += v[i][j] * dt;
-                if (r[i][j] < 0) r[i][j] += box[j];
-                if (r[i][j] >= box[j]) r[i][j] -= box[j];
+        for(int i=0;i< (int)floor(n_particles/2);i++){
+            ran rannums = get_gaussian_nums();
+            for(int k=0;k<NDIM;k++){
+                v[(int)(2*i)][k] = rannums.N1[k];
+                v[(int)(2*i)+1][k] = rannums.N2[k];
+                // printf("speed is %lf\n ",v[(int)(2*i)][k]);
+                // printf("speed is %lf\n ",v[(int)(2*i)+1][k]);
             }
         }
 
+        calc_forces();
 
-        calc_forces(); 
+        for(int c = 0; c < M; c++) {
+            time_array[c] = (double)c * dt;
 
 
-        double E_kin = 0;
-        for(int i = 0; i < n_particles; i++) {
-            double v2_sum = 0;
-            for(int j = 0; j < NDIM; j++) {
+            for(int i = 0; i < n_particles; i++) {
+                for(int j = 0; j < NDIM; j++) {
+                    r[i][j] += v[i][j] * dt + 0.5 /mass * F[i][j] * dt *dt;
+                    if (r[i][j] < 0) r[i][j] += box[j];
+                    if (r[i][j] >= box[j]) r[i][j] -= box[j];
 
-                v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
-                v2_sum += v[i][j] * v[i][j];
+                    v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
+                }
             }
-            E_kin += 0.5 * mass * v2_sum;
+
+
+            calc_forces(); 
+
+
+            double E_kin = 0;
+            for(int i = 0; i < n_particles; i++) {
+                double v2_sum = 0;
+                if(dsfmt_genrand()>=nu*dt){
+                    for(int j = 0; j < NDIM; j++) {
+
+                    v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
+                    v2_sum += v[i][j] * v[i][j];
+                    }
+                }
+                else {
+                    ran rannums = get_gaussian_nums();
+                    for(int j = 0; j < NDIM; j++) {
+                        v[i][j] = rannums.N1[j];
+                        v2_sum += v[i][j] * v[i][j];
+                    }
+                }
+                E_kin += 0.5 * mass * v2_sum;
+            }
+
+            E[c][0] = energy; 
+            E[c][1] = E_kin;
         }
 
-        E[c][0] = energy; 
-        E[c][1] = E_kin;
-    }
-    char filename[100];
-    sprintf(filename, "data/energy_vs_time_dt_%.8f.txt", dt);
+        char filename[100];
+        sprintf(filename, "data/energy_vs_time_dt_temp_%.8f.txt", 1.0/beta);
 
-    FILE *fp = fopen(filename, "w");
-    fprintf(fp, "# Time    Energy\n");
-    for (int i = 0; i < M; i++) {
-        fprintf(fp, "%lf\t%lf\t%lf\n", time_array[i], E[i][0],E[i][1]);
+        FILE *fp = fopen(filename, "w");
+        fprintf(fp, "# Time    Energy\n");
+        for (int i = 0; i < M; i++) {
+            fprintf(fp, "%lf\t%lf\t%lf\t%lf\n", time_array[i], E[i][0],E[i][1],beta);
+        }
+        fclose(fp);
     }
-    fclose(fp);
 }

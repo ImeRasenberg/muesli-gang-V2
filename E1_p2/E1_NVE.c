@@ -177,8 +177,8 @@ int main(){
     size_t seed = time(NULL);
     dsfmt_seed(seed);
 
-    for(int j=0;j<big;j++){
-        dt = dts[j];
+    for(int o=0;o<big;o++){
+        dt = dts[o];
 
         for(int i=0;i< (int)floor(n_particles/2);i++){
             ran rannums = get_gaussian_nums();
@@ -198,13 +198,11 @@ int main(){
 
             for(int i = 0; i < n_particles; i++) {
                 for(int j = 0; j < NDIM; j++) {
-
-                    v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
-                    
-                    
-                    r[i][j] += v[i][j] * dt;
+                    r[i][j] += v[i][j] * dt + 0.5 /mass * F[i][j] * dt *dt;
                     if (r[i][j] < 0) r[i][j] += box[j];
                     if (r[i][j] >= box[j]) r[i][j] -= box[j];
+
+                    v[i][j] += (F[i][j] / (2.0 * mass)) * dt;
                 }
             }
 
