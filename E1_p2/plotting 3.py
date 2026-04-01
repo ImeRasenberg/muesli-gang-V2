@@ -85,3 +85,5 @@ plt.ylabel(r'$\langle v(0)v(t) \rangle$')
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 
+
+print(f"D = {np.sum(y)*dt/3}")

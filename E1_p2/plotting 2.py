@@ -59,11 +59,11 @@ average = average[sort_idx]
 
 # Log-log plot
 plt.figure()
-plt.scatter(1/betas / 1.5, average*1.5, marker='o', linestyle='-')
+plt.scatter(1/betas * 1.5, average*1.5, marker='o', linestyle='-')
 
-plt.xlabel(r' $\epsilon\beta^{-1}$')
+plt.xlabel(r' $\beta^{-1}/\epsilon$')
 plt.ylabel(r'Average Energy/$\epsilon$')
-plt.title('Log-Log Plot of Average Energy vs dt')
+# plt.title('Log-Log Plot of Average Energy vs dt')
 plt.grid(True, which="both", ls="--")
 
 plt.show()

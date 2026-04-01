@@ -56,7 +56,7 @@ for dt, x_vals, y_vals in plot1_data:
         plt.plot(x_vals, y_vals, label=f"dt = {dt:.1e}")
 
 plt.xlabel(r'Unitles time $\tau$')
-plt.ylabel(r'$E_{tot}/\beta$')
+plt.ylabel(r'$\beta E_{tot}$')
 # plt.title('Energy Evolution per Iteration Step')
 plt.legend()
 plt.grid(True, alpha=0.3)
@@ -74,7 +74,7 @@ sort_idx = np.argsort(dt_values)
 plt.loglog(dt_values[sort_idx], abs_sum_values[sort_idx], 'o-', color='tab:red', markersize=8)
 
 plt.xlabel('Time Step ($dt$)')
-plt.ylabel(r'$\Delta E_{tot}/\beta$')
+plt.ylabel(r'$\beta\Delta E_{tot}$')
 # plt.title('Total Absolute Variation vs. Time Step (Log-Log Scale)')
 plt.grid(True, which="both", ls="-", alpha=0.2)
 plt.tight_layout()
