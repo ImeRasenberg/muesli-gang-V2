@@ -2,6 +2,7 @@
 /exercise_8/data
 /E1_p2/data
 /E1_p2/data_2
+/E1_p2/data_3
 
 # Ignore all LaTeX auxiliary files
 /documentation/*.aux

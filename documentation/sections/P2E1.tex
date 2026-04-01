@@ -1,41 +1,207 @@
 \section{Exercise 1}
 
 Here we are asked to make a MD simulation of which the code will be found in appendix~\ref{app:MD 1}.
-\subsection{NVE}
-The code for the NVE molecular dynamics simulation can be found in appendix~\ref{app:MD 1 NVE}.
 
-The energy as function of time can be found in Figure~\ref{fig: energy tau}. Here it can be seen that it has some equilibrating process taking place in the first $\approx 100$ time steps.
+%\subsection{NVE}
+%The code for the NVE molecular dynamics simulation can be found in appendix~\ref{app:MD 1 NVE}.
+%
+%The energy as function of time is shown in Figure~\ref{fig: energy tau}. Here it can be seen that it has some equilibrating process taking place in the first $\approx 100$ time steps.
+%
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.75\linewidth]{graphs/P2E1/Energy_tau.png}
+%	\caption{The Total kinetic and potential energy}
+%	\label{fig: energy tau}
+%\end{figure}
+%
+%We don't yet know what a good choice is for dt, so we run the simulation many times with different choices for dt. Then we take the standard deviation of the energy in time. This is plotted in figure~\ref{fig: energy dt} 
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.75\linewidth]{graphs/P2E1/Energy_dt.png}
+%	\caption{The maximum change in energy as a function of step size}
+%	\label{fig: energy dt}
+%\end{figure}
+%
+%We can see that taking time steps larger than $10^{-2}$ the simulations become nonsensical.
+%
+%After this it seems to to have flattened out meaning the dynamics are not better described by a smaller $dt$. From this graph it would suggested to take a $dt$ that is $10^{-2}$ however from further simulations it was found still sometimes reproduces odd energy jumps therefor $dt=10^-3$ is used for future simulations.
+\subsection{NVE Ensemble Results}
+
+The implementation details for the NVE molecular dynamics simulation are provided in Appendix~\ref{ref:app:MD 1 NVE}.
+
+The evolution of energy over time is illustrated in Figure~\ref{fig: energy tau}. An initial equilibration period is observed during approximately the first 300 time steps, after which the system stabilizes.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\linewidth]{graphs/P2E1/Energy_tau.png}
-	\caption{The Total kinetic and potential energy}
+	\includegraphics[width=0.75\linewidth]{graphs/P2E1/Energy_tau.png}
+	\caption{Evolution of total, kinetic, and potential energy over time.}
 	\label{fig: energy tau}
 \end{figure}
 
-We don't yet know what a good choice is for dt, so we run the simulation many times with different choices for dt. Then we take the standard deviation of the energy in time. This is plotted in figure~\ref{fig: energy dt} 
+To determine an optimal time step ($dt$), we performed a series of simulations across a range of $dt$ values. The stability of each simulation was assessed by calculating the standard deviation of the total energy over time, as shown in Figure~\ref{fig: energy dt}.
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\linewidth]{graphs/P2E1/Energy_dt.png}
-	\caption{The maximum change in energy as a function of step size}
+	\includegraphics[width=0.75\linewidth]{graphs/P2E1/Energy_dt.png}
+	\caption{Standard deviation of total energy as a function of time step size.}
 	\label{fig: energy dt}
 \end{figure}
 
-We can see that taking time steps larger than $10^{-2}$ the simulations become nonsensical.
+The data indicates that for $dt > 10^{-2}$, the simulation becomes unstable and the results are non-physical. While the energy fluctuation appears to plateau for values below $10^{-2}$—suggesting that smaller steps do not significantly improve the description of the dynamics—subsequent testing revealed occasional energy jumps at $dt = 10^{-2}$. Thus, a more conservative time step of $dt = 10^{-3}$ was selected for all future simulations to ensure long-term numerical stability.
 
-\subsection{NVT}
+%\subsection{NVT}
+%Here we had to get the total energy in the system as a function of temperature.
+%
+%This is done by attaching the algorithm used in PART 1 to a heat bath and letting it equilibrate with a chance of connecting to the heat bath as $\nu = 1\ s^{-1}$. 
+%
+%The code can be found in Appendix~\ref{app: MD 1 NVT}
+%
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.75\linewidth]{graphs/P2E1/Eaverage_Temp.png}
+%	\caption{The maximum change in energy as a function of step size}
+%	\label{fig: E average beta}
+%\end{figure}
+
+\subsection{NVT Ensemble Results}
+
+In this section, we investigate the relationship between the total energy of the system and the equilibrium temperature. To maintain a constant temperature, the molecular dynamics algorithm from Part 1 was coupled to a stochastic heat bath (Andersen thermostat). 
+
+The system equilibrates through periodic velocity rescaling, where the probability of a particle interacting with the heat bath is defined by the collision frequency $\nu = 1\ \text{s}^{-1}$. The implementation of this NVT simulation is provided in Appendix~\ref{app: MD 1 NVT}.
+
+The resulting average total energy as a function of temperature is presented in Figure~\ref{fig: E average beta}. 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\linewidth]{graphs/P2E1/Eaverage_Temp.png}
-	\caption{The maximum change in energy as a function of step size}
+	\includegraphics[width=0.75\linewidth]{graphs/P2E1/Eaverage_Temp.png}
+	\caption{Average total energy of the system as a function of temperature $T$.}
 	\label{fig: E average beta}
 \end{figure}
 
-\subsection{Expectation}
 
 
-\subsection{Velocity-Velocity correlation function}
 
+
+%\subsection{Expectation}
+%Thermodynamics equipartition theorem predicts that the energy of a system is given by
+%\begin{equation}
+%	E_t = \frac{3}{2} N \beta^{-1}
+%\end{equation}
+%
+%For an ideal gas, the Lenard Jones potential only confines particles in the radial direction and leaves the angular free of confinement. Meaning that at most it can add one more quadratic degree of freedom making it $E_t = \frac{4}{2} N \beta^{-1}$.
+%
+%BUT because the particles are chosen to be at a density that is not the ideal packing density, there will be particles that are not in the quadratic bit of the potential meaning that they will not add energy, meaning the total energy is described by:
+%
+%\begin{equation}
+%	E_t = \frac{3 + \gamma(\rho)}{2}N \beta^{-1}
+%\end{equation}
+%
+%where $\gamma(\rho)\in[0,1]$ is an unknown function that tells us what part of the particles occupy the quadratic part of the potential.
+%
+%
+%
+%Fitting the graph with a linear line we find that has a slope of $434$ (unites) so we find
+%\begin{equation}
+%	E_t \approx \frac{3.4}{2} N \beta^{-1}
+%\end{equation}
+%
+%Meaning that $\approx 40\%$ of the particles are in the potential dip.
+
+\subsection{Theoretical Expectations}
+
+According to the thermodynamic equipartition theorem, the internal energy of a system with $3N$ translational degrees of freedom is given by:
+\begin{equation}
+	E_{trans} = \frac{3}{2} N \beta^{-1}
+\end{equation}
+
+For a system interacting via a Lennard-Jones potential, additional degrees of freedom may arise from the potential wells. In a dense system, the radial oscillations of particles around their equilibrium positions can contribute further quadratic terms to the Hamiltonian. In the limit of a harmonic crystal, this would add another $\frac{1}{2} N \beta^{-1}$; however, for a fluid where particles are partially confined, we expect a smaller contribution. If we assume the potential adds at most one additional quadratic degree of freedom, the total energy would follow $E_t = \frac{4}{2} N \beta^{-1}$.
+
+Because the system is not at an ideal packing density, not all particles occupy the harmonic (quadratic) region of the potential well. We can therefore model the total energy as:
+\begin{equation}
+	E_t = \frac{3 + \gamma(\rho)}{2} N \beta^{-1}
+\end{equation}
+where $\gamma(\rho) \in [0, 1]$ is a density-dependent parameter representing the fraction of particles effectively trapped within the quadratic region of the potential.
+
+By applying a linear fit to the energy-temperature data, we obtained a slope of $434$, which corresponds to:
+\begin{equation}
+	E_t \approx \frac{3.4}{2} N \beta^{-1}
+\end{equation}
+This result suggests that $\gamma(\rho) \approx 0.4$, implying that approximately $40\%$ of the particles are situated within the potential minima at this specific density.
+
+
+%\subsection{Velocity-Velocity correlation function}
+%
+%The velocity velocity autocorrelation function is given by
+%\begin{equation}
+%	\langle \mathbf{v}(o)\mathbf{v}(t)\rangle
+%\end{equation}
+%For out simulation the results of running this every time step is shown in figure \ref{fig: correlation}
+% 
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.75\linewidth]{graphs/P2E1/example time.png}
+%	\caption{The maximum change in energy as a function of step size}
+%	\label{fig: correlation}
+%\end{figure}
+%
+%as can be seen there are still a lot of fluctuations. This simulation has been run 100 times and averaged to get ride of the fluctuations. The result of this averaging is shown in figure \ref{fig: average correlation}
+%
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.75\linewidth]{graphs/P2E1/velocity_cor_time.png}
+%	\caption{The maximum change in energy as a function of step size}
+%	\label{fig: average correlation}
+%\end{figure}
+%
+%
+
+\subsection{Velocity-Velocity Correlation Function}
+
+The velocity autocorrelation function (VACF) is defined as:
+\begin{equation}
+	C_v(t) = \langle \mathbf{v}(0) \cdot \mathbf{v}(t) \rangle
+\end{equation}
+
+Initial results for the VACF calculated over a single simulation run are presented in Figure~\ref{fig: correlation}. As can be seen there are a lot of fluctuations.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{graphs/P2E1/example time.png}
+	\caption{Velocity autocorrelation function for a single simulation run, showing high statistical noise.}
+	\label{fig: correlation}
+\end{figure}
+
+To improve the signal-to-noise ratio, the simulation was repeated 100 times. The average of these independent trajectories is shown in Figure~\ref{fig: average correlation}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{graphs/P2E1/velocity_cor_time.png}
+	\caption{Ensemble-averaged velocity autocorrelation function obtained from 100 independent simulations.}
+	\label{fig: average correlation}
+\end{figure}
+
+%\subsection{Diffusion Coefficient}
+%
+%To get the diffusion coefficient we use the Green-Kubo Relation
+%\begin{equation}
+%	D = \frac{1}{d}\int_o^\infty dt \langle \mathbf{v}(o)\mathbf{v}(t)\rangle
+%\end{equation}
+%
+%for out case this is
+%
+%\begin{equation*}
+%	D \approx 0.24
+%\end{equation*}
 
 \subsection{Diffusion Coefficient}
+
+The self-diffusion coefficient $D$ can be calculated from the velocity autocorrelation function (VACF) using the Green-Kubo relation:
+\begin{equation}
+	D = \frac{1}{3} \int_{0}^{\infty} \langle \mathbf{v}(0) \cdot \mathbf{v}(t) \rangle \, dt
+\end{equation}
+where the factor of $1/3$ corresponds to the three translational degrees of freedom in our system ($d=3$).
+
+In practice, the upper limit of the integral is replaced by a correlation time $\tau_{max}$ at which the VACF has sufficiently decayed to approximately zero. Integrating the averaged correlation function shown in Figure~\ref{fig: average correlation}, we obtain:
+\begin{equation*}
+	D \approx 0.24 \quad
+\end{equation*}

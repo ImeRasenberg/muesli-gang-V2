@@ -59,11 +59,30 @@ average = average[sort_idx]
 
 # Log-log plot
 plt.figure()
-plt.scatter(1/betas * 1.5, average, marker='o', linestyle='-')
+plt.scatter(1/betas / 1.5, average*1.5, marker='o', linestyle='-')
 
 plt.xlabel(r' $\epsilon\beta^{-1}$')
-plt.ylabel('Average Energy')
+plt.ylabel(r'Average Energy/$\epsilon$')
 plt.title('Log-Log Plot of Average Energy vs dt')
 plt.grid(True, which="both", ls="--")
 
 plt.show()
+
+
+# Linear fit: y = a*x + b
+x = 1/betas
+y = average
+
+coeffs = np.polyfit(x, y, 1)  # degree 1 polynomial
+a, b = coeffs
+
+print(f"Slope (a) = {a}")
+print(f"Intercept (b) = {b}")
+
+# Plot fitted line
+x_fit = np.linspace(min(x), max(x), 200)
+y_fit = a * x_fit + b
+
+plt.plot(x_fit, y_fit, label=f'fit: y={a:.3e}x + {b:.3e}')
+plt.legend()
+

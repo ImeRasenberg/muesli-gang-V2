@@ -200,7 +200,7 @@ int main(){
         v_cm /= n_particles;
 
         for(int i=0;i<n_particles;i++) v[i][k] -= v_cm;
-}
+        }
 
         calc_forces();
 

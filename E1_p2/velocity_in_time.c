@@ -21,14 +21,16 @@ int n_particles = 0;
 double (*r)[NDIM];
 double (*F)[NDIM];
 double (*v)[NDIM];
+double (*v_0)[NDIM];
 double *size;
 double box[NDIM];
 double dummy;
 
 double dt = 1E-3; // the size of the timesteps
-#define M 5000
+#define M 2000
 double time_array[M];
 double E[M][2];
+double v_t[M];
 
 double epsilon = 2.0/3.0;
 double sigma = 1.0;
@@ -142,6 +144,7 @@ void read_data(void){
 
     r = malloc(n_particles * sizeof * r); 
     v = malloc(n_particles * sizeof * v);
+    v_0 = malloc(n_particles * sizeof * v_0);
     F = malloc(n_particles * sizeof * F); 
     size = malloc(n_particles * sizeof * size); 
 
@@ -158,23 +161,17 @@ void read_data(void){
 }
 
 int main(){
-
-    // printf("sdt %lf/n",std);
     e_cut = epsilon * 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
+
+
 
     size_t seed = time(NULL);
     dsfmt_seed(seed);
 
-    // double betas[] = {0.1,0.5,1.0,5.0,10.0,15.0};
-    double betas[] = {2,4,6,8,10,12,14};
-    int big = sizeof(betas) / sizeof(betas[0]);
-
-    for(int o=0;o<big;o++){
-        beta = 1/(double)betas[o];
-        std = sqrt(1/beta/mass);
-
+    std = sqrt(1/beta/mass);
+    for(int count=50; count<100; count++){
         read_data();
-
+        
         if(n_particles == 0){
             printf("Error: Number of particles, n_particles = 0.\n");
             return 0;
@@ -186,11 +183,13 @@ int main(){
             ran rannums = get_gaussian_nums();
             for(int k=0;k<NDIM;k++){
                 v[(int)(2*i)][k] = rannums.N1[k];
+                v_0[(int)(2*i)][k]= rannums.N1[k];
+
                 v[(int)(2*i)+1][k] = rannums.N2[k];
-                // printf("speed is %lf\n ",v[(int)(2*i)][k]);
-                // printf("speed is %lf\n ",v[(int)(2*i)+1][k]);
+                v_0[(int)(2*i)+1][k] = rannums.N2[k];
             }
         }
+
         for(int k=0;k<NDIM;k++){
             double v_cm = 0;
             for(int i=0;i<n_particles;i++) {
@@ -200,8 +199,11 @@ int main(){
 
             for(int i=0;i<n_particles;i++){
                 v[i][k] -= v_cm;
+                v_0[i][k] -= v_cm;
             } 
         }
+
+
 
         calc_forces();
 
@@ -244,16 +246,26 @@ int main(){
 
             E[c][0] = energy; 
             E[c][1] = E_kin;
+
+            v_t[c] = 0;
+            for(int i = 0; i < n_particles; i++) {
+                for(int k=0; k<NDIM; k++){
+                v_t[c] += v_0[i][k]*v[i][k];
+                }
+            }
+            v_t[c] /= n_particles;
         }
 
         char filename[100];
-        sprintf(filename, "data_2/energy_vs_time_dt_temp_%.1f.txt", 1.0/beta);
+        sprintf(filename, "data_3/velocity_correlation_%d.txt",count);
 
         FILE *fp = fopen(filename, "w");
         fprintf(fp, "# Time    Energy\n");
         for (int i = 0; i < M; i++) {
-            fprintf(fp, "%lf\t%lf\t%lf\t%lf\n", time_array[i], E[i][0],E[i][1],beta);
+            fprintf(fp, "%lf\t%lf\n", time_array[i], v_t[i]);
         }
         fclose(fp);
     }
+
+    
 }
