@@ -1,0 +1,34 @@
+\section{Exercise 2}\label{sect: P2E2}
+Here we are asked to make a Brownian simulation with a WCA potential of which the code will be found in appendix~\ref{app:P2E2}.
+The Weeks Chandler Andersen (WCA) potential is a modified Lennard Jones potential that is cut of at the minimum of the original Lennard Jones potential 
+and shifted up to 0 at the minimum to create a purely repulsive potential:
+
+\begin{align}
+V(r) = \begin{dcases} 4 \epsilon \left[\left( \frac{\sigma}{r} \right)^{12} - \left( \frac{\sigma}{r} \right)^6\right] + \epsilon &,r \le  r_0 \\ 0  &,r > r_0. \end{dcases}
+\end{align}\label{eq: WCA potential}
+
+Where $r_0 = 2^{\frac{1}{6}} \sigma$ is the minimum of the Lennard Jones potential. And therefore we get the following force:
+\begin{align}
+F_{WCA}(r) = - \nabla V(r) = \begin{dcases} \frac{48 \epsilon}{r} \left[ \left(\ \frac{\sigma}{r}\right)^{12}-\frac{1}{2}\left(\frac{\sigma}{r}\right)^6\right]   &,r \le  r_0 \\ 0  &,r > r_0. \end{dcases}
+\end{align}\label{eq: WCA force}
+This is the same force as in the Lennard Jones potential up to minima at $r_0$.
+
+For Brownian motion we get the following integration scheme:
+
+\begin{align}
+    x(t +\Delta t) = x(t) + \sqrt{2D}R(t)\sqrt{\Delta t} + \frac{F^x_{int}}{\gamma} \Delta t.
+\end{align}\label{eq: brownian integration}
+
+Here $D = \frac{k_BT}{\gamma}$ is the diffusion constant, $\gamma$ is the friction constant, $R(t)$ is the random Brownian force characterized by $\left\langle R(t)\right\rangle = 0,\quad \left\langle R_i(t)R_j(t')\right\rangle = \delta(t-t')\delta_{ij}$
+and $F^x_{int}$ is the resulting interaction force coming from the WCA potential in our case.
+
+\subsection{Energy vs timestep}
+Using the integration from equation \ref{eq: brownian integration} starting from an FCC lattice at a density of $\rho \sigma^3$ and a temperature of $\frac{k_B T}{\epsilon} = 1$ we get:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{graphs/P2E2/energy_vs_dt.png}
+	\caption{Reduced energy versus reduced time for 4 different time steps.}
+	\label{fig: energ vs dt}
+\end{figure}
+We notice that the energy first equilibrates and then oscillates around an average value for timesteps smaller than $\Delta t = 10^{-4}$ and becomes unstable for larger timesteps.
+Therefore the largest stabel timestepp $\Delta t = 10^{-4}$ is a good timestep.
