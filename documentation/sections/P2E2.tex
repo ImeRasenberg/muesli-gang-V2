@@ -22,13 +22,76 @@ For Brownian motion we get the following integration scheme:
 Here $D = \frac{k_BT}{\gamma}$ is the diffusion constant, $\gamma$ is the friction constant, $R(t)$ is the random Brownian force characterized by $\left\langle R(t)\right\rangle = 0,\quad \left\langle R_i(t)R_j(t')\right\rangle = \delta(t-t')\delta_{ij}$
 and $F^x_{int}$ is the resulting interaction force coming from the WCA potential in our case.
 
-\subsection{Energy vs timestep}
-Using the integration from equation \ref{eq: brownian integration} starting from an FCC lattice at a density of $\rho \sigma^3$ and a temperature of $\frac{k_B T}{\epsilon} = 1$ we get:
+\subsection{Energy vs time step}
+Using the integration from equation \ref{eq: brownian integration} starting from an FCC lattice at a density of $\rho \sigma^3 = 0.5$ and a temperature of $\frac{k_B T}{\epsilon} = 1$ we get:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{graphs/P2E2/energy_vs_dt.png}
 	\caption{Reduced energy versus reduced time for 4 different time steps.}
-	\label{fig: energ vs dt}
+	\label{fig: energy vs dt}
 \end{figure}
-We notice that the energy first equilibrates and then oscillates around an average value for timesteps smaller than $\Delta t = 10^{-4}$ and becomes unstable for larger timesteps.
-Therefore the largest stabel timestepp $\Delta t = 10^{-4}$ is a good timestep.
+We notice that the energy first equilibrates and then oscillates around an average value for time steps smaller than $\Delta t = 10^{-4}$ and becomes unstable for larger timesteps.
+Therefore, the largest stable time step $\Delta t = 10^{-4}$ is a good time step.
+
+\newpage
+\subsection{Energy vs temperature}
+For this section we continue with the time step of $\Delta t = 10^{-4}$ for all temperatures and use a constant density of $\rho \sigma^3 = 0.5$.
+For these parameters we get the following energies:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/P2E2/energy_vs_T.png}
+	\caption{Reduced energy versus reduced time for 4 different temperatures.}
+	\label{fig: energy vs T}
+\end{figure}
+We see a general trend across all temperatures where the energy first increase and then oscillates around an average value.
+For higher temperatures we see a higher average temperature and a bigger oscillation around the average. \\
+To look at the equilibration time we use the Savitzky-Golay filter to smooth the energy. 
+We see that across all temperatures the energy equilibrates after a reduced time of about 0.1.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/P2E2/smooth_energy_vs_T.png}
+	\caption{Reduced smoothed energy using the Savitzky-Golay filter versus reduced time for 4 different temperatures. The vertical line is at a reduced time of 0.1 and indicate the equilibration time }
+	\label{fig:smooth energy vs T}
+\end{figure}
+
+\newpage
+\subsection{MSD for $\bf{\rho \sigma^3 = 0.01}$}
+For our choice of  $\Delta t$ and $\rho$ we get the following MSD:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/P2E2/MSD.png}
+	\caption{MSD displacement with linear fit for $\rho \sigma^3 = 0.01$. }
+	\label{fig: MSD}
+\end{figure}
+Here we have plotted a linear fit of 6Dt where we have taken the fit after the equilibrium time of 0.1. 
+We find a diffusion constant of 0.96. We see that the data follows the linear fit form the theoretical model of 6Dt well.
+
+\subsection{MSD for $\bf{\rho \sigma^3 = 0.6}$}
+For the higher density we get the following MSD:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/P2E2/MSD_0.6.png}
+	\caption{MSD displacement with linear fit for $\rho \sigma^3 = 0.6$.}
+	\label{fig: MSD 0.6}
+\end{figure}
+We see that the data again matches the theoretical linear model well but this time with a lower diffusion constant of 0.47 which is to be expected for a higher density.
+
+\newpage
+\subsection{MSD for $\bf{\rho \sigma^3 = 1.15}$}
+For our last and highest density starting in an FCC latice we get the following MSD:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/P2E2/MSD_1.15.png}
+	\caption{MSD displacement with linear fit for $\rho \sigma^3 = 1.15$.}
+	\label{fig: MSD 0.6}
+\end{figure}
+For our highest density we see a drastically different MSD. We see no linear increasing trend but rather a stochastic MSD.
+This is because of a phase transition. The particles are now in a solid phase and not free to move creating this stochastic movement in the FCC lattice.\\
+We also see this in the final coordinates where we see the particles are still inside an FCC lattice.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{graphs/P2E2/coords_1.15.png}
+	\caption{Final coordinates for an FCC lattice with a density of $\rho \sigma^3 = 1.15$.}
+	\label{fig: MSD 0.6}
+\end{figure}

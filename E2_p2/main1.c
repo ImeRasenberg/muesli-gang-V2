@@ -25,24 +25,23 @@ int n_particles; // first three are imported from fcc.xyz
 double sigma;
 double box[NDIM];
 
-double beta = 1.0;
+double beta = 1.0/3.0;
 double mass = 1.0;
 
-double density = 1.15;
+double density = 0.5;
 double gamma = 1;
 double D;
 
 double E[M]; // kinetic and potential energy 
 double r[N][NDIM];
-double r_d[N][NDIM]; // displacement
 double F[N][NDIM];
-double MSD; 
-double MSD_arr[M];
 
 /*potential variables*/
 double epsilon = 1.0;
 double r_cut;
+double e_cut = 0.0;
 double energy;
+
 
 
 
@@ -67,15 +66,6 @@ void read_data(void){
     fclose(coords);
     /* print out some of the read data as a sanity check*/
     printf("number of particls: %d\t ,box size: %lf\t ,radius: %lf\n " , n_particles, box[0],sigma ); 
-}
-
-void set_r_d (void){
-for (int n = 0; n<n_particles; n++){
-    for (int d = 0; d<NDIM; d++){
-        r_d[n][d] = 0;
-        //r_d[n][d] = r[n][d];
-    }
-}
 }
 
 void set_density(void){
@@ -197,9 +187,7 @@ void brownian (void){
     for (int n = 0; n<n_particles; n++){
         for (int d = 0; d <NDIM; d++){
             double R = gaussian_number();
-            double dx = sqrt(2*D) * R * sqrt(dt) + F[n][d]*dt/gamma;
-            r[n][d] += dx;
-            r_d[n][d] += dx;
+            r[n][d] += sqrt(2*D) * R * sqrt(dt) + F[n][d]*dt/gamma;
 
             if (r[n][d] < 0) r[n][d] += box[d];
             if (r[n][d] >= box[d]) r[n][d] -= box[d];
@@ -207,32 +195,6 @@ void brownian (void){
         }
     }
 }
-
-void MeanSquaredDis (void){
-    MSD = 0;
-    for (int n = 0; n<n_particles; n++){
-        double dis2 = 0;
-        for (int d = 0; d<NDIM ; d++){
-            dis2 += r_d[n][d]*r_d[n][d] ;
-        }
-    MSD += dis2;
-    }
-    MSD /= n_particles;
-}
-
-void write_MSD(void){
-    char filename[100];
-        sprintf(filename, "data/MSD.txt");
-
-        FILE *fp = fopen(filename, "w");
-        fprintf(fp, "# Time    MSD\n");
-        for (int t = 0; t < M; t++) {
-            fprintf(fp, "%lf\t%lf\n", time_array[t], MSD_arr[t]);
-        }
-        fclose(fp);
-}
-
-
 
 int main(void){
     dsfmt_seed(time(NULL));
@@ -246,19 +208,16 @@ int main(void){
     r_cut = pow(2.0, 1.0/6.0) * sigma;
     
     set_density();
-    set_r_d();
     
     for(int t = 0; t<M ; t++){
         calc_forces();
         brownian(); 
         time_array[t]= t*dt;
         E[t]= energy;  
-        MeanSquaredDis();
-        MSD_arr[t]= MSD;
     }
 
     printf("simulation done");
-    write_MSD();
-    write_coords(density);
+    write_data();
+    write_coords(1/beta);
     return 0;
 }
