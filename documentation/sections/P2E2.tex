@@ -83,7 +83,7 @@ For our last and highest density starting in an FCC latice we get the following 
 	\centering
 	\includegraphics[width=0.7\linewidth]{graphs/P2E2/MSD_1.15.png}
 	\caption{MSD displacement with linear fit for $\rho \sigma^3 = 1.15$.}
-	\label{fig: MSD 0.6}
+	\label{fig: MSD 1.15}
 \end{figure}
 For our highest density we see a drastically different MSD. We see no linear increasing trend but rather a stochastic MSD.
 This is because of a phase transition. The particles are now in a solid phase and not free to move creating this stochastic movement in the FCC lattice.\\
@@ -93,5 +93,29 @@ We also see this in the final coordinates where we see the particles are still i
 	\centering
 	\includegraphics[width=0.6\linewidth]{graphs/P2E2/coords_1.15.png}
 	\caption{Final coordinates for an FCC lattice with a density of $\rho \sigma^3 = 1.15$.}
-	\label{fig: MSD 0.6}
+	\label{fig: coords 1.15}
 \end{figure}
+\newpage
+\subsection{MD MSD for $\bf{\rho \sigma^3 = 0.01}$ and 0.6}
+We can straightforwardly change our MD simulation of the previous exercise with the  Lennerd-Jones to the WCA potential by changing the $r_{cut}$ form $2.5 \sigma$ to $2^{\frac{1}{6}} \sigma$. 
+We than get the following MSD for $\rho \sigma^3$ = 0.01 and 0.6 respectively.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{graphs/P2E2/MD_MSD_001.png}
+	\caption{MSD for an MD simulation with a WCA potential at a density of $\rho \sigma^3 = 0.01$.}
+	\label{fig: MSD MD 0.6}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{graphs/P2E2/MD_MSD_06.png}
+	\caption{MSD for an MD simulation with a WCA potential at a density of $\rho \sigma^3 = 0.6$.}
+	\label{fig: MSD MD 0.6}
+\end{figure}
+
+When comparing the MSD of the MD simulation to the BM simulation there are a couple of distinct differences.
+Firstly the MD simulation has a smooth result unlike the BM which is logical since the MD simulation does not use the random force of the BM.
+Secondly we see that the MD has a lower MSD than the BM with a larger difference for the density of 0.6 than for 0.01. 
+Lastly we do not see the clear linear model for the MD simulation that we did see in the BM simulation where the 0.01 case in particular seems to be increasing on the entire time frame.

@@ -14,7 +14,7 @@
 #endif
 
 #define NDIM 3
-#define N 512
+#define N 256
 
 const char*  init_filename = "fcc.xyz";
 int n_particles = 0;
@@ -25,19 +25,23 @@ double *size;
 double box[NDIM];
 double dummy;
 
-double dt = 5E-4; // the size of the timesteps
-#define M 5000
+double dt = 1E-4; // the size of the timesteps
+#define M 20000
 double time_array[M];
 double E[M][2];
 
-double epsilon = 2.0/3.0;
+double epsilon = 1;
 double sigma = 1.0;
-double r_cut = 2.5;
+double r_cut = 0.0;
 double e_cut = 0.0;
-double density = 0.5;
+double density = 0.6;
 double beta = 1.0;
 double mass = 1.0;
 double std;
+
+double MSD; 
+double MSD_arr[M];
+double r_d[N][NDIM]; // displacement
 
 double calculate_force_over_r(double r2) {
     if (r2 >= r_cut * r_cut) return 0.0; 
@@ -159,14 +163,40 @@ void read_data(void){
     fclose(read_cords);
 }
 
+void MeanSquaredDis (void){
+    MSD = 0;
+    for (int n = 0; n<n_particles; n++){
+        double dis2 = 0;
+        for (int d = 0; d<NDIM ; d++){
+            dis2 += r_d[n][d]*r_d[n][d] ;
+        }
+    MSD += dis2;
+    }
+    MSD /= n_particles;
+}
+
+void write_MSD(void){
+    char filename[100];
+        sprintf(filename, "data/MD_MSD.txt");
+
+        FILE *fp = fopen(filename, "w");
+        fprintf(fp, "# Time    MSD\n");
+        for (int t = 0; t < M; t++) {
+            fprintf(fp, "%lf\t%lf\n", time_array[t], MSD_arr[t]);
+        }
+        fclose(fp);
+}
+
 int main(){
+    printf("starting");
+    r_cut = pow(2, 1.0/6.0)*sigma;
     std = sqrt(1/beta/mass);
     // printf("sdt %lf/n",std);
     e_cut = 4.0 * (pow(sigma / r_cut, 12.0) - pow(sigma / r_cut, 6.0));
 
 
 
-    double dts[] = {1E-3};
+    double dts[] = {1E-4};
     int big = sizeof(dts) / sizeof(dts[0]);
 
     size_t seed = time(NULL);
@@ -210,7 +240,9 @@ int main(){
 
             for(int i = 0; i < n_particles; i++) {
                 for(int j = 0; j < NDIM; j++) {
-                    r[i][j] += v[i][j] * dt + 0.5 /mass * F[i][j] * dt *dt;
+                    double dx = v[i][j] * dt + 0.5 /mass * F[i][j] * dt *dt;
+                    r[i][j] += dx;
+                    r_d[i][j]+= dx;
                     if (r[i][j] < 0) r[i][j] += box[j];
                     if (r[i][j] >= box[j]) r[i][j] -= box[j];
 
@@ -235,9 +267,12 @@ int main(){
 
             E[c][0] = energy; 
             E[c][1] = E_kin;
+            MeanSquaredDis();
+            MSD_arr[c]= MSD;
         }
+        write_MSD();
         char filename[100];
-        sprintf(filename, "data/energy_vs_time_dt_%.8f.txt", dt);
+        sprintf(filename, "data/MD_energy.txt");
 
         FILE *fp = fopen(filename, "w");
         fprintf(fp, "# Time    Energy\n");
@@ -245,7 +280,7 @@ int main(){
             fprintf(fp, "%lf\t%lf\t%lf\n", time_array[i], E[i][0],E[i][1]);
         }
         fclose(fp);
-        printf("done");
     }
+    printf("done");
 
 }
