@@ -34,7 +34,7 @@ double epsilon = 1;
 double sigma = 1.0;
 double r_cut = 0.0;
 double e_cut = 0.0;
-double density = 0.6;
+double density = 0.01;
 double beta = 1.0;
 double mass = 1.0;
 double std;

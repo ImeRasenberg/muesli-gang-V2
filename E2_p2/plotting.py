@@ -100,11 +100,11 @@ popt, pcov = curve_fit(func, fit_time, fit_msd)
 print(popt)
 plt.figure()
 plt.plot(time, msd, label = "MSD")
-#plt.plot(fit_time, func(fit_time, popt[0], popt[1]), label = f"6Dt, D = {popt[1]:.2f}")
+plt.plot(fit_time, func(fit_time, popt[0], popt[1]), label = f"6Dt, D = {popt[1]:.2f}")
 plt.legend()
 plt.ylabel(r'$MSD/\sigma^2  $  (reduced MSD)',fontsize = 10)
 plt.xlabel(r"$t \sqrt{\frac{\epsilon}{\sigma m}}  $ (reduced time)", fontsize = 10)
-plt.xlim((0,2))
+plt.xlim((0,10))
 plt.savefig('MSD_115', dpi=200)
 plt.show()
 
@@ -119,20 +119,20 @@ for fpath in files:
     time = data[:, 0]
     msd  = data[:, 1]
 
-fit_time = time[10000:] # cut off the equilibrium time
-fit_msd = msd[10000:]
+fit_time = time[1000:] # cut off the equilibrium time
+fit_msd = msd[1000:]
 def func(x, a, b,):
-    return a + 6*b*x 
+    return a + 6*b*x*x
 
 popt, pcov = curve_fit(func, fit_time, fit_msd)
 print(popt)
 plt.figure()
-plt.plot(time, msd, label = "MSD")
-#plt.plot(fit_time, func(fit_time, popt[0], popt[1]), label = f"6Dt, D = {popt[1]:.2f}")
+plt.plot(time, msd, label = "MD MSD")
+plt.plot(time, 3*time**2, label = r"$\frac{3k_BT}{m}t^2$")
+#plt.plot(fit_time, func(fit_time, popt[0], popt[1]), label = f"6Dt^2, D = {popt[1]:.2f}")
 plt.legend()
 plt.ylabel(r'$MSD/\sigma^2  $  (reduced MSD)',fontsize = 10)
 plt.xlabel(r"$t \sqrt{\frac{\epsilon}{\sigma m}}  $ (reduced time)", fontsize = 10)
-plt.xlim((0,2))
 plt.savefig('MD_MSD_06', dpi=200)
 plt.show()
 

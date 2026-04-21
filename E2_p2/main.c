@@ -16,7 +16,7 @@ const char* init_filename = "fcc.xyz";
 
 /* Simulation variables */
 #define dt 1E-4
-#define t_max 2
+#define t_max 10
 #define M (int)(t_max/dt)
 double time_array[M];
 
@@ -28,7 +28,7 @@ double box[NDIM];
 double beta = 1.0;
 double mass = 1.0;
 
-double density = 1.15;
+double density = 0.6;
 double gamma = 1;
 double D;
 
@@ -231,8 +231,6 @@ void write_MSD(void){
         }
         fclose(fp);
 }
-
-
 
 int main(void){
     dsfmt_seed(time(NULL));
