@@ -115,16 +115,18 @@ We than get the following MSD for $\rho \sigma^3$ = 0.01 and 0.6 respectively.
 	\label{fig: MSD MD 0.6}
 \end{figure}
 
+\newpage
 When comparing the MSD of the MD simulation to the BM simulation there are a couple of distinct differences.
 Firstly the MD simulation has a smooth result unlike the BM which is logical since the MD simulation does not use the random force of the BM.
-Secondly we see that the MD has a lower MSD than the BM with a larger difference for the density of 0.6 than for 0.01. 
+Secondly we see that the MD has a lower MSD than the BM with a larger difference for the density of 0.6 than for 0.01. \\
 Lastly we do not see the clear linear model for the MD simulation that we did see in the BM simulation where the 0.01 case in particular seems to be increasing on the entire time frame and seems to be in the ballistic regime.
-We start of with the initial velocity from our Boltzman distribution and because of the low density the displacement is linear. This means that with a linear displacement the squared displacement is quadratic.
-The higher density seems to be more linear but is not linear when we try to fit it.
+We start of with the initial velocity from our Boltzman distribution and because of the low density and lack of forces the displacement is linear. This means that with a linear displacement the squared displacement is quadratic.
+We do not get this linear displacement for the BM for any density because the random force is always present.
+The higher density seems to be more linear because we do have interaction forces but is not linear when we try to fit it.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\linewidth]{graphs/P2E2/MD_MSD_06-fit.png}
 	\caption{MSD for an MD simulation with a WCA potential at a density of $\rho \sigma^3 = 0.01$ and the theoretical model in the ballistic regime where we see a perfect match.}
-	\label{fig: MSD MD 0.6}
+	\label{fig: MSD MD 0.6 with fit}
 \end{figure}

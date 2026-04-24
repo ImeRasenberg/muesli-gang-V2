@@ -1,0 +1,18 @@
+\section{Exercise 3: Ising model singel flip}\label{sect: P2E2}
+In this exercise we perform a Monte Carlo simulation on a two-dimensional Ising model on a square lattice.\\
+We use the following Hamiltonian without an external field and only looking at the spin in one direction with a constant interaction.
+
+\begin{equation}
+    H = -\frac{J}{2} \sum_{\left\langle i, j \right\rangle} S_i S_j
+\end{equation}
+Here J is the interaction strength with $J>0$ leading to a ferromagnet and $J<0$ to an antiferromagnet. $\left\langle i, j \right\rangle$ is the sum over nearest neighbours and corner neighbours. 
+$S_i$ is the spin at site i with $S_i \in \{-1, +1\}$.\\
+For the heat capacity we use the following expression:
+
+\begin{equation}
+    C_V = \frac{\left\langle E^2 \right\rangle - \left\langle E \right\rangle^2}{k_B T^2}.
+\end{equation}
+Here $\left\langle E^2 \right\rangle, \left\langle E \right\rangle^2$ are the average square energy and the square of the average energy respectively, $k_B$ the Boltzman constant and T the temperature. 
+
+
+
