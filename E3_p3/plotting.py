@@ -93,3 +93,58 @@ plt.ylabel(r"$ \beta^2 \left( \langle E^2 \rangle - \langle E \rangle^2 \right)/
 plt.xlabel(r"$T^*: k_bT/J$")
 plt.savefig('plots/Cv_vs_temp', dpi=200)
 plt.show()
+
+
+
+fpath_avg = "data/critical_averages.txt"
+data = np.loadtxt(fpath_avg, comments="#")
+temp    = data[:, 0]
+magnet  = data[:, 1]
+energy  = data[:, 2]
+energy2 = data[:, 3]
+Cv      = data[:, 4]
+
+
+
+Cv_minimum_index= np.argmax(Cv) 
+T_crit = temp[Cv_minimum_index]
+print(f"the critical temprature = {T_crit}")
+
+
+plt.figure()
+plt.plot(temp, magnet) 
+plt.axvline(T_crit, color='k', linestyle='--')
+plt.xlabel(r"$T^*: k_bT/J$")
+plt.ylabel(r"$\langle M \rangle / N$")
+plt.savefig('plots/crit_Magnetization_vs_temp', dpi=200)
+plt.show()
+
+plt.figure()
+plt.plot(temp, energy)
+plt.axvline(T_crit, color='k', linestyle='--')
+plt.ylabel(r"$\langle E \rangle /(N \cdot J)$")
+plt.xlabel(r"$T^*: k_bT/J$")
+plt.savefig('plots/crit_energy_vs_temp', dpi=200)
+plt.show()
+    
+plt.figure()
+plt.plot(temp, energy2)
+plt.axvline(T_crit, color='k', linestyle='--')
+plt.xlabel(r"$T^*: k_bT/J$")
+plt.ylabel("energy2")
+plt.savefig('plots/crit_energy2_vs_temp', dpi=200)
+plt.show()
+
+
+from scipy.signal import savgol_filter
+Cv_smooth = savgol_filter(Cv, window_length=5, polyorder=1) #local smoothing algoritm
+
+
+plt.figure()
+plt.plot(temp, Cv)
+plt.plot(temp, Cv_smooth)
+plt.axvline(T_crit, color='k', linestyle='--')
+plt.ylabel(r"$ \beta^2 \left( \langle E^2 \rangle - \langle E \rangle^2 \right)/N  $")
+plt.xlabel(r"$T^*: k_bT/J$")
+plt.savefig('plots/crit_Cv_vs_temp', dpi=200)
+plt.show()

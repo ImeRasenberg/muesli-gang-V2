@@ -10,9 +10,9 @@
 #endif
 
 #define N 100
-#define M 1000
+#define M 30000
 
-int cutof = 100; // cutof ater which we sample
+int cutof = 10000; // cutof ater which we sample
 double J = 1; //coupeling constant
 double beta = 1.0;
 double Temp = 1.0;
@@ -170,8 +170,10 @@ int main (void){
     clock_t end, start;
     double cpu_time_used;
     start = clock();
+    fill_S();
 
-    double T_list[] = {1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 , 1.8, 1.9, 2.0, 2.1, 2.2 , 2.3 , 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7 , 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8 ,4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7 , 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5 ,6.6, 6.7, 6.8, 6.9, 7.0 }; // loop over Temps's
+    //double T_list[] = {1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 , 1.8, 1.9, 2.0, 2.1, 2.2 , 2.3 , 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7 , 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8 ,4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7 , 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5 ,6.6, 6.7, 6.8, 6.9, 7.0 }; // loop over Temps's
+    double T_list[] = {5.0,  5.1,  5.15, 5.2, 5.25, 5.27, 5.28, 5.29,  5.3, 5.31, 5.32, 5.33, 5.34, 5.35,  5.4, 5.45, 5.50, 5.55, 5.6 }; // loop over Temps's
     int len_T = sizeof(T_list)/sizeof(T_list[0]);
     double E_avg[len_T];
     double E2_avg[len_T];
@@ -188,7 +190,7 @@ int main (void){
         Temp = T_list[idx];
         beta = 1/Temp;
 
-        fill_S();
+        //fill_S();
         energy = calculate_energy();
         magnet = calculate_magnetization();
         energy_arr[0]= energy;
@@ -213,7 +215,7 @@ int main (void){
         //write_data(); // write data for every beta
     }
     char filename[100];
-    sprintf(filename, "data/averages.txt");
+    sprintf(filename, "data/critical_averages.txt");
     FILE *fp = fopen(filename, "w");
     fprintf(fp, "# temp,  magnetization, average energy, average squared energy, heat_capacity \n");
     for (int t = 0; t < len_T; t++) {

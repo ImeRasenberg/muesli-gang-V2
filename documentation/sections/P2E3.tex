@@ -60,3 +60,6 @@ We choose to find the critical temperature by finding the maximum of the heat ca
 \end{figure}
 For the Ising model with only nearest neighbours (excluding the corner neighbours) there is a known critical temperature of: $\frac{T_c}{J}= \frac{2}{log{(1 + \sqrt{2})}} \approx 2.269$ 
 The value we found is roughly 3 higher which can intuitively be understood by the doubling of the nearest neighbours. Mean field theory gives an upper estimate of 8 ( the amount of nearest neighbours).Other models with 8 neighbours give values around 3.5, our critical temperature seems a bit high but internally consistent.
+We have runn every simulation for a 1000 sweeps with step size in the temperature of 0.1 with where we start sampeling after a 100 steps. around the critical temperature time this becomes problematic because the correlation times increase signifiantly around the critical temperature.\\ 
+Therefore we tried another run around the critical temperature where we run the simulaiton for 30000 sweeps and start sampeling after a 10000 sweeps and use a step size of 0.01 in temperature. 
+this unfortunately does not improve the plot signifiantly and gives a slightly lower critical temperature of 5.29 
