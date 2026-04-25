@@ -14,5 +14,49 @@ For the heat capacity we use the following expression:
 \end{equation}
 Here $\left\langle E^2 \right\rangle, \left\langle E \right\rangle^2$ are the average square energy and the square of the average energy respectively, $k_B$ the Boltzman constant and T the temperature. 
 
+\subsection{$\left\langle S \right\rangle, \left\langle E \right\rangle, C_V$ and critical temperature}
+We use a 100 x100 lattice and start of all our runs with all particles with spin up. We start with an energy of $-\frac{J}{2}\cdot 8 \cdot N^2 $ = -40000 and a magnetization of $N^2$ = 10000
+We first plot the energy and magnetization vs time for different temperatures to get an idea for how long it takes to equilibrate and a rough estimate of the critical temperature.
 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphs/P2E3/Energy_vs_time.png}
+	\caption{}
+	\label{fig: energy vs time}
+\end{figure}
+\newpage
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphs/P2E3/Magnetization_vs_time.png}
+	\caption{}
+	\label{fig: magnetization vs time}
+\end{figure}
+
+We see that the system takes about a 100 steps maximum to reach equilibrium and has a critical temperature between $\beta = 0.1 $and $\beta = 0.4$\\
+There are multiple equivalent ways to find the critical temperature: the maximum of the derivative of the magnetization or energy and the maximum of the heat capacity. 
+We choose to find the critical temperature by finding the maximum of the heat capacity where we find $T_c = 5.3$. We plot this critical temperature as a vertical line in the 3 required plots where we see that the value agrees for all 3 plots.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphs/P2E3/Magnetization_vs_temp.png}
+	\caption{}
+	\label{fig: magnetization vs temp}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphs/P2E3/Cv_vs_temp.png}
+	\caption{}
+	\label{fig: Cv vs temp}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{graphs/P2E3/energy_vs_temp.png}
+	\caption{}
+	\label{fig: energy vs temp}
+\end{figure}
+For the Ising model with only nearest neighbours (excluding the corner neighbours) there is a known critical temperature of: $\frac{T_c}{J}= \frac{2}{log{(1 + \sqrt{2})}} \approx 2.269$ 
+The value we found is roughly 3 higher which can intuitively be understood by the doubling of the nearest neighbours. Mean field theory gives an upper estimate of 8 ( the amount of nearest neighbours).Other models with 8 neighbours give values around 3.5, our critical temperature seems a bit high but internally consistent.

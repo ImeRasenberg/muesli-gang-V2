@@ -11,8 +11,12 @@
 
 #define N 100
 #define M 1000
+
+int cutof = 100; // cutof ater which we sample
 double J = 1; //coupeling constant
 double beta = 1.0;
+double Temp = 1.0;
+
 
 double energy; // the energy of the system
 double magnet;  // the magnetization of the system
@@ -22,6 +26,13 @@ int S[N][N]; // the spin array
 double energy_arr[M];
 double magnet_arr[M];
 double heat_cp_arr[M];
+
+double E;  // the averages
+double E2;
+double Cv;
+double av_magnet;
+
+
 
 void fill_S (void){
     /*setting everyting spin up*/
@@ -127,6 +138,29 @@ void write_data(void){
         fclose(fp);
 }
 
+void calculate (void){
+    E = 0;
+    E2 = 0;
+    Cv = 0;
+    av_magnet =0;
+
+    for (int step = cutof; step<M; step++){
+        E += energy_arr[step];
+        E2 += energy_arr[step]* energy_arr[step];
+        av_magnet += magnet_arr[step];
+    }
+
+    E /= (M-cutof);
+    E2 /= (M-cutof);
+    av_magnet/= (M-cutof);
+    Cv=  beta * beta *( E2 - E*E)/(N*N);
+
+    E /= N*N;
+    E2 /= (N*N)*(N*N);
+    av_magnet/= N*N;
+}
+
+
 
 int main (void){
 
@@ -137,10 +171,22 @@ int main (void){
     double cpu_time_used;
     start = clock();
 
-    double beta_list[] = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0}; // loop over beta's
-    for (int idx = 0; idx < sizeof(beta_list)/sizeof(beta_list[0]); idx++) {
+    double T_list[] = {1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 , 1.8, 1.9, 2.0, 2.1, 2.2 , 2.3 , 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7 , 3.9, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8 ,4.9, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7 , 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5 ,6.6, 6.7, 6.8, 6.9, 7.0 }; // loop over Temps's
+    int len_T = sizeof(T_list)/sizeof(T_list[0]);
+    double E_avg[len_T];
+    double E2_avg[len_T];
+    double Cv_arr[len_T];
+    double av_magnet_arr[len_T];
+
+   
+  
+
+
+    printf("temp runs %d\n", len_T);
+    for (int idx = 0; idx < len_T; idx++) {
        
-        beta = beta_list[idx];
+        Temp = T_list[idx];
+        beta = 1/Temp;
 
         fill_S();
         energy = calculate_energy();
@@ -156,8 +202,24 @@ int main (void){
         magnet_arr[step]= magnet;
         } 
 
-        write_data(); // write data for every beta
+        calculate();
+        E_avg[idx] = E;
+        E2_avg[idx]= E2;
+        Cv_arr[idx] = Cv;
+        av_magnet_arr[idx] = av_magnet;
+  
+
+        printf("temp, magnetization, energy, energy^2 , Cv %lf\t%lf\t%lf\t%lf\t%lf\n", Temp, av_magnet, E, E2, Cv);
+        //write_data(); // write data for every beta
     }
+    char filename[100];
+    sprintf(filename, "data/averages.txt");
+    FILE *fp = fopen(filename, "w");
+    fprintf(fp, "# temp,  magnetization, average energy, average squared energy, heat_capacity \n");
+    for (int t = 0; t < len_T; t++) {
+        fprintf(fp, "%lf\t%lf\t%lf\t%lf\t%lf\n", T_list[t],av_magnet_arr[t], E_avg[t], E2_avg[t], Cv_arr[t]);
+        }
+    fclose(fp);
 
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
