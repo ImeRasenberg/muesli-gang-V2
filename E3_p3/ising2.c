@@ -11,7 +11,7 @@
 
 #define N 100
 #define M 600
-#define MAX_T 20       // amount of temps (not clean but idk)
+#define MAX_T 11       // amount of temps (not clean but idk)
 #define cutof 100 // cutof ater which we sample
 #define INTERVAL (M - cutof)
 
@@ -153,6 +153,18 @@ void calculate_correlation(double corr[][INTERVAL], int idx){
 
         }
     }
+void write_data(int idx, double Temp ){
+    char filename[100];
+        sprintf(filename, "data/correlation_vs_time_Temp:%.3f.txt", Temp);
+
+        FILE *fp = fopen(filename, "w");
+        fprintf(fp, "# time,  correlation,  \n");
+        for (int i = 0; i < INTERVAL; i++) {
+            fprintf(fp, "%d\t%lf\t%lf\n", i, correlations[idx][i], Temp);
+        }
+        fclose(fp);
+}
+
 int main (void){
 
     int interval = M- cutof;
@@ -175,18 +187,21 @@ int main (void){
         fill_S();
         energy = calculate_energy();
         magnet = calculate_magnetization();
-     
-        double correlations[len_T][interval];
 
         for (int step = 1; step <M; step ++){
             for (int i = 0; i< N* N; i++){
              Monte_carlo();
+             magnet_arr[step]= magnet;
             }
       
         } 
         calculate_correlation(correlations, idx);
 
 
+    }
+    for (int i = 0; i<len_T; i++){
+        Temp = T_list[i];
+        write_data(i, Temp);
     }
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
