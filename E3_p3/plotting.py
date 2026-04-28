@@ -142,7 +142,7 @@ Cv_smooth = savgol_filter(Cv, window_length=5, polyorder=1) #local smoothing alg
 
 plt.figure()
 plt.plot(temp, Cv)
-plt.plot(temp, Cv_smooth)
+#plt.plot(temp, Cv_smooth)
 plt.axvline(T_crit, color='k', linestyle='--')
 plt.ylabel(r"$ \beta^2 \left( \langle E^2 \rangle - \langle E \rangle^2 \right)/N  $")
 plt.xlabel(r"$T^*: k_bT/J$")
