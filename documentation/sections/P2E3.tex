@@ -68,6 +68,24 @@ this unfortunately does not improve the plot signifiantly and gives a slightly l
 
 \subsection{Correlation}
 
+Figure~\ref{fig: correlation in steps} shows the correlation function as a function of the number of steps for different temperatures. Here the average of 30 simulations is taken. in these results an exponential decay is fit, from this fit the decay-time and its uncertainty can be found.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[listentry][Temperature of 3.0]{\includegraphics[width=.45\linewidth]{graphs/P2E3/T25.png}}
+	\subfloat[listentry][Temperature of 4.5]{\includegraphics[width=.45\linewidth]{graphs/P2E3/T45.png}}\\
+	\subfloat[listentry][Temperature of 5.5]{\includegraphics[width=.45\linewidth]{graphs/P2E3/T55.png}}	\subfloat[listentry][Temperature of 8.0]{\includegraphics[width=.45\linewidth]{graphs/P2E3/T75.png}}
+	\caption{The correlation function between the spins in the initial state as a function of the number of taken simulation steps}
+	\label{fig: correlation in steps}
+\end{figure}
 
 
+The decay time as a function of temperature is shown in figure~\ref{fig: decay time of temp}. It can be seen that the correlation time goes up significantly during the phase transition, after the phase transition it goes down again.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/P2E3/tau_temp.png}
+	\caption{The decay "time" in the number of the simulation steps as a function of the unit less temperature}
+	\label{fig: decay time of temp}
+\end{figure}
 

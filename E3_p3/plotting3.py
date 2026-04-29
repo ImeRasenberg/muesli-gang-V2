@@ -338,7 +338,7 @@ for key in sorted_keys:
                  label=f'$T = {key}$ ($\\tau = {tau_val:.2f} \\pm {tau_err:.2f}$)')
         
         
-        plt.xlabel('Simulation Step')
+        plt.xlabel('Step')
         plt.ylabel('Correlation Function')
         plt.legend(fontsize='small', ncol=2)
         plt.grid(True, linestyle='--', alpha=0.6)
@@ -354,9 +354,9 @@ plt.figure(figsize=(8, 5))
 plt.errorbar(T_results[2:], tau_results[2:], yerr=tau_errors[2:], 
              fmt='o-', capsize=5, markersize=6)#, ecolor='red', color='black')
 plt.axvline(T_crit, color='k', linestyle='--')
-plt.xlabel('Temperature ($T$)')
-plt.ylabel('Decay Time ($\\tau$)')
-plt.title('Correlation Decay Time vs Temperature')
+plt.xlabel(r"$T^*: k_bT/J$", fontsize=12)
+plt.ylabel('$\\tau$')
+# plt.title('Correlation Decay Time vs Temperature')
 plt.grid(True, linestyle=':', alpha=0.7)
 plt.tight_layout()
 plt.show()
