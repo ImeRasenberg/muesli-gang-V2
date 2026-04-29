@@ -5,14 +5,14 @@ We use the following Hamiltonian without an external field and only looking at t
 \begin{equation}
     H = -\frac{J}{2} \sum_{\left\langle i, j \right\rangle} S_i S_j
 \end{equation}
-Here J is the interaction strength with $J>0$ leading to a ferromagnet and $J<0$ to an antiferromagnet. $\left\langle i, j \right\rangle$ is the sum over nearest neighbours and corner neighbours. 
+Here J is the interaction strength with $J>0$ leading to a ferromagnet and $J<0$ to an anti-ferromagnet. $\left\langle i, j \right\rangle$ is the sum over nearest neighbours and corner neighbours. 
 $S_i$ is the spin at site i with $S_i \in \{-1, +1\}$.\\
 For the heat capacity we use the following expression:
 
 \begin{equation}
     C_V = \frac{\left\langle E^2 \right\rangle - \left\langle E \right\rangle^2}{k_B T^2}.
 \end{equation}
-Here $\left\langle E^2 \right\rangle, \left\langle E \right\rangle^2$ are the average square energy and the square of the average energy respectively, $k_B$ the Boltzman constant and T the temperature. 
+Here $\left\langle E^2 \right\rangle, \left\langle E \right\rangle^2$ are the average square energy and the square of the average energy respectively, $k_B$ the Boltzmann constant and T the temperature. 
 
 \subsection{$\left\langle S \right\rangle, \left\langle E \right\rangle, C_V$ and critical temperature}
 We use a 100 x100 lattice and start of all our runs with all particles with spin up. We start with an energy of $-\frac{J}{2}\cdot 8 \cdot N^2 $ = -40000 and a magnetization of $N^2$ = 10000
@@ -78,6 +78,7 @@ Figure~\ref{fig: correlation in steps} shows the correlation function as a funct
 	\caption{The correlation function between the spins in the initial state as a function of the number of taken simulation steps}
 	\label{fig: correlation in steps}
 \end{figure}
+There is a problem with this data. The correlation function is not in the domain [1,0], This problem does not seem to want to go away.
 
 
 The decay time as a function of temperature is shown in figure~\ref{fig: decay time of temp}. It can be seen that the correlation time goes up significantly during the phase transition, after the phase transition it goes down again.
