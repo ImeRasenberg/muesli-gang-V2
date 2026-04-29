@@ -9,10 +9,10 @@
 #define M_PI 3.14159265358979323846
 #endif
 
-#define N 32
-#define M 1000
-#define MAX_T 14      // amount of temps (not clean but idk)
-#define cutof 200 // cutof ater which we sample
+#define N 100
+#define M 600
+#define MAX_T 11       // amount of temps (not clean but idk)
+#define cutof 100 // cutof ater which we sample
 #define INTERVAL (M - cutof)
 
 double J = 1; //coupeling constant
@@ -127,7 +127,7 @@ void calculate_correlation(double corr[][INTERVAL], int idx){
 
     double M_tavg = 0.0, M2_tavg = 0.0;
     
-    for (int i = cutof; i< M ; i++){
+    for (int i = cutof; i< interval ; i++){
         double m = magnet_arr[i];
         M_tavg += m;
         M2_tavg += m* m;
@@ -138,32 +138,29 @@ void calculate_correlation(double corr[][INTERVAL], int idx){
 
     double variance = M2_tavg - M_tavg * M_tavg ;
 
-    for (int t = 0; t < max_t ; t++) {
+    for (int t = 0; t < interval ; t++) {
        
         double chi = 0;
         int n_pairs = 0;
 
         for (int tau = cutof; tau < M- t; tau++){
-            chi += magnet_arr[tau]*magnet_arr[t + tau];
+            chi += magnet_arr[t]*magnet_arr[t + tau];
             n_pairs++;
             }
         chi /= n_pairs;
-        if (variance < 1e-8) {
-        corr[idx][t] = (t == 0) ? 1.0 : 0.0;
-            } 
-        else {
-            chi = (chi - M_tavg * M_tavg)/variance;
-            corr[idx][t] = chi;
-             }
+        chi = (chi - M_tavg * M_tavg)/variance;
+        corr[idx][t]= chi;
+
         }
     }
-void write_data(int idx, double Temp ){
+
+void write_data(int idx, double Temp,int itter ){
     char filename[100];
-        sprintf(filename, "data/correlation_vs_time_Temp:%.3f.txt", Temp);
+        sprintf(filename, "data2/correlation_vs_time_Temp:%.3f:%i.txt", Temp, itter);
 
         FILE *fp = fopen(filename, "w");
         fprintf(fp, "# time,  correlation,  \n");
-        for (int i = 0; i < INTERVAL/2; i++) {
+        for (int i = 0; i < INTERVAL; i++) {
             fprintf(fp, "%d\t%lf\t%lf\n", i, correlations[idx][i], Temp);
         }
         fclose(fp);
@@ -175,39 +172,50 @@ int main (void){
     dsfmt_seed(time(NULL));
     clock_t end, start;
     double cpu_time_used;
+
+    int itter = 2;
+
+    for(int itter=0;itter<30;itter++){
+    
+
     start = clock();
     
     fill_S();
 
-    double T_list[] = {1.0,  1.5,  2.0, 2.5, 3.0, 3.5, 4, 4.5, 5, 5.3,  5.5, 6.0, 7.0, 8.0 }; // loop over Temps's
+    // double T_list[] = {2.0, 2.5, 3.0, 3.5, 4, 4.5,  5, 5.5, 6.0, 7.0, 8.0}; // loop over Temps's
+     double T_list[] = {5.25,5.75}; // loop over Temps's
+    
     int len_T = sizeof(T_list)/sizeof(T_list[0]);
  
     printf("temp runs %d\n", len_T);
     for (int idx = 0; idx < len_T; idx++) {
        
         Temp = T_list[idx];
-        beta = 1.0/Temp;
+        beta = 1/Temp;
 
         fill_S();
         energy = calculate_energy();
         magnet = calculate_magnetization();
 
-        for (int step = 0; step <M; step ++){
+        for (int step = 1; step <M; step ++){
             for (int i = 0; i< N* N; i++){
              Monte_carlo();
+             magnet_arr[step]= magnet;
             }
-             magnet_arr[step]= magnet/ (N*N);
+      
         } 
         calculate_correlation(correlations, idx);
-    }
 
+
+    }
     for (int i = 0; i<len_T; i++){
         Temp = T_list[i];
-        write_data(i, Temp);
+        write_data(i, Temp, itter);
     }
     end = clock();
     cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
     printf("done in %f seconds\n", cpu_time_used);
+    }
     
     return 0;
 }

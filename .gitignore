@@ -3,6 +3,7 @@
 /E1_p2/data
 /E1_p2/data_2
 /E1_p2/data_3
+/E3_p3/data2
 
 # Ignore all LaTeX auxiliary files
 /documentation/*.aux

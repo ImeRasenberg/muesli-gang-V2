@@ -34,7 +34,7 @@ We first plot the energy and magnetization vs time for different temperatures to
 	\label{fig: magnetization vs time}
 \end{figure}
 
-We see that the system takes about a 100 steps maximum to reach equilibrium and has a critical temperature between $\beta = 0.1 $and $\beta = 0.4$\\
+We see that the system takes about a 100 steps maximum to reach equilibrium and has a critical temperature between $\beta = 0.1 $ and $\beta = 0.4$\\
 There are multiple equivalent ways to find the critical temperature: the maximum of the derivative of the magnetization or energy and the maximum of the heat capacity. 
 We choose to find the critical temperature by finding the maximum of the heat capacity where we find $T_c = 5.3$. We plot this critical temperature as a vertical line in the 3 required plots where we see that the value agrees for all 3 plots.
 
@@ -59,32 +59,15 @@ We choose to find the critical temperature by finding the maximum of the heat ca
 	\label{fig: energy vs temp}
 \end{figure}
 For the Ising model with only nearest neighbours (excluding the corner neighbours) there is a known critical temperature of: $\frac{T_c}{J}= \frac{2}{log{(1 + \sqrt{2})}} \approx 2.269$ 
-The value we found is roughly 3 higher which can intuitively be understood by the doubling of the nearest neighbours. Mean field theory gives an upper estimate of 8 ( the amount of nearest neighbours).Other models with 8 neighbours give values around 3.5, our critical temperature seems a bit high but internally consistent and within the upper limit of mean field theory.
-We have run every simulation for a 1000 sweeps with step size in the temperature of 0.1 with where we start sampeling after a 100 steps. around the critical temperature time this becomes problematic because the correlation times increase signifiantly around the critical temperature.\\ 
-Therefore we tried another run around the critical temperature where we run the simulation for 30.000 sweeps and start sampeling after a 10.000 sweeps and use a step size of 0.01 in temperature. 
-This unfortunately does not improve the smoothness plot significantly and gives a slightly lower critical temperature of 5.29.
+The value we found is roughly 3 higher which can intuitively be understood by the doubling of the nearest neighbours. Mean field theory gives an upper estimate of 8 ( the amount of nearest neighbours).Other models with 8 neighbours give values around 3.5, our critical temperature seems a bit high but internally consistent.
+We have run every simulation for a 1000 sweeps with step size in the temperature of 0.1 with where we start sampeling after a 100 steps. Around the critical temperature time this becomes problematic because the correlation times increase signifiantly around the critical temperature.\\ 
+Therefore we tried another run around the critical temperature where we run the simulaiton for 30000 sweeps and start sampeling after a 10000 sweeps and use a step size of 0.01 in temperature. 
+this unfortunately does not improve the plot signifiantly and gives a slightly lower critical temperature of 5.29.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{graphs/P2E3/crit_Cv_vs_temp.png}
-	\caption{}
-	\label{fig: crit Cv vs temp}
-\end{figure}
 
-\newpage
-\subsection{magnetization autocorrelation function}
-The time-displaced autocorrelation function of the magnetization  is given by:
-\begin{equation}
-\chi(t) = \left\langle M(t')\,M(t+t') \right\rangle - \langle M \rangle^2
-\end{equation}
-Where for long times we expect that the equation reduces to an exponential:
-\begin{equation}
-	\chi(t) = e^{-\frac{t}{\tau}}
-\end{equation}
-Where $\tau$ is the autocorrelation time.
-We can use this relation to calculate the atuocorrelation time with the relation:
 
-\begin{equation}
-	\int_{0}^{\infty} \frac{\chi(t)}{\chi(0)} =\int_{0}^{\infty} e^{-\frac{t}{\tau}} = \tau 
-\end{equation}
-Where $\chi(0) = \left\langle M^2 \right\rangle - \langle M \rangle^2$
+\subsection{Correlation}
+
+
+
+
