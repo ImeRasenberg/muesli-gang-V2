@@ -16,3 +16,15 @@
 /documentation/*.fls
 /documentation/*.fdb_latexmk
 /documentation/*.pdf
+
+
+/1Project/documentation/*.aux
+/1Project/documentation/*.bbl
+/docu1Project/documentationmentation/*.blg
+/1Project/documentation/*.log
+/1Project/documentation/*.out
+/1Project/documentation/*.toc
+/1Project/documentation/*.synctex.gz
+/1Project/documentation/*.fls
+/1Project/documentation/*.fdb_latexmk
+/1Project/documentation/*.pdf
