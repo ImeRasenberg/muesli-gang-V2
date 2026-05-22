@@ -125,48 +125,47 @@ double get_energy_tot(double spin[N][N][3]){
     return Energy_n;
 }
 
-
-// THIS IS A QUESTION FOR THE TA'S, WHY ISNT THIS EXACTLY DELTA_E???
-double get_energy_n(double spin[N][N][3]){
-    double Energy_n = 0;
-
-    for (int di = -NC; di <= NC; di++) {
-        int i = (n1 + di + N) % N;
-        for (int dj = -NC; dj <= NC; dj++) {
-            int j = (n2 + dj + N) % N;
-
-            // Magnetic Field energy
-            double E_H = -Hz * spin[i][j][2];
-
-            // indexes for spin spin interactions
-            int i_2 = (i + 1 + N) % N;
-            int i_3 = (i - 1 + N) % N;
-            int j_2 = (j + 1 + N) % N;
-            int j_3 = (j - 1 + N) % N;
-
-
-            // spin spin alinging interaction
-            double E_J = 0;
-            E_J += -J/2*dot_prod(spin[i][j],spin[i_2][j]);
-            E_J += -J/2*dot_prod(spin[i][j],spin[i_3][j]);
-            E_J += -J/2*dot_prod(spin[i][j],spin[i][j_2]);
-            E_J += -J/2*dot_prod(spin[i][j],spin[i][j_3]);
-
-            // spin orbit coupling
-            double E_D = 0;
-            E_D += -D/2*cross_x(spin[i][j],spin[i_2][j]);
-            E_D += -D/2*cross_x(spin[i][j],spin[i_3][j]);
-            E_D += -D/2*cross_y(spin[i][j],spin[i][j_2]);
-            E_D += -D/2*cross_y(spin[i][j],spin[i][j_3]);
-
-            Energy_n += E_H + E_J + E_D;
-        }
+double get_delta_energy(int i, int j) {
+    // Calculate the change in the spin vector
+    double dS[3];
+    for(int k=0; k<3; k++) {
+        dS[k] = spin_n[i][j][k] - spin[i][j][k];
     }
 
-    return Energy_n;
+    // Neighbors with periodic boundary conditions
+    int ip = (i + 1) % N;
+    int im = (i - 1 + N) % N;
+    int jp = (j + 1) % N;
+    int jm = (j - 1 + N) % N;
+
+    // Magnetic Field contribution
+    double dE_H = -Hz * dS[2];
+
+    // Heisenberg Exchange contribution (J)
+    double dE_J = -J * (
+        dot_prod(dS, spin[ip][j]) +
+        dot_prod(dS, spin[im][j]) +
+        dot_prod(dS, spin[i][jp]) +
+        dot_prod(dS, spin[i][jm])
+    );
+
+    // 3. Dzyaloshinskii-Moriya Interaction (DMI) contribution (D)
+    // Pay close attention to the indices to match your global energy function!
+    double dE_D = 0;
+    
+    // Along X direction: cross_x(S_i, S_i+1) -> handled carefully for both sides
+    dE_D += -D * cross_x(dS, spin[ip][j]);          // Interaction where (i,j) is the left actor
+    dE_D += -D * cross_x(spin[im][j], dS);          // Interaction where (i,j) is the right actor
+
+    // Along Y direction: cross_y(S_j, S_j+1)
+    dE_D += -D * cross_y(dS, spin[i][jp]);          // Interaction where (i,j) is the bottom actor
+    dE_D += -D * cross_y(spin[i][jm], dS);          // Interaction where (i,j) is the top actor
+
+    return dE_H + dE_J + dE_D;
 }
 
 int change_particle(){
+    // changing the spin with some random ammount
     spin_n[n1][n2][0] += dang*(2.0*dsfmt_genrand()-1.0);
     spin_n[n1][n2][1] += dang*(2.0*dsfmt_genrand()-1.0);
     spin_n[n1][n2][2] += dang*(2.0*dsfmt_genrand()-1.0);
@@ -181,22 +180,14 @@ int change_particle(){
     spin_n[n1][n2][1] /= norm;
     spin_n[n1][n2][2] /= norm;
 
-
-    double dE = get_energy_n(spin_n) - get_energy_n(spin);
+    // The change in enery
+    double dE = get_delta_energy(n1 , n2);
 
     if(dE < 0.0 || dsfmt_genrand() < exp(-beta * dE)){
-
-        // for(int i=0; i < N; i++){
-        //     for(int j=0; j < N; j++){
-        //         for(int k=0; k<3; k++){
-        //             spin[i][j][k] = spin_n[i][j][k];
-        //         }
-        //     }
-        
-        // }
         spin[n1][n2][0] = spin_n[n1][n2][0];
         spin[n1][n2][1] = spin_n[n1][n2][1];
         spin[n1][n2][2] = spin_n[n1][n2][2];
+        
         Energy += dE;
         return 1;
     }
