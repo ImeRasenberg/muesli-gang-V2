@@ -11,19 +11,19 @@
 const double pi = 3.14159265358979323846;
 
 #define N 20
-#define M 1e5
+#define M 4e4
 
 double spin[N][N][3]; // The lattice in which all spins reside with their angles
 double spin_n[N][N][3]; // The updated lattice
 
 // constants of the Hamiltonian
 double J = 1;
-double D = 1;
-double Hz = 0.5;
+double D = 0.2;
+double Hz = 0.08;
 
 // Constants of the simmulation
-double beta = 1;
-double dang = 1;
+double beta = 5;
+double dang = 0.5;
 int NC = 1;
 int n1 = 0;
 int n2 = 0;
@@ -149,11 +149,9 @@ double get_delta_energy(int i, int j) {
         dot_prod(dS, spin[i][jm])
     );
 
-    // 3. Dzyaloshinskii-Moriya Interaction (DMI) contribution (D)
-    // Pay close attention to the indices to match your global energy function!
+    // Dzyaloshinskii-Moriya Interaction (DMI) contribution (D)
     double dE_D = 0;
     
-    // Along X direction: cross_x(S_i, S_i+1) -> handled carefully for both sides
     dE_D += -D * cross_x(dS, spin[ip][j]);          // Interaction where (i,j) is the left actor
     dE_D += -D * cross_x(spin[im][j], dS);          // Interaction where (i,j) is the right actor
 
@@ -177,7 +175,7 @@ int change_particle(){
     );
 
     spin_n[n1][n2][0] /= norm;
-    spin_n[n1][n2][1] /= norm;
+    spin_n[n1][n2][1] /= norm; //completely solid white background everywhere else, showing that the rest of the lattice has perfectly aligned spins (qij​=0).norm;
     spin_n[n1][n2][2] /= norm;
 
     // The change in enery
@@ -213,12 +211,49 @@ int main(void){
     sprintf(save, "Data/Energy_steps.txt");
     FILE* fp = fopen(save, "w");
 
+    int tot =0;
+    beta = 0.5;
     for(int count=1; count<M+1; count++){
         n1 = floor(N*dsfmt_genrand());
         n2 = floor(N*dsfmt_genrand());
         accepted += change_particle();
-        fprintf(fp, "%d\t%lf\t%lf\n", count, Energy, accepted/(double)count);
+        tot+=1;
+        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
     }
+
+    beta = 1;
+    for(int count=1; count<M+1; count++){
+        n1 = floor(N*dsfmt_genrand());
+        n2 = floor(N*dsfmt_genrand());
+        accepted += change_particle();
+        tot+=1;
+        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
+    }
+
+    beta = 2;
+    for(int count=1; count<M+1; count++){
+        n1 = floor(N*dsfmt_genrand());
+        n2 = floor(N*dsfmt_genrand());
+        accepted += change_particle();
+        tot+=1;
+        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
+    }
+
+    beta = 4;
+    for(int count=1; count<M+1; count++){
+        n1 = floor(N*dsfmt_genrand());
+        n2 = floor(N*dsfmt_genrand());
+        accepted += change_particle();
+        tot+=1;
+        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
+    }
+
+
+
+
+
+
+
     fclose(fp);
 
     WriteState2File();
