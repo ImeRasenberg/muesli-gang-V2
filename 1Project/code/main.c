@@ -11,7 +11,7 @@
 const double pi = 3.14159265358979323846;
 
 #define N 20
-#define M 1e4
+#define M 1e5
 
 double spin[N][N][3]; // The lattice in which all spins reside with their angles
 double spin_n[N][N][3]; // The updated lattice
@@ -22,8 +22,8 @@ double D = 1;
 double Hz = 0.5;
 
 // Constants of the simmulation
-double beta = 0.1;
-double dang = 0.1;
+double beta = 1;
+double dang = 1;
 int NC = 1;
 int n1 = 0;
 int n2 = 0;
@@ -125,27 +125,39 @@ double get_energy_tot(double spin[N][N][3]){
     return Energy_n;
 }
 
+
+// THIS IS A QUESTION FOR THE TA'S, WHY ISNT THIS EXACTLY DELTA_E???
 double get_energy_n(double spin[N][N][3]){
     double Energy_n = 0;
-    for(int i=n1-NC; i < n1+NC+1; i++){
-        for(int j=n2-NC; j < n2+NC+1; j++){
-            // interaction choice
-            int i_2 = (i + 1) % N;
-            int j_2 = (j + 1) % N;
+
+    for (int di = -NC; di <= NC; di++) {
+        int i = (n1 + di + N) % N;
+        for (int dj = -NC; dj <= NC; dj++) {
+            int j = (n2 + dj + N) % N;
 
             // Magnetic Field energy
             double E_H = -Hz * spin[i][j][2];
 
+            // indexes for spin spin interactions
+            int i_2 = (i + 1 + N) % N;
+            int i_3 = (i - 1 + N) % N;
+            int j_2 = (j + 1 + N) % N;
+            int j_3 = (j - 1 + N) % N;
+
+
             // spin spin alinging interaction
             double E_J = 0;
-
-            E_J += -J*dot_prod(spin[i][j],spin[i_2][j]);
-            E_J += -J*dot_prod(spin[i][j],spin[i][j_2]);
+            E_J += -J/2*dot_prod(spin[i][j],spin[i_2][j]);
+            E_J += -J/2*dot_prod(spin[i][j],spin[i_3][j]);
+            E_J += -J/2*dot_prod(spin[i][j],spin[i][j_2]);
+            E_J += -J/2*dot_prod(spin[i][j],spin[i][j_3]);
 
             // spin orbit coupling
             double E_D = 0;
-            E_D += -D*cross_x(spin[i][j],spin[i_2][j]);
-            E_D += -D*cross_y(spin[i][j],spin[i][j_2]);
+            E_D += -D/2*cross_x(spin[i][j],spin[i_2][j]);
+            E_D += -D/2*cross_x(spin[i][j],spin[i_3][j]);
+            E_D += -D/2*cross_y(spin[i][j],spin[i][j_2]);
+            E_D += -D/2*cross_y(spin[i][j],spin[i][j_3]);
 
             Energy_n += E_H + E_J + E_D;
         }
@@ -203,7 +215,7 @@ int main(void){
     WriteState2File();
 
     Energy = get_energy_tot(spin);
-    // printf("initial energy is %lf\n", Energy);
+    printf("initial energy is %lf\n", Energy);
 
 
     char save[128];
