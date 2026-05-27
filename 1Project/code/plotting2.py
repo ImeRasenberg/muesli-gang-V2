@@ -194,5 +194,161 @@ plt.grid(False) # Turn off standard lines to clearly observe the pixels
 plt.show()
 
 
+#%%
+from scipy.ndimage import (
+    gaussian_filter,
+    maximum_filter,
+    minimum_filter
+)
+
+# -----------------------------------
+# Smooth topological density
+# -----------------------------------
+smooth = gaussian_filter(
+    charge_density,
+    sigma=2,
+    mode="wrap"
+)
+
+# -----------------------------------
+# Detection parameters
+# -----------------------------------
+neighborhood_size = 5
+
+Q_target = int(round(total_Q))
+
+# adaptive threshold search
+threshold_levels = np.linspace(0.35, 0.02, 40)
+
+best_result = None
+
+for frac in threshold_levels:
+
+    threshold = frac * np.max(np.abs(smooth))
+
+    # ---- maxima ----
+    local_max = maximum_filter(
+        smooth,
+        size=neighborhood_size,
+        mode='wrap'
+    )
+
+    maxima_mask = (
+        (smooth == local_max) &
+        (smooth > threshold)
+    )
+
+    # ---- minima ----
+    local_min = minimum_filter(
+        smooth,
+        size=neighborhood_size,
+        mode='wrap'
+    )
+
+    minima_mask = (
+        (smooth == local_min) &
+        (smooth < -threshold)
+    )
+
+    max_y, max_x = np.where(maxima_mask)
+    min_y, min_x = np.where(minima_mask)
+
+    N_plus = len(max_x)
+    N_minus = len(min_x)
+
+    Q_found = N_plus - N_minus
+
+    mismatch = abs(Q_target - Q_found)
+
+    best_result = {
+        "frac": frac,
+        "threshold": threshold,
+        "max_x": max_x,
+        "max_y": max_y,
+        "min_x": min_x,
+        "min_y": min_y,
+        "Q_found": Q_found,
+        "N_plus": N_plus,
+        "N_minus": N_minus
+    }
+
+    # stop once charge matches
+    if Q_found == Q_target:
+        break
 
 
+# -----------------------------------
+# unpack best result
+# -----------------------------------
+max_x = best_result["max_x"]
+max_y = best_result["max_y"]
+
+min_x = best_result["min_x"]
+min_y = best_result["min_y"]
+
+Q_found = best_result["Q_found"]
+
+print("="*40)
+print(f"Target Q      = {Q_target}")
+print(f"Detected Q    = {Q_found}")
+print(f"N+            = {best_result['N_plus']}")
+print(f"N-            = {best_result['N_minus']}")
+print(f"Threshold frac= {best_result['frac']:.3f}")
+print("="*40)
+
+# -----------------------------------
+# Plot
+# -----------------------------------
+plt.figure(figsize=(9,7))
+
+vmax2 = np.max(np.abs(smooth))
+
+img = plt.imshow(
+    smooth,
+    cmap='seismic',
+    origin='lower',
+    vmin=-vmax2,
+    vmax=vmax2,
+    extent=[-0.5, N-0.5, -0.5, N-0.5]
+)
+
+cbar = plt.colorbar(img)
+cbar.set_label(
+    'Local Topological Charge Density ($q_{ij}$)',
+    rotation=270,
+    labelpad=15
+)
+
+# positive candidates
+plt.scatter(
+    max_x,
+    max_y,
+    s=160,
+    facecolors='none',
+    edgecolors='lime',
+    linewidths=2,
+    label='positive'
+)
+
+# negative candidates
+plt.scatter(
+    min_x,
+    min_y,
+    s=120,
+    c='cyan',
+    marker='x',
+    linewidths=2,
+    label='negative'
+)
+
+plt.title(
+    f"Detected Skyrmions\n"
+    f"Target Q={Q_target}, detected Q={Q_found}"
+)
+
+plt.xlabel("X lattice site")
+plt.ylabel("Y lattice site")
+plt.legend()
+plt.grid(False)
+
+plt.show()

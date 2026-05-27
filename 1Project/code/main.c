@@ -15,6 +15,8 @@ const double pi = 3.14159265358979323846;
 
 double spin[N][N][3]; // The lattice in which all spins reside with their angles
 double spin_n[N][N][3]; // The updated lattice
+double CD[N][N]; //the wrapping number in space
+double CD_smooth[N][N]; //the wrapping number smoothed out
 
 // constants of the Hamiltonian
 double J = 1;
@@ -34,7 +36,7 @@ double Energy=0;
 double Q = 0;
 
 
-
+// starting the simmulation
 void generate_random_spin(){
 
     for(int i=0; i < N; i++){
@@ -58,6 +60,8 @@ void generate_random_spin(){
         }
     }
 }
+
+// writing out the state into a file for nice plotting
 void WriteState2File(){
     char filename[100];
     sprintf(filename, "Data/Spin_orientiation.txt");
@@ -81,7 +85,7 @@ void WriteState2File(){
     fclose(fp);
 }
 
-
+// The functions that determain the MC simmulations
 double dot_prod(double A[3], double B[3]){
     double res=0;
     for(int k =0; k<3; k++){
@@ -194,7 +198,7 @@ int change_particle(){
 
 }
 
-
+// Getting the Q-number and tracing places of skyrmions
 void cross_prod(double A[3], double B[3], double C[3]){
     C[0] = A[1]*B[2] - A[2]*B[1];
     C[1] = A[2]*B[0] - A[0]*B[2];
@@ -216,7 +220,6 @@ double triangle_charge(double S1[3], double S2[3], double S3[3]){
 }
 double get_Q(){
     double Q = 0.0;
-    double CD[N][N];
 
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
@@ -241,6 +244,222 @@ double get_Q(){
     return Q;
 }
 
+// Tracing the skyrmions
+void gaussian_filter_CD(double sigma){
+
+    // Radius ≈ 3 sigma (same practical cutoff scipy uses)
+    int radius = (int)ceil(3.0 * sigma);
+    int size = 2 * radius + 1;
+
+    double kernel[size][size];
+    double norm = 0.0;
+
+    // Build Gaussian kernel
+    for(int dx = -radius; dx <= radius; dx++){
+        for(int dy = -radius; dy <= radius; dy++){
+
+            double r2 = dx*dx + dy*dy;
+
+            kernel[dx + radius][dy + radius]
+                = exp(-r2 / (2.0 * sigma * sigma));
+
+            norm += kernel[dx + radius][dy + radius];
+        }
+    }
+
+    // Normalize kernel
+    for(int i = 0; i < size; i++){
+        for(int j = 0; j < size; j++){
+            kernel[i][j] /= norm;
+        }
+    }
+
+    // Convolution with periodic boundary conditions (mode="wrap")
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+
+            double sum = 0.0;
+
+            for(int dx = -radius; dx <= radius; dx++){
+                for(int dy = -radius; dy <= radius; dy++){
+
+                    int ii = (i + dx + N) % N;
+                    int jj = (j + dy + N) % N;
+
+                    sum += CD[ii][jj]
+                         * kernel[dx + radius][dy + radius];
+                }
+            }
+
+            CD_smooth[i][j] = sum;
+        }
+    }
+}
+#define MAX_PEAKS (N*N)
+int max_count = 0;
+int min_count = 0;
+int max_x[MAX_PEAKS];
+int max_y[MAX_PEAKS];
+int min_x[MAX_PEAKS];
+int min_y[MAX_PEAKS];
+void desission_peak(int step){
+
+    max_count = 0;
+    min_count = 0;
+
+    int radius = 2;
+    int Q_target = (int)round(Q);
+
+    // ---------------------------------
+    // largest peak
+    // ---------------------------------
+    double largest_peak = 0.0;
+
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+
+            double val = fabs(CD_smooth[i][j]);
+
+            if(val > largest_peak){
+                largest_peak = val;
+            }
+        }
+    }
+
+    // ---------------------------------
+    // adaptive threshold relaxation
+    // equivalent to:
+    // np.linspace(0.35, 0.02, 40)
+    // ---------------------------------
+    double best_frac = 0.25;
+    int Q_found = 0;
+
+    for(int step = 0; step < 40; step++){
+
+        // gradually relax threshold
+        double frac = 0.25 - step * (0.23 / 39.0);
+
+        if(frac < 0.02){
+            frac = 0.02;
+        }
+
+        double threshold = frac * largest_peak;
+
+        max_count = 0;
+        min_count = 0;
+
+        // ---------------------------------
+        // peak detection
+        // ---------------------------------
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < N; j++){
+
+                double center = CD_smooth[i][j];
+
+                // threshold cut
+                if(fabs(center) < threshold){
+                    continue;
+                }
+
+                int is_max = 1;
+                int is_min = 1;
+
+                for(int dx = -radius; dx <= radius; dx++){
+
+                    for(int dy = -radius; dy <= radius; dy++){
+
+                        if(dx == 0 && dy == 0){
+                            continue;
+                        }
+
+                        int ii = (i + dx + N) % N;
+                        int jj = (j + dy + N) % N;
+
+                        double neighbor = CD_smooth[ii][jj];
+
+                        // maxima test
+                        if(center < neighbor){
+                            is_max = 0;
+                        }
+
+                        // minima test
+                        if(center > neighbor){
+                            is_min = 0;
+                        }
+
+                        // early exit
+                        if(!is_max && !is_min){
+                            goto done_check;
+                        }
+                    }
+                }
+
+done_check:
+
+                if(is_max){
+                    max_x[max_count] = i;
+                    max_y[max_count] = j;
+                    max_count++;
+                }
+
+                if(is_min){
+                    min_x[min_count] = i;
+                    min_y[min_count] = j;
+                    min_count++;
+                }
+            }
+        }
+
+        Q_found = max_count - min_count;
+
+        best_frac = frac;
+
+        // success condition
+        if(Q_found == Q_target){
+            break;
+        }
+    }
+
+    FILE *fp = fopen("Data/skyrmions.json", "a");
+    if (fp == NULL) {
+        return;
+    }
+
+    // 1. Start the main object and print basic simulation metrics
+    fprintf(fp, "{\n");
+    fprintf(fp, "  \"step\": %d,\n", step);
+    fprintf(fp, "  \"Q\": %d,\n", Q_found);
+    fprintf(fp, "  \"threshold_fraction\": %.6f,\n", best_frac);
+
+    // 2. Print positive peaks ("N+")
+    fprintf(fp, "  \"N+\": {");
+    for (int k = 0; k < max_count; k++) {
+        fprintf(fp, "\"%d\": [%d, %d]", k, max_x[k], max_y[k]);
+        if (k < max_count - 1) {
+            fprintf(fp, ", "); // Comma between peak objects
+        }
+    }
+    fprintf(fp, "},\n"); // Close N+ and add a comma for the next key
+
+    // 3. Print negative peaks ("N-")
+    fprintf(fp, "  \"N-\": {");
+    for (int k = 0; k < min_count; k++) {
+        fprintf(fp, "\"%d\": [%d, %d]", k, min_x[k], min_y[k]);
+        if (k < min_count - 1) {
+            fprintf(fp, ", "); // Comma between peak objects
+        }
+    }
+    fprintf(fp, "}\n"); // Close N- (no trailing comma here because it's the last item!)
+
+    // 4. Close the main object
+    fprintf(fp, "}\n");
+
+    fclose(fp);
+}
+
+
+
+// where the fun happends
 int main(void){
     dsfmt_seed(time(NULL));
 
@@ -250,22 +469,46 @@ int main(void){
     Energy = get_energy_tot(spin);
     printf("initial energy is %lf\n", Energy);
 
+    double Js[] = {1};
+    int Jb = sizeof(Js) / sizeof(Js[0]);
+    double Ds[] = {0.2};
+    int Db = sizeof(Ds) / sizeof(Ds[0]);
+    double Hs[] = {0.08};
+    int Hb = sizeof(Hs) / sizeof(Hs[0]);
+
+    for(int count1 = 0; count1<Jb; count1++){
+        J=Js[count1];
+
+        for(int count2 = 0; count2<Db; count2++){
+            D=Ds[count2];
+
+            for(int count3 = 0; count3<Hb; count3++){
+                Hz=Hs[count3];
+
+
+
+            }
+        }
+    }
 
     char save[128];
     sprintf(save, "Data/Energy_steps.txt");
     FILE* fp = fopen(save, "w");
+    FILE *fp_sk = fopen("Data/skyrmions.json", "w");
 
-    // we start hot and then cool down
-    int tot =0;
-    beta = 0.5;
     double betas[] = {0.5, 1.0, 2.0, 4.0};
     int big = sizeof(betas) / sizeof(betas[0]);
 
+    int tot =0;
     for(int s = 0; s<big; s++){
         beta = betas[s];
         for(int count=1; count<M+1; count++){
-            if(count % 1000 == 0){
+            if(count % 1000 == 0 & beta>=betas[big-1]){
                 Q = get_Q();
+
+                gaussian_filter_CD(2.0);
+
+                desission_peak(tot);
             }
             n1 = floor(N*dsfmt_genrand());
             n2 = floor(N*dsfmt_genrand());
