@@ -10,8 +10,8 @@
 
 const double pi = 3.14159265358979323846;
 
-#define N 20
-#define M 4e4
+#define N 40
+#define M 16e4
 
 double spin[N][N][3]; // The lattice in which all spins reside with their angles
 double spin_n[N][N][3]; // The updated lattice
@@ -23,7 +23,7 @@ double Hz = 0.08;
 
 // Constants of the simmulation
 double beta = 5;
-double dang = 0.5;
+double dang = 1.0;
 int NC = 1;
 int n1 = 0;
 int n2 = 0;
@@ -31,6 +31,7 @@ int n2 = 0;
 // Simmulation metrics
 int accepted = 0;
 double Energy=0;
+double Q = 0;
 
 
 
@@ -57,7 +58,6 @@ void generate_random_spin(){
         }
     }
 }
-
 void WriteState2File(){
     char filename[100];
     sprintf(filename, "Data/Spin_orientiation.txt");
@@ -81,6 +81,7 @@ void WriteState2File(){
     fclose(fp);
 }
 
+
 double dot_prod(double A[3], double B[3]){
     double res=0;
     for(int k =0; k<3; k++){
@@ -94,8 +95,6 @@ double cross_x(double A[3], double B[3]){
 double cross_y(double A[3], double B[3]){
     return A[2]*B[0] - A[0]*B[2]; 
 }
-
-
 double get_energy_tot(double spin[N][N][3]){
     double Energy_n = 0;
     for(int i=0; i < N; i++){
@@ -124,7 +123,6 @@ double get_energy_tot(double spin[N][N][3]){
 
     return Energy_n;
 }
-
 double get_delta_energy(int i, int j) {
     // Calculate the change in the spin vector
     double dS[3];
@@ -161,7 +159,6 @@ double get_delta_energy(int i, int j) {
 
     return dE_H + dE_J + dE_D;
 }
-
 int change_particle(){
     // changing the spin with some random ammount
     spin_n[n1][n2][0] += dang*(2.0*dsfmt_genrand()-1.0);
@@ -197,6 +194,53 @@ int change_particle(){
 
 }
 
+
+void cross_prod(double A[3], double B[3], double C[3]){
+    C[0] = A[1]*B[2] - A[2]*B[1];
+    C[1] = A[2]*B[0] - A[0]*B[2];
+    C[2] = A[0]*B[1] - A[1]*B[0];
+}
+double triangle_charge(double S1[3], double S2[3], double S3[3]){
+    double AxB[3];
+
+    cross_prod(S2, S3, AxB);
+    double num = S1[0]*AxB[0] + S1[1]*AxB[1] + S1[2]*AxB[2];
+
+    double d12 = S1[0]*S2[0] + S1[1]*S2[1] + S1[2]*S2[2];
+    double d23 = S2[0]*S3[0] + S2[1]*S3[1] + S2[2]*S3[2];
+    double d31 = S3[0]*S1[0] + S3[1]*S1[1] + S3[2]*S1[2];
+
+    double den = 1.0 + d12 + d23 + d31;
+
+    return 2.0 * atan2(num, den) / (4.0 * pi);
+}
+double get_Q(){
+    double Q = 0.0;
+    double CD[N][N];
+
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+
+            int ip = (i + 1) % N;
+            int jp = (j + 1) % N;
+
+            double S_ij[3]   = {spin[i][j][0],   spin[i][j][1],   spin[i][j][2]};
+            double S_ipj[3]  = {spin[ip][j][0],  spin[ip][j][1],  spin[ip][j][2]};
+            double S_ijp[3]  = {spin[i][jp][0],  spin[i][jp][1],  spin[i][jp][2]};
+            double S_ipjp[3] = {spin[ip][jp][0], spin[ip][jp][1], spin[ip][jp][2]};
+
+            CD[i][j] = 0;
+            // two triangles per plaquette
+            CD[i][j] += triangle_charge(S_ij, S_ipj, S_ijp);
+            CD[i][j] += triangle_charge(S_ipj, S_ipjp, S_ijp);
+
+            Q += CD[i][j];
+        }
+    }
+
+    return Q;
+}
+
 int main(void){
     dsfmt_seed(time(NULL));
 
@@ -211,51 +255,27 @@ int main(void){
     sprintf(save, "Data/Energy_steps.txt");
     FILE* fp = fopen(save, "w");
 
+    // we start hot and then cool down
     int tot =0;
     beta = 0.5;
-    for(int count=1; count<M+1; count++){
-        n1 = floor(N*dsfmt_genrand());
-        n2 = floor(N*dsfmt_genrand());
-        accepted += change_particle();
-        tot+=1;
-        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
+    double betas[] = {0.5, 1.0, 2.0, 4.0};
+    int big = sizeof(betas) / sizeof(betas[0]);
+
+    for(int s = 0; s<big; s++){
+        beta = betas[s];
+        for(int count=1; count<M+1; count++){
+            if(count % 1000 == 0){
+                Q = get_Q();
+            }
+            n1 = floor(N*dsfmt_genrand());
+            n2 = floor(N*dsfmt_genrand());
+            accepted += change_particle();
+            tot+=1;
+            fprintf(fp, "%d\t%lf\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot, beta, Q);
+        }
     }
-
-    beta = 1;
-    for(int count=1; count<M+1; count++){
-        n1 = floor(N*dsfmt_genrand());
-        n2 = floor(N*dsfmt_genrand());
-        accepted += change_particle();
-        tot+=1;
-        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
-    }
-
-    beta = 2;
-    for(int count=1; count<M+1; count++){
-        n1 = floor(N*dsfmt_genrand());
-        n2 = floor(N*dsfmt_genrand());
-        accepted += change_particle();
-        tot+=1;
-        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
-    }
-
-    beta = 4;
-    for(int count=1; count<M+1; count++){
-        n1 = floor(N*dsfmt_genrand());
-        n2 = floor(N*dsfmt_genrand());
-        accepted += change_particle();
-        tot+=1;
-        fprintf(fp, "%d\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot,beta);
-    }
-
-
-
-
-
-
 
     fclose(fp);
-
     WriteState2File();
 
     return 0;
