@@ -455,7 +455,7 @@ int main(void){
     generate_random_spin();
     WriteState2File();
 
-    Energy = get_energy_tot(spin);
+    
     printf("initial energy is %lf\n", Energy);
 
     double Js[] = {1};
@@ -466,45 +466,49 @@ int main(void){
     for(int count1 = 0; count1<Jb; count1++){
         J=Js[count1];
 
-        for(int count3 = 0; count3<Hb; count3++){
-            Hz=Hs[count3];
+        for(int count2 = 0; count2<Hb; count2++){
+            Hz=Hs[count2];
 
+            for(int count3 = 0; count3<20; count3++){
 
+                Energy = get_energy_tot(spin);
 
-        }
-    }
+                char f1[128];
+                sprintf(f1, "Data/Energy_steps__J_%lf__Hz_%lf__I_%d.txt",J, Hz, count3);
+                FILE* fp = fopen(f1, "w");
 
-    char f1[128];
-    sprintf(f1, "Data/Energy_steps.txt");
-    FILE* fp = fopen(f1, "w");
+                char f2[128];
+                sprintf(f2, "Data/skyrmions__J_%lf__Hz_%lf__I_%d.json",J, Hz, count3);
+                FILE *fp_sk = fopen(f2, "w");
 
-    char f2[128];
-    sprintf(f2, "Data/skyrmions.json");
-    FILE *fp_sk = fopen(f2, "w");
+                double betas[] = {0.5, 1.0, 2.0, 4.0};
+                int big = sizeof(betas) / sizeof(betas[0]);
 
-    double betas[] = {0.5, 1.0, 2.0, 4.0};
-    int big = sizeof(betas) / sizeof(betas[0]);
+                int tot =0;
+                for(int s = 0; s<big; s++){
+                    beta = betas[s];
+                    for(int count=1; count<M+1; count++){
+                        if(count % 1000 == 0 & beta>=betas[big-1]){
+                            Q = get_Q();
 
-    int tot =0;
-    for(int s = 0; s<big; s++){
-        beta = betas[s];
-        for(int count=1; count<M+1; count++){
-            if(count % 1000 == 0 & beta>=betas[big-1]){
-                Q = get_Q();
+                            gaussian_filter_CD(2.0);
 
-                gaussian_filter_CD(2.0);
+                            desission_peak(tot, f2);
+                        }
+                        n1 = floor(N*dsfmt_genrand());
+                        n2 = floor(N*dsfmt_genrand());
+                        accepted += change_particle();
+                        tot+=1;
+                        fprintf(fp, "%d\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%d\n", tot, Energy, accepted/(double)tot, beta, Q, J, D, Hz, count3);
+                    }
+                }
 
-                desission_peak(tot, f2);
+                fclose(fp);
+                fclose(fp_sk);
             }
-            n1 = floor(N*dsfmt_genrand());
-            n2 = floor(N*dsfmt_genrand());
-            accepted += change_particle();
-            tot+=1;
-            fprintf(fp, "%d\t%lf\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot, beta, Q);
         }
     }
 
-    fclose(fp);
     WriteState2File();
 
     return 0;
