@@ -206,14 +206,14 @@ from scipy.ndimage import (
 # -----------------------------------
 smooth = gaussian_filter(
     charge_density,
-    sigma=2,
+    sigma=1,
     mode="wrap"
 )
 
 # -----------------------------------
 # Detection parameters
 # -----------------------------------
-neighborhood_size = 5
+neighborhood_size = 4
 
 Q_target = int(round(total_Q))
 

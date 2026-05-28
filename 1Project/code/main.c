@@ -471,9 +471,9 @@ int main(void){
 
     double Js[] = {1};
     int Jb = sizeof(Js) / sizeof(Js[0]);
-    double Ds[] = {0.2};
+    double Ds[] = {0};
     int Db = sizeof(Ds) / sizeof(Ds[0]);
-    double Hs[] = {0.08};
+    double Hs[] = {2};
     int Hb = sizeof(Hs) / sizeof(Hs[0]);
 
     for(int count1 = 0; count1<Jb; count1++){
