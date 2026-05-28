@@ -1,29 +1,30 @@
 import os
 import json
-import numpy as np
 
 data_folder = "Data"
 
 master_dict = {}
 decoder = json.JSONDecoder()
 
-# --------------------------------------------------
-# LOOP THROUGH ALL FILES
-# --------------------------------------------------
-for filename in os.listdir(data_folder):
+# ==========================================================
+# loop through all json files
+# ==========================================================
+filepaths = [
+    os.path.join(data_folder, f)
+    for f in os.listdir(data_folder)
+    if os.path.isfile(os.path.join(data_folder, f))
+    and f.endswith(".json")
+]
 
-    filepath = os.path.join(data_folder, filename)
+print(f"Found {len(filepaths)} JSON files")
 
-    if not os.path.isfile(filepath):
-        continue
+for filepath in filepaths:
 
-    # only process known file types
-    if not (filename.endswith(".json") or filename.endswith(".txt")):
-        continue
+    filename = os.path.basename(filepath)
 
-    # --------------------------------------------------
+    # ------------------------------------------------------
     # scrape metadata dynamically from filename
-    # --------------------------------------------------
+    # ------------------------------------------------------
     name_no_ext = os.path.splitext(filename)[0]
     parts = name_no_ext.split("__")
 
@@ -34,96 +35,60 @@ for filename in os.listdir(data_folder):
             key, value = part.split("_", 1)
             metadata[key] = value
 
-    # skip files without required keys
-    if not all(k in metadata for k in ["J", "Hz", "I"]):
+    # skip malformed filenames
+    if not all(k in metadata for k in ["D", "Hz", "I"]):
+        print(f"Skipping {filename}")
         continue
 
     try:
-        J = float(metadata["J"])
+        J = float(metadata["D"])
         Hz = float(metadata["Hz"])
         I = int(metadata["I"])
     except ValueError:
-        print(f"Skipping malformed filename: {filename}")
+        print(f"Malformed metadata in {filename}")
         continue
 
-    # --------------------------------------------------
-    # create nested structure
+    print(f"Loading {filename}")
+
+    # ------------------------------------------------------
+    # initialize nested dictionary
     # master_dict[J][Hz][I]
-    # --------------------------------------------------
+    # ------------------------------------------------------
     if J not in master_dict:
         master_dict[J] = {}
 
     if Hz not in master_dict[J]:
         master_dict[J][Hz] = {}
 
-    if I not in master_dict[J][Hz]:
-        master_dict[J][Hz][I] = {
-            "skyrmions": {},
-            "info": {}
-        }
+    master_dict[J][Hz][I] = {}
 
-    entry = master_dict[J][Hz][I]
+    # ------------------------------------------------------
+    # load concatenated json objects
+    # ------------------------------------------------------
+    with open(filepath, "r") as f:
+        content = f.read().strip()
 
-    # ==================================================
-    # SKYRMION JSON FILE
-    # ==================================================
-    if filename.endswith(".json"):
+    pos = 0
 
-        print(f"Loading skyrmions: {filename}")
+    while pos < len(content):
 
-        with open(filepath, "r") as f:
-            content = f.read().strip()
+        while pos < len(content) and content[pos].isspace():
+            pos += 1
 
-        pos = 0
-
-        while pos < len(content):
-
-            while pos < len(content) and content[pos].isspace():
-                pos += 1
-
-            if pos >= len(content):
-                break
-
-            try:
-                obj, idx = decoder.raw_decode(content[pos:])
-                pos += idx
-
-                step = obj["step"]
-
-                # store original object
-                entry["skyrmions"][step] = obj
-
-            except json.JSONDecodeError as e:
-                print(f"Error in {filename} near position {pos}: {e}")
-                break
-
-    # ==================================================
-    # ENERGY / INFO TXT FILE
-    # ==================================================
-    elif filename.endswith(".txt"):
-
-        print(f"Loading energy info: {filename}")
+        if pos >= len(content):
+            break
 
         try:
-            data = np.genfromtxt(filepath, skip_header=1)
+            obj, idx = decoder.raw_decode(content[pos:])
+            pos += idx
 
-            if data.ndim == 1:
-                data = data.reshape(1, -1)
+            step = obj["step"]
 
-            entry["info"] = {
-                "steps": np.array(data[:, 0]),
-                "Energy": np.array(data[:, 1]),
-                "acceptance": np.array(data[:, 2]),
-                "beta": np.array(data[:, 3]),
-                "Q": np.array(data[:, 4]),
-                "J": np.array(data[:, 5]),
-                "D": np.array(data[:, 6]),
-                "Hz": np.array(data[:, 7]),
-                "I": np.array(data[:, 8]),
-            }
+            # store original object
+            master_dict[J][Hz][I][step] = obj
 
-        except Exception as e:
-            print(f"Failed to load {filename}: {e}")
+        except json.JSONDecodeError as e:
+            print(f"Error in {filename} near position {pos}: {e}")
+            break
 
-#%%
-
+print("Finished loading.")

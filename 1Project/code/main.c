@@ -419,6 +419,12 @@ done_check:
     fprintf(fp, "  \"step\": %d,\n", step);
     fprintf(fp, "  \"Q\": %d,\n", Q_found);
     fprintf(fp, "  \"threshold_fraction\": %.6f,\n", best_frac);
+    fprintf(fp, "  \"E\": %.6f,\n", Energy);
+    fprintf(fp, "  \"J\": %.6f,\n", J);
+    fprintf(fp, "  \"D\": %.6f,\n", D);
+    fprintf(fp, "  \"Hz\": %.6f,\n", Hz);
+    fprintf(fp, "  \"beta\": %.6f,\n", beta);
+    
 
     // 2. Print positive peaks ("N+")
     fprintf(fp, "  \"N+\": {");
@@ -458,27 +464,29 @@ int main(void){
     
     printf("initial energy is %lf\n", Energy);
 
-    double Js[] = {1};
-    int Jb = sizeof(Js) / sizeof(Js[0]);
-    double Hs[] = {0.08};
+    double Ds[] = {1};
+    int Db = sizeof(Ds) / sizeof(Ds[0]);
+    double Hs[] = {1};
     int Hb = sizeof(Hs) / sizeof(Hs[0]);
 
-    for(int count1 = 0; count1<Jb; count1++){
-        J=Js[count1];
+    
+    int O = 5;
+    for(int count1 = 0; count1<O; count1++){
+        D=2/(double)O*count1;
 
-        for(int count2 = 0; count2<Hb; count2++){
-            Hz=Hs[count2];
+        for(int count2 = 0; count2<O; count2++){
+            Hz=2/(double)O*count2;
 
-            for(int count3 = 0; count3<20; count3++){
+            for(int count3 = 0; count3<1; count3++){
 
                 Energy = get_energy_tot(spin);
 
-                char f1[128];
-                sprintf(f1, "Data/Energy_steps__J_%lf__Hz_%lf__I_%d.txt",J, Hz, count3);
-                FILE* fp = fopen(f1, "w");
+                // char f1[128];
+                // sprintf(f1, "Data/Energy_steps__J_%lf__Hz_%lf__I_%d.txt",J, Hz, count3);
+                // FILE* fp = fopen(f1, "w");
 
                 char f2[128];
-                sprintf(f2, "Data/skyrmions__J_%lf__Hz_%lf__I_%d.json",J, Hz, count3);
+                sprintf(f2, "Data/skyrmions__D_%lf__Hz_%lf__I_%d.json",D, Hz, count3);
                 FILE *fp_sk = fopen(f2, "w");
 
                 double betas[] = {0.5, 1.0, 2.0, 4.0};
@@ -502,7 +510,7 @@ int main(void){
                     }
                 }
 
-                fclose(fp);
+                // fclose(fp);
                 fclose(fp_sk);
             }
         }
