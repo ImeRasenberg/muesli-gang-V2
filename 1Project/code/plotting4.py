@@ -211,4 +211,26 @@ for I in I_vals:
     ax.set_title(f"N- size (I={I}) averaged over last {N_LAST} steps")
 
     plt.show()
+    
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    im = ax.imshow(
+        minus_grid-plus_grid,
+        origin="lower",
+        aspect="auto",
+        extent=[
+            min(D_vals),
+            max(D_vals),
+            min(Hz_vals),
+            max(Hz_vals),
+        ]
+    )
+
+    plt.colorbar(im, ax=ax, label="mean len(N-)")
+
+    ax.set_xlabel("D")
+    ax.set_ylabel("Hz")
+    ax.set_title(f"N- - N+ size (I={I}) averaged over last {N_LAST} steps")
+
+    plt.show()
 
