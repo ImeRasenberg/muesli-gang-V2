@@ -470,11 +470,11 @@ int main(void){
     int Hb = sizeof(Hs) / sizeof(Hs[0]);
 
     
-    int O = 5;
-    for(int count1 = 0; count1<O; count1++){
+    int O = 20;
+    for(int count1 = 0; count1<O+1; count1++){
         D=2/(double)O*count1;
 
-        for(int count2 = 0; count2<O; count2++){
+        for(int count2 = 0; count2<O+1; count2++){
             Hz=2/(double)O*count2;
 
             for(int count3 = 0; count3<1; count3++){
