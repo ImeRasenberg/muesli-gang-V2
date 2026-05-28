@@ -499,7 +499,6 @@ int main(void){
                         n2 = floor(N*dsfmt_genrand());
                         accepted += change_particle();
                         tot+=1;
-                        fprintf(fp, "%d\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%lf\t%d\n", tot, Energy, accepted/(double)tot, beta, Q, J, D, Hz, count3);
                     }
                 }
 
