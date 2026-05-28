@@ -50,8 +50,8 @@ for step in sorted(full_dataset_dict.keys()):
 # --- Generate the plot ---
 fig, ax = plt.subplots(figsize=(10, 5))
 
-ax.plot(steps, n_plus_counts, label=r'$N_+$ (Positive Peaks)', color='#1f77b4', linewidth=2, marker='o', markersize=4)
-ax.plot(steps, n_minus_counts, label=r'$N_-$ (Negative Peaks)', color='#d62728', linewidth=2, marker='x', markersize=4)
+ax.plot(steps, n_plus_counts, label=r'$N_+$ (Positive Peaks)', color='#d62728', linewidth=2, marker='o', markersize=4)
+ax.plot(steps, n_minus_counts, label=r'$N_-$ (Negative Peaks)', color='#1f77b4', linewidth=2, marker='x', markersize=4)
 
 # Format labels, title, and layout
 ax.set_xlabel("Simulation Steps", fontsize=12)
@@ -123,11 +123,11 @@ for step in steps:
     field = np.zeros((N, N), dtype=float)
 
     # Positive skyrmions
-    for _, (x, y) in entry["N+"].items():
+    for _, (y,x) in entry["N+"].items():
         field += gaussian(grid_x, grid_y, x, y, sigma)
 
     # Negative skyrmions
-    for _, (x, y) in entry["N-"].items():
+    for _, (y,x) in entry["N-"].items():
         field -= gaussian(grid_x, grid_y, x, y, sigma)
 
     vmax = np.max(np.abs(field)) if np.max(np.abs(field)) > 0 else 1.0

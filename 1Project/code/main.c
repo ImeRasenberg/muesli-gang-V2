@@ -248,7 +248,7 @@ double get_Q(){
 void gaussian_filter_CD(double sigma){
 
     // Radius ≈ 3 sigma (same practical cutoff scipy uses)
-    int radius = (int)ceil(3.0 * sigma);
+    int radius = (int)ceil(4.0 * sigma);
     int size = 2 * radius + 1;
 
     double kernel[size][size];
@@ -302,17 +302,14 @@ int max_x[MAX_PEAKS];
 int max_y[MAX_PEAKS];
 int min_x[MAX_PEAKS];
 int min_y[MAX_PEAKS];
-void desission_peak(int step){
+void desission_peak(int step, char f2[128]){
 
     max_count = 0;
     min_count = 0;
 
-    int radius = 2;
+    int radius = 4;
     int Q_target = (int)round(Q);
 
-    // ---------------------------------
-    // largest peak
-    // ---------------------------------
     double largest_peak = 0.0;
 
     for(int i = 0; i < N; i++){
@@ -326,11 +323,6 @@ void desission_peak(int step){
         }
     }
 
-    // ---------------------------------
-    // adaptive threshold relaxation
-    // equivalent to:
-    // np.linspace(0.35, 0.02, 40)
-    // ---------------------------------
     double best_frac = 0.25;
     int Q_found = 0;
 
@@ -348,9 +340,6 @@ void desission_peak(int step){
         max_count = 0;
         min_count = 0;
 
-        // ---------------------------------
-        // peak detection
-        // ---------------------------------
         for(int i = 0; i < N; i++){
             for(int j = 0; j < N; j++){
 
@@ -420,7 +409,7 @@ done_check:
         }
     }
 
-    FILE *fp = fopen("Data/skyrmions.json", "a");
+    FILE *fp = fopen(f2, "a");
     if (fp == NULL) {
         return;
     }
@@ -471,30 +460,27 @@ int main(void){
 
     double Js[] = {1};
     int Jb = sizeof(Js) / sizeof(Js[0]);
-    double Ds[] = {0.2};
-    int Db = sizeof(Ds) / sizeof(Ds[0]);
     double Hs[] = {0.08};
     int Hb = sizeof(Hs) / sizeof(Hs[0]);
 
     for(int count1 = 0; count1<Jb; count1++){
         J=Js[count1];
 
-        for(int count2 = 0; count2<Db; count2++){
-            D=Ds[count2];
-
-            for(int count3 = 0; count3<Hb; count3++){
-                Hz=Hs[count3];
+        for(int count3 = 0; count3<Hb; count3++){
+            Hz=Hs[count3];
 
 
 
-            }
         }
     }
 
-    char save[128];
-    sprintf(save, "Data/Energy_steps.txt");
-    FILE* fp = fopen(save, "w");
-    FILE *fp_sk = fopen("Data/skyrmions.json", "w");
+    char f1[128];
+    sprintf(f1, "Data/Energy_steps.txt");
+    FILE* fp = fopen(f1, "w");
+
+    char f2[128];
+    sprintf(f2, "Data/skyrmions.json");
+    FILE *fp_sk = fopen(f2, "w");
 
     double betas[] = {0.5, 1.0, 2.0, 4.0};
     int big = sizeof(betas) / sizeof(betas[0]);
@@ -508,7 +494,7 @@ int main(void){
 
                 gaussian_filter_CD(2.0);
 
-                desission_peak(tot);
+                desission_peak(tot, f2);
             }
             n1 = floor(N*dsfmt_genrand());
             n2 = floor(N*dsfmt_genrand());
