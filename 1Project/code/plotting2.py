@@ -44,6 +44,7 @@ V_sub = S_y[::subsample, ::subsample]
 W_sub = S_z[::subsample, ::subsample] # Z-component used for coloring
 
  # 4. Plotting
+"""
 plt.figure(figsize=(10, 8))
  
  # quiver plots the 2D arrows (U, V). 
@@ -64,7 +65,7 @@ plt.gca().set_aspect('equal') # Keep the grid square
 plt.grid(True, which='both', linestyle=':', alpha=0.5)
 
 plt.show()
-
+"""
 #%%
 
 filepath2="Data/Energy_steps.txt"
@@ -91,6 +92,7 @@ plt.figure(figsize=(10, 8))
 plt.plot(steps, Energy)
 plt.show()
 
+"""
 plt.figure(figsize=(10, 8))
 plt.plot(steps, acceptance)
 plt.show()
@@ -98,6 +100,7 @@ plt.show()
 plt.figure(figsize=(10, 8))
 plt.plot(steps, Q)
 plt.show()
+"""
 
 #%%
 
@@ -155,6 +158,7 @@ print(f"Estimated Skyrmion Count:   {round(abs(total_Q))}")
 print("=" * 50)
 
 # 5. Plotting the Local Density Map
+"""
 plt.figure(figsize=(9, 7))
 
 # imshow creates a clean pixel-by-pixel heat map of our grid calculations
@@ -172,12 +176,12 @@ plt.xlabel("X Lattice Site")
 plt.ylabel("Y Lattice Site")
 plt.grid(False) # Turn off standard lines to clearly observe the pixels
 plt.show()
-
+"""
 
 from scipy.ndimage import gaussian_filter
 
 smooth = gaussian_filter(charge_density, sigma=2, mode = "wrap")
-
+"""
 plt.figure(figsize=(9, 7))
 
 vmax2 = np.max(np.abs(smooth)) # Scale dynamically, baseline 0.1
@@ -192,7 +196,7 @@ plt.xlabel("X Lattice Site")
 plt.ylabel("Y Lattice Site")
 plt.grid(False) # Turn off standard lines to clearly observe the pixels
 plt.show()
-
+"""
 
 #%%
 from scipy.ndimage import (

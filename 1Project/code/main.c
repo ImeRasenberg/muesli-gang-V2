@@ -471,9 +471,9 @@ int main(void){
 
     double Js[] = {1};
     int Jb = sizeof(Js) / sizeof(Js[0]);
-    double Ds[] = {0};
+    double Ds[] = {1.6};
     int Db = sizeof(Ds) / sizeof(Ds[0]);
-    double Hs[] = {2};
+    double Hs[] = {1.8};
     int Hb = sizeof(Hs) / sizeof(Hs[0]);
 
     for(int count1 = 0; count1<Jb; count1++){
@@ -499,22 +499,69 @@ int main(void){
     double betas[] = {0.5, 1.0, 2.0, 4.0};
     int big = sizeof(betas) / sizeof(betas[0]);
 
+    int window_size = N*N * 3; 
+    double tolerance = 50;
+    int number_windows = 2; // number of requiered stable windows
+
+
     int tot =0;
     for(int s = 0; s<big; s++){
         beta = betas[s];
+
+        double E_sum = 0.0;
+        double E_avg_prev = 0.0;
+        int stable_count = 0;
+        int is_stable = 0;
+        int sampeling_started = 0;
+        int samples_taken = 0;
+        int max_samples = 30;
+
         for(int count=1; count<M+1; count++){
-            if(count % 1000 == 0 & beta>=betas[big-1]){
+            //if(count % 1000 == 0 & beta>=betas[big-1]){
+            if(count % 1000 == 0 && sampeling_started == 1){
                 Q = get_Q();
 
                 gaussian_filter_CD(2.0);
 
                 desission_peak(tot);
+
+               samples_taken ++;
+
+               if (samples_taken >= max_samples){
+                break;
+               }
             }
             n1 = floor(N*dsfmt_genrand());
             n2 = floor(N*dsfmt_genrand());
             accepted += change_particle();
             tot+=1;
+            
             fprintf(fp, "%d\t%lf\t%lf\t%lf\t%lf\n", tot, Energy, accepted/(double)tot, beta, Q);
+
+            E_sum += Energy;
+            if (count % window_size == 0){
+                double E_avg = E_sum / window_size;
+                tolerance = 0.15 * fabs(E_avg);
+                if (count > window_size){ // start at the second windwo 
+                    if (fabs(E_avg - E_avg_prev)< tolerance){
+                        stable_count ++;
+                    }
+                    else stable_count = 0;
+                }
+                E_avg_prev = E_avg; // reset
+                E_sum = 0;
+            }
+
+            if (stable_count >= number_windows && is_stable ==0){
+                is_stable = 1; // set is stabel to true
+                 printf("stabel");
+
+                if (s< big -1) break;  // jump to the next beta 
+                else {
+                    sampeling_started = 1;
+                }
+            } 
+            
         }
     }
 
