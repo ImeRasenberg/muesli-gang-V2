@@ -461,6 +461,11 @@ int main(void){
     generate_random_spin();
     WriteState2File();
 
+    // stabalisation constants
+    int window_size = N*N * 3; 
+    double tolerance = 50;
+    int number_windows = 2; // number of requiered stable windows
+
 
 
     int O = 20;
@@ -494,6 +499,7 @@ int main(void){
                 for(int s = 0; s<big; s++){
                     beta = betas[s];
                     for(int count=1; count<M+1; count++){
+                        
                         if(count % 1000 == 0 && sampeling_started == 1){
                             Q = get_Q();
 
@@ -548,7 +554,6 @@ int main(void){
 
 
                             if (s< big -1) break;  // jump to the next beta 
-
                             else {
 
                                 sampeling_started = 1;
@@ -559,6 +564,8 @@ int main(void){
 
                         
                     }
+                    
+                }
 
                 // fclose(fp);
                 fclose(fp_sk);
