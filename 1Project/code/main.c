@@ -461,15 +461,8 @@ int main(void){
     generate_random_spin();
     WriteState2File();
 
-    
-    printf("initial energy is %lf\n", Energy);
 
-    double Ds[] = {1};
-    int Db = sizeof(Ds) / sizeof(Ds[0]);
-    double Hs[] = {1};
-    int Hb = sizeof(Hs) / sizeof(Hs[0]);
 
-    
     int O = 20;
     for(int count1 = 0; count1<O+1; count1++){
         D=2/(double)O*count1;
@@ -478,12 +471,17 @@ int main(void){
             Hz=2/(double)O*count2;
 
             for(int count3 = 0; count3<1; count3++){
+                // for understanding when the energy is stable
+                double E_sum = 0.0;
+                double E_avg_prev = 0.0;
+                int stable_count = 0;
+                int is_stable = 0;
 
+                // knowing when to start sampling
+                int sampeling_started = 0;
+                int samples_taken = 0;
+                int max_samples = 30;
                 Energy = get_energy_tot(spin);
-
-                // char f1[128];
-                // sprintf(f1, "Data/Energy_steps__J_%lf__Hz_%lf__I_%d.txt",J, Hz, count3);
-                // FILE* fp = fopen(f1, "w");
 
                 char f2[128];
                 sprintf(f2, "Data/skyrmions__D_%lf__Hz_%lf__I_%d.json",D, Hz, count3);
@@ -496,19 +494,71 @@ int main(void){
                 for(int s = 0; s<big; s++){
                     beta = betas[s];
                     for(int count=1; count<M+1; count++){
-                        if(count % 1000 == 0 & beta>=betas[big-1]){
+                        if(count % 1000 == 0 && sampeling_started == 1){
                             Q = get_Q();
 
                             gaussian_filter_CD(2.0);
 
                             desission_peak(tot, f2);
+
+                            samples_taken ++;
+
+                            if (samples_taken >= max_samples){
+                                break;
+                            }
                         }
                         n1 = floor(N*dsfmt_genrand());
                         n2 = floor(N*dsfmt_genrand());
                         accepted += change_particle();
                         tot+=1;
+
+                        E_sum += Energy;
+                        E_sum += Energy;
+
+                        if (count % window_size == 0){
+
+                            double E_avg = E_sum / window_size;
+
+                            tolerance = 0.15 * fabs(E_avg);
+
+                            if (count > window_size){ // start at the second windwo 
+
+                                if (fabs(E_avg - E_avg_prev)< tolerance){
+
+                                    stable_count ++;
+
+                                }
+
+                                else stable_count = 0;
+
+                            }
+
+                            E_avg_prev = E_avg; // reset
+
+                            E_sum = 0;
+
+                        }
+
+                        if (stable_count >= number_windows && is_stable ==0){
+
+                            is_stable = 1; // set is stabel to true
+
+                            printf("stabel");
+
+
+
+                            if (s< big -1) break;  // jump to the next beta 
+
+                            else {
+
+                                sampeling_started = 1;
+
+                            }
+
+                        }
+
+                        
                     }
-                }
 
                 // fclose(fp);
                 fclose(fp_sk);
