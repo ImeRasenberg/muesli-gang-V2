@@ -30,4 +30,16 @@
 /1Project/documentation/*.pdf
 
 
+/1Project/graphs/*.aux
+/1Project/graphs/*.bbl
+/1Project/graphs/*.log
+/1Project/graphs/*.out
+/1Project/graphs/*.toc
+/1Project/graphs/*.synctex.gz
+/1Project/graphs/*.fls
+/1Project/graphs/*.fdb_latexmk
+/1Project/graphs/*.pdf
+/1Project/graphs/*.snm
+/1Project/graphs/*.nav
+
 /1Project/code/Data/
