@@ -3,31 +3,14 @@
 \begin{document}
 	
 	\begin{frame}{Model}
-		\[
-		\mathcal{H} = 
-		\]
+		 \begin{align*}
+    	&H = H_J + H_D\\
+   	 	& \text{Heisenberg exchange Hamiltonian}: H_J  = - J \sum_r \vec{S}_r \cdot \left(  \vec{S}_{r + \hat{x}} + \vec{S}_{r + \hat{y}}  \right) - H_Z \sum_r \vec{S}_r\\
+    	& \text{Dzyaloshinskii-Moriya interaction Hamiltonian}: H_D = D \sum_r \vec{S}_r \times \vec{S}_{r + \hat{x}} \cdot \hat{x} +  \vec{S}_r \times \vec{S}_{r + \hat{y}} \cdot \hat{y}
+ \end{align*}
 	\end{frame}
 	
-	
-	\begin{frame}{Comparison}
-		\begin{columns}
-			\column{0.48\linewidth}
-			\centering
-			\begin{figure}
-				\includegraphics[width=\linewidth]{20x20 phase diagram.png}
-			\end{figure}
-			
-			
-			\column{0.48\linewidth}
-			\centering
-			
-			\begin{figure}
-				\includegraphics[width=\linewidth]{20x20 phase diagram.png}
-			\end{figure}
-			
-		\end{columns}
-		
-	\end{frame}
+
 	
 	
 	
@@ -46,6 +29,27 @@
 			
 			\begin{figure}
 				\includegraphics[width=\linewidth]{wrapping.png}
+			\end{figure}
+			
+		\end{columns}
+	\end{frame}
+
+
+	\begin{frame}{Detection}
+		
+		\begin{columns}
+			\column{0.48\linewidth}
+			\centering
+			\begin{figure}
+				\includegraphics[width=\linewidth]{wrapping.png}
+			\end{figure}
+			
+			
+			\column{0.48\linewidth}
+			\centering
+			
+			\begin{figure}
+				\includegraphics[width=\linewidth]{peaks.png}
 			\end{figure}
 			
 		\end{columns}
@@ -72,4 +76,25 @@
 %			
 %		\end{columns}
 %	\end{frame}
+
+	
+	\begin{frame}{Comparison}
+		\begin{columns}
+			\column{0.48\linewidth}
+			\centering
+			\begin{figure}
+				\includegraphics[width=\linewidth]{20x20 phase diagram.png}
+			\end{figure}
+			
+			
+			\column{0.48\linewidth}
+			\centering
+			
+			\begin{figure}
+				\includegraphics[width=\linewidth]{skyrmion_paper_space.jpeg}
+			\end{figure}
+			
+		\end{columns}
+		
+	\end{frame}
 \end{document}
