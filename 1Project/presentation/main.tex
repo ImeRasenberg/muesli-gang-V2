@@ -1,0 +1,57 @@
+% main.tex - showcase of the UU beamer theme
+\documentclass[aspectratio=169,10pt]{beamer}
+
+\usetheme[showlogo]{UU}
+
+
+% -- Metadata -----------------------------------
+\title[Magnetic Skyrmions]{%
+  Magnetic Skyrmions%
+%  \texorpdfstring{{\footnotesize \quad \textcolor{UUred}{v1.1.0}}}{ v1.1.0}%
+}
+\author[P.Haas, I.Rasenberg]{Dr. Heinz Doofenshmirtz}
+\subtitle{A \LaTeX\ presentation template for Utrecht University}
+\institute{Department of Information and Computing Sciences}
+\date{\today}
+
+
+
+\usepackage{braket}
+\usepackage{pgfplots}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\pgfplotsset{compat=1.18}
+
+\begin{document}
+
+% -- Multi-author / conference title (no subtitle - demonstrates that
+%    leaving it out is fine) --
+\subtitle{}
+\author[Pieter \& Ime]{%
+  Pieter Haas\inst{1} \and
+  Ime Rasenberg\inst{2}%
+}
+
+\addinstitute{1}{ physics, Utrecht University}
+\addinstitute{2}{ physics, Utrecht University}
+\multiauthor
+\venue{Modeling and simulations}
+
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+
+
+% ===========================================
+
+% ===========================================
+
+\input{sections/update_pres.tex}
+
+
+
+
+\end{document}
