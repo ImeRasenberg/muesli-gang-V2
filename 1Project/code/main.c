@@ -248,7 +248,7 @@ double get_Q(){
 void gaussian_filter_CD(double sigma){
 
     // Radius ≈ 3 sigma (same practical cutoff scipy uses)
-    int radius = (int)ceil(4.0 * sigma);
+    int radius = (int)round(4.0 * sigma);
     int size = 2 * radius + 1;
 
     double kernel[size][size];
@@ -307,7 +307,7 @@ void desission_peak(int step, char f2[128]){
     max_count = 0;
     min_count = 0;
 
-    int radius = 4;
+    int radius = 2;
     int Q_target = (int)round(Q);
 
     double largest_peak = 0.0;
@@ -476,12 +476,6 @@ int main(void){
             Hz=2/(double)O*count2;
 
             for(int count3 = 0; count3<1; count3++){
-                // for understanding when the energy is stable
-                double E_sum = 0.0;
-                double E_avg_prev = 0.0;
-                int stable_count = 0;
-                int is_stable = 0;
-
                 // knowing when to start sampling
                 int sampeling_started = 0;
                 int samples_taken = 0;
@@ -498,12 +492,19 @@ int main(void){
                 int tot =0;
                 for(int s = 0; s<big; s++){
                     beta = betas[s];
+                    // for understanding when the energy is stable
+                    double E_sum = 0.0;
+                    double E_avg_prev = 0.0;
+                    int stable_count = 0;
+                    int is_stable = 0;
+
+
                     for(int count=1; count<M+1; count++){
                         
                         if(count % 1000 == 0 && sampeling_started == 1){
                             Q = get_Q();
 
-                            gaussian_filter_CD(2.0);
+                            gaussian_filter_CD(0.8);
 
                             desission_peak(tot, f2);
 
@@ -518,7 +519,6 @@ int main(void){
                         accepted += change_particle();
                         tot+=1;
 
-                        E_sum += Energy;
                         E_sum += Energy;
 
                         if (count % window_size == 0){
@@ -545,21 +545,19 @@ int main(void){
 
                         }
 
-                        if (stable_count >= number_windows && is_stable ==0){
+                        if (stable_count >= number_windows && is_stable == 0){
+                            // printf("Stable reached at beta=%f count=%d\n", beta, count);
 
-                            is_stable = 1; // set is stabel to true
+                            is_stable = 1;
 
-                            printf("stabel");
-
-
-
-                            if (s< big -1) break;  // jump to the next beta 
-                            else {
-
-                                sampeling_started = 1;
-
+                            if (s < big - 1){
+                                // printf("Moving to next beta\n");
+                                break;
                             }
-
+                            else{
+                                // printf("Starting sampling\n");
+                                sampeling_started = 1;
+                            }
                         }
 
                         
@@ -567,7 +565,6 @@ int main(void){
                     
                 }
 
-                // fclose(fp);
                 fclose(fp_sk);
             }
         }
