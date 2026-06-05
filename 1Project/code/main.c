@@ -468,7 +468,7 @@ int main(void){
 
 
 
-    int O = 20;
+    int O = 30;
     for(int count1 = 0; count1<O+1; count1++){
         D=2/(double)O*count1;
 
