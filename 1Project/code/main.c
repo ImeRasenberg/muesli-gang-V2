@@ -297,16 +297,14 @@ void gaussian_filter_CD(double sigma){
 }
 #define MAX_PEAKS (N*N)
 int max_count = 0;
+double max_sum = 0;
 int min_count = 0;
+double min_sum = 0;
 int max_x[MAX_PEAKS];
 int max_y[MAX_PEAKS];
 int min_x[MAX_PEAKS];
 int min_y[MAX_PEAKS];
 void desission_peak(int step, char f2[128]){
-
-    max_count = 0;
-    min_count = 0;
-
     int radius = 2;
     int Q_target = (int)round(Q);
 
@@ -338,7 +336,9 @@ void desission_peak(int step, char f2[128]){
         double threshold = frac * largest_peak;
 
         max_count = 0;
+        max_sum = 0;
         min_count = 0;
+        min_sum = 0;
 
         for(int i = 0; i < N; i++){
             for(int j = 0; j < N; j++){
@@ -389,12 +389,14 @@ done_check:
                     max_x[max_count] = i;
                     max_y[max_count] = j;
                     max_count++;
+                    max_sum += CD_smooth[i][j];
                 }
 
                 if(is_min){
                     min_x[min_count] = i;
                     min_y[min_count] = j;
                     min_count++;
+                    min_sum += CD_smooth[i][j];
                 }
             }
         }
@@ -409,6 +411,18 @@ done_check:
         }
     }
 
+    double spinx = 0;
+    double spiny = 0;
+    double spinz = 0;
+
+    for(int i = 0; i<N; i++ ){
+        for(int j=0; j<N; j++ ){
+            spinx += spin[i][j][0];
+            spiny += spin[i][j][1];
+            spinz += spin[i][j][3];
+        }
+    }
+
     FILE *fp = fopen(f2, "a");
     if (fp == NULL) {
         return;
@@ -419,11 +433,15 @@ done_check:
     fprintf(fp, "  \"step\": %d,\n", step);
     fprintf(fp, "  \"Q\": %d,\n", Q_found);
     fprintf(fp, "  \"threshold_fraction\": %.6f,\n", best_frac);
+    fprintf(fp, "  \"max_sum\": %.6f,\n", max_sum);
+    fprintf(fp, "  \"min_sum\": %.6f,\n", min_sum);
     fprintf(fp, "  \"E\": %.6f,\n", Energy);
     fprintf(fp, "  \"J\": %.6f,\n", J);
     fprintf(fp, "  \"D\": %.6f,\n", D);
     fprintf(fp, "  \"Hz\": %.6f,\n", Hz);
     fprintf(fp, "  \"beta\": %.6f,\n", beta);
+
+    fprintf(fp, "  \"spins\": [%.6f,%.6f,%.6f],\n", spinx, spiny, spinz);
     
 
     // 2. Print positive peaks ("N+")
@@ -475,7 +493,7 @@ int main(void){
         for(int count2 = 0; count2<O+1; count2++){
             Hz=2/(double)O*count2;
 
-            for(int count3 = 0; count3<1; count3++){
+            for(int count3 = 0; count3<5; count3++){
                 // knowing when to start sampling
                 int sampeling_started = 0;
                 int samples_taken = 0;
