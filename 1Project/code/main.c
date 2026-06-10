@@ -419,7 +419,7 @@ done_check:
         for(int j=0; j<N; j++ ){
             spinx += spin[i][j][0];
             spiny += spin[i][j][1];
-            spinz += spin[i][j][3];
+            spinz += spin[i][j][2];
         }
     }
 
@@ -447,7 +447,7 @@ done_check:
     // 2. Print positive peaks ("N+")
     fprintf(fp, "  \"N+\": {");
     for (int k = 0; k < max_count; k++) {
-        fprintf(fp, "\"%d\": [%d, %d]", k, max_x[k], max_y[k]);
+        fprintf(fp, "\"%d\": [%d, %d, %.6f]", k, max_x[k], max_y[k], CD_smooth[max_x[k]][max_y[k]]);
         if (k < max_count - 1) {
             fprintf(fp, ", "); // Comma between peak objects
         }
@@ -457,7 +457,7 @@ done_check:
     // 3. Print negative peaks ("N-")
     fprintf(fp, "  \"N-\": {");
     for (int k = 0; k < min_count; k++) {
-        fprintf(fp, "\"%d\": [%d, %d]", k, min_x[k], min_y[k]);
+        fprintf(fp, "\"%d\": [%d, %d, %.6f]", k, min_x[k], min_y[k], CD_smooth[min_x[k]][min_y[k]]);
         if (k < min_count - 1) {
             fprintf(fp, ", "); // Comma between peak objects
         }
@@ -486,7 +486,7 @@ int main(void){
 
 
 
-    int O = 30;
+    int O = 10;
     for(int count1 = 0; count1<O+1; count1++){
         D=2/(double)O*count1;
 

@@ -1,23 +1,33 @@
-\documentclass{article}
+\documentclass[twocolumn]{article}
 
 \input{packages}
 \input{appearance}
 
+\usepackage{multicol}
 
 \begin{document}
 
-\pagenumbering{roman}
-\input{}
-\tableofcontents 
-\newpage
+%\pagenumbering{roman}
+%\input{sections/Title page.tex}
+%\tableofcontents 
+%\newpage
 
 
-\pagenumbering{arabic}\newpage 
-\input{sections/Theory/Theory.tex}
+%\pagenumbering{arabic}\newpage 
+\twocolumn[
+\input{sections/Title page.tex}
+\vspace*{1em}
+]
+
+\input{sections/Introduction.tex}
+\input{sections/Theory.tex}
+\input{sections/Results.tex}
+\input{sections/Discussion.tex}
+\input{sections/Conclusion.tex}
 
 \newpage
 \appendix
-a
+
 \pagenumbering{Roman}
 
 \end{document}
