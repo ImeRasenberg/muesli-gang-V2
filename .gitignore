@@ -42,4 +42,22 @@
 /1Project/graphs/*.snm
 /1Project/graphs/*.nav
 
+
+/1Project/presentation/*.aux
+/1Project/presentation/*.bbl
+/1Project/presentation/*.log
+/1Project/presentation/*.out
+/1Project/presentation/*.toc
+/1Project/presentation/*.synctex.gz
+/1Project/presentation/*.fls
+/1Project/presentation/*.fdb_latexmk
+/1Project/presentation/*.pdf
+/1Project/presentation/*.snm
+/1Project/presentation/*.nav
+
+
+
 /1Project/code/Data/
+/1Project/code/Data 4.0/
+/1Project/code/Data 3.0/
+/1Project/code/Data 2.0/
