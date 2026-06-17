@@ -507,7 +507,7 @@ int main(void){
         for(int count2 = 0; count2<O+1; count2++){
             Hz=2/(double)O*count2;
 
-            for(int count3 = 0; count3<5; count3++){
+            for(int count3 = 0; count3<4; count3++){
                 // knowing when to start sampling
                 int sampeling_started = 0;
                 int samples_taken = 0;

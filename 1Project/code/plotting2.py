@@ -167,7 +167,7 @@ img = plt.imshow(charge_density, cmap='seismic', origin='lower',
 cbar = plt.colorbar(img)
 cbar.set_label('Local Topological Charge Density ($q_{ij}$)', rotation=270, labelpad=15)
 
-plt.title(f"Local Topological Charge Density Map\nGlobal Wrapping Number $Q$ = {total_Q:+.4f}")
+plt.title(f"$Q$ = {total_Q:+.4f}")
 plt.xlabel("X Lattice Site")
 plt.ylabel("Y Lattice Site")
 plt.grid(False) # Turn off standard lines to clearly observe the pixels
@@ -176,7 +176,7 @@ plt.show()
 
 from scipy.ndimage import gaussian_filter
 
-smooth = gaussian_filter(charge_density, sigma=2, mode = "wrap")
+smooth = gaussian_filter(charge_density, sigma=0.8, mode = "wrap")
 
 plt.figure(figsize=(9, 7))
 
@@ -187,7 +187,7 @@ img = plt.imshow(smooth, cmap='seismic', origin='lower',
 cbar = plt.colorbar(img)
 cbar.set_label('Local Topological Charge Density ($q_{ij}$)', rotation=270, labelpad=15)
 
-plt.title(f"Local Topological Charge Density Map\nGlobal Wrapping Number $Q$ = {total_Q:+.4f}")
+plt.title(f"$Q$ = {total_Q:+.4f}")
 plt.xlabel("X Lattice Site")
 plt.ylabel("Y Lattice Site")
 plt.grid(False) # Turn off standard lines to clearly observe the pixels
@@ -206,7 +206,7 @@ from scipy.ndimage import (
 # -----------------------------------
 smooth = gaussian_filter(
     charge_density,
-    sigma=2,
+    sigma=0.8,
     mode="wrap"
 )
 
@@ -342,8 +342,7 @@ plt.scatter(
 )
 
 plt.title(
-    f"Detected Skyrmions\n"
-    f"Target Q={Q_target}, detected Q={Q_found}"
+   f"Target Q={Q_target}, detected Q={Q_found}"
 )
 
 plt.xlabel("X lattice site")
