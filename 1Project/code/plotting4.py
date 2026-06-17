@@ -1,7 +1,7 @@
 import os
 import json
 
-data_folder = "Data 3.0"
+data_folder = "Data 2.0"
 
 master_dict = {}
 decoder = json.JSONDecoder()
@@ -254,6 +254,31 @@ ax.set_title(f"Q measured")
 
 plt.show()
 
+
+
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+im = ax.imshow(
+    (tn-tp)/len(I_vals)+(Q)/len(I_vals),
+    origin="lower",
+    aspect="auto",
+    extent=[
+        min(D_vals),
+        max(D_vals),
+        min(Hz_vals),
+        max(Hz_vals),
+    ]
+)
+
+plt.colorbar(im, ax=ax, label="mean len(N-)")
+
+ax.set_xlabel("D/J")
+ax.set_ylabel("H/J")
+ax.set_title("Q - (N- - N+)")
+
+plt.show()
+
 # ======================================= #
 
 fig, ax = plt.subplots(figsize=(8, 6))
@@ -382,9 +407,9 @@ for I in I_vals:
             if I not in master_dict[D][Hz]:
                 continue
 
-            if mtx[iy][ix] > cut_off:
-                # print(f"skipping H{Hz}, D{D}")
-                continue
+            # if mtx[iy][ix] > cut_off:
+            #     # print(f"skipping H{Hz}, D{D}")
+            #     continue
         
             # if ix + iy  < 1:
             #     print(f"skipping H{Hz}, D{\D}")
@@ -444,7 +469,14 @@ im = ax.imshow(
 )
 
 plt.colorbar(im, ax=ax, label="mean len(N-)")
-
+ax.contour(mtx, levels = [cut_off] , colors="red", linewidths=1.5,
+           extent=[
+               min(D_vals),
+               max(D_vals),
+               min(Hz_vals),
+               max(Hz_vals),
+           ]
+           )
 ax.set_xlabel("D/J")
 ax.set_ylabel("H/J")
 ax.set_title(r"Average Magnetisation $\hat{z}$")
