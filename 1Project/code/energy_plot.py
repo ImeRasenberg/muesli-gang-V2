@@ -20,12 +20,11 @@ energies = data["energy"]
 
 plt.figure(figsize=(12, 6))
 plt.plot(steps, energies)
-plt.xlabel("Monte Carlo step")
+plt.xlabel("Step")
 plt.ylabel(r"Energy")
-plt.title("Energy evolution during Monte Carlo simulation")
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-#plt.savefig("energy_evolution.png", dpi=150)
+plt.savefig("energy_evolution.png", dpi=150)
 plt.show()
 
 
@@ -34,10 +33,9 @@ energies = energies *betas
 # Plot energy vs step, colored by beta
 plt.figure(figsize=(12, 6))
 plt.plot(steps, energies)
-plt.xlabel("Monte Carlo step")
+plt.xlabel("Step")
 plt.ylabel(r"Energy $\beta$")
-plt.title("Energy evolution during Monte Carlo simulation")
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
-#plt.savefig("energy_evolution.png", dpi=150)
+plt.savefig("energybeta_evolution.png", dpi=150)
 plt.show()
