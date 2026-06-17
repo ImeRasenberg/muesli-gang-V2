@@ -535,9 +535,9 @@ extent = [min(all_D_vals), max(all_D_vals), min(all_Hz_vals), max(all_Hz_vals)]
 
 fig, ax = plt.subplots(figsize=(8, 6))
 im = ax.imshow(Tc_masked, origin="lower", aspect="auto", extent=extent)
-plt.colorbar(im, ax=ax, label=r"$T_c \ (J/k_B)$")
+plt.colorbar(im, ax=ax, label=r"$T_c^* $")
 ax.set_xlabel("D/J")
 ax.set_ylabel("H/J")
-ax.set_title(r"$T_c$ (masked to ordered domain at $\beta=4$)")
+ax.set_title(r"$T_c^*$ (masked to ordered domain at $J\beta=4$)")
 plt.tight_layout()
 plt.show()
