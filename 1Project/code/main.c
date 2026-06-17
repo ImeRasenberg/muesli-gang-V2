@@ -35,6 +35,11 @@ int accepted = 0;
 double Energy=0;
 double Q = 0;
 
+double spinx = 0;
+double spiny = 0;
+double spinz = 0;
+
+
 
 // starting the simmulation
 void generate_random_spin(){
@@ -127,6 +132,22 @@ double get_energy_tot(double spin[N][N][3]){
 
     return Energy_n;
 }
+
+void calcualte_spins(void){
+        for(int i = 0; i<N; i++ ){
+        for(int j=0; j<N; j++ ){
+            spinx += spin[i][j][0];
+            spiny += spin[i][j][1];
+            spinz += spin[i][j][2];
+        }
+    }
+}
+
+void update_spins (double new_spin[3], double old_spin[3]){
+    spinx += (new_spin[0]- old_spin[0]);
+    spiny += (new_spin[1]- old_spin[1]);
+    spinz += (new_spin[2]- old_spin[2]);
+}
 double get_delta_energy(int i, int j) {
     // Calculate the change in the spin vector
     double dS[3];
@@ -183,6 +204,8 @@ int change_particle(){
     double dE = get_delta_energy(n1 , n2);
 
     if(dE < 0.0 || dsfmt_genrand() < exp(-beta * dE)){
+
+        update_spins (spin_n[n1][n2], spin[n1][n2]);
         spin[n1][n2][0] = spin_n[n1][n2][0];
         spin[n1][n2][1] = spin_n[n1][n2][1];
         spin[n1][n2][2] = spin_n[n1][n2][2];
@@ -411,17 +434,7 @@ done_check:
         }
     }
 
-    double spinx = 0;
-    double spiny = 0;
-    double spinz = 0;
 
-    for(int i = 0; i<N; i++ ){
-        for(int j=0; j<N; j++ ){
-            spinx += spin[i][j][0];
-            spiny += spin[i][j][1];
-            spinz += spin[i][j][2];
-        }
-    }
 
     FILE *fp = fopen(f2, "a");
     if (fp == NULL) {
@@ -477,6 +490,7 @@ int main(void){
     dsfmt_seed(time(NULL));
 
     generate_random_spin();
+    calcualte_spins();
     WriteState2File();
 
     // stabalisation constants
