@@ -504,7 +504,7 @@ int main(void){
                 sprintf(f2, "Data/skyrmions__D_%lf__Hz_%lf__I_%d.json",D, Hz, count3);
                 FILE *fp_sk = fopen(f2, "w");
 
-                double betas[] = {0.5, 1.0, 2.0, 4.0};
+                double betas[] = {0.5, 1.0, 1.5, 2.0};
                 int big = sizeof(betas) / sizeof(betas[0]);
 
                 int tot =0;

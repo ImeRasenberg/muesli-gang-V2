@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.18.0 (TeX Live 2025/dev/Debian)  (format=lualatex 2026.2.3)  17 JUN 2026 19:08
+This is LuaHBTeX, Version 1.18.0 (TeX Live 2025/dev/Debian)  (format=lualatex 2026.2.3)  17 JUN 2026 19:21
  restricted system commands enabled.
 **main.tex
 (./main.tex
@@ -727,12 +727,10 @@ Package: amsthm 2020/05/29 v2.20.6
 \beamer@dimb=\dimen293
 )
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerouterthemedefault.sty)))
-(./beamerthemeUU.sty
-Package: beamerthemeUU 2026/05/14 v1.1.0 A Beamer Theme for Utrecht University
- (./beamercolorthemeUU.sty
-Package: beamercolorthemeUU 2026/05/14 v1.1.0 UU Beamer Color Theme
-) (./beamerinnerthemeUU.sty
-Package: beamerinnerthemeUU 2026/05/14 v1.1.0 UU Beamer Inner Theme
+(/usr/share/texlive/texmf-dist/tex/latex/braket/braket.sty)
+(/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
 
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (/usr/share/texlive/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
@@ -799,1512 +797,16 @@ File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
 zlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )))
-(/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
-zlibrarypositioning.code.tex
-File: tikzlibrarypositioning.code.tex 2023-01-15 v3.1.10 (3.1.10)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
-Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count352
-\calc@Bcount=\count353
-\calc@Adimen=\dimen307
-\calc@Bdimen=\dimen308
-\calc@Askip=\skip66
-\calc@Bskip=\skip67
-LaTeX Info: Redefining \setlength on input line 80.
-LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count354
-\calc@Cskip=\skip68
-)
-(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
-Package: setspace 2022/12/04 v6.7b set line spacing
-))
-(./beamerouterthemeUU.sty
-Package: beamerouterthemeUU 2026/05/14 v1.1.0 UU Beamer Outer Theme
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count355
-\lst@gtempboxa=\box82
-\lst@token=\toks49
-\lst@length=\count356
-\lst@currlwidth=\dimen309
-\lst@column=\count357
-\lst@pos=\count358
-\lst@lostspace=\dimen310
-\lst@width=\dimen311
-\lst@newlines=\count359
-\lst@lineno=\count360
-\lst@maxwidth=\dimen312
-
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstpatch.sty
-File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
-\c@lstnumber=\count361
-\lst@skipnumbers=\count362
-\lst@framebox=\box83
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2024/09/23 1.10c listings configuration
-))
-Package: listings 2024/09/23 1.10c (Carsten Heinz)
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
-Package: biblatex 2024/03/21 v3.20 programmable bibliographies (PK/MW)
-
-(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
-Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count363
-
-(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
-File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
-))
-(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2024/03/16 v1.1e Standard LaTeX ifthen package (DPC)
-)
-\c@tabx@nest=\count364
-\c@listtotal=\count365
-\c@listcount=\count366
-\c@liststart=\count367
-\c@liststop=\count368
-\c@citecount=\count369
-\c@citetotal=\count370
-\c@multicitecount=\count371
-\c@multicitetotal=\count372
-\c@instcount=\count373
-\c@maxnames=\count374
-\c@minnames=\count375
-\c@maxitems=\count376
-\c@minitems=\count377
-\c@citecounter=\count378
-\c@maxcitecounter=\count379
-\c@savedcitecounter=\count380
-\c@uniquelist=\count381
-\c@uniquename=\count382
-\c@refsection=\count383
-\c@refsegment=\count384
-\c@maxextratitle=\count385
-\c@maxextratitleyear=\count386
-\c@maxextraname=\count387
-\c@maxextradate=\count388
-\c@maxextraalpha=\count389
-\c@abbrvpenalty=\count390
-\c@highnamepenalty=\count391
-\c@lownamepenalty=\count392
-\c@maxparens=\count393
-\c@parenlevel=\count394
-\blx@tempcnta=\count395
-\blx@tempcntb=\count396
-\blx@tempcntc=\count397
-\c@blx@maxsection=\count398
-\blx@maxsegment@0=\count399
-\blx@notetype=\count400
-\blx@parenlevel@text=\count401
-\blx@parenlevel@foot=\count402
-\blx@sectionciteorder@0=\count403
-\blx@sectionciteorderinternal@0=\count404
-\blx@entrysetcounter=\count405
-\blx@biblioinstance=\count406
-\labelnumberwidth=\skip69
-\labelalphawidth=\skip70
-\biblabelsep=\skip71
-\bibitemsep=\skip72
-\bibnamesep=\skip73
-\bibinitsep=\skip74
-\bibparsep=\skip75
-\bibhang=\skip76
-\blx@bcfin=\read3
-\blx@bcfout=\write5
-\blx@langwohyphens=\language2
-\c@mincomprange=\count407
-\c@maxcomprange=\count408
-\c@mincompwidth=\count409
-Package biblatex Info: Trying to load biblatex default data model...
-Package biblatex Info: ... file 'blx-dm.def' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def
-File: blx-dm.def 2024/03/21 v3.20 biblatex datamodel (PK/MW)
-)
-Package biblatex Info: Trying to load biblatex style data model...
-Package biblatex Info: ... file 'numeric.dbx' not found.
-Package biblatex Info: Trying to load biblatex custom data model...
-Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count410
-\c@savedafterword=\count411
-\c@annotator=\count412
-\c@savedannotator=\count413
-\c@author=\count414
-\c@savedauthor=\count415
-\c@bookauthor=\count416
-\c@savedbookauthor=\count417
-\c@commentator=\count418
-\c@savedcommentator=\count419
-\c@editor=\count420
-\c@savededitor=\count421
-\c@editora=\count422
-\c@savededitora=\count423
-\c@editorb=\count424
-\c@savededitorb=\count425
-\c@editorc=\count426
-\c@savededitorc=\count427
-\c@foreword=\count428
-\c@savedforeword=\count429
-\c@holder=\count430
-\c@savedholder=\count431
-\c@introduction=\count432
-\c@savedintroduction=\count433
-\c@namea=\count434
-\c@savednamea=\count435
-\c@nameb=\count436
-\c@savednameb=\count437
-\c@namec=\count438
-\c@savednamec=\count439
-\c@translator=\count440
-\c@savedtranslator=\count441
-\c@shortauthor=\count442
-\c@savedshortauthor=\count443
-\c@shorteditor=\count444
-\c@savedshorteditor=\count445
-\c@labelname=\count446
-\c@savedlabelname=\count447
-\c@institution=\count448
-\c@savedinstitution=\count449
-\c@lista=\count450
-\c@savedlista=\count451
-\c@listb=\count452
-\c@savedlistb=\count453
-\c@listc=\count454
-\c@savedlistc=\count455
-\c@listd=\count456
-\c@savedlistd=\count457
-\c@liste=\count458
-\c@savedliste=\count459
-\c@listf=\count460
-\c@savedlistf=\count461
-\c@location=\count462
-\c@savedlocation=\count463
-\c@organization=\count464
-\c@savedorganization=\count465
-\c@origlocation=\count466
-\c@savedoriglocation=\count467
-\c@origpublisher=\count468
-\c@savedorigpublisher=\count469
-\c@publisher=\count470
-\c@savedpublisher=\count471
-\c@language=\count472
-\c@savedlanguage=\count473
-\c@origlanguage=\count474
-\c@savedoriglanguage=\count475
-\c@pageref=\count476
-\c@savedpageref=\count477
-\shorthandwidth=\skip77
-\shortjournalwidth=\skip78
-\shortserieswidth=\skip79
-\shorttitlewidth=\skip80
-\shortauthorwidth=\skip81
-\shorteditorwidth=\skip82
-\locallabelnumberwidth=\skip83
-\locallabelalphawidth=\skip84
-\localshorthandwidth=\skip85
-\localshortjournalwidth=\skip86
-\localshortserieswidth=\skip87
-\localshorttitlewidth=\skip88
-\localshortauthorwidth=\skip89
-\localshorteditorwidth=\skip90
-Package biblatex Info: Trying to load enhanced support for Unicode engines...
-Package biblatex Info: ... file 'blx-unicode.def' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-unicode.def)
-Package biblatex Info: Trying to load compatibility code...
-Package biblatex Info: ... file 'blx-compat.def' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
-File: blx-compat.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
-)
-Package biblatex Info: Trying to load generic definitions...
-Package biblatex Info: ... file 'biblatex.def' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
-File: biblatex.def 2024/03/21 v3.20 biblatex compatibility (PK/MW)
-\c@textcitecount=\count478
-\c@textcitetotal=\count479
-\c@textcitemaxnames=\count480
-\c@biburlbigbreakpenalty=\count481
-\c@biburlbreakpenalty=\count482
-\c@biburlnumpenalty=\count483
-\c@biburlucpenalty=\count484
-\c@biburllcpenalty=\count485
-\biburlbigskip=\muskip19
-\biburlnumskip=\muskip20
-\biburlucskip=\muskip21
-\biburllcskip=\muskip22
-\c@smartand=\count486
-)
-Package biblatex Info: Trying to load bibliography style 'numeric'...
-Package biblatex Info: ... file 'numeric.bbx' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/numeric.bbx
-File: numeric.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
-Package biblatex Info: Trying to load bibliography style 'standard'...
-Package biblatex Info: ... file 'standard.bbx' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/bbx/standard.bbx
-File: standard.bbx 2024/03/21 v3.20 biblatex bibliography style (PK/MW)
-\c@bbx:relatedcount=\count487
-\c@bbx:relatedtotal=\count488
-))
-Package biblatex Info: Trying to load citation style 'numeric'...
-Package biblatex Info: ... file 'numeric.cbx' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric.cbx
-File: numeric.cbx 2024/03/21 v3.20 biblatex citation style (PK/MW)
-Package biblatex Info: Redefining '\cite'.
-Package biblatex Info: Redefining '\parencite'.
-Package biblatex Info: Redefining '\footcite'.
-Package biblatex Info: Redefining '\footcitetext'.
-Package biblatex Info: Redefining '\smartcite'.
-Package biblatex Info: Redefining '\supercite'.
-Package biblatex Info: Redefining '\textcite'.
-Package biblatex Info: Redefining '\textcites'.
-Package biblatex Info: Redefining '\cites'.
-Package biblatex Info: Redefining '\parencites'.
-Package biblatex Info: Redefining '\smartcites'.
-)
-Package biblatex Info: Trying to load configuration file...
-Package biblatex Info: ... file 'biblatex.cfg' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
-File: biblatex.cfg 
-)
-Package biblatex Info: LuaTeX detected.
-(biblatex)             Assuming input encoding 'utf8'.
-Package biblatex Info: Document encoding is UTF8 ....
-
-(/usr/share/texlive/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-01-18 L3 programming layer (loader) 
-
-(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
-File: l3backend-luatex.def 2024-05-08 L3 backend support: PDF output (LuaTeX)
-\l__color_backend_stack_int=\count489
-Inserting `l3color' in `luaotfload.parse_color'.
-\l__pdf_internal_box=\box84
-))
-Package biblatex Info: ... and expl3
-(biblatex)             2025-01-18 L3 programming layer (loader) 
-(biblatex)             is new enough (at least 2020/04/06),
-(biblatex)             setting 'casechanger=expl3'.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
-(/usr/share/texlive/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2024-08-16 L3 Experimental document command parser
-)
-Package: blx-case-expl3 2024/03/21 v3.20 expl3 case changing code for biblatex
-))
-(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 1
-16.
-
-(/usr/share/texmf/tex/latex/lm/t1lmss.fd
-File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-))
-(/usr/share/texlive/texmf-dist/tex/latex/merriweather/merriweather.sty
-Package: merriweather 2022/09/20 (Bob Tennent) Supports Merriweather(Sans) font
-s for all LaTeX engines. 
-
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifxetex.sty
-Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
-)
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/ifluatex.sty
-Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-)
-(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
-Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
-)
-(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
-Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
-
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks50
-\XKV@tempa@toks=\toks51
-)
-\XKV@depth=\count490
-File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.sty
-Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
-Lua module: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
-(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec-luatex.sty
-Package: fontspec-luatex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaT
-eX
-\l__fontspec_script_int=\count491
-\l__fontspec_language_int=\count492
-\l__fontspec_strnum_int=\count493
-\l__fontspec_tmp_int=\count494
-\l__fontspec_tmpa_int=\count495
-\l__fontspec_tmpb_int=\count496
-\l__fontspec_tmpc_int=\count497
-\l__fontspec_em_int=\count498
-\l__fontspec_emdef_int=\count499
-\l__fontspec_strong_int=\count500
-\l__fontspec_strongdef_int=\count501
-\l__fontspec_tmpa_dim=\dimen313
-\l__fontspec_tmpb_dim=\dimen314
-\l__fontspec_tmpc_dim=\dimen315
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-)
-(/usr/share/texlive/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
-
-Package fontspec Info: 
-(fontspec)             Font family 'Merriweather(0)' created for font
-(fontspec)             'Merriweather' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,Ligatures=TeX,Numbers =
-(fontspec)             {Proportional,OldStyle},UprightFont =
-(fontspec)             *-Regular,ItalicFont = *-Italic,BoldFont =
-(fontspec)             *-Bold,BoldItalicFont = *-BoldItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Regular.otf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Regular.otf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Bold.otf]:mode=node;script=latn;langua
-ge=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Bold.otf]:mode=node;script=latn;langua
-ge=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Italic.otf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Italic.otf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BoldItalic.otf]:mode=node;script=latn;
-language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BoldItalic.otf]:mode=node;script=latn;
-language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'Merriweather(1)' created for font
-(fontspec)             'Merriweather' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,Numbers = {Proportional,OldStyle},UprightFont =
-(fontspec)             *-Regular,ItalicFont = *-Italic,BoldFont =
-(fontspec)             *-Bold,BoldItalicFont = *-BoldItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Regular.otf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Regular.otf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Bold.otf]:mode=node;script=latn;langua
-ge=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Bold.otf]:mode=node;script=latn;langua
-ge=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Italic.otf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Italic.otf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BoldItalic.otf]:mode=node;script=latn;
-language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BoldItalic.otf]:mode=node;script=latn;
-language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'MerriweatherSans(0)' created for font
-(fontspec)             'MerriweatherSans' with options [Ligatures =
-(fontspec)             TeX,Extension = .otf,Ligatures=TeX,Numbers =
-(fontspec)             {Proportional,OldStyle},Scale = 1,UprightFont =
-(fontspec)             *-Regular,ItalicFont = *-Italic,BoldFont =
-(fontspec)             *-Bold,BoldItalicFont = *-BoldItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Regular.otf]:mode=node;script
-=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Regular.otf]:mode=node;script
-=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Bold.otf]:mode=node;script=la
-tn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Bold.otf]:mode=node;script=la
-tn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Italic.otf]:mode=node;script=
-latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Italic.otf]:mode=node;script=
-latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-BoldItalic.otf]:mode=node;scr
-ipt=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-BoldItalic.otf]:mode=node;scr
-ipt=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 297.
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'MerriweatherSans(1)' created for font
-(fontspec)             'MerriweatherSans' with options [Ligatures =
-(fontspec)             TeX,Extension = .otf,Numbers =
-(fontspec)             {Proportional,OldStyle},Scale = 1,UprightFont =
-(fontspec)             *-Regular,ItalicFont = *-Italic,BoldFont =
-(fontspec)             *-Bold,BoldItalicFont = *-BoldItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Regular.otf]:mode=node;script
-=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Regular.otf]:mode=node;script
-=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Bold.otf]:mode=node;script=la
-tn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Bold.otf]:mode=node;script=la
-tn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Italic.otf]:mode=node;script=
-latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Italic.otf]:mode=node;script=
-latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-BoldItalic.otf]:mode=node;scr
-ipt=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-BoldItalic.otf]:mode=node;scr
-ipt=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'Merriweather(2)' created for font
-(fontspec)             'Merriweather' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,Numbers = {Proportional,OldStyle},UprightFont =
-(fontspec)             *-Light,ItalicFont = *-LightItalic,BoldFont =
-(fontspec)             *-Light,BoldItalicFont = *-LightItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Light.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Light.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Light.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Light.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-LightItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-LightItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-LightItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-LightItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'MerriweatherSans(2)' created for font
-(fontspec)             'MerriweatherSans' with options [Ligatures =
-(fontspec)             TeX,Extension = .otf,Numbers =
-(fontspec)             {Proportional,OldStyle},Scale = 1,UprightFont =
-(fontspec)             *-Light,ItalicFont = *-LightItalic,BoldFont =
-(fontspec)             *-Light,BoldItalicFont = *-LightItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Light.otf]:mode=node;script=l
-atn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Light.otf]:mode=node;script=l
-atn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Light.otf]:mode=node;script=l
-atn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-Light.otf]:mode=node;script=l
-atn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-LightItalic.otf]:mode=node;sc
-ript=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-LightItalic.otf]:mode=node;sc
-ript=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-LightItalic.otf]:mode=node;sc
-ript=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-LightItalic.otf]:mode=node;sc
-ript=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'Merriweather(3)' created for font
-(fontspec)             'Merriweather' with options [Ligatures = TeX,Extension
-(fontspec)             = .otf,Numbers = {Proportional,OldStyle},UprightFont =
-(fontspec)             *-Black,ItalicFont = *-BlackItalic,BoldFont =
-(fontspec)             *-Black,BoldItalicFont = *-BlackItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Black.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Black.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Black.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->"[Merriweather-Black.otf]:mode=node;script=latn;langu
-age=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BlackItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BlackItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BlackItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->"[Merriweather-BlackItalic.otf]:mode=node;script=latn
-;language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             MerriweatherSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'MerriweatherSans(3)' created for font
-(fontspec)             'MerriweatherSans' with options [Ligatures =
-(fontspec)             TeX,Extension = .otf,Numbers =
-(fontspec)             {Proportional,OldStyle},Scale = 1,UprightFont =
-(fontspec)             *-ExtraBold,ItalicFont = *-ExtraBoldItalic,BoldFont =
-(fontspec)             *-ExtraBold,BoldItalicFont = *-ExtraBoldItalic].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBold.otf]:mode=node;scri
-pt=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBold.otf]:mode=node;scri
-pt=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBold.otf]:mode=node;scri
-pt=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBold.otf]:mode=node;scri
-pt=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBoldItalic.otf]:mode=nod
-e;script=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBoldItalic.otf]:mode=nod
-e;script=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBoldItalic.otf]:mode=nod
-e;script=latn;language=dflt;+tlig;+pnum;+onum;"
-(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
-(fontspec)             <->s*[1]"[MerriweatherSans-ExtraBoldItalic.otf]:mode=nod
-e;script=latn;language=dflt;+tlig;+pnum;+onum;+smcp;"
-
-)
-(/usr/share/texlive/texmf-dist/tex/latex/opensans/opensans.sty
-Package: opensans 2019/06/20 Style file for Open Sans.
-
-(/usr/share/texlive/texmf-dist/tex/latex/fontaxes/fontaxes.sty
-Package: fontaxes 2020/07/21 v1.0e Font selection axes
-LaTeX Info: Redefining \upshape on input line 29.
-LaTeX Info: Redefining \itshape on input line 31.
-LaTeX Info: Redefining \slshape on input line 33.
-LaTeX Info: Redefining \swshape on input line 35.
-LaTeX Info: Redefining \scshape on input line 37.
-LaTeX Info: Redefining \sscshape on input line 39.
-LaTeX Info: Redefining \ulcshape on input line 41.
-LaTeX Info: Redefining \textsw on input line 47.
-LaTeX Info: Redefining \textssc on input line 48.
-LaTeX Info: Redefining \textulc on input line 49.
-)
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'opensans-TLF' created for font 'OpenSans'
-(fontspec)             with options
-(fontspec)             [Extension=.ttf,Ligatures={TeX,Common},Scale=1,FontFace=
-{l}{n}{*-Light},FontFace={l}{it}{*-LightItalic},FontFace={lc}{n}{*Condensed-Lig
-ht},FontFace={lc}{it}{*Condensed-LightItalic},UprightFont={*-Regular},ItalicFon
-t={*-Italic},FontFace={sb}{n}{*-SemiBold},FontFace={sb}{it}{*-SemiBoldItalic},F
-ontFace={b}{n}{*-Bold},FontFace={b}{it}{*-BoldItalic},BoldFont={*-Bold},BoldIta
-licFont={*-BoldItalic},FontFace={bc}{n}{*Condensed-Bold},FontFace={eb}{n}{*-Ext
-raBold},FontFace={eb}{it}{*-ExtraBoldItalic},Numbers={Monospaced,Lining},NFSSFa
-mily=opensans-TLF].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - (l/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Light.ttf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (l/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-LightItalic.ttf]:mode=node;script=lat
-n;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (lc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Light.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (lc/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-LightItalic.ttf]:mode=node;s
-cript=latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (sb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBold.ttf]:mode=node;script=latn;l
-anguage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (sb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBoldItalic.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Bold.ttf]:mode=node;script=latn;langu
-age=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-BoldItalic.ttf]:mode=node;script=latn
-;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (bc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Bold.ttf]:mode=node;script=l
-atn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (eb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBold.ttf]:mode=node;script=latn;
-language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (eb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBoldItalic.ttf]:mode=node;script
-=latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Regular.ttf]:mode=node;script=latn;la
-nguage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Italic.ttf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+liga;+tnum;+lnum;"
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'opensans-LF' created for font 'OpenSans'
-(fontspec)             with options
-(fontspec)             [Extension=.ttf,Ligatures={TeX,Common},Scale=1,FontFace=
-{l}{n}{*-Light},FontFace={l}{it}{*-LightItalic},FontFace={lc}{n}{*Condensed-Lig
-ht},FontFace={lc}{it}{*Condensed-LightItalic},UprightFont={*-Regular},ItalicFon
-t={*-Italic},FontFace={sb}{n}{*-SemiBold},FontFace={sb}{it}{*-SemiBoldItalic},F
-ontFace={b}{n}{*-Bold},FontFace={b}{it}{*-BoldItalic},BoldFont={*-Bold},BoldIta
-licFont={*-BoldItalic},FontFace={bc}{n}{*Condensed-Bold},FontFace={eb}{n}{*-Ext
-raBold},FontFace={eb}{it}{*-ExtraBoldItalic},Numbers={Proportional,Lining},NFSS
-Family=opensans-LF].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - (l/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Light.ttf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (l/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-LightItalic.ttf]:mode=node;script=lat
-n;language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (lc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Light.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (lc/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-LightItalic.ttf]:mode=node;s
-cript=latn;language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (sb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBold.ttf]:mode=node;script=latn;l
-anguage=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (sb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBoldItalic.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Bold.ttf]:mode=node;script=latn;langu
-age=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-BoldItalic.ttf]:mode=node;script=latn
-;language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (bc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Bold.ttf]:mode=node;script=l
-atn;language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (eb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBold.ttf]:mode=node;script=latn;
-language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - (eb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBoldItalic.ttf]:mode=node;script
-=latn;language=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Regular.ttf]:mode=node;script=latn;la
-nguage=dflt;+tlig;+liga;+pnum;+lnum;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Italic.ttf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+liga;+pnum;+lnum;"
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'opensans-TOsF' created for font 'OpenSans'
-(fontspec)             with options
-(fontspec)             [Extension=.ttf,Ligatures={TeX,Common},Scale=1,FontFace=
-{l}{n}{*-Light},FontFace={l}{it}{*-LightItalic},FontFace={lc}{n}{*Condensed-Lig
-ht},FontFace={lc}{it}{*Condensed-LightItalic},UprightFont={*-Regular},ItalicFon
-t={*-Italic},FontFace={sb}{n}{*-SemiBold},FontFace={sb}{it}{*-SemiBoldItalic},F
-ontFace={b}{n}{*-Bold},FontFace={b}{it}{*-BoldItalic},BoldFont={*-Bold},BoldIta
-licFont={*-BoldItalic},FontFace={bc}{n}{*Condensed-Bold},FontFace={eb}{n}{*-Ext
-raBold},FontFace={eb}{it}{*-ExtraBoldItalic},Numbers={Monospaced,OldStyle},NFSS
-Family=opensans-TOsF].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - (l/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Light.ttf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (l/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-LightItalic.ttf]:mode=node;script=lat
-n;language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (lc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Light.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (lc/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-LightItalic.ttf]:mode=node;s
-cript=latn;language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (sb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBold.ttf]:mode=node;script=latn;l
-anguage=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (sb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBoldItalic.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Bold.ttf]:mode=node;script=latn;langu
-age=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-BoldItalic.ttf]:mode=node;script=latn
-;language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (bc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Bold.ttf]:mode=node;script=l
-atn;language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (eb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBold.ttf]:mode=node;script=latn;
-language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - (eb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBoldItalic.ttf]:mode=node;script
-=latn;language=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Regular.ttf]:mode=node;script=latn;la
-nguage=dflt;+tlig;+liga;+tnum;+onum;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Italic.ttf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+liga;+tnum;+onum;"
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'opensans-OsF' created for font 'OpenSans'
-(fontspec)             with options
-(fontspec)             [Extension=.ttf,Ligatures={TeX,Common},Scale=1,FontFace=
-{l}{n}{*-Light},FontFace={l}{it}{*-LightItalic},FontFace={lc}{n}{*Condensed-Lig
-ht},FontFace={lc}{it}{*Condensed-LightItalic},UprightFont={*-Regular},ItalicFon
-t={*-Italic},FontFace={sb}{n}{*-SemiBold},FontFace={sb}{it}{*-SemiBoldItalic},F
-ontFace={b}{n}{*-Bold},FontFace={b}{it}{*-BoldItalic},BoldFont={*-Bold},BoldIta
-licFont={*-BoldItalic},FontFace={bc}{n}{*Condensed-Bold},FontFace={eb}{n}{*-Ext
-raBold},FontFace={eb}{it}{*-ExtraBoldItalic},Numbers={Proportional,OldStyle},NF
-SSFamily=opensans-OsF].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - (l/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Light.ttf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (l/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-LightItalic.ttf]:mode=node;script=lat
-n;language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (lc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Light.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (lc/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-LightItalic.ttf]:mode=node;s
-cript=latn;language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (sb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBold.ttf]:mode=node;script=latn;l
-anguage=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (sb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBoldItalic.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Bold.ttf]:mode=node;script=latn;langu
-age=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-BoldItalic.ttf]:mode=node;script=latn
-;language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (bc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Bold.ttf]:mode=node;script=l
-atn;language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (eb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBold.ttf]:mode=node;script=latn;
-language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - (eb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBoldItalic.ttf]:mode=node;script
-=latn;language=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Regular.ttf]:mode=node;script=latn;la
-nguage=dflt;+tlig;+liga;+pnum;+onum;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Italic.ttf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+liga;+pnum;+onum;"
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'fos' created for font 'OpenSans' with
-(fontspec)             options
-(fontspec)             [Extension=.ttf,Ligatures={TeX,Common},Scale=1,FontFace=
-{l}{n}{*-Light},FontFace={l}{it}{*-LightItalic},FontFace={lc}{n}{*Condensed-Lig
-ht},FontFace={lc}{it}{*Condensed-LightItalic},UprightFont={*-Regular},ItalicFon
-t={*-Italic},FontFace={sb}{n}{*-SemiBold},FontFace={sb}{it}{*-SemiBoldItalic},F
-ontFace={b}{n}{*-Bold},FontFace={b}{it}{*-BoldItalic},BoldFont={*-Bold},BoldIta
-licFont={*-BoldItalic},FontFace={bc}{n}{*Condensed-Bold},FontFace={eb}{n}{*-Ext
-raBold},FontFace={eb}{it}{*-ExtraBoldItalic},Numbers={Monospaced,Lining},NFSSFa
-mily=fos].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - (l/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Light.ttf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (l/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-LightItalic.ttf]:mode=node;script=lat
-n;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (lc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Light.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (lc/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-LightItalic.ttf]:mode=node;s
-cript=latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (sb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBold.ttf]:mode=node;script=latn;l
-anguage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (sb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBoldItalic.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Bold.ttf]:mode=node;script=latn;langu
-age=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-BoldItalic.ttf]:mode=node;script=latn
-;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (bc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Bold.ttf]:mode=node;script=l
-atn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (eb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBold.ttf]:mode=node;script=latn;
-language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (eb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBoldItalic.ttf]:mode=node;script
-=latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Regular.ttf]:mode=node;script=latn;la
-nguage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Italic.ttf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+liga;+tnum;+lnum;"
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Light scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-LightItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-SemiBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-BoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSansCondensed-Bold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBold scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-ExtraBoldItalic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Regular scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             OpenSans-Italic scale = 1.
-
-
-Package fontspec Info: 
-(fontspec)             Font family 'OpenSans(0)' created for font 'OpenSans'
-(fontspec)             with options
-(fontspec)             [Ligatures=TeX,Extension=.ttf,Ligatures={TeX,Common},Sca
-le=1,FontFace={l}{n}{*-Light},FontFace={l}{it}{*-LightItalic},FontFace={lc}{n}{
-*Condensed-Light},FontFace={lc}{it}{*Condensed-LightItalic},UprightFont={*-Regu
-lar},ItalicFont={*-Italic},FontFace={sb}{n}{*-SemiBold},FontFace={sb}{it}{*-Sem
-iBoldItalic},FontFace={b}{n}{*-Bold},FontFace={b}{it}{*-BoldItalic},BoldFont={*
--Bold},BoldItalicFont={*-BoldItalic},FontFace={bc}{n}{*Condensed-Bold},FontFace
-={eb}{n}{*-ExtraBold},FontFace={eb}{it}{*-ExtraBoldItalic},Numbers={Monospaced,
-Lining}].
-(fontspec)              
-(fontspec)              This font family consists of the following NFSS
-(fontspec)             series/shapes:
-(fontspec)              
-(fontspec)             - (l/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Light.ttf]:mode=node;script=latn;lang
-uage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (l/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-LightItalic.ttf]:mode=node;script=lat
-n;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (lc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Light.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (lc/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-LightItalic.ttf]:mode=node;s
-cript=latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (sb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBold.ttf]:mode=node;script=latn;l
-anguage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (sb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-SemiBoldItalic.ttf]:mode=node;script=
-latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'bold' (b/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Bold.ttf]:mode=node;script=latn;langu
-age=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-BoldItalic.ttf]:mode=node;script=latn
-;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (bc/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSansCondensed-Bold.ttf]:mode=node;script=l
-atn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (eb/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBold.ttf]:mode=node;script=latn;
-language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - (eb/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-ExtraBoldItalic.ttf]:mode=node;script
-=latn;language=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'normal' (m/n) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Regular.ttf]:mode=node;script=latn;la
-nguage=dflt;+tlig;+liga;+tnum;+lnum;"
-(fontspec)             - 'italic' (m/it) with NFSS spec.:
-(fontspec)             <->s*[1]"[OpenSans-Italic.ttf]:mode=node;script=latn;lan
-guage=dflt;+tlig;+liga;+tnum;+lnum;"
-
-)
-(/usr/share/texlive/texmf-dist/tex/latex/beamer/beamerfontthemeprofessionalfont
-s.sty)
-Package hyperref Info: Option `colorlinks' set `true' on input line 118.
-) (/usr/share/texlive/texmf-dist/tex/latex/braket/braket.sty)
-(/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
-(/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
-Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
-
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
 Package pgfplots info on input line 124: Initializing with LUA version Lua 5.3
 \pgfplots@luabackend@table=\catcodetable14
-\t@pgfplots@toka=\toks52
-\t@pgfplots@tokb=\toks53
-\t@pgfplots@tokc=\toks54
-\pgfplots@tmpa=\dimen316
-\c@pgfplots@coordindex=\count502
-\c@pgfplots@scanlineindex=\count503
+\t@pgfplots@toka=\toks49
+\t@pgfplots@tokb=\toks50
+\t@pgfplots@tokc=\toks51
+\pgfplots@tmpa=\dimen307
+\c@pgfplots@coordindex=\count352
+\c@pgfplots@scanlineindex=\count353
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code
 .tex))
@@ -2315,9 +817,9 @@ gfsupp_loader.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex
 )
 Package pgfplots: loading complementary utilities for your pgf version...
-\t@pgf@toka=\toks55
-\t@pgf@tokb=\toks56
-\t@pgf@tokc=\toks57
+\t@pgf@toka=\toks52
+\t@pgf@tokb=\toks53
+\t@pgf@tokc=\toks54
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldp
 gfsupp_pgfutil-common-lists.tex)
@@ -2336,14 +838,14 @@ tructure.code.tex)
 tructureext.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray
 .code.tex
-\c@pgfplotsarray@tmp=\count504
+\c@pgfplotsarray@tmp=\count354
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatri
 x.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshare
 d.code.tex
-\c@pgfplotstable@counta=\count505
-\t@pgfplotstable@a=\toks58
+\c@pgfplotstable@counta=\count355
+\t@pgfplotstable@a=\toks55
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque
 .code.tex)
@@ -2355,7 +857,7 @@ de.tex))
 .tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.sur
 fshading.code.tex
-\c@pgfplotslibrarysurf@no=\count506
+\c@pgfplotslibrarysurf@no=\count356
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surf
 shading.pgfsys-luatex.def)))
@@ -2382,16 +884,16 @@ e.tex)
 zlibrarydecorations.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.cod
 e.tex
-\pgfdecoratedcompleteddistance=\dimen317
-\pgfdecoratedremainingdistance=\dimen318
-\pgfdecoratedinputsegmentcompleteddistance=\dimen319
-\pgfdecoratedinputsegmentremainingdistance=\dimen320
-\pgf@decorate@distancetomove=\dimen321
-\pgf@decorate@repeatstate=\count507
-\pgfdecorationsegmentamplitude=\dimen322
-\pgfdecorationsegmentlength=\dimen323
+\pgfdecoratedcompleteddistance=\dimen308
+\pgfdecoratedremainingdistance=\dimen309
+\pgfdecoratedinputsegmentcompleteddistance=\dimen310
+\pgfdecoratedinputsegmentremainingdistance=\dimen311
+\pgf@decorate@distancetomove=\dimen312
+\pgf@decorate@repeatstate=\count357
+\pgfdecorationsegmentamplitude=\dimen313
+\pgfdecorationsegmentlength=\dimen314
 )
-\tikz@lib@dec@box=\box85
+\tikz@lib@dec@box=\box82
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarydecorations.pathmorphing.code.tex
@@ -2403,13 +905,13 @@ zlibrarydecorations.pathreplacing.code.tex
 decorations.pathreplacing.code.tex))
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.co
 ntourlua.code.tex)
-\pgfplots@numplots=\count508
-\pgfplots@xmin@reg=\dimen324
-\pgfplots@xmax@reg=\dimen325
-\pgfplots@ymin@reg=\dimen326
-\pgfplots@ymax@reg=\dimen327
-\pgfplots@zmin@reg=\dimen328
-\pgfplots@zmax@reg=\dimen329
+\pgfplots@numplots=\count358
+\pgfplots@xmin@reg=\dimen315
+\pgfplots@xmax@reg=\dimen316
+\pgfplots@ymin@reg=\dimen317
+\pgfplots@ymax@reg=\dimen318
+\pgfplots@zmin@reg=\dimen319
+\pgfplots@zmax@reg=\dimen320
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibraryplotmarks.code.tex
@@ -2419,31 +921,35 @@ File: tikzlibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 de.tex
 File: pgflibraryplotmarks.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )))
-\@quotelevel=\count509
-\@quotereset=\count510
- (./main.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
+File: l3backend-luatex.def 2024-05-08 L3 backend support: PDF output (LuaTeX)
+\l__color_backend_stack_int=\count359
+Inserting `l3color' in `luaotfload.parse_color'.
+\l__pdf_internal_box=\box83
+)
+(./main.aux)
 \openout1 = main.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 27.
+LaTeX Font Info:    ... okay on input line 27.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
@@ -2481,17 +987,17 @@ LaTeX Font Info:    ... okay on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count511
-\scratchdimen=\dimen330
-\scratchbox=\box86
-\nofMPsegments=\count512
-\nofMParguments=\count513
-\everyMPshowfont=\toks59
-\MPscratchCnt=\count514
-\MPscratchDim=\dimen331
-\MPnumerator=\count515
-\makeMPintoPDFobject=\count516
-\everyMPtoPDFconversion=\toks60
+\scratchcounter=\count360
+\scratchdimen=\dimen321
+\scratchbox=\box84
+\nofMPsegments=\count361
+\nofMParguments=\count362
+\everyMPshowfont=\toks56
+\MPscratchCnt=\count363
+\MPscratchDim=\dimen322
+\MPnumerator=\count364
+\makeMPintoPDFobject=\count365
+\everyMPtoPDFconversion=\toks57
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -2501,12 +1007,54 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 26.
+Package hyperref Info: Link coloring OFF on input line 27.
 
 (./main.out) (./main.out)
-\@outlinefile=\write6
+\@outlinefile=\write5
 
-\openout6 = main.out
+\openout5 = main.out
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 27.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 27.
+\symnumbers=\mathgroup6
+\sympureletters=\mathgroup7
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/lmr/m/n on input line 27.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> TU/lmss/b/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> TU/lmss/b/n on input line 27.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> TU/lmss/m/n on input line 27.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> TU/lmss/m/it on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> TU/lmss/m/it on input line 27.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 27.
+LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
+(Font)                  TU/lmss/m/n --> TU/lmss/b/n on input line 27.
+LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
+(Font)                  TU/lmss/m/it --> TU/lmss/b/it on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
+(Font)                  OT1/cmss/b/n --> TU/lmr/b/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  TU/lmss/b/n --> TU/lmss/b/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  TU/lmss/m/n --> TU/lmss/b/n on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  TU/lmss/m/it --> TU/lmss/b/it on input line 27.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  TU/lmtt/m/n --> TU/lmtt/b/n on input line 27.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
 -English.dict
@@ -2532,295 +1080,97 @@ Dictionary: translator-numbers-dictionary, Language: English
 ry-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-\c@lstlisting=\count517
-Package biblatex Info: Trying to load language 'english'...
-Package biblatex Info: ... file 'english.lbx' found.
-
-(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
-File: english.lbx 2024/03/21 v3.20 biblatex localization (PK/MW)
-)
-Package biblatex Info: LuaTeX detected.
-(biblatex)             Assuming input encoding 'utf8'.
-Package biblatex Info: Automatic encoding selection.
-(biblatex)             Assuming data encoding 'utf8'.
-
-\openout5 = main.bcf
-Package biblatex Info: Trying to load bibliographic data...
-Package biblatex Info: ... file 'main.bbl' not found.
-
-No file main.bbl.
-Package biblatex Info: Reference section=0 on input line 26.
-Package biblatex Info: Reference segment=0 on input line 26.
-
-Package fontspec Info: 
-(fontspec)             Adjusting the maths setup (use [no-math] to avoid
-(fontspec)             this).
-
-\symlegacymaths=\mathgroup6
-LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 26.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 26.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 26.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 26.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 26.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 26.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 26.
-LaTeX Font Info:    Redeclaring math accent \check on input line 26.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 26.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 26.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 26.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 26.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 26.
-LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 26.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> TU/OpenSans(0)/m/n on input line 26.
-LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 26.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> TU/OpenSans(0)/m/n on input line 26.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  TU/OpenSans(0)/m/n --> TU/OpenSans(0)/m/n on input line
- 26.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> TU/OpenSans(0)/m/it on input line 26.
-LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> TU/OpenSans(0)/b/n on input line 26.
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/MerriweatherSans(0)/m/n on input li
-ne 26.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 26.
-LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  TU/OpenSans(0)/m/n --> TU/OpenSans(0)/b/n on input line
- 26.
-LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> TU/OpenSans(0)/b/it on input line 26.
-
-LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/MerriweatherSans(0)/b/n on input l
-ine 26.
-LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 26.
-\c@mv@tabular=\count518
-\c@mv@boldtabular=\count519
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
 (./main.nav)
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 26.
-Package epstopdf Info: Source file: <logos/UU_logo_EN_BLACK.eps>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 1114766 bytes
-(epstopdf)             Output file: <logos/UU_logo_EN_BLACK-eps-converted-to.pd
-f>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 17865 bytes
-(epstopdf)             Command: <repstopdf --outfile=logos/UU_logo_EN_BLACK-eps
--converted-to.pdf logos/UU_logo_EN_BLACK.eps>
-(epstopdf)             \includegraphics on input line 26.
-Package epstopdf Info: Output file is already uptodate.
-<logos/UU_logo_EN_BLACK-eps-converted-to.pdf, id=14, 325.215pt x 128.48pt>
-File: logos/UU_logo_EN_BLACK-eps-converted-to.pdf Graphic file (type pdf)
-<use logos/UU_logo_EN_BLACK-eps-converted-to.pdf>
-Package luatex.def Info: logos/UU_logo_EN_BLACK-eps-converted-to.pdf  used on i
-nput line 26.
-(luatex.def)             Requested size: 100.83049pt x 39.83368pt.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 47.
 
-
-Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 34.
-
-Package epstopdf Info: Source file: <logos/UU_logo_EN_BLACK.eps>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 1114766 bytes
-(epstopdf)             Output file: <logos/UU_logo_EN_BLACK-eps-converted-to.pd
-f>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 17865 bytes
-(epstopdf)             Command: <repstopdf --outfile=logos/UU_logo_EN_BLACK-eps
--converted-to.pdf logos/UU_logo_EN_BLACK.eps>
-(epstopdf)             \includegraphics on input line 44.
-Package epstopdf Info: Output file is already uptodate.
-File: logos/UU_logo_EN_BLACK-eps-converted-to.pdf Graphic file (type pdf)
-<use logos/UU_logo_EN_BLACK-eps-converted-to.pdf>
-Package luatex.def Info: logos/UU_logo_EN_BLACK-eps-converted-to.pdf  used on i
-nput line 44.
-(luatex.def)             Requested size: 100.83049pt x 39.83368pt.
-Package epstopdf Info: Source file: <logos/UU_logo_EN_RGB.eps>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 539666 bytes
-(epstopdf)             Output file: <logos/UU_logo_EN_RGB-eps-converted-to.pdf>
-
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 18352 bytes
-(epstopdf)             Command: <repstopdf --outfile=logos/UU_logo_EN_RGB-eps-c
-onverted-to.pdf logos/UU_logo_EN_RGB.eps>
-(epstopdf)             \includegraphics on input line 44.
-Package epstopdf Info: Output file is already uptodate.
-<logos/UU_logo_EN_RGB-eps-converted-to.pdf, id=18, 325.215pt x 128.48pt>
-File: logos/UU_logo_EN_RGB-eps-converted-to.pdf Graphic file (type pdf)
-<use logos/UU_logo_EN_RGB-eps-converted-to.pdf>
-Package luatex.def Info: logos/UU_logo_EN_RGB-eps-converted-to.pdf  used on inp
-ut line 44.
-(luatex.def)             Requested size: 144.04285pt x 56.9055pt.
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 44.
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 44.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 44.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 44.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 44.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 44.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 44.
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 47.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 44.
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 44.
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 44.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 44.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 44.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 44.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 47.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <7> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 47.
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <5> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 47.
 
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}<./logos/UU_logo_EN_RGB-eps-c
-onverted-to.pdf>] (./sections/update_pres.tex
-Package epstopdf Info: Source file: <logos/UU_logo_EN_BLACK.eps>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 1114766 bytes
-(epstopdf)             Output file: <logos/UU_logo_EN_BLACK-eps-converted-to.pd
-f>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 17865 bytes
-(epstopdf)             Command: <repstopdf --outfile=logos/UU_logo_EN_BLACK-eps
--converted-to.pdf logos/UU_logo_EN_BLACK.eps>
-(epstopdf)             \includegraphics on input line 7.
-Package epstopdf Info: Output file is already uptodate.
-File: logos/UU_logo_EN_BLACK-eps-converted-to.pdf Graphic file (type pdf)
-<use logos/UU_logo_EN_BLACK-eps-converted-to.pdf>
-Package luatex.def Info: logos/UU_logo_EN_BLACK-eps-converted-to.pdf  used on i
-nput line 7.
-(luatex.def)             Requested size: 100.83049pt x 39.83368pt.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./main.toc)
 
-Overfull \hbox (15.68135pt too wide) detected at line 7
-[]
- []
-
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 7.
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 7.
-LaTeX Font Info:    Font shape `TU/OpenSans(0)/b/n' will be
-(Font)              scaled to size 12.0pt on input line 7.
-
-
-LaTeX Font Info:    Font shape `TU/MerriweatherSans(0)/m/n' will be
-(Font)              scaled to size 4.0pt on input line 7.
-Package epstopdf Info: Source file: <logos/UU_logo_EN_BLACK.eps>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 1114766 bytes
-(epstopdf)             Output file: <logos/UU_logo_EN_BLACK-eps-converted-to.pd
-f>
-(epstopdf)                    date: 2026-06-03 19:54:27
-(epstopdf)                    size: 17865 bytes
-(epstopdf)             Command: <repstopdf --outfile=logos/UU_logo_EN_BLACK-eps
--converted-to.pdf logos/UU_logo_EN_BLACK.eps>
-(epstopdf)             \includegraphics on input line 7.
-Package epstopdf Info: Output file is already uptodate.
-File: logos/UU_logo_EN_BLACK-eps-converted-to.pdf Graphic file (type pdf)
-<use logos/UU_logo_EN_BLACK-eps-converted-to.pdf>
-Package luatex.def Info: logos/UU_logo_EN_BLACK-eps-converted-to.pdf  used on i
-nput line 7.
-(luatex.def)             Requested size: 100.83049pt x 39.83368pt.
 [2
 
-<./logos/UU_logo_EN_BLACK-eps-converted-to.pdf>])
-\tf@nav=\write7
+] (./sections/update_pres.tex
 
-\openout7 = main.nav
-\tf@toc=\write8
+[3
 
-\openout8 = main.toc
-\tf@snm=\write9
+]) (./sections/results.tex
+<afbeeldingen/Lattice.png, id=113, 596.2275pt x 504.88625pt>
+File: afbeeldingen/Lattice.png Graphic file (type png)
+<use afbeeldingen/Lattice.png>
+Package luatex.def Info: afbeeldingen/Lattice.png  used on input line 23.
+(luatex.def)             Requested size: 152.96123pt x 129.52623pt.
+<afbeeldingen/detection.png, id=114, 534.99875pt x 449.17813pt>
+File: afbeeldingen/detection.png Graphic file (type png)
+<use afbeeldingen/detection.png>
+Package luatex.def Info: afbeeldingen/detection.png  used on input line 23.
+(luatex.def)             Requested size: 152.96123pt x 128.42148pt.
 
-\openout9 = main.snm
+
+[4
+
+<./afbeeldingen/Lattice.png><./afbeeldingen/detection.png>])
+\tf@nav=\write6
+
+\openout6 = main.nav
+\tf@toc=\write7
+
+\openout7 = main.toc
+\tf@snm=\write8
+
+\openout8 = main.snm
  (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
-Package logreq Info: Writing requests to 'main.run.xml'.
-
-\openout1 = main.run.xml
+(rerunfilecheck)             Checksum: 5C458BE4F3F0A9F62E76BCBA1460B4C2;151.
 )
 
 Here is how much of LuaTeX's memory you used:
- 47622 strings out of 475512
- 125165,2373549 words of node,token memory allocated
- 5038 words of node memory still in use:
-   121 hlist, 30 vlist, 7 rule, 11 disc, 4 local_par, 12 math, 114 glue, 51 kern
-, 16 penalty, 170 glyph, 134 attribute, 73 glue_spec, 134 attribute_list, 4 writ
-e, 15 pdf_literal, 18 pdf_colorstack nodes
-   avail lists: 2:681,3:744,4:245,5:144,6:27,7:918,8:32,9:486,10:1,11:29
- 69384 multiletter control sequences out of 65536+600000
- 115 fonts using 15041863 bytes
- 128i,16n,130p,699b,983s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/opentype/sorkin/merriweather/MerriweatherSa
-ns-Regular.otf></usr/share/texlive/texmf-dist/fonts/truetype/ascender/opensans/O
-penSans-Bold.ttf></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
-Output written on main.pdf (2 pages, 103093 bytes).
+ 35328 strings out of 475512
+ 100000,1648299 words of node,token memory allocated
+ 2196 words of node memory still in use:
+   43 hlist, 11 vlist, 6 rule, 1 disc, 6 local_par, 4 math, 66 glue, 6 kern, 27 
+penalty, 13 glyph, 97 attribute, 61 glue_spec, 97 attribute_list, 4 write, 24 pd
+f_literal, 14 pdf_colorstack, 2 pdf_setmatrix, 2 pdf_save, 2 pdf_restore nodes
+   avail lists: 2:484,3:309,4:145,5:202,6:37,7:966,8:32,9:586,10:6,11:67
+ 57307 multiletter control sequences out of 65536+600000
+ 41 fonts using 2894447 bytes
+ 128i,14n,116p,699b,596s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf/fonts/opentype/public/lm/lmsans8-oblique.otf></usr/share/texmf
+/fonts/opentype/public/lm/lmsans10-oblique.otf></usr/share/texmf/fonts/opentype/
+public/lm/lmsans8-regular.otf></usr/share/texmf/fonts/opentype/public/lm/lmsans1
+0-regular.otf></usr/share/texmf/fonts/opentype/public/lm/lmsans12-regular.otf></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on main.pdf (4 pages, 429038 bytes).
 
-PDF statistics: 91 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 131072)
- 26 words of extra memory for PDF output out of 10000 (max. 100000000)
+PDF statistics: 193 PDF objects out of 1000 (max. 8388607)
+ 155 compressed objects within 2 object streams
+ 11 named destinations out of 1000 (max. 131072)
+ 32 words of extra memory for PDF output out of 10000 (max. 100000000)
 
