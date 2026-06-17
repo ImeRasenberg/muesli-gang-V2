@@ -69,11 +69,11 @@ void generate_random_spin(){
 // writing out the state into a file for nice plotting
 void WriteState2File(){
     char filename[100];
-    sprintf(filename, "Data/Spin_orientiation.txt");
+    sprintf(filename, "data2/Spin_orientiation.txt");
 
     FILE *fp = fopen(filename, "w");
     if (fp == NULL) {
-        printf("ERROR: Could not create file! Make sure a folder named 'Data' exists in this directory.\n");
+        printf("ERROR: Could not create file! Make sure a folder named 'data2' exists in this directory.\n");
         return; 
     }
 
@@ -327,7 +327,7 @@ int max_x[MAX_PEAKS];
 int max_y[MAX_PEAKS];
 int min_x[MAX_PEAKS];
 int min_y[MAX_PEAKS];
-void desission_peak(int step, char f2[128]){
+void desission_peak(int step){
     int radius = 2;
     int Q_target = (int)round(Q);
 
@@ -433,54 +433,6 @@ done_check:
             break;
         }
     }
-
-
-
-    FILE *fp = fopen(f2, "a");
-    if (fp == NULL) {
-        return;
-    }
-
-    // 1. Start the main object and print basic simulation metrics
-    fprintf(fp, "{\n");
-    fprintf(fp, "  \"step\": %d,\n", step);
-    fprintf(fp, "  \"Q\": %d,\n", Q_found);
-    fprintf(fp, "  \"threshold_fraction\": %.6f,\n", best_frac);
-    fprintf(fp, "  \"max_sum\": %.6f,\n", max_sum);
-    fprintf(fp, "  \"min_sum\": %.6f,\n", min_sum);
-    fprintf(fp, "  \"E\": %.6f,\n", Energy);
-    fprintf(fp, "  \"J\": %.6f,\n", J);
-    fprintf(fp, "  \"D\": %.6f,\n", D);
-    fprintf(fp, "  \"Hz\": %.6f,\n", Hz);
-    fprintf(fp, "  \"beta\": %.6f,\n", beta);
-
-    fprintf(fp, "  \"spins\": [%.6f,%.6f,%.6f],\n", spinx, spiny, spinz);
-    
-
-    // 2. Print positive peaks ("N+")
-    fprintf(fp, "  \"N+\": {");
-    for (int k = 0; k < max_count; k++) {
-        fprintf(fp, "\"%d\": [%d, %d, %.6f]", k, max_x[k], max_y[k], CD_smooth[max_x[k]][max_y[k]]);
-        if (k < max_count - 1) {
-            fprintf(fp, ", "); // Comma between peak objects
-        }
-    }
-    fprintf(fp, "},\n"); // Close N+ and add a comma for the next key
-
-    // 3. Print negative peaks ("N-")
-    fprintf(fp, "  \"N-\": {");
-    for (int k = 0; k < min_count; k++) {
-        fprintf(fp, "\"%d\": [%d, %d, %.6f]", k, min_x[k], min_y[k], CD_smooth[min_x[k]][min_y[k]]);
-        if (k < min_count - 1) {
-            fprintf(fp, ", "); // Comma between peak objects
-        }
-    }
-    fprintf(fp, "}\n"); // Close N- (no trailing comma here because it's the last item!)
-
-    // 4. Close the main object
-    fprintf(fp, "}\n");
-
-    fclose(fp);
 }
 
 
@@ -498,111 +450,101 @@ int main(void){
     double tolerance = 50;
     int number_windows = 2; // number of requiered stable windows
 
+    D=2;
+    Hz=2;
+
+    // knowing when to start sampling
+    int sampeling_started = 0;
+    int samples_taken = 0;
+    int max_samples = 30;
+    Energy = get_energy_tot(spin);
+
+    FILE *energy_log = fopen("data2/energy_log.txt", "w");
+    if (energy_log == NULL) {
+        printf("Could not create energy log file.\n");
+        return 1;
+    }
+    fprintf(energy_log, "# step  beta  Energy\n");  // header
+
+    double betas[] = {0.5, 1.0, 1.5, 2.0};
+    int big = sizeof(betas) / sizeof(betas[0]);
+
+    int tot =0;
+    for(int s = 0; s<big; s++){
+        beta = betas[s];
+        // for understanding when the energy is stable
+        double E_sum = 0.0;
+        double E_avg_prev = 0.0;
+        int stable_count = 0;
+        int is_stable = 0;
 
 
-    int O = 20;
-    for(int count1 = 0; count1<O+1; count1++){
-        D=2/(double)O*count1;
-
-        for(int count2 = 0; count2<O+1; count2++){
-            Hz=2/(double)O*count2;
-
-            for(int count3 = 0; count3<4; count3++){
-                // knowing when to start sampling
-                int sampeling_started = 0;
-                int samples_taken = 0;
-                int max_samples = 30;
-                Energy = get_energy_tot(spin);
-
-                char f2[128];
-                sprintf(f2, "Data/skyrmions__D_%lf__Hz_%lf__I_%d.json",D, Hz, count3);
-                FILE *fp_sk = fopen(f2, "w");
-
-                double betas[] = {0.1, 2.0, 4.0, 6.0};
-                int big = sizeof(betas) / sizeof(betas[0]);
-
-                int tot =0;
-                for(int s = 0; s<big; s++){
-                    beta = betas[s];
-                    // for understanding when the energy is stable
-                    double E_sum = 0.0;
-                    double E_avg_prev = 0.0;
-                    int stable_count = 0;
-                    int is_stable = 0;
-
-
-                    for(int count=1; count<M+1; count++){
+        for(int count=1; count<M+1; count++){
+            fprintf(energy_log, "%d  %f  %f\n", tot, beta, Energy);
                         
-                        if(count % 1000 == 0 && sampeling_started == 1){
-                            Q = get_Q();
+            if(count % 1000 == 0 && sampeling_started == 1){
 
-                            gaussian_filter_CD(0.8);
+                samples_taken ++;
 
-                            desission_peak(tot, f2);
+                if (samples_taken >= max_samples){
+                    break;
+                    }
+            }
 
-                            samples_taken ++;
+            n1 = floor(N*dsfmt_genrand());
+            n2 = floor(N*dsfmt_genrand());
+            accepted += change_particle();
+            if (count % 1000 == 0){
+                // propperly calculate the energy every 1000 steps
+                Energy = get_energy_tot(spin);
+            }
+            tot+=1;
 
-                            if (samples_taken >= max_samples){
-                                break;
-                            }
-                        }
-                        n1 = floor(N*dsfmt_genrand());
-                        n2 = floor(N*dsfmt_genrand());
-                        accepted += change_particle();
-                        tot+=1;
+            E_sum += Energy;
 
-                        E_sum += Energy;
+            if (count % window_size == 0){
 
-                        if (count % window_size == 0){
+                double E_avg = E_sum / window_size;
+                tolerance = 0.15 * fabs(E_avg);
 
-                            double E_avg = E_sum / window_size;
+                if (count > window_size){ // start at the second windwo 
 
-                            tolerance = 0.15 * fabs(E_avg);
-
-                            if (count > window_size){ // start at the second windwo 
-
-                                if (fabs(E_avg - E_avg_prev)< tolerance){
-
-                                    stable_count ++;
-
-                                }
-
-                                else stable_count = 0;
-
-                            }
-
-                            E_avg_prev = E_avg; // reset
-
-                            E_sum = 0;
-
+                    if (fabs(E_avg - E_avg_prev)< tolerance){
+                        stable_count ++;
                         }
 
-                        if (stable_count >= number_windows && is_stable == 0){
-                            // printf("Stable reached at beta=%f count=%d\n", beta, count);
-
-                            is_stable = 1;
-
-                            if (s < big - 1){
-                                // printf("Moving to next beta\n");
-                                break;
-                            }
-                            else{
-                                // printf("Starting sampling\n");
-                                sampeling_started = 1;
-                            }
+                    else stable_count = 0;
                         }
+
+                    E_avg_prev = E_avg; // reset
+                    E_sum = 0;
+
+                }
+
+            if (stable_count >= number_windows && is_stable == 0){
+                // printf("Stable reached at beta=%f count=%d\n", beta, count);
+
+                is_stable = 1;
+
+                if (s < big - 1){
+                     // printf("Moving to next beta\n");
+                    break;
+                     }
+                else{
+                    // printf("Starting sampling\n");
+                    sampeling_started = 1;
+                    }
+                }
 
                         
                     }
                     
                 }
 
-                fclose(fp_sk);
+                fclose(energy_log);
+                WriteState2File();
+                return 0;
             }
-        }
-    }
 
-    WriteState2File();
+  
 
-    return 0;
-}

@@ -309,8 +309,8 @@ for beta in beta_vals:
 # Q vs beta for the grid point closest to a target [H, D]
 # ==========================================================
 
-target_H = 1.75   # <-- set your target H/J
-target_D = 1.7   # <-- set your target D/J
+target_H = 1   # <-- set your target H/J
+target_D = 2   # <-- set your target D/J
 
 # find closest available H and D values (global across all betas)
 all_D_vals  = sorted({ D  for b in master_dict for D  in master_dict[b] })
@@ -357,10 +357,187 @@ else:
     betas, Qs, errs = zip(*Q_vs_beta)
 
     fig, ax = plt.subplots(figsize=(8, 5))
-    ax.errorbar(betas, Qs, yerr=errs, marker="o", linewidth=1.5, capsize=4, capthick=1.5)
-    ax.set_xlabel(r"$\beta$")
+    ax.errorbar(1/np.array(betas), Qs, yerr=errs, marker="o", linewidth=1.5, capsize=4, capthick=1.5)
+    ax.set_xlabel(r"$J\beta^{-1}$")
     ax.set_ylabel("Q")
     ax.set_title(rf"Q vs $\beta$  —  H/J={closest_Hz}, D/J={closest_D}")
     ax.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
     plt.show()
+#%%
+
+# ==========================================================
+# T_c map: temperature at which Q decays to 30% of its
+# low-T (high-beta) value, for every (H, D) grid point
+# ==========================================================
+
+N_LAST_Q = 30
+
+beta_vals   = sorted(master_dict.keys())
+all_D_vals  = sorted({ D  for b in master_dict for D  in master_dict[b] })
+all_Hz_vals = sorted({ Hz for b in master_dict for D  in master_dict[b]
+                        for Hz in master_dict[b][D] })
+
+Tc_grid = np.full((len(all_Hz_vals), len(all_D_vals)), np.nan)
+
+for ix, D in enumerate(all_D_vals):
+    for iy, Hz in enumerate(all_Hz_vals):
+
+        # --- collect (beta, mean_Q) for this grid point ---
+        Q_vs_beta = []
+        for beta in beta_vals:
+            beta_dict = master_dict[beta]
+            if D   not in beta_dict:             continue
+            if Hz  not in beta_dict[D]:          continue
+
+            q_all = []
+            for I, step_dict in beta_dict[D][Hz].items():
+                if not step_dict:
+                    continue
+                for step in sorted(step_dict.keys())[-N_LAST_Q:]:
+                    obj = step_dict[step]
+                    if "Q" in obj:
+                        q_all.append(obj["Q"])
+
+            if q_all:
+                Q_vs_beta.append((beta, np.mean(q_all)))
+
+        if len(Q_vs_beta) < 2:
+            continue
+
+        # sort by descending beta (= ascending T)
+        Q_vs_beta.sort(key=lambda x: -x[0])
+        betas_arr = np.array([b for b, _ in Q_vs_beta])
+        Qs_arr    = np.array([q for _, q in Q_vs_beta])
+
+        # reference value: average of the 3 highest-beta points
+        n_ref   = min(3, len(Qs_arr))
+        Q_ref   = np.mean(Qs_arr[:n_ref])
+
+        if Q_ref == 0:
+            continue
+
+        # threshold: 30 % of reference, respecting sign
+        # "decayed to 30%" means |Q| has shrunk, i.e. Q moved toward zero
+        Q_thresh = Q_ref * 0.30
+
+        # find first index (going toward high T) where Q crosses threshold
+        # and *stays* there (all subsequent points also past threshold)
+        Tc = np.nan
+        for i in range(1, len(Qs_arr)):
+            # check whether Q has passed the 30% threshold
+            if Q_ref > 0:
+                crossed = Qs_arr[i] < Q_thresh
+            else:
+                crossed = Qs_arr[i] > Q_thresh   # Q_ref negative: toward 0 means >
+
+            if crossed:
+                # verify it stays past threshold for all remaining points
+                remaining = Qs_arr[i:]
+                if Q_ref > 0:
+                    stays = np.all(remaining < Q_thresh)
+                else:
+                    stays = np.all(remaining > Q_thresh)
+
+                if stays:
+                    # interpolate between i-1 and i for a smoother estimate
+                    b0, q0 = betas_arr[i-1], Qs_arr[i-1]
+                    b1, q1 = betas_arr[i],   Qs_arr[i]
+                    if q1 != q0:
+                        beta_c = b0 + (Q_thresh - q0) * (b1 - b0) / (q1 - q0)
+                    else:
+                        beta_c = (b0 + b1) / 2
+                    Tc = 1.0 / beta_c
+                    break
+
+        Tc_grid[iy, ix] = Tc
+
+# ==========================================================
+# plot T_c as a function of H and D
+# ==========================================================
+extent = [min(all_D_vals), max(all_D_vals), min(all_Hz_vals), max(all_Hz_vals)]
+
+fig, ax = plt.subplots(figsize=(8, 6))
+im = ax.imshow(Tc_grid, origin="lower", aspect="auto", extent=extent)
+plt.colorbar(im, ax=ax, label=r"$T_c \ (J/k_B)$")
+ax.set_xlabel("D/J")
+ax.set_ylabel("H/J")
+ax.set_title(r"$T_c$ — temperature where $Q$ decays to 30% of low-$T$ value")
+plt.tight_layout()
+plt.show()
+
+
+# ==========================================================
+# mask T_c to the domain where mtx > cut_off at beta=4
+# ==========================================================
+
+cut_off = 1.5
+target_beta = 4.0
+closest_beta = min(master_dict.keys(), key=lambda b: abs(b - target_beta))
+print(f"Using beta={closest_beta} for domain mask")
+
+beta_dict = master_dict[closest_beta]
+D_vals_b  = sorted(beta_dict.keys())
+Hz_vals_b = sorted({ Hz for D in beta_dict for Hz in beta_dict[D] })
+
+I_vals_b  = sorted({ I for D in beta_dict for Hz in beta_dict[D]
+                       for I in beta_dict[D][Hz] })
+
+tp_b = np.zeros((len(Hz_vals_b), len(D_vals_b)))
+pp_b = np.zeros((len(Hz_vals_b), len(D_vals_b)))
+tn_b = np.zeros((len(Hz_vals_b), len(D_vals_b)))
+pn_b = np.zeros((len(Hz_vals_b), len(D_vals_b)))
+
+for I in I_vals_b:
+    for ix, D in enumerate(D_vals_b):
+        for iy, Hz in enumerate(Hz_vals_b):
+            if Hz not in beta_dict[D]:          continue
+            if I  not in beta_dict[D][Hz]:      continue
+            step_dict = beta_dict[D][Hz][I]
+            if not step_dict:                   continue
+
+            largest_steps = sorted(step_dict.keys())[-N_LAST_Q:]
+            npl, ppl, nml, pnl = [], [], [], []
+
+            for step in largest_steps:
+                obj = step_dict[step]
+                if "N+" in obj:
+                    npl.append(len(obj["N+"]))
+                    ppl.append(obj["max_sum"])
+                if "N-" in obj:
+                    nml.append(len(obj["N-"]))
+                    pnl.append(obj["min_sum"])
+
+            if npl: tp_b[iy, ix] += np.mean(npl);  pp_b[iy, ix] += np.mean(ppl)
+            if nml: tn_b[iy, ix] += np.mean(nml);  pn_b[iy, ix] += np.mean(pnl)
+
+n_I_b = len(I_vals_b)
+mtx_b = -(pn_b / n_I_b / tn_b) / (pp_b / n_I_b / tp_b)
+
+# build mask on the same (all_Hz_vals, all_D_vals) grid as Tc_grid
+domain_mask = np.full((len(all_Hz_vals), len(all_D_vals)), False)
+
+for ix, D in enumerate(all_D_vals):
+    for iy, Hz in enumerate(all_Hz_vals):
+        if D  not in D_vals_b:  continue
+        if Hz not in Hz_vals_b: continue
+        bix = D_vals_b.index(D)
+        biy = Hz_vals_b.index(Hz)
+        if mtx_b[biy, bix] > cut_off:
+            domain_mask[iy, ix] = True
+
+Tc_masked = np.where(domain_mask, Tc_grid, np.nan)
+
+# ==========================================================
+# plot masked T_c
+# ==========================================================
+extent = [min(all_D_vals), max(all_D_vals), min(all_Hz_vals), max(all_Hz_vals)]
+
+fig, ax = plt.subplots(figsize=(8, 6))
+im = ax.imshow(Tc_masked, origin="lower", aspect="auto", extent=extent)
+plt.colorbar(im, ax=ax, label=r"$T_c \ (J/k_B)$")
+ax.set_xlabel("D/J")
+ax.set_ylabel("H/J")
+ax.set_title(r"$T_c$ (masked to ordered domain at $\beta=4$)")
+plt.tight_layout()
+plt.show()
