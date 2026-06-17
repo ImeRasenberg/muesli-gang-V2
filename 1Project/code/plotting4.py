@@ -482,4 +482,3 @@ ax.set_ylabel("H/J")
 ax.set_title(r"Average Magnetisation $\hat{z}$")
 
 plt.show()
-
