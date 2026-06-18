@@ -250,6 +250,8 @@ for D, Hz, crit in critical_points:
 
     mtx[i, j] = crit
 #%%
+mask = np.loadtxt("mask.txt", dtype=int).astype(bool)
+
 fig, ax = plt.subplots(figsize=(8, 6))
 
 im = ax.imshow(
@@ -267,6 +269,36 @@ im = ax.imshow(
 ax.set_xlabel(r"$D/J$")
 ax.set_ylabel(r"$H/J$")
 # ax.set_title(r"$T_c^*$")
+
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$T_c^*$")
+
+plt.tight_layout()
+plt.show()
+
+#%%
+
+mask = np.loadtxt("mask.txt", dtype=int).astype(bool)
+
+# Hide values where mask is False
+mtx_masked = np.ma.masked_where(~mask, mtx)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+im = ax.imshow(
+    mtx_masked,
+    origin="lower",
+    aspect="auto",
+    extent=[
+        min(D_vals),
+        max(D_vals),
+        min(Hz_vals),
+        max(Hz_vals),
+    ]
+)
+
+ax.set_xlabel(r"$D/J$")
+ax.set_ylabel(r"$H/J$")
 
 cbar = plt.colorbar(im, ax=ax)
 cbar.set_label(r"$T_c^*$")

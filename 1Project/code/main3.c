@@ -591,10 +591,7 @@ int main(void){
                                 sampeling_started = 1;
                             }
                         }
-
-                        
                     }
-                    
                 }
 
 
