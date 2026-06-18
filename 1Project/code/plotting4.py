@@ -1,7 +1,7 @@
 import os
 import json
 
-data_folder = "Data 2.0"
+data_folder = "Data"
 
 master_dict = {}
 decoder = json.JSONDecoder()
