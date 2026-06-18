@@ -1,7 +1,7 @@
 import os
 import json
 
-data_folder = "Data"
+data_folder = "Data 4.0"
 
 master_dict = {}
 decoder = json.JSONDecoder()
@@ -482,3 +482,11 @@ ax.set_ylabel("H/J")
 ax.set_title(r"Average Magnetisation $\hat{z}$")
 
 plt.show()
+#%%
+import numpy as np
+
+# create boolean mask
+mask = mtx > cut_off
+
+# save to file
+np.savetxt("mask.txt", mask.astype(int), fmt="%d")
