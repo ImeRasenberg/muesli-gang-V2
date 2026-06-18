@@ -100,7 +100,6 @@ plt.plot(steps, Q)
 plt.show()
 
 #%%
-
 def get_triangle_charge(S1, S2, S3):
     """
     Calculates the signed solid angle (topological charge contribution) 
@@ -351,3 +350,4 @@ plt.legend()
 plt.grid(False)
 
 plt.show()
+
