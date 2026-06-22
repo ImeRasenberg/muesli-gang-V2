@@ -1,4 +1,8 @@
 \section{Theory}
+\setlength{\abovedisplayskip}{0pt plus 1pt}%
+\setlength{\belowdisplayskip}{0pt plus 1pt}%
+\setlength{\abovedisplayshortskip}{0pt plus 1pt}%
+\setlength{\belowdisplayshortskip}{0pt plus 1pt}%
 
 To be able to find Skyrmions we first have to define a system in which they might exist. After this some characteristics of these Skyrmions will be discussed. 
 
@@ -16,7 +20,7 @@ The system will be an $N$ by $N$ 2D lattice. In the sites of this lattice electr
 \subsubsection{Heisenberg}
 
 \begin{equation}
-	\mathcal{H}_H = 
+	\mathcal{H}_H = -J \sum_r \vec{S}_r \cdot \left( \vec{S}_{r + \hat{x}} + \vec{S}_{r + \hat{y}}  \right) 
 \end{equation}
 
 
@@ -24,7 +28,7 @@ The system will be an $N$ by $N$ 2D lattice. In the sites of this lattice electr
 \subsubsection{Zeeman}
 
 \begin{equation}
-	 \mathcal{H}_{Z} = 
+	 \mathcal{H}_{Z} = - H_z \sum_r \vec{S}_r 
 \end{equation}
 
 
@@ -32,7 +36,7 @@ The system will be an $N$ by $N$ 2D lattice. In the sites of this lattice electr
 \subsubsection{Dzyaloshinskii–Moriya Interaction}
 
 \begin{equation}
-	\mathcal{H}_{DM} = 
+	\mathcal{H}_{DM} = -D \sum_r \vec{S}_r \times \vec{S}_{r + \hat{x}} \cdot \hat{x} + \vec{S}_r \times \vec{S}_{r + \hat{y}} \cdot \hat{y}
 \end{equation}
 
 
@@ -42,11 +46,32 @@ The system will be an $N$ by $N$ 2D lattice. In the sites of this lattice electr
 
 \subsubsection{Winding Number}
 Continuous
+\begin{equation}
+	 n = \frac{1}{4\pi} \int \mathbf{M} \cdot \left( \frac{\partial \mathbf{M}}{\partial x}  \times \frac{\partial \mathbf{M}}{\partial y}\right) dx dy
+\end{equation}
 
-Discreet
+
+To calculate this discreetly we use the formula proposed by  Berg and Lüscher (1981)\cite{BERG1981412}:
+\begin{equation}
+	Q = \frac{1}{4\pi} \sum_{i=1}^N \sum_{j=1}^N \left( q_{ij}^A + q_{ij}^B\right).
+\end{equation}
+Where $q_{ij}^A $ and $ q_{ij}^B$ are the solid angles of the two triangles in the plaquette (i, j):
+\begin{align}
+& q_{ij}^A = {} 2\arctan\biggl( \\
+& \frac{\mathbf{S}_{i,j}\cdot \left(\mathbf{S}_{i+1,j} \times \mathbf{S}_{i,j+1}\right)}
+       {1 + \mathbf{S}_{i,j}\cdot\mathbf{S}_{i+1,j} + \mathbf{S}_{i+1,j}\cdot\mathbf{S}_{i,j+1} + \mathbf{S}_{i,j+1}\cdot\mathbf{S}_{i,j}}
+\biggr),  \nonumber \\
+& q_{ij}^B = {} 2\arctan\biggl( \\
+& \frac{\mathbf{S}_{i+1,j}\cdot \left(\mathbf{S}_{i+1,j+1} \times \mathbf{S}_{i,j+1}\right)}
+       {1 + \mathbf{S}_{i+1 ,j}\cdot\mathbf{S}_{i+1,j+1} + \mathbf{S}_{i+1,j+1}\cdot\mathbf{S}_{i,j+1} + \mathbf{S}_{i,j+1}\cdot\mathbf{S}_{i+1,j}}
+\biggr) \nonumber
+\end{align}
+	
+
 
 \subsubsection{Identification}
-Q-number
+
+Q-number 
 
 Minima and maxima
 

@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-filepath="Data/Spin_orientiation.txt"
+filepath="data2/Spin_orientiation.txt"
 subsample=1
 
 if not os.path.exists(filepath):
