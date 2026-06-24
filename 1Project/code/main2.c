@@ -450,8 +450,8 @@ int main(void){
     double tolerance = 50;
     int number_windows = 2; // number of requiered stable windows
 
-    D=4.0;
-    Hz=0.0;
+    D=0.0;
+    Hz=10.0;
 
     // knowing when to start sampling
     int sampeling_started = 0;
