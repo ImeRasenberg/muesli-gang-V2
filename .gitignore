@@ -23,6 +23,8 @@
 /docu1Project/documentationmentation/*.blg
 /1Project/documentation/*.log
 /1Project/documentation/*.out
+/1Project/documentation/*.bcf
+/1Project/documentation/*.blg
 /1Project/documentation/*.toc
 /1Project/documentation/*.synctex.gz
 /1Project/documentation/*.fls

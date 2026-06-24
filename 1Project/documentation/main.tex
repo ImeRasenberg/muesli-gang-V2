@@ -3,7 +3,10 @@
 \input{packages}
 \input{appearance}
 
+
+\usepackage{subfig}
 \usepackage{multicol}
+\usepackage{subcaption}
 
 \begin{document}
 
@@ -25,20 +28,14 @@
 \input{sections/Discussion.tex}
 \input{sections/Conclusion.tex}
 
-<<<<<<< Updated upstream
 
-\twocolumn[\appendix]
-\input{Appendix/graphs.tex}
 
+
+\twocolumn[\printbibliography \appendix]
 \pagenumbering{Roman}
-\end{document}
-=======
-\newpage
-\printbibliography
-\newpage
-\appendix
+%\input{Appendix/graphs.tex}
 
-\pagenumbering{Roman}
+
 
 \end{document}
->>>>>>> Stashed changes
+
