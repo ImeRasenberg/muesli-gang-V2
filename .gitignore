@@ -46,6 +46,7 @@
 /1Project/presentation/*.aux
 /1Project/presentation/*.bbl
 /1Project/presentation/*.log
+/1Project/presentation/*.bcf
 /1Project/presentation/*.out
 /1Project/presentation/*.toc
 /1Project/presentation/*.synctex.gz
