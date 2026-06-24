@@ -1,22 +1,18 @@
 [0] Config.pm:307> INFO - This is Biber 2.19
 [0] Config.pm:310> INFO - Logfile is 'main.blg'
-[47] biber-darwin:340> INFO - === Wed Jun 24, 2026, 16:34:43
-[57] Biber.pm:419> INFO - Reading 'main.bcf'
-[110] Biber.pm:979> INFO - Found 7 citekeys in bib section 0
-[120] Biber.pm:4419> INFO - Processing section 0
-[128] Biber.pm:4610> INFO - Looking for bibtex file 'bibliography.bib' for section 0
-[128] bibtex.pm:1713> INFO - LaTeX decoding ...
-[130] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
-[155] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[155] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[155] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[155] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
-[160] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
-[160] bbl.pm:763> INFO - Output to main.bbl
-[160] Biber.pm:131> WARN - I didn't find a database entry for '4785860' (section 0)
-[160] Biber.pm:131> WARN - I didn't find a database entry for 'owid-moores-law' (section 0)
-[161] Biber.pm:131> WARN - I didn't find a database entry for 'Markov_2014' (section 0)
-[161] Biber.pm:131> WARN - I didn't find a database entry for 'Zhang_2023' (section 0)
-[161] Biber.pm:131> WARN - I didn't find a database entry for 'Dzyaloshinsky1958ATT' (section 0)
-[161] Biber.pm:131> WARN - I didn't find a database entry for 'PhysRev.120.91' (section 0)
-[161] Biber.pm:133> INFO - WARNINGS: 6
+[50] biber-darwin:340> INFO - === Wed Jun 24, 2026, 16:48:16
+[61] Biber.pm:419> INFO - Reading 'main.bcf'
+[115] Biber.pm:979> INFO - Found 7 citekeys in bib section 0
+[126] Biber.pm:4419> INFO - Processing section 0
+[133] Biber.pm:4610> INFO - Looking for bibtex file 'bibliography.bib' for section 0
+[135] bibtex.pm:1713> INFO - LaTeX decoding ...
+[142] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography.bib'
+[190] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[190] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[190] Biber.pm:4239> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[190] Biber.pm:4245> INFO - No sort tailoring available for locale 'en-US'
+[199] bbl.pm:660> INFO - Writing 'main.bbl' with encoding 'UTF-8'
+[202] bbl.pm:763> INFO - Output to main.bbl
+[202] Biber.pm:131> WARN - legacy month field 'jul' in entry 'Zhang_2023' is not an integer - this will probably not sort properly.
+[202] Biber.pm:131> WARN - legacy month field 'Oct' in entry 'PhysRev.120.91' is not an integer - this will probably not sort properly.
+[202] Biber.pm:133> INFO - WARNINGS: 2
