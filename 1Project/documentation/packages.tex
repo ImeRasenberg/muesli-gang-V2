@@ -13,12 +13,24 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-% allowing for the use of linking in the pdf
-\usepackage{hyperref}
 
 % allowing for the input of code
 \usepackage{listings}
 \usepackage{xcolor}
 
 \usepackage{mathtools}
+
+\usepackage[backend=biber,style=numeric]{biblatex} % use number in main text
+\addbibresource{bibliography.bib} 
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=black,      
+    urlcolor=black,
+    citecolor=black,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
 

@@ -19,9 +19,9 @@ double CD[N][N]; //the wrapping number in space
 double CD_smooth[N][N]; //the wrapping number smoothed out
 
 // constants of the Hamiltonian
-double J = 1;
-double D = 0.2;
-double Hz = 0.08;
+double J = 1.0;
+double D = 2.0;
+double Hz = 0.0;
 
 // Constants of the simmulation
 double beta = 5;
@@ -450,8 +450,8 @@ int main(void){
     double tolerance = 50;
     int number_windows = 2; // number of requiered stable windows
 
-    D=2;
-    Hz=2;
+    D=4.0;
+    Hz=0.0;
 
     // knowing when to start sampling
     int sampeling_started = 0;
