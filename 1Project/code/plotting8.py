@@ -11,6 +11,10 @@ import json
 
 data_folder = "Data"
 
+
+here = "../documentation/sections/Graphs/"
+
+
 master_dict = {}
 decoder = json.JSONDecoder()
 
@@ -157,12 +161,12 @@ ax.errorbar(
     color="#3266ad", label="mean ± 1 std",
 )
 
-ax.set_xlabel(r"$J\beta^{-1}$", fontsize=13)
-ax.set_ylabel(r"$Q$", fontsize=13)
-ax.set_title(
-    rf"$Q$ vs $\beta^{{-1}}$  (J={J_sel}, Hz={Hz_sel})",
-    fontsize=13,
-)
+ax.set_xlabel(r"$J\beta^{-1}$", fontsize=18)
+ax.set_ylabel(r"$Q$", fontsize=18)
+# ax.set_title(
+#     rf"$Q$ vs $\beta^{{-1}}$  (J={J_sel}, Hz={Hz_sel})",
+#     fontsize=13,
+# )
 ax.legend(fontsize=11)
 ax.grid(True, linestyle="--", linewidth=0.5, alpha=0.6)
 
@@ -178,7 +182,7 @@ ax.grid(True, linestyle="--", linewidth=0.5, alpha=0.6)
 #     )
 
 plt.tight_layout()
-# plt.savefig("Q_vs_beta.png", dpi=150)
+plt.savefig(here + "QT.png", dpi=150)
 plt.show()
 print("Saved Q_vs_beta.png")
 
@@ -297,11 +301,12 @@ im = ax.imshow(
     ]
 )
 
-ax.set_xlabel(r"$D/J$")
-ax.set_ylabel(r"$H/J$")
+ax.set_xlabel(r"$D/J$",size=18)
+ax.set_ylabel(r"$H/J$",size =18)
 
 cbar = plt.colorbar(im, ax=ax)
-cbar.set_label(r"$T_c^*$")
+cbar.set_label(r"$T_c^*$",size =18)
 
 plt.tight_layout()
+plt.savefig(here + "Tc2.png")
 plt.show()

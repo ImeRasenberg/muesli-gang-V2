@@ -2,6 +2,8 @@ import os
 import json
 
 data_folder = "Data 4.0"
+here = "../documentation/sections/Graphs/"
+
 
 master_dict = {}
 decoder = json.JSONDecoder()
@@ -222,13 +224,16 @@ im = ax.imshow(
     ]
 )
 
-plt.colorbar(im, ax=ax, label="mean len(N-)")
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label("N", size =18)
 
-ax.set_xlabel("D/J")
-ax.set_ylabel("H/J")
-ax.set_title("N- - N+")
-
+ax.set_xlabel("D/J", size =18)
+ax.set_ylabel("H/J", size =18)
+# ax.set_title("N- - N+")
+plt.savefig(here + "HD_B4.0_NN.png")
 plt.show()
+
+#%%
 
 # ======================================= #
 
@@ -246,12 +251,13 @@ im = ax.imshow(
     ]
 )
 
-plt.colorbar(im, ax=ax, label="mean len(N-)")
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label("Q", size =18)
 
-ax.set_xlabel("D/J")
-ax.set_ylabel("H/J")
-ax.set_title(f"Q measured")
-
+ax.set_xlabel("D/J", size =18)
+ax.set_ylabel("H/J", size =18)
+# ax.set_title(f"Q measured")
+plt.savefig(here + "HD_B4_Q.png")
 plt.show()
 
 
@@ -271,12 +277,13 @@ im = ax.imshow(
     ]
 )
 
-plt.colorbar(im, ax=ax, label="mean len(N-)")
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label("Q-N", size =18)
 
-ax.set_xlabel("D/J")
-ax.set_ylabel("H/J")
-ax.set_title("Q - (N- - N+)")
-
+ax.set_xlabel("D/J", size =18)
+ax.set_ylabel("H/J", size =18)
+# ax.set_title("Q - N")
+plt.savefig(here + "HD_B4_diff.png")
 plt.show()
 
 # ======================================= #
@@ -295,12 +302,13 @@ im = ax.imshow(
     ]
 )
 
-plt.colorbar(im, ax=ax, label="mean len(N-)")
+cbar = plt.colorbar(im, ax=ax, label="mean len(N-)")
+cbar.set_label("$H^+$", size =18)
 
-ax.set_xlabel("D/J")
-ax.set_ylabel("H/J")
-ax.set_title(f"positie peaks hight")
-
+ax.set_xlabel("D/J", size =18)
+ax.set_ylabel("H/J", size =18)
+# ax.set_title(f"N^+")
+plt.savefig(here + "HD_B4_PH.png")
 plt.show()
 
 # ======================================= #
@@ -320,12 +328,13 @@ im = ax.imshow(
     ]
 )
 
-plt.colorbar(im, ax=ax, label="mean len(N-)")
+cbar = plt.colorbar(im, ax=ax, label="mean len(N-)")
+cbar.set_label("$H^-$", size =18)
 
-ax.set_xlabel("D/J")
-ax.set_ylabel("H/J")
+ax.set_xlabel("D/J", size =18)
+ax.set_ylabel("H/J", size =18)
 ax.set_title(f"negative peak hight")
-
+plt.savefig(here + "HD_B4_NH.png")
 plt.show()
 
 

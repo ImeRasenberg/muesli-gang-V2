@@ -10,8 +10,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-filepath="Data/Spin_orientiation.txt"
+filepath="Data 4.0/Spin_orientiation.txt"
 subsample=1
+
+
+here = "../documentation/sections/Graphs/"
+
 
 if not os.path.exists(filepath):
     print(f"Error: Could not find the file at '{filepath}'.")
@@ -53,51 +57,51 @@ quiver = plt.quiver(X_sub, Y_sub, U_sub, V_sub, W_sub,
  
  # Add a colorbar to show what the arrow colors mean
 cbar = plt.colorbar(quiver)
-cbar.set_label('Spin Z-component ($S_z$)', rotation=270, labelpad=15)
+cbar.set_label('$S_z$', size = 18)
 
-plt.title(f"2D Spin Lattice (Subsampled 1:{subsample})")
-plt.xlabel("X Lattice Site")
-plt.ylabel("Y Lattice Site")
+# plt.title(f"2D Spin Lattice (Subsampled 1:{subsample})")
+plt.xlabel("X Lattice Site", size = 18)
+plt.ylabel("Y Lattice Site", size = 18)
 plt.xlim(-1, N)
 plt.ylim(-1, N)
 plt.gca().set_aspect('equal') # Keep the grid square
 plt.grid(True, which='both', linestyle=':', alpha=0.5)
-
+plt.savefig(here + "Lattice.png")
 plt.show()
 
 #%%
 
-filepath2="Data/Energy_steps.txt"
+# filepath2="Data/Energy_steps.txt"
 
-if not os.path.exists(filepath2):
-    print(f"Error: Could not find the file at '{filepath}'.")
-    print("Make sure you have run your C program and it successfully saved the data.")
-    # return
+# if not os.path.exists(filepath2):
+#     print(f"Error: Could not find the file at '{filepath}'.")
+#     print("Make sure you have run your C program and it successfully saved the data.")
+#     # return
 
-data = np.genfromtxt(filepath2, skip_header=1)
+# data = np.genfromtxt(filepath2, skip_header=1)
 
-# Convert to numpy arrays and reshape back to (N, N)
-# Using float64 to match C's double precision
-steps = np.array(data[:,0])
-Energy = np.array(data[:,1])
-acceptance = np.array(data[:,2])
-beta = np.array(data[:,3])
-Q = np.array(data[:, 4])
-# S_z = np.array(z_lines, dtype=np.float64).reshape((N, N))
+# # Convert to numpy arrays and reshape back to (N, N)
+# # Using float64 to match C's double precision
+# steps = np.array(data[:,0])
+# Energy = np.array(data[:,1])
+# acceptance = np.array(data[:,2])
+# beta = np.array(data[:,3])
+# Q = np.array(data[:, 4])
+# # S_z = np.array(z_lines, dtype=np.float64).reshape((N, N))
 
   
-# 4. Plotting
-plt.figure(figsize=(10, 8))
-plt.plot(steps, Energy)
-plt.show()
+# # 4. Plotting
+# plt.figure(figsize=(10, 8))
+# plt.plot(steps, Energy)
+# plt.show()
 
-plt.figure(figsize=(10, 8))
-plt.plot(steps, acceptance)
-plt.show()
+# plt.figure(figsize=(10, 8))
+# plt.plot(steps, acceptance)
+# plt.show()
 
-plt.figure(figsize=(10, 8))
-plt.plot(steps, Q)
-plt.show()
+# plt.figure(figsize=(10, 8))
+# plt.plot(steps, Q)
+# plt.show()
 
 #%%
 def get_triangle_charge(S1, S2, S3):
@@ -164,12 +168,13 @@ img = plt.imshow(charge_density, cmap='seismic', origin='lower',
                  vmin=-vmax, vmax=vmax, extent=[-0.5, N-0.5, -0.5, N-0.5])
 
 cbar = plt.colorbar(img)
-cbar.set_label('Local Topological Charge Density ($q_{ij}$)', rotation=270, labelpad=15)
+cbar.set_label('$q_{ij}$', size =18)
 
-plt.title(f"$Q$ = {total_Q:+.4f}")
-plt.xlabel("X Lattice Site")
-plt.ylabel("Y Lattice Site")
+# plt.title(f"$Q$ = {total_Q:+.4f}")
+plt.xlabel("X Lattice Site",size =18)
+plt.ylabel("Y Lattice Site",size = 18)
 plt.grid(False) # Turn off standard lines to clearly observe the pixels
+plt.savefig(here + "wrapping.png")
 plt.show()
 
 
@@ -184,12 +189,13 @@ img = plt.imshow(smooth, cmap='seismic', origin='lower',
                  vmin=-vmax2, vmax=vmax2, extent=[-0.5, N-0.5, -0.5, N-0.5])
 
 cbar = plt.colorbar(img)
-cbar.set_label('Local Topological Charge Density ($q_{ij}$)', rotation=270, labelpad=15)
+cbar.set_label(r'$\langle q_{ij} \rangle_{ij}$', size=18)
 
-plt.title(f"$Q$ = {total_Q:+.4f}")
-plt.xlabel("X Lattice Site")
-plt.ylabel("Y Lattice Site")
+# plt.title(f"$Q$ = {total_Q:+.4f}")
+plt.xlabel("X Lattice Site",size =18)
+plt.ylabel("Y Lattice Site",size =18)
 plt.grid(False) # Turn off standard lines to clearly observe the pixels
+plt.savefig(here + "smoothed.png")
 plt.show()
 
 
@@ -312,11 +318,7 @@ img = plt.imshow(
 )
 
 cbar = plt.colorbar(img)
-cbar.set_label(
-    'Local Topological Charge Density ($q_{ij}$)',
-    rotation=270,
-    labelpad=15
-)
+cbar.set_label(r'$\langle q_{ij} \rangle_{ij}$', size=18)
 
 # positive candidates
 plt.scatter(
@@ -340,14 +342,15 @@ plt.scatter(
     label='negative'
 )
 
-plt.title(
-   f"Target Q={Q_target}, detected Q={Q_found}"
-)
+# plt.title(
+#    f"Target Q={Q_target}, detected Q={Q_found}"
+# )
 
-plt.xlabel("X lattice site")
-plt.ylabel("Y lattice site")
+plt.xlabel("X lattice site", size =18)
+plt.ylabel("Y lattice site", size =18)
 plt.legend()
 plt.grid(False)
+plt.savefig(here + "detection.png")
 
 plt.show()
 

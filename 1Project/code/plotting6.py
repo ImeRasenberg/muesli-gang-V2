@@ -125,6 +125,9 @@ print("Finished loading.")
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+
+here = "../documentation/sections/Graphs/"
 N_LAST = 30
 
 beta_vals = sorted(master_dict.keys())
@@ -224,6 +227,7 @@ for beta in beta_vals:
         ax.set_xlabel("D/J")
         ax.set_ylabel("H/J")
         ax.set_title(f"[β={beta}]  {title}")
+        # plt.savefig(here+f"")
         plt.show()
 
     # _imshow((tn - tp) / n_I,           "N- − N+")
@@ -238,11 +242,13 @@ for beta in beta_vals:
 
     fig, ax = plt.subplots(figsize=(8, 6))
     im = ax.imshow(mtx, origin="lower", aspect="auto", extent=extent)
-    plt.colorbar(im, ax=ax, label="neg / pos peak height")
+    cbar = plt.colorbar(im, ax=ax,)
+    cbar.set_label("neg / pos peak height", size = 18)
     ax.contour(mtx, levels=[cut_off], colors="red", linewidths=1.5, extent=extent)
-    ax.set_xlabel("D/J")
-    ax.set_ylabel("H/J")
-    ax.set_title(f"[β={beta}]  negative peak height / positive peak height")
+    ax.set_xlabel("D/J", size = 18)
+    ax.set_ylabel("H/J", size = 18)
+    plt.savefig(here+f"HD_B{beta}_PH_NH.png")
+    # ax.set_title(f"[β={beta}]  negative peak height / positive peak height")
     plt.show()
 
     # --------------------------------------------------
@@ -297,11 +303,13 @@ for beta in beta_vals:
 
     fig, ax = plt.subplots(figsize=(8, 6))
     im = ax.imshow(z / 40**2 / n_I, origin="lower", aspect="auto", extent=extent)
-    plt.colorbar(im, ax=ax, label="⟨Sz⟩ / N")
+    cbar = plt.colorbar(im, ax=ax)
     ax.contour(mtx, levels=[cut_off], colors="red", linewidths=1.5, extent=extent)
-    ax.set_xlabel("D/J")
-    ax.set_ylabel("H/J")
-    ax.set_title(fr"[β={beta}]  Average Magnetisation $\hat{{z}}$")
+    cbar.set_label(r"$\langle S_z \rangle / N$",size = 18)
+    ax.set_xlabel("D/J", size = 18)
+    ax.set_ylabel("H/J", size = 18)
+    plt.savefig(here+f"HD_B{beta}_AM.png")
+    # ax.set_title(fr"[β={beta}]  Average Magnetisation $\hat{{z}}$")
     plt.show()
     
 #%%
@@ -309,8 +317,8 @@ for beta in beta_vals:
 # Q vs beta for the grid point closest to a target [H, D]
 # ==========================================================
 
-target_H = 1   # <-- set your target H/J
-target_D = 2   # <-- set your target D/J
+target_H = 0.25   # <-- set your target H/J
+target_D = 0.7  # <-- set your target D/J
 
 # find closest available H and D values (global across all betas)
 all_D_vals  = sorted({ D  for b in master_dict for D  in master_dict[b] })
@@ -358,11 +366,12 @@ else:
 
     fig, ax = plt.subplots(figsize=(8, 5))
     ax.errorbar(1/np.array(betas), Qs, yerr=errs, marker="o", linewidth=1.5, capsize=4, capthick=1.5)
-    ax.set_xlabel(r"$J\beta^{-1}$")
-    ax.set_ylabel("Q")
-    ax.set_title(rf"Q vs $\beta$  —  H/J={closest_Hz}, D/J={closest_D}")
+    ax.set_xlabel(r"$J\beta^{-1}$",size = 18)
+    ax.set_ylabel("Q", size = 18)
+    # ax.set_title(rf"Q vs $\beta$  —  H/J={closest_Hz}, D/J={closest_D}")
     ax.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
+    plt.savefig(here + "QB3.png")
     plt.show()
 #%%
 
@@ -459,10 +468,12 @@ extent = [min(all_D_vals), max(all_D_vals), min(all_Hz_vals), max(all_Hz_vals)]
 
 fig, ax = plt.subplots(figsize=(8, 6))
 im = ax.imshow(Tc_grid, origin="lower", aspect="auto", extent=extent)
-plt.colorbar(im, ax=ax, label=r"$T_c \ (J/k_B)$")
-ax.set_xlabel("D/J")
-ax.set_ylabel("H/J")
-ax.set_title(r"$T_c$ — temperature where $Q$ decays to 30% of low-$T$ value")
+cbr = plt.colorbar(im, ax=ax )
+cbr.set_label(r"$T_c \ (J/k_B)$",size = 18)
+
+ax.set_xlabel("D/J",size = 18)
+ax.set_ylabel("H/J",size = 18)
+# ax.set_title(r"$T_c$ — temperature where $Q$ decays to 30% of low-$T$ value")
 plt.tight_layout()
 plt.show()
 
@@ -535,9 +546,10 @@ extent = [min(all_D_vals), max(all_D_vals), min(all_Hz_vals), max(all_Hz_vals)]
 
 fig, ax = plt.subplots(figsize=(8, 6))
 im = ax.imshow(Tc_masked, origin="lower", aspect="auto", extent=extent)
-plt.colorbar(im, ax=ax, label=r"$T_c^* $")
-ax.set_xlabel("D/J")
-ax.set_ylabel("H/J")
-ax.set_title(r"$T_c^*$ (masked to ordered domain at $J\beta=4$)")
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$T_f^*$", size = 18)
+ax.set_xlabel("D/J", size = 18)
+ax.set_ylabel("H/J", size = 18)
+# ax.set_title(r"$T_c^*$")
 plt.tight_layout()
 plt.show()

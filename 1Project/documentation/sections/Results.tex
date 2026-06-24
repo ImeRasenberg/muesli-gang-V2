@@ -9,7 +9,7 @@ First a 40x40 lattice is generated. All spins are given a random orientation at 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width = \linewidth]{sections/Graphs/Lattice.png}
+	\includegraphics[width = \linewidth]{sections/Graphs/energybeta_evolution.png}
 	\caption{The energy as a function of MC steps, showing where the unitless temperature is changed.}
 	\label{fig: Energy time}
 \end{figure}
@@ -57,10 +57,6 @@ Now that we have found the maxima and minima we need to see if they are actually
 
 Summing the wrapping number over the whole grid we get the Q-number which is some integer describing the number of positive skyrmions minus the numer of negative skyrmions. From this we know how many peaks we need to find. This is done by getting value of the lowest minima or highest maxima found and checking down from there adding keep adding peaks untill we find the Q-number. 
 
-
-\textbf{[Show that the Q with H>0 prefers negative skyrmions while H<0 prefers positive ones ]}
-
-
 \subsection{Distinguishing phases}
 
 there are a few phases to be found here, one where the ferromagnetic interaction dominates, one where the DM interaction dominates (spiral phase), and then one where skyrmions can be found.
@@ -76,7 +72,7 @@ To get the phase diagram the applied magnetic field and the strength of the DM i
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{sections/Graphs/HD_B4_NN.png}
+	\includegraphics[width=\linewidth]{sections/Graphs/HD_B4.0_NN.png}
 	\caption{The number of detected skyrmions as a function of unitless DM-interaction strength (D) and the unitless applied magnetic field (H).}
 \end{figure}
 
@@ -84,7 +80,7 @@ hight of negative skyrmion over positive skyrmion greater then 1.5
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{sections/Graphs/HD_B4_PH_NH.png}
+	\includegraphics[width=\linewidth]{sections/Graphs/HD_B4.0_PH_NH.png}
 	\caption{The detected hight of the negative detected skyrmions devided by the hight of the positive detected skyrmion as a function of unitless DM-interaction strength (D) and the unitless applied magnetic field (H).}
 \end{figure}
 
@@ -92,7 +88,7 @@ then average magnetisation
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{sections/Graphs/HD_B4_AM.png}
+	\includegraphics[width=\linewidth]{sections/Graphs/HD_B4.0_AM.png}
 	\caption{The average magnetization in the Z direction as a function of unitless DM-interaction strength (D) and the unitless applied magnetic field (H).}
 \end{figure}
 
@@ -111,13 +107,13 @@ single D,H combination
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{sections/Graphs/QB1.png}
-	\caption{The detected number of skyrmions as a function of relative temperature }
+	\caption{The detected number of formed skyrmions as a function of unitless temperature for a specific unitless DM-interaction strength (D) and the unitless applied magnetic field (H).}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{sections/Graphs/Tf.png}
-	\caption{text}
+	\caption{The formation cutoff temperature as a function of unitless DM-interaction strength (D) and the unitless applied magnetic field (H).}
 \end{figure}
 
 
@@ -128,15 +124,12 @@ single D,H
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{sections/Graphs/QT.png}
-	\caption{text}
+	\caption{The detected number of existing skyrmions as a function of unitless temperature for a specific unitless DM-interaction strength (D) and the unitless applied magnetic field (H).}
 \end{figure}
 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{sections/Graphs/Tc2.png}
-	\caption{text}
+	\caption{The destruction cutoff temperature as a function of unitless DM-interaction strength (D) and the unitless applied magnetic field (H).}
 \end{figure}
-
-
-
