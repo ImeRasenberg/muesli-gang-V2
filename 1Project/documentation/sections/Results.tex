@@ -187,11 +187,16 @@ For each combination of \(D/J\) and \(H/J\), the system is initialised at low te
 	\label{fig: Formation}
 \end{figure}
 
-The formation cutoff temperature \(T_f^*\) is defined as the temperature at which the skyrmion number drops to 30\% of its value at \(\beta/J = 4\). The resulting dependence on \(D/J\) and \(H/J\) is shown in Figure~\ref{fig: Formation whole domain}.
+The formation cutoff temperature \(T_f^*\) is defined in context of
+\begin{equation}
+	Q=a+b e^{-\frac{J\beta^{-1}}{T_f^*}}.
+\end{equation}
+This equation is fit to the data get the cutoff temperature.
+The resulting dependence on \(D/J\) and \(H/J\) is shown in Figure~\ref{fig: Formation whole domain}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{sections/Graphs/Tf.png}
+	\includegraphics[width=\linewidth]{sections/Graphs/Tf_masked.png}
 	\caption{Formation cutoff temperature \(T_f^*\) as a function of dimensionless DM interaction strength \(D/J\) and applied magnetic field \(H/J\).}
 	\label{fig: Formation whole domain}
 \end{figure}
@@ -208,11 +213,16 @@ In this case, the system is initialised in a low-temperature skyrmionic configur
 	\label{fig: QT}
 \end{figure}
 
-The destruction cutoff temperature \(T_c^*\) is defined as the temperature at which the skyrmion number drops below 30\% of its low-temperature value. The resulting dependence on \(D/J\) and \(H/J\) is shown in Figure~\ref{fig: Tc}.
+The destruction cutoff temperature \(T_c^*\) is defined in context of
+\begin{equation}
+	Q=a+b e^{-\frac{J\beta^{-1}}{T_c^*}}.
+\end{equation}
+This equation is fit to the data to get the cutoff temperature.
+The resulting dependence on \(D/J\) and \(H/J\) is shown in Figure~\ref{fig: Tc}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{sections/Graphs/Tc2.png}
+	\includegraphics[width=\linewidth]{sections/Graphs/tau_masked.png}
 	\caption{Destruction cutoff temperature \(T_c^*\) as a function of dimensionless DM interaction strength \(D/J\) and applied magnetic field \(H/J\).}
 	\label{fig: Tc}
 \end{figure}

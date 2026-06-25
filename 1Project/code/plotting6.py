@@ -553,3 +553,282 @@ ax.set_ylabel("H/J", size = 18)
 # ax.set_title(r"$T_c^*$")
 plt.tight_layout()
 plt.show()
+
+#%% exponential fit instead
+
+
+from scipy.optimize import curve_fit
+
+def exp_decay(T, a, b, tau):
+    return a + b * np.exp(-T / tau)
+
+N_LAST_Q = 30
+
+beta_vals   = sorted(master_dict.keys())
+all_D_vals  = sorted({D for b in master_dict for D in master_dict[b]})
+all_Hz_vals = sorted({Hz for b in master_dict
+                         for D in master_dict[b]
+                         for Hz in master_dict[b][D]})
+
+tau_grid = np.full((len(all_Hz_vals), len(all_D_vals)), np.nan)
+
+for ix, D in enumerate(all_D_vals):
+    for iy, Hz in enumerate(all_Hz_vals):
+
+        # --------------------------------------------------
+        # collect (T, <Q>)
+        # --------------------------------------------------
+        Q_vs_T = []
+
+        for beta in beta_vals:
+
+            if D not in master_dict[beta]:
+                continue
+            if Hz not in master_dict[beta][D]:
+                continue
+
+            q_all = []
+
+            for I, step_dict in master_dict[beta][D][Hz].items():
+
+                if not step_dict:
+                    continue
+
+                for step in sorted(step_dict.keys())[-N_LAST_Q:]:
+
+                    obj = step_dict[step]
+
+                    if "Q" in obj:
+                        q_all.append(obj["Q"])
+
+            if q_all:
+                Q_vs_T.append((1.0 / beta, np.mean(q_all)))
+
+        if len(Q_vs_T) < 4:
+            continue
+
+        # --------------------------------------------------
+        # arrays sorted by temperature
+        # --------------------------------------------------
+        Q_vs_T.sort(key=lambda x: x[0])
+
+        T_arr = np.array([x[0] for x in Q_vs_T])
+        Q_arr = np.array([x[1] for x in Q_vs_T])
+
+        T_span = T_arr.max() - T_arr.min()
+
+        if T_span <= 0:
+            continue
+
+        # --------------------------------------------------
+        # fit
+        # --------------------------------------------------
+        a0 = Q_arr[-1]
+        b0 = Q_arr[0] - a0
+        tau0 = T_span / 2
+
+        try:
+
+            popt, _ = curve_fit(
+                exp_decay,
+                T_arr,
+                Q_arr,
+                p0=[a0, b0, tau0],
+                bounds=(
+                    [-np.inf, -np.inf, 1e-12],
+                    [ np.inf,  np.inf, np.inf]
+                ),
+                maxfev=10000
+            )
+
+            a_fit, b_fit, tau_fit = popt
+
+            # reject fits whose decay length exceeds
+            # the measured temperature window
+            if tau_fit > T_span*1.5:
+                continue
+
+            tau_grid[iy, ix] = tau_fit
+
+        except (RuntimeError, ValueError):
+            continue
+        
+fig, ax = plt.subplots(figsize=(8, 6))
+
+im = ax.imshow(
+    tau_grid,
+    origin="lower",
+    aspect="auto",
+    extent=extent
+)
+
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$T_c \ (J/k_B)$", size=18)
+
+ax.set_xlabel("D/J", size=18)
+ax.set_ylabel("H/J", size=18)
+
+plt.tight_layout()
+# plt.savefig("Tc_tau.png", dpi=300, bbox_inches="tight")
+plt.show()
+
+tau_masked = np.where(domain_mask, tau_grid, np.nan)
+
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+im = ax.imshow(
+    tau_masked,
+    origin="lower",
+    aspect="auto",
+    extent=extent
+)
+
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$T_f^*$", size=18)
+
+ax.set_xlabel("D/J", size=18)
+ax.set_ylabel("H/J", size=18)
+
+plt.tight_layout()
+plt.savefig(here + "Tc_masked_tau.png", dpi=300, bbox_inches="tight")
+plt.show()
+#%%
+#%%
+# ==========================================================
+# Q vs 1/beta for the selected point, with exponential fit
+# ==========================================================
+
+from scipy.optimize import curve_fit
+
+def exp_decay(T, a, b, tau):
+    return a + b * np.exp(-T / tau)
+
+N_LAST_Q = 30
+
+# reuse closest_D, closest_Hz from the Q vs beta cell above
+Q_vs_T_sel = []
+
+for beta in sorted(master_dict.keys()):
+    beta_dict = master_dict[beta]
+    if closest_D  not in beta_dict:             continue
+    if closest_Hz not in beta_dict[closest_D]:  continue
+
+    q_all = []
+    for I, step_dict in beta_dict[closest_D][closest_Hz].items():
+        if not step_dict: continue
+        for step in sorted(step_dict.keys())[-N_LAST_Q:]:
+            obj = step_dict[step]
+            if "Q" in obj:
+                q_all.append(obj["Q"])
+
+    if q_all:
+        q_arr = np.array(q_all)
+        Q_vs_T_sel.append((1.0 / beta, np.mean(q_arr), np.std(q_arr) / np.sqrt(len(q_arr))))
+
+Q_vs_T_sel.sort(key=lambda x: x[0])
+T_sel  = np.array([x[0] for x in Q_vs_T_sel])
+Q_sel  = np.array([x[1] for x in Q_vs_T_sel])
+err_sel = np.array([x[2] for x in Q_vs_T_sel])
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.errorbar(T_sel, Q_sel, yerr=err_sel, marker="o", linewidth=1.5,
+            capsize=4, capthick=1.5, label="mean ± s.e.m.")
+
+try:
+    T_span = T_sel.max() - T_sel.min()
+    popt, _ = curve_fit(
+        exp_decay, T_sel, Q_sel,
+        p0=[Q_sel[-1], Q_sel[0] - Q_sel[-1], T_span / 2],
+        bounds=([-np.inf, -np.inf, 1e-12], [np.inf, np.inf, np.inf]),
+        maxfev=10000
+    )
+    T_fit = np.linspace(T_sel.min(), T_sel.max(), 300)
+    ax.plot(T_fit, exp_decay(T_fit, *popt), color="tomato", linewidth=2,
+            label=rf"fit: $T_f^*={popt[2]:.3f}$")
+    print(f"Fit (H={closest_Hz}, D={closest_D}): a={popt[0]:.4f}, b={popt[1]:.4f}, Tf*={popt[2]:.4f}")
+except RuntimeError:
+    print("Fit failed for selected point.")
+
+ax.set_xlabel(r"$J\beta^{-1}$", size=18)
+ax.set_ylabel("Q", size=18)
+ax.legend(fontsize=11)
+ax.grid(True, linestyle="--", alpha=0.5)
+plt.tight_layout()
+plt.savefig(here + "QB3_fit.png", dpi=150)
+plt.show()
+
+# ==========================================================
+# T_f* map from exponential fit, unmasked
+# ==========================================================
+
+Tf_grid = np.full((len(all_Hz_vals), len(all_D_vals)), np.nan)
+
+for ix, D in enumerate(all_D_vals):
+    for iy, Hz in enumerate(all_Hz_vals):
+
+        Q_vs_T = []
+        for beta in beta_vals:
+            if D  not in master_dict[beta]:          continue
+            if Hz not in master_dict[beta][D]:       continue
+
+            q_all = []
+            for I, step_dict in master_dict[beta][D][Hz].items():
+                if not step_dict: continue
+                for step in sorted(step_dict.keys())[-N_LAST_Q:]:
+                    obj = step_dict[step]
+                    if "Q" in obj:
+                        q_all.append(obj["Q"])
+
+            if q_all:
+                Q_vs_T.append((1.0 / beta, np.mean(q_all)))
+
+        if len(Q_vs_T) < 4:
+            continue
+
+        Q_vs_T.sort(key=lambda x: x[0])
+        T_arr = np.array([x[0] for x in Q_vs_T])
+        Q_arr = np.array([x[1] for x in Q_vs_T])
+        T_span = T_arr.max() - T_arr.min()
+
+        if T_span <= 0:
+            continue
+
+        try:
+            popt, _ = curve_fit(
+                exp_decay, T_arr, Q_arr,
+                p0=[Q_arr[-1], Q_arr[0] - Q_arr[-1], T_span / 2],
+                bounds=([-np.inf, -np.inf, 1e-12], [np.inf, np.inf, np.inf]),
+                maxfev=10000
+            )
+            if popt[2] <= 1.5 * T_arr.max():
+                Tf_grid[iy, ix] = popt[2]
+        except (RuntimeError, ValueError):
+            continue
+
+extent = [min(all_D_vals), max(all_D_vals), min(all_Hz_vals), max(all_Hz_vals)]
+
+fig, ax = plt.subplots(figsize=(8, 6))
+im = ax.imshow(Tf_grid, origin="lower", aspect="auto", extent=extent)
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$T_f^*\ (J/k_B)$", size=18)
+ax.set_xlabel("D/J", size=18)
+ax.set_ylabel("H/J", size=18)
+plt.tight_layout()
+plt.show()
+
+# ==========================================================
+# T_f* map masked to skyrmion domain
+# ==========================================================
+
+Tf_masked = np.where(domain_mask, Tf_grid, np.nan)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+im = ax.imshow(Tf_masked, origin="lower", aspect="auto", extent=extent)
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$T_f^*$", size=18)
+ax.set_xlabel("D/J", size=18)
+ax.set_ylabel("H/J", size=18)
+plt.tight_layout()
+plt.savefig(here + "Tf_masked.png", dpi=300, bbox_inches="tight")
+plt.show()

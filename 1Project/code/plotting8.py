@@ -310,3 +310,133 @@ cbar.set_label(r"$T_c^*$",size =18)
 plt.tight_layout()
 plt.savefig(here + "Tc2.png")
 plt.show()
+
+#%%
+# ==========================================================
+# EXPONENTIAL FIT: a + b * exp(-x / tau), x = 1/beta
+# Plots tau as a function of D and Hz (same layout as Tc2)
+# ==========================================================
+
+from scipy.optimize import curve_fit
+
+def exp_model(x, a, b, tau):
+    return a + b * np.exp(-x / tau)
+
+# ----------------------------------------------------------
+# Re-plot Q vs 1/beta for the selected (J, Hz) with fit
+# ----------------------------------------------------------
+fig, ax = plt.subplots(figsize=(8, 5))
+
+ax.errorbar(
+    1 / betas, means, yerr=stds,
+    marker="o", linewidth=1.8, markersize=5,
+    capsize=4, capthick=1.2, elinewidth=1.2,
+    color="#3266ad", label="mean ± 1 std",
+)
+
+try:
+    p0 = [means[-1], means[0] - means[-1], np.median(1 / betas)]
+    popt, _ = curve_fit(exp_model, 1 / betas, means, p0=p0, maxfev=10000)
+    x_fit = np.linspace((1 / betas).min(), (1 / betas).max(), 300)
+    ax.plot(x_fit, exp_model(x_fit, *popt), color="tomato", linewidth=2,
+            label=rf"fit: $\tau={popt[2]:.3f}$")
+    print(f"Fit (J={J_sel}, Hz={Hz_sel}): a={popt[0]:.4f}, b={popt[1]:.4f}, tau={popt[2]:.4f}")
+except RuntimeError:
+    print(f"Fit failed for J={J_sel}, Hz={Hz_sel}")
+
+ax.set_xlabel(r"$J\beta^{-1}$", fontsize=18)
+ax.set_ylabel(r"$Q$", fontsize=18)
+ax.legend(fontsize=11)
+ax.grid(True, linestyle="--", linewidth=0.5, alpha=0.6)
+
+plt.tight_layout()
+plt.savefig(here + "QT_fit.png", dpi=150)
+plt.show()
+print("Saved QT_fit.png")
+
+# ----------------------------------------------------------
+# Build tau matrix over all (D, Hz)
+# ----------------------------------------------------------
+tau_points = []
+
+for D in master_dict:
+    for Hz in master_dict[D]:
+
+        beta_data = defaultdict(list)
+        for I, steps in master_dict[D][Hz].items():
+            for step, obj in steps.items():
+                beta_data[obj["beta"]].append(obj["Q"])
+
+        if len(beta_data) < 4:   # need enough points to fit
+            continue
+
+        betas_loc = np.array(sorted(beta_data.keys()))
+        means_loc = np.array([np.mean(beta_data[b]) for b in betas_loc])
+        x_loc     = 1 / betas_loc
+
+        try:
+            p0 = [means_loc[-1], means_loc[0] - means_loc[-1], np.median(x_loc)]
+            popt, _ = curve_fit(exp_model, x_loc, means_loc, p0=p0, maxfev=10000)
+            tau = popt[2]
+            T_max = (1 / betas_loc).max()
+            if 0 < tau < 1.5 * T_max:
+                tau_points.append((D, Hz, tau))
+        except RuntimeError:
+            pass
+
+# ----------------------------------------------------------
+# Assemble matrix (same axes as mtx / Tc2)
+# ----------------------------------------------------------
+tau_mtx = np.full((len(Hz_vals), len(D_vals)), np.nan)
+
+for D, Hz, tau in tau_points:
+    if D in D_vals and Hz in Hz_vals:
+        i = Hz_vals.index(Hz)
+        j = D_vals.index(D)
+        tau_mtx[i, j] = tau
+
+# ----------------------------------------------------------
+# Unmasked heatmap
+# ----------------------------------------------------------
+fig, ax = plt.subplots(figsize=(8, 6))
+
+im = ax.imshow(
+    tau_mtx,
+    origin="lower",
+    aspect="auto",
+    extent=[min(D_vals), max(D_vals), min(Hz_vals), max(Hz_vals)],
+)
+
+ax.set_xlabel(r"$D/J$", size=18)
+ax.set_ylabel(r"$H/J$", size=18)
+
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$\tau$", size=18)
+
+plt.tight_layout()
+plt.savefig(here + "tau.png", dpi=150)
+plt.show()
+
+# ----------------------------------------------------------
+# Masked heatmap (same mask as Tc2)
+# ----------------------------------------------------------
+tau_mtx_masked = np.ma.masked_where(~mask, tau_mtx)
+
+fig, ax = plt.subplots(figsize=(8, 6))
+
+im = ax.imshow(
+    tau_mtx_masked,
+    origin="lower",
+    aspect="auto",
+    extent=[min(D_vals), max(D_vals), min(Hz_vals), max(Hz_vals)],
+)
+
+ax.set_xlabel(r"$D/J$", size=18)
+ax.set_ylabel(r"$H/J$", size=18)
+
+cbar = plt.colorbar(im, ax=ax)
+cbar.set_label(r"$T_c^*$", size=18)
+
+plt.tight_layout()
+plt.savefig(here + "tau_masked.png", dpi=150)
+plt.show()
