@@ -4,11 +4,11 @@
 \setlength{\abovedisplayshortskip}{0pt plus 1pt}%
 \setlength{\belowdisplayshortskip}{0pt plus 1pt}%
 
-To be able to find Skyrmions we first have to define a system in which they might exist. After this some characteristics of these Skyrmions will be discussed. 
+To be able to find Skyrmions we first have to define a system in which they might exist. Afterwards,  some characteristics of these Skyrmions will be discussed. 
 
 \subsection{Hamiltonian}
 
-The system will be an $N$ by $N$ 2D lattice where we have set $N$  to 40. In the sites of this lattice electrons are bound with a spin. The spins of these electrons interact via a normal nearest neighbor ferromagnetic Heisenberg model. A magnetic field is applied therefore a Zeeman Hamiltonian is added. Then to stimulate the underlying crystal structure the Dzyaloshinskii-Mariya (DM) interaction energy is also added.
+The system will be a periodic $N$ by $N$ 2D lattice where we have set $N$  to 40. In the sites of this lattice electrons are bound, each carrying a spin. The spins of these electrons interact via a normal nearest neighbor ferromagnetic Heisenberg model. A magnetic field is applied therefore a Zeeman Hamiltonian is added. Then to stimulate the underlying crystal structure the Dzyaloshinskii-Moriya (DM) interaction energy is also added.
 
 \begin{equation}
 	\mathcal{H} =\mathcal{H}_H + \mathcal{H}_{Z} +\mathcal{H}_{DM}
@@ -18,12 +18,12 @@ The system will be an $N$ by $N$ 2D lattice where we have set $N$  to 40. In the
 
 \subsubsection{Heisenberg}
 
-The Heisenberg Hamiltonian describes the alignment between nearest neigbours and is given by: 
+The Heisenberg Hamiltonian describes the alignment between nearest neighbours and is given by: 
 \begin{equation}
 	\mathcal{H}_H = -J \sum_r \vec{S}_r \cdot \left( \vec{S}_{r + \hat{x}} + \vec{S}_{r + \hat{y}}  \right).
 \end{equation}
 Here $J$ is the coupling constant that is kept at a constant value of 1, and $\vec{S}_r$ is the spin at site $r$. The sum over $r$ sums over all spins with periodic boundary conditions. 
-For positive or negative J it leads to the alignment or anti alignment of nearest neigbours and is therefore ferromagnetic or  antiferromagnetic.
+For positive or negative J it leads to the alignment or anti alignment of nearest neighbours and is therefore ferromagnetic or  antiferromagnetic.
 
 
 \subsubsection{Zeeman}
@@ -34,29 +34,29 @@ The Zeeman Hamiltonian describes the alignment of the spins with an external mag
 	 \mathcal{H}_{Z} = - H_z \sum_r \vec{S}_r 
 \end{equation}
 
-Here $H_Z$ is the external magnetic field. Together with the Heisenberg Hamiltonian it describes the Ising model.
+Here $H_Z$ is the external magnetic field. 
 
 
 
 \subsubsection{Dzyaloshinskii–Moriya Interaction}
-Contrarie to the Ising model the Dzyaloshinskii–Moriya interaction otherwise known as the antisymmetric exchange favors spin canting. 
-The phenomena was first observed in weak ferromagnetism of typical antiferromagnetic materials.
-The interaction was first described using landau theory by  Igor Dzyaloshinskii in 1958 \cite{Dzyaloshinsky1958ATT} and later using spin orbit coupling by Toru Moriya in 1960 \cite{PhysRev.120.91}.
+Contrary  to the Heisenberg model the Dzyaloshinskii–Moriya interaction otherwise known as the antisymmetric exchange favors spin canting. 
+This phenomenon was first observed in weak ferromagnetism of typical antiferromagnetic materials.
+The interaction was first described using Landau theory by  Igor Dzyaloshinskii in 1958 \cite{Dzyaloshinsky1958ATT} and later derived using spin orbit coupling by Toru Moriya in 1960 \cite{PhysRev.120.91}.
 \begin{equation}
 	\mathcal{H}_{DM} = -D \sum_r \vec{S}_r \times \vec{S}_{r + \hat{x}} \cdot \hat{x} + \vec{S}_r \times \vec{S}_{r + \hat{y}} \cdot \hat{y}
 \end{equation}
 Here $D$ is the DM constant. This interaction makes it possible for nonlinear spin textures to form and therefore makes the formation of skyrmions possible.
 
 
-\subsubsection{Skyrmion Number}\label{model_skyrmion_number}
+\subsection{Skyrmion Number}\label{model_skyrmion_number}
 Skyrmions are vortices in the spin lattice that can be mathematically described by the skyrmion number otherwise known as the winding number. 
 
-In the continuous case the skyrion number is given by:
+In the continuous case the skyrmion number is given by:
 \begin{equation}
 	 n = \frac{1}{4\pi} \int \mathbf{M} \cdot \left( \frac{\partial \mathbf{M}}{\partial x}  \times \frac{\partial \mathbf{M}}{\partial y}\right) dx dy.
 \end{equation}
 
-To calculate this discreetly we use the formula proposed by  Berg and Lüscher (1981)\cite{BERG1981412}:
+To calculate this discretely we use the formula proposed by  Berg and Lüscher (1981)\cite{BERG1981412}:
 \begin{equation}
 	Q = \frac{1}{4\pi} \sum_{i=1}^N \sum_{j=1}^N \left( q_{ij}^A + q_{ij}^B\right).
 \end{equation}

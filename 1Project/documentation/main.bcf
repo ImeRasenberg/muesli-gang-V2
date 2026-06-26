@@ -2371,6 +2371,8 @@
     <bcf:citekey order="8" intorder="1">Dzyaloshinsky1958ATT</bcf:citekey>
     <bcf:citekey order="9" intorder="1">PhysRev.120.91</bcf:citekey>
     <bcf:citekey order="10" intorder="1">BERG1981412</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">10.1063/9.0000082</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">Haller_2022</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

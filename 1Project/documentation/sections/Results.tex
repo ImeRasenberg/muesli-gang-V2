@@ -1,7 +1,7 @@
 \section{Results}
 This chapter presents the results obtained from the Monte Carlo simulations. First, a representative spin configuration containing skyrmionic structures is examined. The corresponding discretized topological charge density is then calculated and used to demonstrate the skyrmion detection procedure developed in this work.
 
-After validating the detection method, the external magnetic field and Dzyaloshinskii--Moriya (DM) interaction strength are varied to construct phase diagrams of the system. These phase diagrams are used to identify the regions corresponding to ferromagnetic, spiral, and skyrmionic phases. Finally, the evolution of the skyrmionic phase with temperature is investigated. This is done by trying to generate skyrmions at different temperatures, and generating skyrmions and increasing the temperature to see when they break.
+After validating the detection method, the external magnetic field and Dzyaloshinskii--Moriya (DM) interaction strength are varied to construct phase diagrams of the system. These phase diagrams are used to identify the regions corresponding to ferromagnetic, spiral, and skyrmionic phases. Finally, the evolution of the skyrmionic phase with temperature is investigated. This is done by quenching the system at different temperatures, and destroying formed skyrmions by increasing the temperature.
 
 
 \subsection{Spin lattice}
@@ -29,7 +29,7 @@ For each sampled spin lattice, the discretized topological charge density was ca
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \linewidth]{sections/Graphs/wrapping.png}
-	\caption{An example of the wrapping number calculated from the spin lattice}
+	\caption{An example of the winding number calculated from the spin lattice}
 	\label{fig: wrapping}
 \end{figure}
 
@@ -41,7 +41,7 @@ Skyrmions are characterized by a localized topological charge density. To identi
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \linewidth]{sections/Graphs/smoothed.png}
-	\caption{An example of the wrapping number calculated from the spin lattice}
+	\caption{An example of the winding number calculated from the spin lattice with a Gaussian smoothing.}
 	\label{fig: smooth}
 \end{figure}
 
@@ -50,7 +50,7 @@ In the smoothed distribution, positive skyrmions correspond to localized positiv
 \begin{figure}[H]
 	\centering
 	\includegraphics[width = \linewidth]{sections/Graphs/detection.png}
-	\caption{An example of the wrapping number calculated from the spin lattice}
+	\caption{An example of the smoothed winding number with the detected minima and maxima (skyrmions).}
 	\label{fig: max min}
 \end{figure}
 
@@ -124,8 +124,8 @@ The skyrmionic phase is defined as the region where the average magnitude of the
 	\label{fig: wrapping_ratio}
 \end{figure}
 
-The ferromagnetic and spiral phases are distinguished using the average magnetization along the direction of the applied magnetic field,
-In the ferromagnetic phase, the Zeeman interaction dominates and most spins align with the magnetic field. In the spiral phase, the DM interaction dominates and the spins preferentially lie in the (xy)-plane, giving a much smaller value of of the average magnetization. The resulting average magnetization is shown in Figure~\ref{fig: magnetization_phase}.
+The ferromagnetic and spiral phases are distinguished using the average magnetization along the direction of the applied magnetic field.
+In the ferromagnetic phase, the Zeeman interaction dominates and most spins align with the magnetic field. In the spiral phase, the DM interaction dominates and the spins preferentially lie in the (xy)-plane, giving a much smaller value of  the average magnetization. The resulting average magnetization is shown in Figure~\ref{fig: magnetization_phase}.
 
 \begin{figure}[H]
 	\centering
@@ -134,7 +134,7 @@ In the ferromagnetic phase, the Zeeman interaction dominates and most spins alig
 	\label{fig: magnetization_phase}
 \end{figure}
 
-Combining the skyrmion detection results, the extrema ratio, and the average magnetization allows the ferromagnetic, spiral, and skyrmionic phases to be identified throughout the ((D,H)) parameter space.
+Combining the skyrmion detection results, the extrema ratio, and the average magnetization allows the ferromagnetic, spiral, and skyrmionic phases to be identified throughout the (D,H) parameter space.
 
 
 %\subsection{Different Temperatures}
@@ -178,7 +178,7 @@ Combining the skyrmion detection results, the extrema ratio, and the average mag
 %\end{figure}
 \subsection{Formation}
 
-For each combination of \(D/J\) and \(H/J\), the system is initialised at low temperature and gradually heated. The number of detected skyrmions is recorded as a function of temperature. Figure~\ref{fig: Formation} shows an example where the skyrmion number decreases with increasing temperature due to thermal fluctuations destabilising the topological textures.
+For each combination of \(D/J\) and \(H/J\), the system is initialised at low temperature and gradually heated. The global skyrmion number is recorded as a function of temperature. Figure~\ref{fig: Formation} shows an example where the skyrmion number decreases with increasing temperature due to thermal fluctuations destabilising the topological textures.
 
 \begin{figure}[H]
 	\centering
@@ -191,7 +191,7 @@ The formation cutoff temperature \(T_f^*\) is defined in context of
 \begin{equation}
 	Q=a+b e^{-\frac{J\beta^{-1}}{T_f^*}}.
 \end{equation}
-This equation is fit to the data get the cutoff temperature.
+This equation is fit to the data to get the cutoff temperature.
 The resulting dependence on \(D/J\) and \(H/J\) is shown in Figure~\ref{fig: Formation whole domain}.
 
 \begin{figure}[H]

@@ -8,13 +8,13 @@ The energy of the system is governed by the spin Hamiltonian containing three co
 
 \subsection{Monte Carlo Procedure}
 
-The equilibrium spin configuration is sampled using the \textbf{Metropolis--Hastings} algorithm at inverse temperature $\beta = 1/k_BT$. At each Monte Carlo step, a lattice site is chosen at random and a trial spin is proposed by adding a small random perturbation to each Cartesian component of the current spin, after which the spin is renormalised to the unit sphere. Rather than recomputing the full lattice energy, only the local energy change $\Delta E$ associated with the selected site is evaluated. The trial move is then accepted or rejected according to the \textbf{Metropolis criterion.}
+The equilibrium spin configuration is sampled using the Metropolis--Hastings algorithm. At each Monte Carlo step, a lattice site is chosen at random and a trial spin is proposed by adding a small random perturbation to each Cartesian component of the current spin, after which the spin is renormalised to the unit sphere. Rather than recomputing the full lattice energy, only the local energy change $\Delta E$ associated with the selected site is evaluated. The trial move is then accepted or rejected according to the Metropolis criterion.
 
 To anneal the system toward its ground state, the simulation is run sequentially at a schedule of increasing inverse temperatures. At each temperature stage the system is thermalised before advancing to the next stage.
 
 \subsection{Energy Stabilisation Check}
 
-Because the simulation starts from a random spin configuration, it must thermalise before meaningful observables can be sampled. Convergence is monitored through a sliding-window criterion on the mean energy. Monte Carlo steps are grouped into windows of size $w = 3N^2$, and at the end of each window the average energy is compared with that of the previous window. The system is considered stable when the relative change between consecutive window averages falls below 15\%, and this condition is satisfied for at least two consecutive windows. Once stability is confirmed, the simulation either advances to the next temperature stage or, at the final stage, begins collecting samples.
+Because the simulation starts from a random spin configuration, it must thermalise before meaningful observables can be sampled. Convergence is monitored through a sliding-window criterion on the mean energy. Monte Carlo steps are grouped into windows of size $w = 3N^2$, and at the end of each window the average energy is compared with that of the previous window. The system is considered stable when the relative change between consecutive window averages falls below 15\%. This condition must be satisfied for at least two consecutive windows. Once stability is confirmed, the simulation either advances to the next temperature stage or, at the final stage, begins collecting samples.
 
 \subsection{Skyrmion Detection}
 
